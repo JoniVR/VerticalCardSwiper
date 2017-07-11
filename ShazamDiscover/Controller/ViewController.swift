@@ -12,6 +12,8 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var collectionView: UICollectionView!
     
+    fileprivate var cellSize: CGSize?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -46,10 +48,17 @@ extension ViewController: UICollectionViewDelegateFlowLayout {
         
         let width = UIScreen.main.bounds.width - 60 // 30 margin aan beide kanten
         
-        let height = collectionView.frame.height - 100 // 70 margin hoogte
+        let height = collectionView.frame.height - 120 // 70 margin hoogte
         
-        return CGSize(width: width, height: height)
+        cellSize = CGSize(width: width, height: height)
+        
+        return cellSize!
     }
+}
+
+extension ViewController: UIScrollViewDelegate {
+    
+    
 }
 
 extension ViewController {
@@ -58,10 +67,12 @@ extension ViewController {
         
         collectionView.delegate = self
         collectionView.dataSource = self
+        collectionView.bounces = false
     }
     
     fileprivate func setupScrollView(){
         
-        collectionView.contentInset = UIEdgeInsets(top: 20, left: 0, bottom: 0, right: 0)
+        // inset bovenaan instellen
+        collectionView.contentInset = UIEdgeInsets(top: 30, left: 0, bottom: 0, right: 0)
     }
 }
