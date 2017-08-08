@@ -26,7 +26,7 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        return 40
+        return 400
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -56,11 +56,6 @@ extension ViewController: UICollectionViewDelegateFlowLayout {
     }
 }
 
-extension ViewController: UIScrollViewDelegate {
-    
-    
-}
-
 extension ViewController {
     
     fileprivate func setupCollectionView(){
@@ -68,6 +63,10 @@ extension ViewController {
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.bounces = false
+        collectionView.isPagingEnabled = false
+        let flowLayout =  ShazamDiscoverFlowLayout()
+        flowLayout.firstItemTransform = 0.05
+        collectionView.collectionViewLayout = flowLayout
     }
     
     fileprivate func setupScrollView(){
