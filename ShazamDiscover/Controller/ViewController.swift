@@ -50,7 +50,8 @@ extension ViewController: UICollectionViewDelegateFlowLayout {
         // 20 margin aan beide kanten
         let width = UIScreen.main.bounds.width - 40
     
-        let height = collectionView.frame.height - 100
+        // 90 = 30 top spacing + 90 bottom spacing
+        let height = collectionView.frame.height - 120
         
         cellSize = CGSize(width: width, height: height)
         
@@ -71,13 +72,13 @@ extension ViewController {
         // transform animatie die ervoor zorgt dat eerste cell scaled
         flowLayout.firstItemTransform = 0.05
         // afstand tussen cellen
-        flowLayout.minimumLineSpacing = 30
+        flowLayout.minimumLineSpacing = 40
         collectionView.collectionViewLayout = flowLayout
     }
     
     fileprivate func setupScrollView(){
         
-        // inset bovenaan instellen
-        collectionView.contentInset = UIEdgeInsets(top: 30, left: 0, bottom: 0, right: 0)
+        // inset instellen (spacing top en bottom)
+        collectionView.contentInset = UIEdgeInsets(top: 30, left: 0, bottom: 90, right: 0)
     }
 }
