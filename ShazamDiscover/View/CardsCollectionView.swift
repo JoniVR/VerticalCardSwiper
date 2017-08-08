@@ -10,6 +10,7 @@ import UIKit
 
 class ShazamDiscoverFlowLayout: UICollectionViewFlowLayout {
     
+    // hoeveel we het eerste item "transformen"/scalen bij scrolling
     var firstItemTransform: CGFloat?
     
     override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
@@ -44,6 +45,7 @@ class ShazamDiscoverFlowLayout: UICollectionViewFlowLayout {
         if let itemTransform = firstItemTransform {
             let scale = 1 - deltaY * itemTransform
             attributes.transform = CGAffineTransform(scaleX: scale, y: scale)
+            // TODO: cell lichtjes naar beneden schuiven (zoals Shazam?)
         }
         
         origin.y = finalY

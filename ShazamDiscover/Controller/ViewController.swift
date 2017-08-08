@@ -37,6 +37,7 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cardCell = collectionView.dequeueReusableCell(withReuseIdentifier: "CardCell", for: indexPath) as? CardCell
+        cardCell?.setRandomBackgroundColor()
         
         return cardCell!
     }
@@ -46,9 +47,10 @@ extension ViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        let width = UIScreen.main.bounds.width - 60 // 30 margin aan beide kanten
-        
-        let height = collectionView.frame.height - 120 // 70 margin hoogte
+        // 20 margin aan beide kanten
+        let width = UIScreen.main.bounds.width - 40
+    
+        let height = collectionView.frame.height - 100
         
         cellSize = CGSize(width: width, height: height)
         
@@ -62,10 +64,14 @@ extension ViewController {
         
         collectionView.delegate = self
         collectionView.dataSource = self
-        collectionView.bounces = false
+        collectionView.bounces = true
+        // moet nog mee getweaked worden.....
         collectionView.isPagingEnabled = false
         let flowLayout =  ShazamDiscoverFlowLayout()
+        // transform animatie die ervoor zorgt dat eerste cell scaled
         flowLayout.firstItemTransform = 0.05
+        // afstand tussen cellen
+        flowLayout.minimumLineSpacing = 30
         collectionView.collectionViewLayout = flowLayout
     }
     
