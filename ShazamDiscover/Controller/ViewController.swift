@@ -12,8 +12,6 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var collectionView: UICollectionView!
     
-    fileprivate var cellSize: CGSize?
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -37,6 +35,7 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cardCell = collectionView.dequeueReusableCell(withReuseIdentifier: "CardCell", for: indexPath) as? CardCell
+        
         cardCell?.setRandomBackgroundColor()
         
         return cardCell!
@@ -51,11 +50,11 @@ extension ViewController: UICollectionViewDelegateFlowLayout {
         let width = UIScreen.main.bounds.width - 40
     
         // 90 = 30 top spacing + 90 bottom spacing
-        let height = collectionView.frame.height - 120
+        let height = collectionView.frame.height - 150
         
-        cellSize = CGSize(width: width, height: height)
+        let cellSize = CGSize(width: width, height: height)
         
-        return cellSize!
+        return cellSize
     }
 }
 
@@ -66,8 +65,9 @@ extension ViewController {
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.bounces = true
-        // moet nog mee getweaked worden.....
-        collectionView.isPagingEnabled = false
+        
+        //collectionView.isPagingEnabled = true
+        collectionView.decelerationRate = UIScrollViewDecelerationRateFast
         let flowLayout =  ShazamDiscoverFlowLayout()
         // transform animatie die ervoor zorgt dat eerste cell scaled
         flowLayout.firstItemTransform = 0.05
@@ -79,6 +79,6 @@ extension ViewController {
     fileprivate func setupScrollView(){
         
         // inset instellen (spacing top en bottom)
-        collectionView.contentInset = UIEdgeInsets(top: 30, left: 0, bottom: 90, right: 0)
+        collectionView.contentInset = UIEdgeInsets(top: 40, left: 0, bottom: 0, right: 0)
     }
 }
