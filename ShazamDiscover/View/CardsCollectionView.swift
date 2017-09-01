@@ -10,9 +10,10 @@ import UIKit
 
 class ShazamDiscoverFlowLayout: UICollectionViewFlowLayout {
     
-    // hoeveel we het eerste item "transformen"/scalen bij scrolling
+    // MARK: hoeveel we het eerste item "transformen"/scalen bij scrolling
     var firstItemTransform: CGFloat?
     
+    // MARK: installen van default behavior
     override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
         let items = NSArray (array: super.layoutAttributesForElements(in: rect)!, copyItems: true)
         var headerAttributes: UICollectionViewLayoutAttributes?
@@ -30,6 +31,7 @@ class ShazamDiscoverFlowLayout: UICollectionViewFlowLayout {
         return items as? [UICollectionViewLayoutAttributes]
     }
     
+    // MARK: afhandelen van gedrag bovenste cell (header)
     func updateCellAttributes(_ attributes: UICollectionViewLayoutAttributes, headerAttributes: UICollectionViewLayoutAttributes?) {
         let minY = collectionView!.bounds.minY + collectionView!.contentInset.top
         var maxY = attributes.frame.origin.y
@@ -53,15 +55,13 @@ class ShazamDiscoverFlowLayout: UICollectionViewFlowLayout {
         attributes.zIndex = attributes.indexPath.row
     }
     
+    // MARK: bij "bounds change" (bv header cell die transformt) van een cell is deze "invalid" -> layout opnieuw uitleggen
     override func shouldInvalidateLayout(forBoundsChange newBounds: CGRect) -> Bool {
-        
         return true
     }
     
     // MARK: hier zorgen we voor de paging
     override func targetContentOffset(forProposedContentOffset proposedContentOffset: CGPoint, withScrollingVelocity velocity: CGPoint) -> CGPoint {
-        
-        print("HelloWorld")
         
         var offsetAdjustment = CGFloat.greatestFiniteMagnitude
         let verticalOffset = proposedContentOffset.y

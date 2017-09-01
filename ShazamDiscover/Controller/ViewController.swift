@@ -48,7 +48,7 @@ extension ViewController: UICollectionViewDelegateFlowLayout {
         // 20 margin aan beide kanten
         let width = UIScreen.main.bounds.width - 40
     
-        // 90 = 30 top spacing + 90 bottom spacing
+        // volledige hoogte - 40 spacing tussen cellen en 80 ruimte voor volgende cell
         let height = collectionView.frame.height - 120
         
         let cellSize = CGSize(width: width, height: height)
@@ -63,7 +63,6 @@ extension ViewController {
         
         collectionView.delegate = self
         collectionView.dataSource = self
-        collectionView.bounces = true
         
         collectionView.decelerationRate = UIScrollViewDecelerationRateFast
         // top spacing geven we mee aan de constraints v/d collectionview (anders buggy)
