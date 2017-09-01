@@ -16,7 +16,6 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         setupCollectionView()
-        setupScrollView()
     }
 }
 
@@ -50,7 +49,7 @@ extension ViewController: UICollectionViewDelegateFlowLayout {
         let width = UIScreen.main.bounds.width - 40
     
         // 90 = 30 top spacing + 90 bottom spacing
-        let height = collectionView.frame.height - 150
+        let height = collectionView.frame.height - 120
         
         let cellSize = CGSize(width: width, height: height)
         
@@ -66,19 +65,17 @@ extension ViewController {
         collectionView.dataSource = self
         collectionView.bounces = true
         
-        //collectionView.isPagingEnabled = true
         collectionView.decelerationRate = UIScrollViewDecelerationRateFast
+        // top spacing geven we mee aan de constraints v/d collectionview (anders buggy)
+        collectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+
         let flowLayout =  ShazamDiscoverFlowLayout()
+        
         // transform animatie die ervoor zorgt dat eerste cell scaled
         flowLayout.firstItemTransform = 0.05
         // afstand tussen cellen
         flowLayout.minimumLineSpacing = 40
-        collectionView.collectionViewLayout = flowLayout
-    }
-    
-    fileprivate func setupScrollView(){
         
-        // inset instellen (spacing top en bottom)
-        collectionView.contentInset = UIEdgeInsets(top: 40, left: 0, bottom: 0, right: 0)
+        collectionView.collectionViewLayout = flowLayout
     }
 }

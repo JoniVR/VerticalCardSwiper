@@ -54,7 +54,27 @@ class ShazamDiscoverFlowLayout: UICollectionViewFlowLayout {
     }
     
     override func shouldInvalidateLayout(forBoundsChange newBounds: CGRect) -> Bool {
+        
         return true
+    }
+    
+    // MARK: hier zorgen we voor de paging
+    override func targetContentOffset(forProposedContentOffset proposedContentOffset: CGPoint, withScrollingVelocity velocity: CGPoint) -> CGPoint {
+        
+        print("HelloWorld")
+        
+        var offsetAdjustment = CGFloat.greatestFiniteMagnitude
+        let verticalOffset = proposedContentOffset.y
+        
+        let targetRect = CGRect(origin: CGPoint(x: 0, y: proposedContentOffset.y), size: self.collectionView!.bounds.size)
+        
+        for layoutAttributes in super.layoutAttributesForElements(in: targetRect)! {
+            let itemOffset = layoutAttributes.frame.origin.y
+            if (abs(itemOffset - verticalOffset) < abs(offsetAdjustment)) {
+                offsetAdjustment = itemOffset - verticalOffset
+            }
+        }
+        return CGPoint(x: proposedContentOffset.x, y: proposedContentOffset.y + offsetAdjustment)
     }
 }
 
