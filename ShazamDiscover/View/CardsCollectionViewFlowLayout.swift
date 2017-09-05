@@ -1,5 +1,5 @@
 //
-//  CardsCollectionView.swift
+//  CardsCollectionViewFlowLayout.swift
 //  ShazamDiscover
 //
 //  Created by Joni Van Roost on 12/07/17.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ShazamDiscoverFlowLayout: UICollectionViewFlowLayout {
+class CardsCollectionViewFlowLayout: UICollectionViewFlowLayout {
     
     // MARK: hoeveel we het eerste item "transformen"/scalen bij scrolling
     var firstItemTransform: CGFloat?
