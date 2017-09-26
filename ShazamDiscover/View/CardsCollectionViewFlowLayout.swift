@@ -10,10 +10,9 @@ import UIKit
 
 class CardsCollectionViewFlowLayout: UICollectionViewFlowLayout {
     
-    // MARK: hoeveel we het eerste item "transformen"/scalen bij scrolling
+    // MARK: this property sets the amount of scaling for the first item.
     var firstItemTransform: CGFloat?
     
-    // MARK: installen van default behavior
     override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
         let items = NSArray (array: super.layoutAttributesForElements(in: rect)!, copyItems: true)
         var headerAttributes: UICollectionViewLayoutAttributes?
@@ -31,7 +30,7 @@ class CardsCollectionViewFlowLayout: UICollectionViewFlowLayout {
         return items as? [UICollectionViewLayoutAttributes]
     }
     
-    // MARK: afhandelen van gedrag bovenste cell (header)
+    // MARK: behavior for header
     func updateCellAttributes(_ attributes: UICollectionViewLayoutAttributes, headerAttributes: UICollectionViewLayoutAttributes?) {
         let minY = collectionView!.bounds.minY + collectionView!.contentInset.top
         var maxY = attributes.frame.origin.y
@@ -47,7 +46,7 @@ class CardsCollectionViewFlowLayout: UICollectionViewFlowLayout {
         if let itemTransform = firstItemTransform {
             let scale = 1 - deltaY * itemTransform
             attributes.transform = CGAffineTransform(scaleX: scale, y: scale)
-            // TODO: cell lichtjes naar beneden schuiven (zoals Shazam?)
+            // TODO: add card stack effect (like Shazam)
         }
         
         origin.y = finalY
@@ -55,12 +54,12 @@ class CardsCollectionViewFlowLayout: UICollectionViewFlowLayout {
         attributes.zIndex = attributes.indexPath.row
     }
     
-    // MARK: bij "bounds change" (bv header cell die transformt) van een cell is deze "invalid" -> layout opnieuw uitleggen
+    // MARK: we invalidate the layout when a "bounds change" happens, for example when we scale the top cell. This forces the cells to be redrawn.
     override func shouldInvalidateLayout(forBoundsChange newBounds: CGRect) -> Bool {
         return true
     }
     
-    // MARK: hier zorgen we voor de paging
+    // MARK: cell paging
     override func targetContentOffset(forProposedContentOffset proposedContentOffset: CGPoint, withScrollingVelocity velocity: CGPoint) -> CGPoint {
         
         var offsetAdjustment = CGFloat.greatestFiniteMagnitude

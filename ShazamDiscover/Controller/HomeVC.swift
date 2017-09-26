@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  HomeVC.swift
 //  ShazamDiscover
 //
 //  Created by Joni Van Roost on 11/07/17.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class HomeVC: UIViewController {
     
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -21,7 +21,7 @@ class ViewController: UIViewController {
     }
 }
 
-extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+extension HomeVC: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
@@ -43,26 +43,25 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     }
 }
 
-extension ViewController: UICollectionViewDelegateFlowLayout {
+extension HomeVC: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        // 20 margin aan beide kanten
+        // MARK: 20 margin on both sides
         let width = UIScreen.main.bounds.width - 40
         
-        // volledige hoogte - 40 spacing tussen cellen en 80 ruimte voor volgende cell
+        // MARK: full height - 40 spacing between cells and 80 spacing for the next cell.
         let height = collectionView.frame.height - 120
         
         let cellSize = CGSize(width: width, height: height)
         
-        // cardSize var instellen op de cellSize
         cardSize = cellSize
         
         return cellSize
     }
 }
 
-extension ViewController {
+extension HomeVC {
     
     fileprivate func setupCollectionView(){
         
@@ -70,14 +69,14 @@ extension ViewController {
         collectionView.dataSource = self
         
         collectionView.decelerationRate = UIScrollViewDecelerationRateFast
-        // top spacing geven we mee aan de constraints v/d collectionview (anders buggy)
+        // FIXME: Top spacing is added through storyboard constraints because it conflicts with the paging we use.
         collectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         
         let flowLayout =  CardsCollectionViewFlowLayout()
         
-        // transform animatie die ervoor zorgt dat eerste cell scaled
+        // MARK: sets the amount of cell scaling for the top visible cell.
         flowLayout.firstItemTransform = 0.05
-        // afstand tussen cellen
+        // MARK: distance between cells.
         flowLayout.minimumLineSpacing = 40
         
         collectionView.collectionViewLayout = flowLayout

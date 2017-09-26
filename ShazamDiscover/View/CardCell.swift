@@ -16,9 +16,11 @@ class CardCell: UICollectionViewCell {
         self.layer.cornerRadius = 12
     }
     
+    /**
+     We use this function to calculate and set a random backgroundcolor.
+     */
     func setRandomBackgroundColor(){
         
-        // gebruiken we om random backgroundColor in te stellen
         let randomRed:CGFloat = CGFloat(arc4random()) / CGFloat(UInt32.max)
         let randomGreen:CGFloat = CGFloat(arc4random()) / CGFloat(UInt32.max)
         let randomBlue:CGFloat = CGFloat(arc4random()) / CGFloat(UInt32.max)

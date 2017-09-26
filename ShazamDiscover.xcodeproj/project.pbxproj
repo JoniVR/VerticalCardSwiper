@@ -9,9 +9,8 @@
 /* Begin PBXBuildFile section */
 		6CD0CB7B1F1588E4001E4565 /* CardsCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CD0CB7A1F1588E4001E4565 /* CardsCollectionViewFlowLayout.swift */; };
 		6CE68C641F15729800CFFA14 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CE68C631F15729800CFFA14 /* AppDelegate.swift */; };
-		6CE68C661F15729800CFFA14 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CE68C651F15729800CFFA14 /* ViewController.swift */; };
+		6CE68C661F15729800CFFA14 /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CE68C651F15729800CFFA14 /* HomeVC.swift */; };
 		6CE68C691F15729800CFFA14 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6CE68C671F15729800CFFA14 /* Main.storyboard */; };
-		6CE68C6C1F15729800CFFA14 /* ShazamDiscover.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6CE68C6A1F15729800CFFA14 /* ShazamDiscover.xcdatamodeld */; };
 		6CE68C6E1F15729800CFFA14 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6CE68C6D1F15729800CFFA14 /* Assets.xcassets */; };
 		6CE68C711F15729800CFFA14 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6CE68C6F1F15729800CFFA14 /* LaunchScreen.storyboard */; };
 		6CE68C7D1F15734700CFFA14 /* CardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CE68C7C1F15734700CFFA14 /* CardCell.swift */; };
@@ -21,9 +20,8 @@
 		6CD0CB7A1F1588E4001E4565 /* CardsCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
 		6CE68C601F15729800CFFA14 /* ShazamDiscover.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ShazamDiscover.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6CE68C631F15729800CFFA14 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		6CE68C651F15729800CFFA14 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		6CE68C651F15729800CFFA14 /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
 		6CE68C681F15729800CFFA14 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		6CE68C6B1F15729800CFFA14 /* ShazamDiscover.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ShazamDiscover.xcdatamodel; sourceTree = "<group>"; };
 		6CE68C6D1F15729800CFFA14 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6CE68C701F15729800CFFA14 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6CE68C721F15729800CFFA14 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -62,7 +60,6 @@
 			children = (
 				6CE68C631F15729800CFFA14 /* AppDelegate.swift */,
 				6CE68C6D1F15729800CFFA14 /* Assets.xcassets */,
-				6CE68C6A1F15729800CFFA14 /* ShazamDiscover.xcdatamodeld */,
 				6CE68C721F15729800CFFA14 /* Info.plist */,
 				6CE68C7A1F15730100CFFA14 /* Model */,
 				6CE68C791F1572FE00CFFA14 /* View */,
@@ -75,7 +72,7 @@
 		6CE68C781F1572FB00CFFA14 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				6CE68C651F15729800CFFA14 /* ViewController.swift */,
+				6CE68C651F15729800CFFA14 /* HomeVC.swift */,
 				6CE68C671F15729800CFFA14 /* Main.storyboard */,
 				6CE68C6F1F15729800CFFA14 /* LaunchScreen.storyboard */,
 			);
@@ -176,8 +173,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6CE68C6C1F15729800CFFA14 /* ShazamDiscover.xcdatamodeld in Sources */,
-				6CE68C661F15729800CFFA14 /* ViewController.swift in Sources */,
+				6CE68C661F15729800CFFA14 /* HomeVC.swift in Sources */,
 				6CE68C641F15729800CFFA14 /* AppDelegate.swift in Sources */,
 				6CE68C7D1F15734700CFFA14 /* CardCell.swift in Sources */,
 				6CD0CB7B1F1588E4001E4565 /* CardsCollectionViewFlowLayout.swift in Sources */,
@@ -363,19 +359,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		6CE68C6A1F15729800CFFA14 /* ShazamDiscover.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				6CE68C6B1F15729800CFFA14 /* ShazamDiscover.xcdatamodel */,
-			);
-			currentVersion = 6CE68C6B1F15729800CFFA14 /* ShazamDiscover.xcdatamodel */;
-			path = ShazamDiscover.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = 6CE68C581F15729800CFFA14 /* Project object */;
 }
