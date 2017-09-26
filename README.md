@@ -1,8 +1,9 @@
 # ShazamDiscoverUI
-Replicating the Shazam Discover UI with UICollectionView in Swift
+_Replicating the Shazam Discover UI with UICollectionView in Swift._
 
+<hr>
 
-The goal of this project is to recreate the Discover UI in Shazam (which I think is a great,fun way to display content).
+The goal of this project is to recreate the Discover UI in Shazam (which I think is a great, fun way to display content).
 
 *Example:*
 
