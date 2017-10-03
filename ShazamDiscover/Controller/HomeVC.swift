@@ -69,8 +69,7 @@ extension HomeVC {
         collectionView.dataSource = self
         
         collectionView.decelerationRate = UIScrollViewDecelerationRateFast
-        // FIXME: Top spacing is added through storyboard constraints because it conflicts with the paging we use.
-        collectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        collectionView.contentInset = UIEdgeInsets(top: 40, left: 0, bottom: 0, right: 0)
         
         let flowLayout =  CardsCollectionViewFlowLayout()
         
