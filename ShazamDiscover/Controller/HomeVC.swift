@@ -12,8 +12,6 @@ class HomeVC: UIViewController {
     
     @IBOutlet weak var collectionView: UICollectionView!
     
-    fileprivate var cardSize: CGSize!
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -24,46 +22,6 @@ class HomeVC: UIViewController {
         super.viewDidAppear(animated)
         
         collectionView.animateIn()
-    }
-}
-
-extension HomeVC: UICollectionViewDelegate, UICollectionViewDataSource {
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        
-        return 400
-    }
-    
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        
-        return 1
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
-        let cardCell = collectionView.dequeueReusableCell(withReuseIdentifier: "CardCell", for: indexPath) as? CardCell
-        
-        cardCell?.setRandomBackgroundColor()
-        
-        return cardCell!
-    }
-}
-
-extension HomeVC: UICollectionViewDelegateFlowLayout {
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        
-        // MARK: 20 margin on both sides
-        let width = UIScreen.main.bounds.width - 40
-        
-        // MARK: full height - 40 spacing between cells and 80 spacing for the next cell.
-        let height = collectionView.frame.height - 120
-        
-        let cellSize = CGSize(width: width, height: height)
-        
-        cardSize = cellSize
-        
-        return cellSize
     }
 }
 
@@ -88,3 +46,39 @@ extension HomeVC {
     }
 }
 
+extension HomeVC: UICollectionViewDelegate, UICollectionViewDataSource {
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        
+        return 400
+    }
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        
+        return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        let cardCell = collectionView.dequeueReusableCell(withReuseIdentifier: "CardCell", for: indexPath) as? CardCell
+        
+        cardCell?.setRandomBackgroundColor()
+        return cardCell!
+    }
+}
+
+extension HomeVC: UICollectionViewDelegateFlowLayout {
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        // MARK: 20 margin on both sides
+        let width = UIScreen.main.bounds.width - 40
+        
+        // MARK: full height - 40 spacing between cells and 80 spacing for the next cell.
+        let height = collectionView.frame.height - 120
+        
+        let cellSize = CGSize(width: width, height: height)
+        
+        return cellSize
+    }
+}

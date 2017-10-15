@@ -10,8 +10,11 @@ import UIKit
 
 extension UICollectionView {
     
-    // MARK: initial animation for collectionView
-    func animateIn() {
+    /**
+     This function animates the cards from the bottom on first load.
+     You should use this function inside `viewDidAppear`.
+    */
+    public func animateIn() {
         var counter: Double = 1
         for cell in visibleCells {
             

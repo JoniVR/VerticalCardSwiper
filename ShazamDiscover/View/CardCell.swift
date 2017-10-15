@@ -14,12 +14,14 @@ class CardCell: UICollectionViewCell {
         super.layoutSubviews()
         
         self.layer.cornerRadius = 12
+        self.layer.shouldRasterize = true
+        self.layer.rasterizationScale = UIScreen.main.scale
     }
     
     /**
      We use this function to calculate and set a random backgroundcolor.
      */
-    func setRandomBackgroundColor(){
+    public func setRandomBackgroundColor(){
         
         let randomRed:CGFloat = CGFloat(arc4random()) / CGFloat(UInt32.max)
         let randomGreen:CGFloat = CGFloat(arc4random()) / CGFloat(UInt32.max)
