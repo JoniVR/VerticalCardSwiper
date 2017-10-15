@@ -19,6 +19,12 @@ class HomeVC: UIViewController {
         
         setupCollectionView()
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        collectionView.animateIn()
+    }
 }
 
 extension HomeVC: UICollectionViewDelegate, UICollectionViewDataSource {
