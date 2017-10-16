@@ -20,11 +20,10 @@ It's built with a `UICollectionView` and a custom flowLayout. This way, it works
   ![Shazam discover](https://i.stack.imgur.com/7XohG.gif)
   
 ## Author
-Joni Van Roost
-joni.VR@hotmail.com
+Joni Van Roost, joni.VR@hotmail.com
 
 ## License
-VerticalCardSwiper is available under the MIT license. See the LICENSE file for more info.
+VerticalCardSwiper is available under the MIT license. See the [LICENSE](https://github.com/JoniVR/VerticalCardSwiper/blob/development/LICENSE) file for more info.
 
 ## More
 Feel free to submit a pull request or fork this project. Any help on improving this is always appreciated.
