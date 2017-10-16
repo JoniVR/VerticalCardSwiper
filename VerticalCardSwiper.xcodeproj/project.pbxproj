@@ -20,7 +20,7 @@
 /* Begin PBXFileReference section */
 		6C26604B1F936132004A8E44 /* CollectionViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewExtensions.swift; sourceTree = "<group>"; };
 		6CD0CB7A1F1588E4001E4565 /* CardsCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
-		6CE68C601F15729800CFFA14 /* ShazamDiscover.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ShazamDiscover.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6CE68C601F15729800CFFA14 /* VerticalCardSwiper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VerticalCardSwiper.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6CE68C631F15729800CFFA14 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6CE68C651F15729800CFFA14 /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
 		6CE68C681F15729800CFFA14 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -44,7 +44,7 @@
 		6CE68C571F15729800CFFA14 = {
 			isa = PBXGroup;
 			children = (
-				6CE68C621F15729800CFFA14 /* ShazamDiscover */,
+				6CE68C621F15729800CFFA14 /* VerticalCardSwiper */,
 				6CE68C611F15729800CFFA14 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -52,23 +52,20 @@
 		6CE68C611F15729800CFFA14 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				6CE68C601F15729800CFFA14 /* ShazamDiscover.app */,
+				6CE68C601F15729800CFFA14 /* VerticalCardSwiper.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		6CE68C621F15729800CFFA14 /* ShazamDiscover */ = {
+		6CE68C621F15729800CFFA14 /* VerticalCardSwiper */ = {
 			isa = PBXGroup;
 			children = (
-				6CE68C631F15729800CFFA14 /* AppDelegate.swift */,
-				6CE68C6D1F15729800CFFA14 /* Assets.xcassets */,
-				6CE68C721F15729800CFFA14 /* Info.plist */,
 				6CE68C7A1F15730100CFFA14 /* Model */,
 				6CE68C791F1572FE00CFFA14 /* View */,
 				6CE68C781F1572FB00CFFA14 /* Controller */,
 				6CE68C7B1F15730F00CFFA14 /* Support Files */,
 			);
-			path = ShazamDiscover;
+			path = VerticalCardSwiper;
 			sourceTree = "<group>";
 		};
 		6CE68C781F1572FB00CFFA14 /* Controller */ = {
@@ -101,6 +98,9 @@
 		6CE68C7B1F15730F00CFFA14 /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
+				6CE68C631F15729800CFFA14 /* AppDelegate.swift */,
+				6CE68C6D1F15729800CFFA14 /* Assets.xcassets */,
+				6CE68C721F15729800CFFA14 /* Info.plist */,
 			);
 			path = "Support Files";
 			sourceTree = "<group>";
@@ -108,9 +108,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		6CE68C5F1F15729800CFFA14 /* ShazamDiscover */ = {
+		6CE68C5F1F15729800CFFA14 /* VerticalCardSwiper */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 6CE68C751F15729800CFFA14 /* Build configuration list for PBXNativeTarget "ShazamDiscover" */;
+			buildConfigurationList = 6CE68C751F15729800CFFA14 /* Build configuration list for PBXNativeTarget "VerticalCardSwiper" */;
 			buildPhases = (
 				6CE68C5C1F15729800CFFA14 /* Sources */,
 				6CE68C5D1F15729800CFFA14 /* Frameworks */,
@@ -120,9 +120,9 @@
 			);
 			dependencies = (
 			);
-			name = ShazamDiscover;
+			name = VerticalCardSwiper;
 			productName = ShazamDiscover;
-			productReference = 6CE68C601F15729800CFFA14 /* ShazamDiscover.app */;
+			productReference = 6CE68C601F15729800CFFA14 /* VerticalCardSwiper.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -140,7 +140,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 6CE68C5B1F15729800CFFA14 /* Build configuration list for PBXProject "ShazamDiscover" */;
+			buildConfigurationList = 6CE68C5B1F15729800CFFA14 /* Build configuration list for PBXProject "VerticalCardSwiper" */;
 			compatibilityVersion = "Xcode 8.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -153,7 +153,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				6CE68C5F1F15729800CFFA14 /* ShazamDiscover */,
+				6CE68C5F1F15729800CFFA14 /* VerticalCardSwiper */,
 			);
 		};
 /* End PBXProject section */
@@ -318,9 +318,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = CYC8C8R4K9;
-				INFOPLIST_FILE = ShazamDiscover/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/VerticalCardSwiper/Support Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = ProjectXDev.ShazamDiscover;
+				PRODUCT_BUNDLE_IDENTIFIER = ProjectXDev.VerticalCardSwiper;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -332,9 +332,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = CYC8C8R4K9;
-				INFOPLIST_FILE = ShazamDiscover/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/VerticalCardSwiper/Support Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = ProjectXDev.ShazamDiscover;
+				PRODUCT_BUNDLE_IDENTIFIER = ProjectXDev.VerticalCardSwiper;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -344,7 +344,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		6CE68C5B1F15729800CFFA14 /* Build configuration list for PBXProject "ShazamDiscover" */ = {
+		6CE68C5B1F15729800CFFA14 /* Build configuration list for PBXProject "VerticalCardSwiper" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				6CE68C731F15729800CFFA14 /* Debug */,
@@ -353,7 +353,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		6CE68C751F15729800CFFA14 /* Build configuration list for PBXNativeTarget "ShazamDiscover" */ = {
+		6CE68C751F15729800CFFA14 /* Build configuration list for PBXNativeTarget "VerticalCardSwiper" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				6CE68C761F15729800CFFA14 /* Debug */,

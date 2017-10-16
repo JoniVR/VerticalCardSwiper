@@ -1,6 +1,6 @@
 //
 //  AppDelegate.swift
-//  ShazamDiscover
+//  VerticalCardSwiper
 //
 //  Created by Joni Van Roost on 11/07/17.
 //  Copyright © 2017 Joni Van Roost. All rights reserved.

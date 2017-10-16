@@ -1,6 +1,6 @@
 //
 //  HomeVC.swift
-//  ShazamDiscover
+//  VerticalCardSwiper
 //
 //  Created by Joni Van Roost on 11/07/17.
 //  Copyright © 2017 Joni Van Roost. All rights reserved.
@@ -35,7 +35,7 @@ extension HomeVC {
         collectionView.decelerationRate = UIScrollViewDecelerationRateFast
         collectionView.contentInset = UIEdgeInsets(top: 40, left: 0, bottom: 0, right: 0)
         
-        let flowLayout =  CardsCollectionViewFlowLayout()
+        let flowLayout =  VerticalCardSwiperFlowLayout()
         
         // MARK: sets the amount of cell scaling for the top visible cell.
         flowLayout.firstItemTransform = 0.05
