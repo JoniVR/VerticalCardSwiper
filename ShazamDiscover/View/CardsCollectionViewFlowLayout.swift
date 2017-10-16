@@ -64,17 +64,18 @@ class CardsCollectionViewFlowLayout: UICollectionViewFlowLayout {
         
         var offsetAdjustment = CGFloat.greatestFiniteMagnitude
         let verticalOffset = proposedContentOffset.y
+        let contentInset = collectionView!.contentInset.top
         
-        let targetRect = CGRect(origin: CGPoint(x: 0, y: proposedContentOffset.y), size: self.collectionView!.bounds.size)
+        let targetRect = CGRect(origin: CGPoint(x: 0, y: verticalOffset), size: self.collectionView!.bounds.size)
         
         for layoutAttributes in super.layoutAttributesForElements(in: targetRect)! {
             // MARK: we adjust for the contentInset
-            let itemOffset = layoutAttributes.frame.origin.y - (collectionView?.contentInset.top)!
+            let itemOffset = layoutAttributes.frame.origin.y - contentInset
             if (abs(itemOffset - verticalOffset) < abs(offsetAdjustment)) {
                 offsetAdjustment = itemOffset - verticalOffset
             }
         }
-        return CGPoint(x: proposedContentOffset.x, y: proposedContentOffset.y + offsetAdjustment)
+        return CGPoint(x: proposedContentOffset.x, y: verticalOffset + offsetAdjustment)
     }
 }
 
