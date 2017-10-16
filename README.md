@@ -13,6 +13,7 @@ It's built with a `UICollectionView` and a custom flowLayout. This way, it works
 - [x] Implement Shazam Discover UI with paging
 - [ ] Implement Tinder-style swiping
 - [ ] Turn project into an easy-to-use library
+- [ ] Add code documentation in README.md file
 - [ ] Add CocoaPods support 
 - [ ] Add Carthage support
 
