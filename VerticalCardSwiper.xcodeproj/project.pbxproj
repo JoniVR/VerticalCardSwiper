@@ -41,6 +41,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6C4E78161F9552FF007C2402 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				6C26604B1F936132004A8E44 /* CollectionViewExtensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		6CE68C571F15729800CFFA14 = {
 			isa = PBXGroup;
 			children = (
@@ -60,6 +68,7 @@
 		6CE68C621F15729800CFFA14 /* VerticalCardSwiper */ = {
 			isa = PBXGroup;
 			children = (
+				6C4E78161F9552FF007C2402 /* Extensions */,
 				6CE68C7A1F15730100CFFA14 /* Model */,
 				6CE68C791F1572FE00CFFA14 /* View */,
 				6CE68C781F1572FB00CFFA14 /* Controller */,
@@ -83,7 +92,6 @@
 			children = (
 				6CE68C7C1F15734700CFFA14 /* CardCell.swift */,
 				6CD0CB7A1F1588E4001E4565 /* CardsCollectionViewFlowLayout.swift */,
-				6C26604B1F936132004A8E44 /* CollectionViewExtensions.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";

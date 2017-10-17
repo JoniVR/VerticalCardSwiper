@@ -10,8 +10,10 @@ import UIKit
 
 class VerticalCardSwiperFlowLayout: UICollectionViewFlowLayout {
     
-    // MARK: this property sets the amount of scaling for the first item.
-    var firstItemTransform: CGFloat?
+    /** This property sets the amount of scaling for the first item. */
+    public var firstItemTransform: CGFloat?
+    /** This property enables paging per card. The default value is true. */
+    public var isPagingEnabled: Bool = true
     
     override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
         let items = NSArray (array: super.layoutAttributesForElements(in: rect)!, copyItems: true)
@@ -61,6 +63,12 @@ class VerticalCardSwiperFlowLayout: UICollectionViewFlowLayout {
     
     // MARK: cell paging
     override func targetContentOffset(forProposedContentOffset proposedContentOffset: CGPoint, withScrollingVelocity velocity: CGPoint) -> CGPoint {
+        
+        // MARK: If the property `isPagingEnabled` is set to false, we don't enable paging and thus return the current contentoffset
+        guard isPagingEnabled else {
+            let latestOffset = super.targetContentOffset(forProposedContentOffset: proposedContentOffset, withScrollingVelocity: velocity)
+            return latestOffset
+        }
         
         var offsetAdjustment = CGFloat.greatestFiniteMagnitude
         let verticalOffset = proposedContentOffset.y
