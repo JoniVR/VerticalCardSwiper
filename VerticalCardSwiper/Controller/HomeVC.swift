@@ -14,8 +14,6 @@ class HomeVC: UIViewController {
     
     /** We use this horizontalPangestureRecognizer for the vertical panning. */
     fileprivate var horizontalPangestureRecognizer: UIPanGestureRecognizer!
-    /** Stores the height of the cell that we use later on to check if the user is swiping the right cell. */
-    fileprivate var cellHeight: CGFloat!
     /** Stores a `CGRect` with the area that is swipeable to the user. */
     fileprivate var swipeAbleArea: CGRect!
     
@@ -151,19 +149,17 @@ extension HomeVC: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         // MARK: 20 margin on both sides
-        let width = collectionView.bounds.width - 40
+        let cellWidth = collectionView.bounds.width - 40
         
         // MARK: full height - 40 spacing between cells and 80 spacing for the next cell.
-        let height = collectionView.frame.size.height - 120
+        let cellHeight = collectionView.frame.size.height - 120
         
-        if cellHeight == nil {
-            
-            cellHeight = height
+        if swipeAbleArea == nil {
             
             // MARK: Calculate and set the swipeAbleArea. We use this to determine wheter the cell can be swiped to the sides or not.
             let swipeAbleAreaOriginY = collectionView.frame.origin.y + collectionView.contentInset.top
             swipeAbleArea = CGRect(x: 0, y: swipeAbleAreaOriginY, width: view.frame.width, height: cellHeight)
         }
-        return CGSize(width: width, height: height)
+        return CGSize(width: cellWidth, height: cellHeight)
     }
 }
