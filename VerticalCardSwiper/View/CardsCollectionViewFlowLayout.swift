@@ -19,7 +19,7 @@ class VerticalCardSwiperFlowLayout: UICollectionViewFlowLayout {
         let items = NSArray (array: super.layoutAttributesForElements(in: rect)!, copyItems: true)
         var headerAttributes: UICollectionViewLayoutAttributes?
         
-        items.enumerateObjects(using: { (object, idex, stop) -> Void in
+        items.enumerateObjects(using: { (object, index, stop) -> Void in
             let attributes = object as! UICollectionViewLayoutAttributes
             
             if attributes.representedElementKind == UICollectionElementKindSectionHeader {

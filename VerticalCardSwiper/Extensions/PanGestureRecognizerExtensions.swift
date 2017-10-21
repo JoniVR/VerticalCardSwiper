@@ -13,13 +13,14 @@ public enum PanDirection: Int {
     case Down
     case Left
     case Right
+    case None
     
     public var isX: Bool { return self == .Left || self == .Right }
-    public var isY: Bool { return !isX }
+    public var isY: Bool { return self == .Up || self == .Down }
 }
 
 extension UIPanGestureRecognizer {
-    
+        
     /** This calculated var stores the direction of the gesture received by the `UIPanGestureRecognizer`. */
     public var direction: PanDirection? {
         let velocity = self.velocity(in: view)
@@ -29,7 +30,7 @@ extension UIPanGestureRecognizer {
         case (true, _, let y) where y > 0: return .Down
         case (false, let x, _) where x > 0: return .Right
         case (false, let x, _) where x < 0: return .Left
-        default: return nil
+        default: return PanDirection.None
         }
     }
 }
