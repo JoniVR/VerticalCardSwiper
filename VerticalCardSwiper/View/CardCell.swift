@@ -29,4 +29,20 @@ class CardCell: UICollectionViewCell {
         
         self.backgroundColor = UIColor(red: randomRed, green: randomGreen, blue: randomBlue, alpha: 1.0)
     }
+    
+    /**
+     This function animates the card. The animation consists of a rotation and translation.
+     - parameter angle: The angle the card rotates while animating.
+     - parameter horizontalTranslation: The horizontal translation the card animates in.
+    */
+    public func animateCard(angle: CGFloat, horizontalTranslation: CGFloat){
+        
+        var transform = CGAffineTransform()
+        
+        transform = CGAffineTransform(translationX: horizontalTranslation, y: 0)
+        
+        UIView.animate(withDuration: 0.1, delay: 0, options: .curveEaseOut, animations: { [weak self] in
+            self?.transform = transform.concatenating(CGAffineTransform(rotationAngle: angle))
+        })
+    }
 }

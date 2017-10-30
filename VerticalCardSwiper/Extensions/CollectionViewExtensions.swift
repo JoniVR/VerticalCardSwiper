@@ -20,7 +20,7 @@ extension UICollectionView {
             
             cell.transform = CGAffineTransform(translationX: 0, y: bounds.height + cell.bounds.height)
             
-            UIView.animate(withDuration: 0.7, delay: 0.3 * counter, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.6, options: .curveEaseInOut, animations: {
+            UIView.animate(withDuration: 0.6, delay: 0.3 * counter, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.6, options: .curveEaseInOut, animations: {
                 cell.transform = CGAffineTransform.identity
                 counter -= 1
             }, completion: nil)

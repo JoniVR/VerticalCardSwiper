@@ -37,6 +37,8 @@ extension HomeVC: UIGestureRecognizerDelegate {
     fileprivate func setupGestureRecognizer(){
         
         horizontalPangestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(handlePan))
+        horizontalPangestureRecognizer.maximumNumberOfTouches = 1
+        collectionView.panGestureRecognizer.maximumNumberOfTouches = 1
         collectionView.addGestureRecognizer(horizontalPangestureRecognizer)
         horizontalPangestureRecognizer.delegate = self
     }
