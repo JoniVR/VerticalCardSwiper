@@ -116,4 +116,13 @@ class CardCell: UICollectionViewCell {
         })
         delegate?.didSwipeAway(cell: self) 
     }
+    
+    /**
+     Prepares for reuse by resetting the anchorPoint back to the default value. This is necessary because in HomeVC we are manipulating the anchorPoint during dragging animation.
+    */
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        // reset to default value (https://developer.apple.com/documentation/quartzcore/calayer/1410817-anchorpoint)
+        self.layer.anchorPoint = CGPoint(x: 0.5, y: 0.5)
+    }
 }
