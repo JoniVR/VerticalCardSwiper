@@ -8,7 +8,21 @@
 
 import UIKit
 
+/**
+ This delegate is used for delegating card actions.
+*/
+protocol CardCellSwipeDelegate: class {
+    
+    /**
+     Called when a CardCell is swiped away.
+     - parameter cell: The CardCell that is being swiped away.
+    */
+    func didSwipeAway(cell: CardCell)
+}
+
 class CardCell: UICollectionViewCell {
+    
+    weak var delegate: CardCellSwipeDelegate?
     
     override func layoutSubviews() {
         super.layoutSubviews()
@@ -34,15 +48,72 @@ class CardCell: UICollectionViewCell {
      This function animates the card. The animation consists of a rotation and translation.
      - parameter angle: The angle the card rotates while animating.
      - parameter horizontalTranslation: The horizontal translation the card animates in.
-    */
+     */
     public func animateCard(angle: CGFloat, horizontalTranslation: CGFloat){
         
-        var transform = CGAffineTransform()
+        var transform = CATransform3DIdentity
+        transform = CATransform3DRotate(transform, angle, 0, 0, 1)
+        transform = CATransform3DTranslate(transform, horizontalTranslation, 0, 1)
+        layer.transform = transform
+    }
+    
+    /**
+     Resets the CardCell back to the center of the CollectionView.
+     - parameter anchorPoint: The point that the card is translated to.
+    */
+    public func resetToCenterPosition(anchorPoint: CGPoint){
         
-        transform = CGAffineTransform(translationX: horizontalTranslation, y: 0)
-        
-        UIView.animate(withDuration: 0.1, delay: 0, options: .curveEaseOut, animations: { [weak self] in
-            self?.transform = transform.concatenating(CGAffineTransform(rotationAngle: angle))
+        var transform = CATransform3DIdentity
+        transform = CATransform3DRotate(transform, 0, 0, 0, 1)
+        transform = CATransform3DTranslate(transform, anchorPoint.x, anchorPoint.y, 1)
+    
+        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut, animations: { [weak self] in
+            
+            self?.layer.transform = transform
         })
+    }
+    
+    /**
+     Called when the pan gesture is ended.
+     Handles what happens when the user stops swiping a card.
+     If a certain treshold of the screen is swiped, the `animateOffScreen` function is called,
+     if the threshold is not reached, the card will be reset to the center by calling `resetToCenterPosition`.
+     - parameter direction: The direction of the pan gesture.
+     - parameter centerX: The center X point of the swipeAbleArea/collectionView.
+     - parameter angle: The angle of the animation, depends on the direction of the swipe.
+    */
+    public func endedPanAnimation(withDirection direction: PanDirection, centerX: CGFloat, angle: CGFloat){
+        
+        let swipePercentageMargin = self.bounds.width * 0.2
+        
+        if (self.center.x > centerX + swipePercentageMargin || self.center.x < centerX - swipePercentageMargin){
+            animateOffScreen(withDirection: direction, angle: angle)
+        } else {
+            self.resetToCenterPosition(anchorPoint: self.layer.anchorPoint)
+        }
+    }
+    
+    /**
+     Animates to card off the screen and calls the `didSwipeAway` function from the `CardCellSwipeDelegate`.
+     - parameter direction: The direction that the card was swiped (and will be animated) in.
+     - parameter angle: The angle that the card will rotate in (depends on direction).
+    */
+    fileprivate func animateOffScreen(withDirection direction: PanDirection, angle: CGFloat){
+        
+        var transform = CATransform3DIdentity
+        transform = CATransform3DRotate(transform, angle, 0, 0, 1)
+
+        if direction == .Left {
+            transform = CATransform3DTranslate(transform, -(self.frame.width * 2), 0, 1)
+        }
+        if direction == .Right {
+            transform = CATransform3DTranslate(transform, (self.frame.width * 2), 0, 1)
+        }
+        
+        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut, animations: { [weak self] in
+            
+            self?.layer.transform = transform
+        })
+        delegate?.didSwipeAway(cell: self) 
     }
 }

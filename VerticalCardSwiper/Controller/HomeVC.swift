@@ -12,10 +12,28 @@ class HomeVC: UIViewController {
     
     @IBOutlet weak var collectionView: UICollectionView!
     
-    /** We use this horizontalPangestureRecognizer for the vertical panning. */
+    /// We use this horizontalPangestureRecognizer for the vertical panning.
     fileprivate var horizontalPangestureRecognizer: UIPanGestureRecognizer!
-    /** Stores a `CGRect` with the area that is swipeable to the user. */
-    fileprivate var swipeAbleArea: CGRect!
+    /// Stores a `CGRect` with the area that is swipeable to the user.
+    internal var swipeAbleArea: CGRect!
+    /// Stores the center point of the swipeAbleArea/collectionView.
+    internal var centerX: CGFloat!
+    /// The amount of cards in the collectionView.
+    internal var numberOfCards = 400
+    /// The `CardCell` that the user can (and is) moving.
+    internal var swipedCard: CardCell! {
+        didSet{
+            setupCardSwipeDelegate()
+        }
+    }
+    /// The flowlayout used in the collectionView.
+    internal lazy var flowLayout: VerticalCardSwiperFlowLayout = {
+        let flowLayout = VerticalCardSwiperFlowLayout()
+        flowLayout.firstItemTransform = 0.05
+        flowLayout.minimumLineSpacing = 40
+        flowLayout.isPagingEnabled = true
+        return flowLayout
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,62 +44,91 @@ class HomeVC: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
         collectionView.animateIn()
+    }
+}
+
+extension HomeVC: CardCellSwipeDelegate {
+    
+    /// Sets up the CardCellSwipeDelegate.
+    fileprivate func setupCardSwipeDelegate() {
+        
+        swipedCard.delegate = self
+    }
+    
+    func didSwipeAway(cell: CardCell) {
+        if let indexPathToRemove = collectionView.indexPath(for: cell){
+            numberOfCards-=1
+            collectionView.deleteItems(at: [indexPathToRemove])
+        }
     }
 }
 
 extension HomeVC: UIGestureRecognizerDelegate {
     
-    /** We set up the `horizontalPangestureRecognizer` and attach it to the `collectionView`. */
+    /// We set up the `horizontalPangestureRecognizer` and attach it to the `collectionView`.
     fileprivate func setupGestureRecognizer(){
         
         horizontalPangestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(handlePan))
         horizontalPangestureRecognizer.maximumNumberOfTouches = 1
-        collectionView.panGestureRecognizer.maximumNumberOfTouches = 1
-        collectionView.addGestureRecognizer(horizontalPangestureRecognizer)
         horizontalPangestureRecognizer.delegate = self
+        collectionView.addGestureRecognizer(horizontalPangestureRecognizer)
+        collectionView.panGestureRecognizer.maximumNumberOfTouches = 1
     }
     
     /**
      This function is called when a pan is detected inside the `collectionView`.
      We also take care of detecting if the pan gesture is inside the `swipeAbleArea` and we animate the cell if necessary.
      - parameter sender: The `UIPanGestureRecognizer` that detects the pan gesture. In this case `horizontalPangestureRecognizer`.
-    */
+     */
     @objc fileprivate func handlePan(sender: UIPanGestureRecognizer){
         
-        let velocity = sender.velocity(in: collectionView)
-        let translation = sender.translation(in: collectionView)
+        /// The taplocation relative to the superview.
         let location = sender.location(in: self.view)
+        /// The taplocation relative to the collectionView.
+        let locationInCollectionView = sender.location(in: collectionView)
+        /// The translation of the finger performing the PanGesture.
+        let translation = sender.translation(in: self.view)
+        /// The 'PanDirection' the user swipes in.
         let direction = sender.direction
         
-        // TODO: remove debug code
-        print("LOCATION: \(location.debugDescription)")
-        print("TRANSLATION: \(translation.debugDescription)")
-        print("VELOCITY: \(velocity.debugDescription)")
-        print("DIRECTION: \(direction!)")
-        
-        if swipeAbleArea.contains(location) {
+        if swipeAbleArea.contains(location) && !collectionView.isScrolling {
             
-            switch direction! {
+            if let swipedCardIndex = collectionView.indexPathForItem(at: locationInCollectionView) {
                 
-            case .Left:
+                /// The card that is swipeable inside the SwipeAbleArea.
+                swipedCard = collectionView.cellForItem(at: swipedCardIndex) as! CardCell
+                /// The horizontal center of the cardCell.
+                let cardCenter = swipedCard.convert(swipedCard.center, to: swipedCard)
+                /// The angle we pass for the swipe animation.
+                var angle: CGFloat!
                 
-                // TODO: Animation code
-                print("⬅️⬅️⬅️")
-                break
+                if cardCenter.x < centerX { angle = 25 }
+                else if cardCenter.x > centerX { angle = -25 }
+                else { angle = 0 }
                 
-            case .Right:
-                
-                // TODO: Animation code
-                print("➡️➡️➡️")
-                break
-                
-            default:
-                
-                // MARK: temp debug code
-                if direction == .Up { print("⬆️⬆️⬆️") }
-                if direction == .Down { print("⬇️⬇️⬇️") }
+                switch (sender.state) {
+                    
+                case .began:
+                    let initialTouchPoint = location
+                    let newAnchorPoint = CGPoint(x: initialTouchPoint.x / swipedCard.bounds.width, y: initialTouchPoint.y / swipedCard.bounds.height)
+                    let oldPosition = CGPoint(x: swipedCard.bounds.size.width * swipedCard.layer.anchorPoint.x, y: swipedCard.bounds.size.height * swipedCard.layer.anchorPoint.y)
+                    let newPosition = CGPoint(x: swipedCard.bounds.size.width * newAnchorPoint.x, y: swipedCard.bounds.size.height * newAnchorPoint.y)
+                    swipedCard.layer.anchorPoint = newAnchorPoint
+                    swipedCard.layer.position = CGPoint(x: swipedCard.layer.position.x - oldPosition.x + newPosition.x, y: swipedCard.layer.position.y - oldPosition.y + newPosition.y)
+                    break
+                    
+                case .changed:
+                    swipedCard.animateCard(angle: angle, horizontalTranslation: translation.x)
+                    break
+
+                case .ended:
+                    swipedCard.endedPanAnimation(withDirection: direction!, centerX: centerX, angle: angle)
+                    break
+                    
+                default:
+                    swipedCard.resetToCenterPosition(anchorPoint: swipedCard.layer.anchorPoint)
+                }
             }
         }
     }
@@ -90,7 +137,7 @@ extension HomeVC: UIGestureRecognizerDelegate {
         
         if let panGestureRec = gestureRecognizer as? UIPanGestureRecognizer {
             
-            // MARK: When a horizontal pan is detected, we make sure to disable the collectionView.panGestureRecognizer so that it doesn't interfere with the sideswipe.
+            // When a horizontal pan is detected, we make sure to disable the collectionView.panGestureRecognizer so that it doesn't interfere with the sideswipe.
             if panGestureRec == horizontalPangestureRecognizer {
                 
                 if panGestureRec.direction!.isX {
@@ -118,17 +165,12 @@ extension HomeVC: UICollectionViewDelegate, UICollectionViewDataSource {
         collectionView.decelerationRate = UIScrollViewDecelerationRateFast
         collectionView.contentInset = UIEdgeInsets(top: 40, left: 0, bottom: 0, right: 0)
         
-        let flowLayout =  VerticalCardSwiperFlowLayout()
-        
-        flowLayout.firstItemTransform = 0.05
-        flowLayout.minimumLineSpacing = 40
-        flowLayout.isPagingEnabled = true
         collectionView.collectionViewLayout = flowLayout
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        return 400
+        return self.numberOfCards
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -141,7 +183,7 @@ extension HomeVC: UICollectionViewDelegate, UICollectionViewDataSource {
         let cardCell = collectionView.dequeueReusableCell(withReuseIdentifier: "CardCell", for: indexPath) as? CardCell
         
         cardCell!.setRandomBackgroundColor()
-        
+                
         return cardCell!
     }
 }
@@ -150,17 +192,17 @@ extension HomeVC: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        // MARK: 20 margin on both sides
+        // 20 margin on both sides
         let cellWidth = collectionView.bounds.width - 40
         
-        // MARK: full height - 40 spacing between cells and 80 spacing for the next cell.
+        // full height - 40 spacing between cells and 80 spacing for the next cell.
         let cellHeight = collectionView.frame.size.height - 120
         
         if swipeAbleArea == nil {
-            
-            // MARK: Calculate and set the swipeAbleArea. We use this to determine wheter the cell can be swiped to the sides or not.
+            // Calculate and set the swipeAbleArea. We use this to determine wheter the cell can be swiped to the sides or not.
             let swipeAbleAreaOriginY = collectionView.frame.origin.y + collectionView.contentInset.top
             swipeAbleArea = CGRect(x: 0, y: swipeAbleAreaOriginY, width: view.frame.width, height: cellHeight)
+            centerX = swipeAbleArea.width/2
         }
         return CGSize(width: cellWidth, height: cellHeight)
     }

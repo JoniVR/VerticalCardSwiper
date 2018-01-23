@@ -10,6 +10,11 @@ import UIKit
 
 extension UICollectionView {
     
+    /// A `Bool` that indicates if the `UICollectionView` is currently scrolling.
+    public var isScrolling: Bool {
+        return (self.isDragging || self.isTracking || self.isDecelerating)
+    }
+    
     /**
      This function animates the cards from the bottom on first load.
      You should use this function inside `viewDidAppear`.

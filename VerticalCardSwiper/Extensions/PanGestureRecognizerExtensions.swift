@@ -21,7 +21,9 @@ public enum PanDirection: Int {
 
 extension UIPanGestureRecognizer {
         
-    /** This calculated var stores the direction of the gesture received by the `UIPanGestureRecognizer`. */
+    /**
+     This calculated var stores the direction of the gesture received by the `UIPanGestureRecognizer`.
+     */
     public var direction: PanDirection? {
         let velocity = self.velocity(in: view)
         let vertical = fabs(velocity.y) > fabs(velocity.x)
