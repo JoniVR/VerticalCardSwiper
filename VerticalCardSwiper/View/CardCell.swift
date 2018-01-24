@@ -59,13 +59,14 @@ class CardCell: UICollectionViewCell {
     
     /**
      Resets the CardCell back to the center of the CollectionView.
-     - parameter anchorPoint: The point that the card is translated to.
     */
-    public func resetToCenterPosition(anchorPoint: CGPoint){
+    public func resetToCenterPosition(){
+        
+        let anchorPoint = self.layer.anchorPoint
         
         var transform = CATransform3DIdentity
         transform = CATransform3DRotate(transform, 0, 0, 0, 1)
-        transform = CATransform3DTranslate(transform, anchorPoint.x, anchorPoint.y, 1)
+        transform = CATransform3DTranslate(transform, anchorPoint.x, anchorPoint.y, self.layer.anchorPointZ)
     
         UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut, animations: { [weak self] in
             
@@ -90,7 +91,7 @@ class CardCell: UICollectionViewCell {
         if (cardCenter.x > centerX + swipePercentageMargin || cardCenter.x < centerX - swipePercentageMargin){
             animateOffScreen(withDirection: direction, angle: angle)
         } else {
-            self.resetToCenterPosition(anchorPoint: self.layer.anchorPoint)
+            self.resetToCenterPosition()
         }
     }
     

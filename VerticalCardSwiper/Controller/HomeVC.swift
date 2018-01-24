@@ -53,13 +53,14 @@ extension HomeVC: CardCellSwipeDelegate {
     /// Sets up the CardCellSwipeDelegate.
     fileprivate func setupCardSwipeDelegate() {
         
-        swipedCard.delegate = self
+        swipedCard?.delegate = self
     }
     
     func didSwipeAway(cell: CardCell) {
         if let indexPathToRemove = collectionView.indexPath(for: cell){
             numberOfCards-=1
             collectionView.deleteItems(at: [indexPathToRemove])
+            swipedCard = nil
         }
     }
 }
@@ -94,6 +95,7 @@ extension HomeVC: UIGestureRecognizerDelegate {
         
         if swipeAbleArea.contains(location) && !collectionView.isScrolling {
             
+            //FIXME: Possible fix (not completely), use: collectionView.indexPathForItem(at: CGPoint(x: collectionView.center.x, y: locationInCollectionView.y)) {
             if let swipedCardIndex = collectionView.indexPathForItem(at: locationInCollectionView) {
                 
                 /// The card that is swipeable inside the SwipeAbleArea.
@@ -103,6 +105,7 @@ extension HomeVC: UIGestureRecognizerDelegate {
                 /// The angle we pass for the swipe animation.
                 var angle: CGFloat!
                 
+                // determine angle of animation
                 if cardCenter.x < centerX { angle = 25 }
                 else if cardCenter.x > centerX { angle = -25 }
                 else { angle = 0 }
@@ -110,6 +113,7 @@ extension HomeVC: UIGestureRecognizerDelegate {
                 switch (sender.state) {
                     
                 case .began:
+                    
                     let initialTouchPoint = location
                     let newAnchorPoint = CGPoint(x: initialTouchPoint.x / swipedCard.bounds.width, y: initialTouchPoint.y / swipedCard.bounds.height)
                     let oldPosition = CGPoint(x: swipedCard.bounds.size.width * swipedCard.layer.anchorPoint.x, y: swipedCard.bounds.size.height * swipedCard.layer.anchorPoint.y)
@@ -119,15 +123,18 @@ extension HomeVC: UIGestureRecognizerDelegate {
                     break
                     
                 case .changed:
+                    
                     swipedCard.animateCard(angle: angle, horizontalTranslation: translation.x)
                     break
-
+                    
                 case .ended:
+                    
                     swipedCard.endedPanAnimation(withDirection: direction!, centerX: centerX, angle: angle)
                     break
                     
                 default:
-                    swipedCard.resetToCenterPosition(anchorPoint: swipedCard.layer.anchorPoint)
+                    
+                    swipedCard.resetToCenterPosition()
                 }
             }
         }
@@ -138,13 +145,10 @@ extension HomeVC: UIGestureRecognizerDelegate {
         if let panGestureRec = gestureRecognizer as? UIPanGestureRecognizer {
             
             // When a horizontal pan is detected, we make sure to disable the collectionView.panGestureRecognizer so that it doesn't interfere with the sideswipe.
-            if panGestureRec == horizontalPangestureRecognizer {
-                
-                if panGestureRec.direction!.isX {
-                    return false
-                } else {
-                    return true
-                }
+            if panGestureRec == horizontalPangestureRecognizer, panGestureRec.direction!.isX {
+                return false
+            } else {
+                return true
             }
         }
         return false
@@ -183,7 +187,7 @@ extension HomeVC: UICollectionViewDelegate, UICollectionViewDataSource {
         let cardCell = collectionView.dequeueReusableCell(withReuseIdentifier: "CardCell", for: indexPath) as? CardCell
         
         cardCell!.setRandomBackgroundColor()
-                
+        
         return cardCell!
     }
 }
