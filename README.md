@@ -1,6 +1,9 @@
 # VerticalCardSwiper
 _A marriage between the Shazam Discover UI and Tinder, built with UICollectionView in Swift._
 
+<a href="https://developer.apple.com/swift"><img src="https://img.shields.io/badge/swift-4.0-4BC51D.svg?style=flat" alt="Language: Swift" /></a>
+[![license](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/JoniVR/VerticalCardSwiper/blob/master/LICENSE)
+
 <hr>
 
 ## Project goal and information
@@ -28,4 +31,4 @@ Joni Van Roost, joni.VR@hotmail.com
 VerticalCardSwiper is available under the MIT license. See the [LICENSE](https://github.com/JoniVR/VerticalCardSwiper/blob/development/LICENSE) file for more info.
 
 ## More
-Feel free to submit a pull request or fork this project. Any help on improving this is always appreciated.
+Feel free to submit a pull request, open an issue or fork this project. Any help is always appreciated.
