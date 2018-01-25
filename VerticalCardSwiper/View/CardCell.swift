@@ -85,8 +85,8 @@ class CardCell: UICollectionViewCell {
     */
     public func endedPanAnimation(withDirection direction: PanDirection, centerX: CGFloat, angle: CGFloat){
         
-        let swipePercentageMargin = self.bounds.width * 0.2
-        let cardCenter = self.convert(self.center, to: self.superview)
+        let swipePercentageMargin = self.bounds.width * 0.3
+        let cardCenter = self.convert(CGPoint(x: self.bounds.midX, y: self.bounds.midY), to: self.superview)
         
         if (cardCenter.x > centerX + swipePercentageMargin || cardCenter.x < centerX - swipePercentageMargin){
             animateOffScreen(withDirection: direction, angle: angle)
