@@ -94,48 +94,51 @@ extension HomeVC: UIGestureRecognizerDelegate {
         let direction = sender.direction
         
         if swipeAbleArea.contains(location) && !collectionView.isScrolling {
-            
-            //FIXME: Possible fix (not completely), use: collectionView.indexPathForItem(at: CGPoint(x: collectionView.center.x, y: locationInCollectionView.y)) {
             if let swipedCardIndex = collectionView.indexPathForItem(at: locationInCollectionView) {
-                
                 /// The card that is swipeable inside the SwipeAbleArea.
                 swipedCard = collectionView.cellForItem(at: swipedCardIndex) as! CardCell
-                /// The horizontal center of the cardCell.
-                let cardCenter = swipedCard.convert(swipedCard.center, to: swipedCard)
-                /// The angle we pass for the swipe animation.
-                var angle: CGFloat!
+            }
+        }
+        
+        if swipedCard != nil && !collectionView.isScrolling {
+            
+            /// The horizontal center of the cardCell.
+            let cardCenter = swipedCard.convert(swipedCard.center, to: swipedCard)
+            /// The angle we pass for the swipe animation.
+            var angle: CGFloat!
+            
+            // determine angle of animation
+            if cardCenter.x < centerX { angle = 25 }
+            else if cardCenter.x > centerX { angle = -25 }
+            else { angle = 0 }
+            
+            switch (sender.state) {
                 
-                // determine angle of animation
-                if cardCenter.x < centerX { angle = 25 }
-                else if cardCenter.x > centerX { angle = -25 }
-                else { angle = 0 }
+            case .began:
                 
-                switch (sender.state) {
-                    
-                case .began:
-                    
-                    let initialTouchPoint = location
-                    let newAnchorPoint = CGPoint(x: initialTouchPoint.x / swipedCard.bounds.width, y: initialTouchPoint.y / swipedCard.bounds.height)
-                    let oldPosition = CGPoint(x: swipedCard.bounds.size.width * swipedCard.layer.anchorPoint.x, y: swipedCard.bounds.size.height * swipedCard.layer.anchorPoint.y)
-                    let newPosition = CGPoint(x: swipedCard.bounds.size.width * newAnchorPoint.x, y: swipedCard.bounds.size.height * newAnchorPoint.y)
-                    swipedCard.layer.anchorPoint = newAnchorPoint
-                    swipedCard.layer.position = CGPoint(x: swipedCard.layer.position.x - oldPosition.x + newPosition.x, y: swipedCard.layer.position.y - oldPosition.y + newPosition.y)
-                    break
-                    
-                case .changed:
-                    
-                    swipedCard.animateCard(angle: angle, horizontalTranslation: translation.x)
-                    break
-                    
-                case .ended:
-                    
-                    swipedCard.endedPanAnimation(withDirection: direction!, centerX: centerX, angle: angle)
-                    break
-                    
-                default:
-                    
-                    swipedCard.resetToCenterPosition()
-                }
+                let initialTouchPoint = location
+                let newAnchorPoint = CGPoint(x: initialTouchPoint.x / swipedCard.bounds.width, y: initialTouchPoint.y / swipedCard.bounds.height)
+                let oldPosition = CGPoint(x: swipedCard.bounds.size.width * swipedCard.layer.anchorPoint.x, y: swipedCard.bounds.size.height * swipedCard.layer.anchorPoint.y)
+                let newPosition = CGPoint(x: swipedCard.bounds.size.width * newAnchorPoint.x, y: swipedCard.bounds.size.height * newAnchorPoint.y)
+                swipedCard.layer.anchorPoint = newAnchorPoint
+                swipedCard.layer.position = CGPoint(x: swipedCard.layer.position.x - oldPosition.x + newPosition.x, y: swipedCard.layer.position.y - oldPosition.y + newPosition.y)
+                break
+                
+            case .changed:
+                
+                swipedCard.animateCard(angle: angle, horizontalTranslation: translation.x)
+                break
+                
+            case .ended:
+                
+                swipedCard.endedPanAnimation(withDirection: direction!, centerX: centerX, angle: angle)
+                swipedCard = nil
+                break
+                
+            default:
+                
+                swipedCard.resetToCenterPosition()
+                swipedCard = nil
             }
         }
     }
