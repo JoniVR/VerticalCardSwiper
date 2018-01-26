@@ -21,8 +21,9 @@ It's built with a `UICollectionView` and a custom flowLayout. This way, it works
 - [ ] Add CocoaPods support 
 - [ ] Add Carthage support
 
-## Example of the Shazam discover UI:
-  ![Shazam discover](https://i.stack.imgur.com/7XohG.gif)
+## Example:
+
+  ![example](https://github.com/JoniVR/VerticalCardSwiper/blob/development/example.gif)
   
 ## Author
 Joni Van Roost, joni.VR@hotmail.com
