@@ -83,5 +83,15 @@ class VerticalCardSwiperFlowLayout: UICollectionViewFlowLayout {
         }
         return CGPoint(x: proposedContentOffset.x, y: verticalOffset + offsetAdjustment)
     }
+    
+    // Workaround for zIndex bug when swiping a card away. (feel free to implement better solution)
+    override func finalLayoutAttributesForDisappearingItem(at itemIndexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
+
+        let nextIndexPath = IndexPath(row: itemIndexPath.row + 1, section: itemIndexPath.section)
+        let attr = self.layoutAttributesForItem(at: nextIndexPath)
+
+        attr?.zIndex = nextIndexPath.row
+        return nil
+    }
 }
 

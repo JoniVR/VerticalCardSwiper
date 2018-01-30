@@ -66,10 +66,9 @@ class CardCell: UICollectionViewCell {
         
         var transform = CATransform3DIdentity
         transform = CATransform3DRotate(transform, 0, 0, 0, 1)
-        transform = CATransform3DTranslate(transform, anchorPoint.x, anchorPoint.y, self.layer.anchorPointZ)
+        transform = CATransform3DTranslate(transform, anchorPoint.x, anchorPoint.y, 1)
     
-        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut, animations: { [weak self] in
-            
+        UIView.animate(withDuration: 0.3, animations: { [weak self] in
             self?.layer.transform = transform
         })
     }
@@ -112,7 +111,7 @@ class CardCell: UICollectionViewCell {
             transform = CATransform3DTranslate(transform, (self.frame.width * 2), 0, 1)
         }
         
-        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut, animations: { [weak self] in
+        UIView.animate(withDuration: 0.3, animations: { [weak self] in
             
             self?.layer.transform = transform
         })
