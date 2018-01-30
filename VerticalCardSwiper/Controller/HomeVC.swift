@@ -20,6 +20,8 @@ class HomeVC: UIViewController {
     internal var centerX: CGFloat!
     /// The amount of cards in the collectionView.
     internal var numberOfCards = 400
+    /// Indicates if side swiping on cards is enabled. Default value is `true`.
+    public var isSideSwipingEnabled = true
     /// The `CardCell` that the user can (and is) moving.
     internal var swipedCard: CardCell! {
         didSet{
@@ -37,8 +39,10 @@ class HomeVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        setupGestureRecognizer()
+
+        if isSideSwipingEnabled {
+            setupGestureRecognizer()
+        }
         setupCollectionView()
     }
     
