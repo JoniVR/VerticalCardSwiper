@@ -106,15 +106,10 @@ extension HomeVC: UIGestureRecognizerDelegate {
         
         if swipedCard != nil && !collectionView.isScrolling {
             
-            /// The horizontal center of the cardCell.
-            let cardCenter = swipedCard.convert(CGPoint(x: swipedCard.bounds.midX, y: swipedCard.bounds.midY), to: self.view)
             /// The angle we pass for the swipe animation.
-            var angle: CGFloat!
-            
-            // determine angle of animation
-            if cardCenter.x < centerX { angle = 25 }
-            else if cardCenter.x > centerX { angle = -25 }
-            else { angle = 0 }
+            let maximumRotation: CGFloat = 1.0
+            let rotationStrength = min(translation.x / swipedCard.frame.width, maximumRotation)
+            let angle = (CGFloat(Double.pi) / 10.0) * rotationStrength
             
             switch (sender.state) {
                 
