@@ -62,9 +62,9 @@ extension HomeVC: CardCellSwipeDelegate {
     
     func didSwipeAway(cell: CardCell) {
         if let indexPathToRemove = collectionView.indexPath(for: cell){
-            numberOfCards-=1
-            collectionView.deleteItems(at: [indexPathToRemove])
+            numberOfCards -= 1
             swipedCard = nil
+            collectionView.deleteItems(at: [indexPathToRemove])
         }
     }
 }
