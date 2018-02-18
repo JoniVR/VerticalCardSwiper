@@ -62,14 +62,8 @@ class CardCell: UICollectionViewCell {
     */
     public func resetToCenterPosition(){
         
-        let anchorPoint = self.layer.anchorPoint
-        
-        var transform = CATransform3DIdentity
-        transform = CATransform3DRotate(transform, 0, 0, 0, 1)
-        transform = CATransform3DTranslate(transform, anchorPoint.x, anchorPoint.y, 1)
-    
         UIView.animate(withDuration: 0.3, animations: { [weak self] in
-            self?.layer.transform = transform
+            self?.layer.transform = CATransform3DIdentity
         })
     }
     
