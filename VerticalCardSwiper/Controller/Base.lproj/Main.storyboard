@@ -43,7 +43,7 @@
                         <constraints>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="3wG-Wh-s0p" secondAttribute="trailing" id="1za-JN-Oms"/>
                             <constraint firstItem="3wG-Wh-s0p" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="D2e-va-cKF"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="3wG-Wh-s0p" secondAttribute="bottom" id="MtJ-Y0-odr"/>
+                            <constraint firstAttribute="bottom" secondItem="3wG-Wh-s0p" secondAttribute="bottom" id="MtJ-Y0-odr"/>
                             <constraint firstItem="3wG-Wh-s0p" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="tn5-oc-oVR"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
