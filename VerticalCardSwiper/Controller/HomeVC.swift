@@ -79,6 +79,7 @@ extension HomeVC: CardCellSwipeDelegate {
             numberOfCards -= 1
             swipedCard = nil
             collectionView.deleteItems(at: [indexPathToRemove])
+            collectionView.collectionViewLayout.invalidateLayout()
         }
     }
 }
