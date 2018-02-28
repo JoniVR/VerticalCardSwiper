@@ -78,8 +78,14 @@ extension HomeVC: CardCellSwipeDelegate {
         if let indexPathToRemove = collectionView.indexPath(for: cell){
             numberOfCards -= 1
             swipedCard = nil
-            collectionView.deleteItems(at: [indexPathToRemove])
-            collectionView.collectionViewLayout.invalidateLayout()
+            
+            collectionView.performBatchUpdates({
+                collectionView.deleteItems(at: [indexPathToRemove])
+            }) { [weak self](finished) in
+                if finished {
+                    self?.collectionView.collectionViewLayout.invalidateLayout()
+                }
+            }
         }
     }
 }

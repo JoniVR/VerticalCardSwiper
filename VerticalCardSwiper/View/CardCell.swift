@@ -39,7 +39,6 @@ class CardCell: UICollectionViewCell {
     weak var delegate: CardCellSwipeDelegate?
     
     override func layoutSubviews() {
-        super.layoutSubviews()
         
         self.layer.cornerRadius = 12
         self.layer.shouldRasterize = true
@@ -47,6 +46,7 @@ class CardCell: UICollectionViewCell {
         
         // make sure anchorPoint is correct when laying out subviews.
         self.layer.anchorPoint = CGPoint(x: 0.5, y: 0.5)
+        super.layoutSubviews()
     }
     
     /**
