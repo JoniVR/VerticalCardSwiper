@@ -30,8 +30,9 @@ protocol CardCellSwipeDelegate: class {
     /**
      Called when a CardCell is swiped away.
      - parameter cell: The CardCell that is being swiped away.
+     - parameter swipeDirection: The direction the card is swiped in. This can be Left, Right or None.
     */
-    func didSwipeAway(cell: CardCell)
+    func didSwipeAway(cell: CardCell, swipeDirection: CellSwipeDirection)
 }
 
 class CardCell: UICollectionViewCell {
@@ -99,7 +100,7 @@ class CardCell: UICollectionViewCell {
         let cardCenter = self.convert(CGPoint(x: self.bounds.midX, y: self.bounds.midY), to: self.superview)
         
         if (cardCenter.x > centerX + swipePercentageMargin || cardCenter.x < centerX - swipePercentageMargin){
-            animateOffScreen(withDirection: direction, angle: angle)
+            animateOffScreen(angle: angle)
         } else {
             self.resetToCenterPosition()
         }
@@ -107,30 +108,38 @@ class CardCell: UICollectionViewCell {
     
     /**
      Animates to card off the screen and calls the `didSwipeAway` function from the `CardCellSwipeDelegate`.
-     - parameter direction: The direction that the card was swiped (and will be animated) in.
-     - parameter angle: The angle that the card will rotate in (depends on direction).
+     - parameter angle: The angle that the card will rotate in (depends on direction). Positive means the card is swiped to the right, a negative angle means the card is swiped to the left.
     */
-    fileprivate func animateOffScreen(withDirection direction: PanDirection, angle: CGFloat){
+    fileprivate func animateOffScreen(angle: CGFloat){
+        
+        var direction: CellSwipeDirection = .None
         
         var transform = CATransform3DIdentity
         transform = CATransform3DRotate(transform, angle, 0, 0, 1)
-
-        if direction == .Left {
+        
+        // swipe left
+        if angle < 0 {
             transform = CATransform3DTranslate(transform, -(self.frame.width * 2), 0, 1)
+            direction = .Left
         }
-        if direction == .Right {
+        
+        // swipe right
+        if angle > 0 {
             transform = CATransform3DTranslate(transform, (self.frame.width * 2), 0, 1)
+            direction = .Right
         }
         
         UIView.animate(withDuration: 0.3, animations: { [weak self] in
             
             self?.layer.transform = transform
         })
-        delegate?.didSwipeAway(cell: self) 
+
+        delegate?.didSwipeAway(cell: self, swipeDirection: direction)
     }
     
     /**
-     Prepares for reuse by resetting the anchorPoint back to the default value. This is necessary because in HomeVC we are manipulating the anchorPoint during dragging animation.
+     Prepares for reuse by resetting the anchorPoint back to the default value.
+     This is necessary because in HomeVC we are manipulating the anchorPoint during dragging animation.
     */
     override func prepareForReuse() {
         super.prepareForReuse()

@@ -22,6 +22,7 @@
 
 import UIKit
 
+/// The direction of the `UIPanGesture`.
 public enum PanDirection: Int {
     case Up
     case Down

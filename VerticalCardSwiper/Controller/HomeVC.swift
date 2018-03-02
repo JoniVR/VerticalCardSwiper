@@ -74,7 +74,8 @@ extension HomeVC: CardCellSwipeDelegate {
         swipedCard?.delegate = self
     }
     
-    func didSwipeAway(cell: CardCell) {
+    func didSwipeAway(cell: CardCell, swipeDirection direction: CellSwipeDirection) {
+                
         if let indexPathToRemove = collectionView.indexPath(for: cell){
             numberOfCards -= 1
             swipedCard = nil
