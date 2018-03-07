@@ -80,7 +80,7 @@ class CardCell: UICollectionViewCell {
     */
     public func resetToCenterPosition(){
         
-        UIView.animate(withDuration: 0.3, animations: { [weak self] in
+        UIView.animate(withDuration: 0.2, animations: { [weak self] in
             self?.layer.transform = CATransform3DIdentity
         })
     }
@@ -129,11 +129,10 @@ class CardCell: UICollectionViewCell {
             direction = .Right
         }
         
-        UIView.animate(withDuration: 0.3, animations: { [weak self] in
-            
+        UIView.animate(withDuration: 0.2, animations: { [weak self] in
+
             self?.layer.transform = transform
         })
-
         delegate?.didSwipeAway(cell: self, swipeDirection: direction)
     }
     

@@ -33,7 +33,7 @@ class HomeVC: UIViewController {
     /// Stores the center point of the swipeAbleArea/collectionView.
     internal var centerX: CGFloat!
     /// The amount of cards in the collectionView.
-    internal var numberOfCards = 400
+    internal var numberOfCards = 200
     /// Indicates if side swiping on cards is enabled. Default value is `true`.
     public var isSideSwipingEnabled = true
     /// The `CardCell` that the user can (and is) moving.
