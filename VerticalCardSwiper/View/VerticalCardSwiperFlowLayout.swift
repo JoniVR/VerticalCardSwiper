@@ -31,28 +31,23 @@ class VerticalCardSwiperFlowLayout: UICollectionViewFlowLayout {
     
     override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
         let items = NSArray (array: super.layoutAttributesForElements(in: rect)!, copyItems: true)
-        var headerAttributes: UICollectionViewLayoutAttributes?
         
         items.enumerateObjects(using: { (object, index, stop) -> Void in
             let attributes = object as! UICollectionViewLayoutAttributes
             
-            if attributes.representedElementKind == UICollectionElementKindSectionHeader {
-                headerAttributes = attributes
-            }
-            else {
-                self.updateCellAttributes(attributes, headerAttributes: headerAttributes)
-            }
+            self.updateCellAttributes(attributes)
         })
         return items as? [UICollectionViewLayoutAttributes]
     }
     
-    func updateCellAttributes(_ attributes: UICollectionViewLayoutAttributes, headerAttributes: UICollectionViewLayoutAttributes?) {
+    /**
+     Updates the attributes.
+     Here manipulate the zIndex of the cards here, calculate the positions and do the animations.
+     - parameter attributes: The attributes we're updating.
+    */
+    func updateCellAttributes(_ attributes: UICollectionViewLayoutAttributes) {
         let minY = collectionView!.bounds.minY + collectionView!.contentInset.top
-        var maxY = attributes.frame.origin.y
-        
-        if let headerAttributes = headerAttributes {
-            maxY -= headerAttributes.bounds.height
-        }
+        let maxY = attributes.frame.origin.y
         
         let finalY = max(minY, maxY)
         var origin = attributes.frame.origin
