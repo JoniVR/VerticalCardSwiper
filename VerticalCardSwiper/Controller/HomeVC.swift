@@ -191,7 +191,7 @@ extension HomeVC: UICollectionViewDelegate, UICollectionViewDataSource {
         collectionView.dataSource = self
         
         collectionView.decelerationRate = UIScrollViewDecelerationRateFast
-        collectionView.contentInset = UIEdgeInsets(top: 40, left: 0, bottom: 0, right: 0)
+        collectionView.contentInset = UIEdgeInsets(top: 40, left: 0, bottom: 40, right: 0)
         
         collectionView.collectionViewLayout = flowLayout
     }
