@@ -22,12 +22,15 @@
 
 import UIKit
 
+/// Custom `UICollectionViewFlowLayout` that provides the flowlayout information like paging and `CardCell` movements.
 class VerticalCardSwiperFlowLayout: UICollectionViewFlowLayout {
     
     /// This property sets the amount of scaling for the first item.
     public var firstItemTransform: CGFloat?
     /// This property enables paging per card. The default value is true.
     public var isPagingEnabled: Bool = true
+    /// Stores the height of a CardCell.
+    internal var cellHeight: CGFloat!
     
     override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
         let items = NSArray (array: super.layoutAttributesForElements(in: rect)!, copyItems: true)
@@ -77,20 +80,25 @@ class VerticalCardSwiperFlowLayout: UICollectionViewFlowLayout {
             return latestOffset
         }
         
-        var offsetAdjustment = CGFloat.greatestFiniteMagnitude
-        let verticalOffset = proposedContentOffset.y
-        let contentInset = collectionView!.contentInset.top
+        // Page height used for estimating and calculating paging.
+        let pageHeight = cellHeight + self.minimumLineSpacing
+
+        // Make an estimation of the current page position.
+        let approximatePage = self.collectionView!.contentOffset.y/pageHeight
         
-        let targetRect = CGRect(origin: CGPoint(x: 0, y: verticalOffset), size: self.collectionView!.bounds.size)
+        // Determine the current page based on velocity.
+        let currentPage = (velocity.y < 0.0) ? floor(approximatePage) : ceil(approximatePage)
         
-        for layoutAttributes in super.layoutAttributesForElements(in: targetRect)! {
-            // adjust for the contentInset
-            let itemOffset = layoutAttributes.frame.origin.y - contentInset
-            if (abs(itemOffset - verticalOffset) < abs(offsetAdjustment)) {
-                offsetAdjustment = itemOffset - verticalOffset
-            }
-        }
-        return CGPoint(x: proposedContentOffset.x, y: verticalOffset + offsetAdjustment)
+        // Create custom flickVelocity.
+        let flickVelocity = velocity.y * 0.3
+        
+        // Check how many pages the user flicked, if <= 1 then flickedPages should return 0.
+        let flickedPages = (abs(round(flickVelocity)) <= 1) ? 0 : round(flickVelocity)
+        
+        // Calculate newVerticalOffset.
+        let newVerticalOffset = ((currentPage + flickedPages) * pageHeight) - self.collectionView!.contentInset.top
+
+        return CGPoint(x: proposedContentOffset.x, y: newVerticalOffset)
     }
     
     override func finalLayoutAttributesForDisappearingItem(at itemIndexPath: IndexPath) -> UICollectionViewLayoutAttributes? {

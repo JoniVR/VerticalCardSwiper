@@ -22,9 +22,7 @@
 
 import UIKit
 
-/**
- This delegate is used for delegating card actions.
-*/
+/// This delegate is used for delegating `CardCell` actions.
 protocol CardCellSwipeDelegate: class {
     
     /**
@@ -35,6 +33,7 @@ protocol CardCellSwipeDelegate: class {
     func didSwipeAway(cell: CardCell, swipeDirection: CellSwipeDirection)
 }
 
+/// The CardCell that the user can swipe away. Based on `UICollectionViewCell`.
 class CardCell: UICollectionViewCell {
     
     weak var delegate: CardCellSwipeDelegate?
@@ -96,7 +95,7 @@ class CardCell: UICollectionViewCell {
     */
     public func endedPanAnimation(withDirection direction: PanDirection, centerX: CGFloat, angle: CGFloat){
         
-        let swipePercentageMargin = self.bounds.width * 0.3
+        let swipePercentageMargin = self.bounds.width * 0.4
         let cardCenter = self.convert(CGPoint(x: self.bounds.midX, y: self.bounds.midY), to: self.superview)
         
         if (cardCenter.x > centerX + swipePercentageMargin || cardCenter.x < centerX - swipePercentageMargin){

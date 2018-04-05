@@ -26,24 +26,32 @@ class HomeVC: UIViewController {
     
     @IBOutlet weak var collectionView: UICollectionView!
     
+    /// Indicates if side swiping on cards is enabled. Default value is `true`.
+    public var isSideSwipingEnabled: Bool = true
+    /// The amount of cards in the collectionView.
+    public var numberOfCards: Int = 100
+    /// The inset (spacing) at the top for the cards.
+    public var topInset: CGFloat = 40
+    /// The inset (spacing) at each side of the cards.
+    public var sideInset: CGFloat = 20
+    /// Sets how much of the next card should be visible.
+    public var visibleNextCardHeight: CGFloat = 50
+    
     /// We use this horizontalPangestureRecognizer for the vertical panning.
     fileprivate var horizontalPangestureRecognizer: UIPanGestureRecognizer!
     /// Stores a `CGRect` with the area that is swipeable to the user.
-    internal var swipeAbleArea: CGRect!
+    fileprivate var swipeAbleArea: CGRect!
     /// Stores the center point of the swipeAbleArea/collectionView.
-    internal var centerX: CGFloat!
-    /// The amount of cards in the collectionView.
-    internal var numberOfCards = 100
-    /// Indicates if side swiping on cards is enabled. Default value is `true`.
-    public var isSideSwipingEnabled = true
+    fileprivate var centerX: CGFloat!
     /// The `CardCell` that the user can (and is) moving.
-    internal var swipedCard: CardCell! {
-        didSet{
+    fileprivate var swipedCard: CardCell! {
+        didSet {
             setupCardSwipeDelegate()
         }
     }
+    
     /// The flowlayout used in the collectionView.
-    internal lazy var flowLayout: VerticalCardSwiperFlowLayout = {
+    fileprivate lazy var flowLayout: VerticalCardSwiperFlowLayout = {
         let flowLayout = VerticalCardSwiperFlowLayout()
         flowLayout.firstItemTransform = 0.05
         flowLayout.minimumLineSpacing = 40
@@ -82,7 +90,7 @@ extension HomeVC: CardCellSwipeDelegate {
             
             collectionView.performBatchUpdates({
                 collectionView.deleteItems(at: [indexPathToRemove])
-            }) { [weak self](finished) in
+            }) { [weak self] (finished) in
                 if finished {
                     self?.collectionView.collectionViewLayout.invalidateLayout()
                 }
@@ -191,8 +199,8 @@ extension HomeVC: UICollectionViewDelegate, UICollectionViewDataSource {
         collectionView.dataSource = self
         
         collectionView.decelerationRate = UIScrollViewDecelerationRateFast
-        collectionView.contentInset = UIEdgeInsets(top: 40, left: 0, bottom: 40, right: 0)
-        
+        collectionView.contentInset = UIEdgeInsets(top: topInset, left: 0, bottom: topInset + flowLayout.minimumLineSpacing + visibleNextCardHeight, right: 0)
+
         collectionView.collectionViewLayout = flowLayout
     }
     
@@ -220,11 +228,11 @@ extension HomeVC: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        // 20 margin on both sides
-        let cellWidth = collectionView.bounds.width - 40
-        
-        // full height - 40 spacing between cells and 80 spacing for the next cell.
-        let cellHeight = collectionView.frame.size.height - 120
+        let cellWidth = collectionView.frame.size.width - (sideInset * 2)
+        let cellHeight = collectionView.frame.size.height - flowLayout.minimumLineSpacing - visibleNextCardHeight - topInset
+                
+        // set cellHeight in the custom flowlayout, we use this for paging calculations.
+        flowLayout.cellHeight = cellHeight
         
         if swipeAbleArea == nil {
             // Calculate and set the swipeAbleArea. We use this to determine wheter the cell can be swiped to the sides or not.
