@@ -32,6 +32,13 @@ class VerticalCardSwiperFlowLayout: UICollectionViewFlowLayout {
     /// Stores the height of a CardCell.
     internal var cellHeight: CGFloat!
     
+    override func prepare() {
+        super.prepare()
+        
+        assert(collectionView!.numberOfSections == 1, "Number of sections should always be 1.")
+        assert(collectionView!.isPagingEnabled == false, "Paging on the collectionview itself should never be enabled. To enable cell paging, use the isPagingEnabled property of the VerticalCardSwiperFlowLayout instead.")
+    }
+    
     override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
         let items = NSArray (array: super.layoutAttributesForElements(in: rect)!, copyItems: true)
         
@@ -66,7 +73,7 @@ class VerticalCardSwiperFlowLayout: UICollectionViewFlowLayout {
         attributes.zIndex = attributes.indexPath.row
     }
     
-    // We invalidate the layout when a "bounds change" happens, for example when we scale the top cell. This forces the cells to be redrawn.
+    // We invalidate the layout when a "bounds change" happens, for example when we scale the top cell. This forces a layout update on the flowlayout.
     override func shouldInvalidateLayout(forBoundsChange newBounds: CGRect) -> Bool {
         return true
     }
@@ -110,6 +117,7 @@ class VerticalCardSwiperFlowLayout: UICollectionViewFlowLayout {
 
         // attributes for swiping card away
         let attr = self.layoutAttributesForItem(at: itemIndexPath)
+        
         return attr
     }
 }
