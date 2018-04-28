@@ -6,6 +6,8 @@ _A marriage between the Shazam Discover UI and Tinder, built with UICollectionVi
 
 <hr>
 
+  ![example](https://github.com/JoniVR/VerticalCardSwiper/blob/development/example.gif)
+
 ## Project goal and information
 The goal of this project is to recreate the Discover UI in Shazam (which I think is a great, fun way to display content) in combination with a Tinder style of swiping cards to the left/right.
 The idea behind this is that in some cases, you don't want to swipe away cards, but keep them availible for later on. This implementation allows for that. And it's a fun way to interact with content.
@@ -20,10 +22,6 @@ It's built with a `UICollectionView` and a custom flowLayout. This way, it works
 - [ ] Add code documentation in README.md file
 - [ ] Add CocoaPods support 
 - [ ] Add Carthage support
-
-## Example:
-
-  ![example](https://github.com/JoniVR/VerticalCardSwiper/blob/development/example.gif)
   
 ## Author
 Joni Van Roost, joni.VR@hotmail.com
