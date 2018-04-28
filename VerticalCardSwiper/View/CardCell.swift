@@ -37,7 +37,7 @@ protocol CardCellSwipeDelegate: class {
 class CardCell: UICollectionViewCell {
     
     weak var delegate: CardCellSwipeDelegate?
-    
+        
     override func layoutSubviews() {
         
         self.layer.cornerRadius = 12
@@ -129,10 +129,11 @@ class CardCell: UICollectionViewCell {
         }
         
         UIView.animate(withDuration: 0.2, animations: { [weak self] in
-
             self?.layer.transform = transform
-        })
-        delegate?.didSwipeAway(cell: self, swipeDirection: direction)
+        }){ (completed) in
+            self.isHidden = true
+            self.delegate?.didSwipeAway(cell: self, swipeDirection: direction)
+        }
     }
     
     /**
@@ -141,6 +142,7 @@ class CardCell: UICollectionViewCell {
     */
     override func prepareForReuse() {
         super.prepareForReuse()
+        self.isHidden = false
         // reset to default value (https://developer.apple.com/documentation/quartzcore/calayer/1410817-anchorpoint)
         self.layer.anchorPoint = CGPoint(x: 0.5, y: 0.5)
     }

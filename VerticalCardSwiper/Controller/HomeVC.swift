@@ -61,7 +61,7 @@ class HomeVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         if isSideSwipingEnabled {
             setupGestureRecognizer()
         }
@@ -83,13 +83,13 @@ extension HomeVC: CardCellSwipeDelegate {
     }
     
     func didSwipeAway(cell: CardCell, swipeDirection direction: CellSwipeDirection) {
-                
+        
         if let indexPathToRemove = collectionView.indexPath(for: cell){
             numberOfCards -= 1
             swipedCard = nil
             
-            collectionView.performBatchUpdates({
-                collectionView.deleteItems(at: [indexPathToRemove])
+            self.collectionView.performBatchUpdates({
+                self.collectionView.deleteItems(at: [indexPathToRemove])
             }) { [weak self] (finished) in
                 if finished {
                     self?.collectionView.collectionViewLayout.invalidateLayout()
@@ -200,7 +200,7 @@ extension HomeVC: UICollectionViewDelegate, UICollectionViewDataSource {
         
         collectionView.decelerationRate = UIScrollViewDecelerationRateFast
         collectionView.contentInset = UIEdgeInsets(top: topInset, left: 0, bottom: topInset + flowLayout.minimumLineSpacing + visibleNextCardHeight, right: 0)
-
+        
         collectionView.collectionViewLayout = flowLayout
     }
     
@@ -230,7 +230,7 @@ extension HomeVC: UICollectionViewDelegateFlowLayout {
         
         let cellWidth = collectionView.frame.size.width - (sideInset * 2)
         let cellHeight = collectionView.frame.size.height - flowLayout.minimumLineSpacing - visibleNextCardHeight - topInset
-                
+        
         // set cellHeight in the custom flowlayout, we use this for paging calculations.
         flowLayout.cellHeight = cellHeight
         
