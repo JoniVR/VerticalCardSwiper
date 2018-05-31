@@ -22,26 +22,33 @@
 
 import Foundation
 
+/**
+ * The VerticalCardSwiper is a subclass of `UIView` that has a `UICollectionView` embedded.
+ *
+ * To use this, you need to implement the `VerticalCardSwiperDatasource`.
+ *
+ * If you want to handle actions like cards being swiped away, implement the `VerticalCardSwiperDelegate`.
+ */
 public class VerticalCardSwiper: UIView {
     
     /// Indicates if side swiping on cards is enabled. Default value is `true`.
     @IBInspectable public var isSideSwipingEnabled: Bool = true
-    /// The amount of cards in the collectionView.
-    @IBInspectable public var numberOfCards: Int = 0
-    /// The inset (spacing) at the top for the cards.
+    /// The inset (spacing) at the top for the cards. Default is 40.
     @IBInspectable public var topInset: CGFloat = 40
-    /// The inset (spacing) at each side of the cards.
+    /// The inset (spacing) at each side of the cards. Default is 20.
     @IBInspectable public var sideInset: CGFloat = 20
-    /// Sets how much of the next card should be visible.
+    /// Sets how much of the next card should be visible. Default is 50.
     @IBInspectable public var visibleNextCardHeight: CGFloat = 50
     
-    public weak var delegate: VerticalCardSwiperDelegate? {
-        didSet {
-            
+    public weak var delegate: VerticalCardSwiperDelegate?
+    public weak var datasource: VerticalCardSwiperDatasource? {
+        didSet{
+            numberOfCards = datasource?.numberOfCards(verticalCardSwiper: self) ?? 0
         }
     }
-    public weak var datasource: VerticalCardSwiperDatasource?
     
+    /// The amount of cards in the collectionView.
+    fileprivate var numberOfCards: Int = 0
     /// We use this horizontalPangestureRecognizer for the vertical panning.
     fileprivate var horizontalPangestureRecognizer: UIPanGestureRecognizer!
     /// Stores a `CGRect` with the area that is swipeable to the user.
@@ -65,7 +72,7 @@ public class VerticalCardSwiper: UIView {
     }()
     
     /// The collectionView where all the magic happens.
-    fileprivate var collectionView: UICollectionView!
+    public var collectionView: UICollectionView!
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -94,9 +101,7 @@ public class VerticalCardSwiper: UIView {
 
 extension VerticalCardSwiper: CardDelegate {
     
-    /// Sets up the VerticalCardSwiperDelegate.
     fileprivate func setupCardSwipeDelegate() {
-        
         swipedCard?.delegate = self
     }
     
@@ -116,6 +121,7 @@ extension VerticalCardSwiper: CardDelegate {
                 }
             }
         }
+        
     }
 }
 
@@ -199,20 +205,14 @@ extension VerticalCardSwiper: UIGestureRecognizerDelegate {
             // When a horizontal pan is detected, we make sure to disable the collectionView.panGestureRecognizer so that it doesn't interfere with the sideswipe.
             if panGestureRec == horizontalPangestureRecognizer, panGestureRec.direction!.isX {
                 return false
-            } else {
-                return true
             }
         }
-        return false
+        return true
     }
 }
 
 extension VerticalCardSwiper: UICollectionViewDelegate, UICollectionViewDataSource {
     
-    /**
-     In this function we setup the collectionView.
-     This includes delegate, datasource, insets, adding the horizontalPangestureRecognizer, setting the flowlayout
-     */
     fileprivate func setupCollectionView(){
         
         collectionView = UICollectionView(frame: self.frame, collectionViewLayout: flowLayout)
@@ -224,6 +224,8 @@ extension VerticalCardSwiper: UICollectionViewDelegate, UICollectionViewDataSour
         collectionView.delegate = self
         collectionView.dataSource = self
         
+        self.numberOfCards = datasource?.numberOfCards(verticalCardSwiper: self) ?? 0
+        
         self.addSubview(collectionView)
         
         collectionView.translatesAutoresizingMaskIntoConstraints = false
@@ -234,13 +236,11 @@ extension VerticalCardSwiper: UICollectionViewDelegate, UICollectionViewDataSour
             collectionView.topAnchor.constraint(equalTo: self.topAnchor),
             collectionView.bottomAnchor.constraint(equalTo: self.bottomAnchor)
             ])
-        
-       
     }
     
     public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        return datasource!.numberOfCards(verticalCardSwiper: collectionView)
+        return self.numberOfCards
     }
     
     public func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -250,13 +250,7 @@ extension VerticalCardSwiper: UICollectionViewDelegate, UICollectionViewDataSour
     
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        //TODO: clean up
-        let cardCell = collectionView.dequeueReusableCell(withReuseIdentifier: "CardCell", for: indexPath) as? CardCell
-        cardCell!.setRandomBackgroundColor()
-        
-        if (datasource == nil) { return cardCell! }
-        
-        return datasource!.cardForItemAt(verticalCardSwiper: collectionView, cardForItemAt: indexPath.row)
+        return datasource?.cardForItemAt(verticalCardSwiper: self, cardForItemAt: indexPath.row) ?? CardCell()
     }
 }
 

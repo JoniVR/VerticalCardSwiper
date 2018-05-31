@@ -12,32 +12,30 @@ import VerticalCardSwiper
 class HomeVC: UIViewController, VerticalCardSwiperDelegate, VerticalCardSwiperDatasource {
     
     private var cardSwiper: VerticalCardSwiper!
-    private var items: [String] = ["Hello mom","This is a test", "A pretty boring test", "I'm not very create atm"]
     
-    func numberOfCards(verticalCardSwiper: UICollectionView) -> Int {
+    override func viewDidLoad() {
+        super.viewDidLoad()
         
-        return items.count
+        cardSwiper = view as? VerticalCardSwiper
+        cardSwiper.delegate = self
+        cardSwiper.datasource = self
     }
     
-    func cardForItemAt(verticalCardSwiper: UICollectionView, cardForItemAt index: Int) -> CardCell {
+    func cardForItemAt(verticalCardSwiper: VerticalCardSwiper, cardForItemAt index: Int) -> CardCell {
         
-        let cardCell = verticalCardSwiper.dequeueReusableCell(withReuseIdentifier: "CardCell", for: IndexPath(row: index, section: 0)) as? CardCell
+        //TODO: clean up
+        let cardCell = verticalCardSwiper.collectionView.dequeueReusableCell(withReuseIdentifier: "CardCell", for: IndexPath(row: index, section: 0)) as? CardCell
+        
         cardCell!.setRandomBackgroundColor()
-        
         
         return cardCell!
     }
     
+    func numberOfCards(verticalCardSwiper: VerticalCardSwiper) -> Int {
+        return 100
+    }
+    
     func didSwipeCardAway(card: CardCell, swipeDirection: CellSwipeDirection) {
         
-        print("SWIPED AWAY!!!")
-    }
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        cardSwiper = view as? VerticalCardSwiper
-        cardSwiper.delegate = self
-        cardSwiper.datasource = self
     }
 }
