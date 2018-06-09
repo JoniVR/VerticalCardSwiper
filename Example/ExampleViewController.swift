@@ -20,24 +20,39 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import Foundation
+import UIKit
+import VerticalCardSwiper
 
-/// This datasource is used for providing data to the `VerticalCardSwiperController`.
-public protocol VerticalCardSwiperDatasource: class {
+class ExampleViewController: UIViewController, VerticalCardSwiperDelegate, VerticalCardSwiperDatasource {
     
-    /**
-     Sets the number of cards for the `UICollectionView` inside the VerticalCardSwiperController.
-     - parameter verticalCardSwiper: The `VerticalCardSwiper` where we set the amount of cards.
-     - returns: an `Int` with the amount of cards we want to show.
-     */
-    func numberOfCards(verticalCardSwiper: UICollectionView) -> Int
+    private var cardSwiper: VerticalCardSwiper!
     
-    /**
-     Asks your data source object for the cell that corresponds to the specified item in the `VerticalCardSwiper`.
-     Your implementation of this method is responsible for creating, configuring, and returning the appropriate `CardCell` for the given item.
-     - parameter verticalCardSwiper: The `VerticalCardSwiper` that will display the `CardCell`.
-     - parameter index: The that the `CardCell` should be shown at.
-     - returns: A CardCell object. The default value is an empty CardCell object.
-    */
-    func cardForItemAt(verticalCardSwiper: UICollectionView, cardForItemAt index: Int) -> CardCell
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        cardSwiper = view as? VerticalCardSwiper
+        cardSwiper.delegate = self
+        cardSwiper.datasource = self
+        
+        // register cardcell for storyboard use
+        cardSwiper.register(ExampleCardCell.self, forCellWithReuseIdentifier: "ExampleCell")
+    }
+    
+    func cardForItemAt(verticalCardSwiper: UICollectionView, cardForItemAt index: Int) -> CardCell {
+        
+        let cardCell = verticalCardSwiper.dequeueReusableCell(withReuseIdentifier: "ExampleCell", for: IndexPath(row: index, section: 0)) as! ExampleCardCell
+        
+        cardCell.setRandomBackgroundColor()
+        
+        return cardCell
+    }
+    
+    func numberOfCards(verticalCardSwiper: UICollectionView) -> Int {
+        return 100
+    }
+    
+    func didSwipeCardAway(card: CardCell, index: Int, swipeDirection: CellSwipeDirection) {
+
+        
+    }
 }

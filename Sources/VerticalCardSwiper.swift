@@ -23,11 +23,11 @@
 import Foundation
 
 /**
- * The VerticalCardSwiper is a subclass of `UIView` that has a `UICollectionView` embedded.
- *
- * To use this, you need to implement the `VerticalCardSwiperDatasource`.
- *
- * If you want to handle actions like cards being swiped away, implement the `VerticalCardSwiperDelegate`.
+ The VerticalCardSwiper is a subclass of `UIView` that has a `UICollectionView` embedded.
+ 
+ To use this, you need to implement the `VerticalCardSwiperDatasource`.
+ 
+ If you want to handle actions like cards being swiped away, implement the `VerticalCardSwiperDelegate`.
  */
 public class VerticalCardSwiper: UIView {
     
@@ -43,7 +43,7 @@ public class VerticalCardSwiper: UIView {
     public weak var delegate: VerticalCardSwiperDelegate?
     public weak var datasource: VerticalCardSwiperDatasource? {
         didSet{
-            numberOfCards = datasource?.numberOfCards(verticalCardSwiper: self) ?? 0
+            numberOfCards = datasource?.numberOfCards(verticalCardSwiper: self.collectionView) ?? 0
         }
     }
     
@@ -90,9 +90,6 @@ public class VerticalCardSwiper: UIView {
         
         setupCollectionView()
         
-        //assert(delegate != nil, "Please implement and assign the VerticalCardSwiperDelegate")
-        //assert(datasource != nil, "Please implement and assign the VerticalCardSwiperDatasource")
-        
         if isSideSwipingEnabled {
             setupGestureRecognizer()
         }
@@ -117,7 +114,7 @@ extension VerticalCardSwiper: CardDelegate {
             }) { [weak self] (finished) in
                 if finished {
                     self?.collectionView.collectionViewLayout.invalidateLayout()
-                    self?.delegate?.didSwipeCardAway(card: cell, swipeDirection: direction)
+                    self?.delegate?.didSwipeCardAway(card: cell, index: indexPathToRemove.row ,swipeDirection: direction)
                 }
             }
         }
@@ -213,18 +210,53 @@ extension VerticalCardSwiper: UIGestureRecognizerDelegate {
 
 extension VerticalCardSwiper: UICollectionViewDelegate, UICollectionViewDataSource {
     
+    /**
+     Register a class for use in creating new CardCells.
+     Prior to calling the dequeueReusableCell(withReuseIdentifier:for:) method of the collection view,
+     you must use this method or the register(_:forCellWithReuseIdentifier:) method
+     to tell the collection view how to create a new cell of the given type.
+     If a cell of the specified type is not currently in a reuse queue,
+     the VerticalCardSwiper uses the provided information to create a new cell object automatically.
+     If you previously registered a class or nib file with the same reuse identifier,
+     the class you specify in the cellClass parameter replaces the old entry.
+     You may specify nil for cellClass if you want to unregister the class from the specified reuse identifier.
+     - parameter cellClass: The class of a cell that you want to use in the VerticalCardSwiper
+     identifier
+     - parameter identifier: The reuse identifier to associate with the specified class. This parameter must not be nil and must not be an empty string.
+     */
+    public func register(_ cellClass: AnyClass?, forCellWithReuseIdentifier identifier: String) {
+        collectionView.register(cellClass, forCellWithReuseIdentifier: identifier)
+    }
+    
+    /**
+     Register a nib file for use in creating new collection view cells.
+     Prior to calling the dequeueReusableCell(withReuseIdentifier:for:) method of the collection view,
+     you must use this method or the register(_:forCellWithReuseIdentifier:) method
+     to tell the collection view how to create a new cell of the given type.
+     If a cell of the specified type is not currently in a reuse queue,
+     the collection view uses the provided information to create a new cell object automatically.
+     If you previously registered a class or nib file with the same reuse identifier,
+     the object you specify in the nib parameter replaces the old entry.
+     You may specify nil for nib if you want to unregister the nib file from the specified reuse identifier.
+     - parameter nib: The nib object containing the cell object. The nib file must contain only one top-level object and that object must be of the type UICollectionViewCell.
+     identifier
+     - parameter identifier: The reuse identifier to associate with the specified nib file. This parameter must not be nil and must not be an empty string.
+    */
+    public func register(nib: UINib?, forCellWithReuseIdentifier identifier: String) {
+        collectionView.register(nib, forCellWithReuseIdentifier: identifier)
+    }
+    
     fileprivate func setupCollectionView(){
         
         collectionView = UICollectionView(frame: self.frame, collectionViewLayout: flowLayout)
         collectionView.decelerationRate = UIScrollViewDecelerationRateFast
         collectionView.backgroundColor = UIColor.clear
-        collectionView.register(CardCell.self, forCellWithReuseIdentifier: "CardCell")
         collectionView.contentInset = UIEdgeInsets(top: topInset, left: 0, bottom: topInset + flowLayout.minimumLineSpacing + visibleNextCardHeight, right: 0)
         collectionView.showsVerticalScrollIndicator = false
         collectionView.delegate = self
         collectionView.dataSource = self
         
-        self.numberOfCards = datasource?.numberOfCards(verticalCardSwiper: self) ?? 0
+        self.numberOfCards = datasource?.numberOfCards(verticalCardSwiper: self.collectionView) ?? 0
         
         self.addSubview(collectionView)
         
@@ -250,7 +282,7 @@ extension VerticalCardSwiper: UICollectionViewDelegate, UICollectionViewDataSour
     
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        return datasource?.cardForItemAt(verticalCardSwiper: self, cardForItemAt: indexPath.row) ?? CardCell()
+        return (datasource?.cardForItemAt(verticalCardSwiper: collectionView, cardForItemAt: indexPath.row))!
     }
 }
 

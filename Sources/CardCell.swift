@@ -22,20 +22,16 @@
 
 import UIKit
 
-/// The CardCell that the user can swipe away. Based on `UICollectionViewCell`.
+/**
+ The CardCell that the user can swipe away. Based on `UICollectionViewCell`.
+ 
+ The cells will be recycled by the `VerticalCardSwiper`,
+ so don't forget to override `prepareForReuse` when needed.
+ */
 open class CardCell: UICollectionViewCell {
     
     weak var delegate: CardDelegate?
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        
-    }
-    
-    required public init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-    }
-    
+
     override open func layoutSubviews() {
         
         self.layer.cornerRadius = 12
@@ -45,18 +41,6 @@ open class CardCell: UICollectionViewCell {
         // make sure anchorPoint is correct when laying out subviews.
         self.layer.anchorPoint = CGPoint(x: 0.5, y: 0.5)
         super.layoutSubviews()
-    }
-    
-    /**
-     We use this function to calculate and set a random backgroundcolor.
-     */
-    public func setRandomBackgroundColor(){
-        
-        let randomRed:CGFloat = CGFloat(arc4random()) / CGFloat(UInt32.max)
-        let randomGreen:CGFloat = CGFloat(arc4random()) / CGFloat(UInt32.max)
-        let randomBlue:CGFloat = CGFloat(arc4random()) / CGFloat(UInt32.max)
-        
-        self.backgroundColor = UIColor(red: randomRed, green: randomGreen, blue: randomBlue, alpha: 1.0)
     }
     
     /**
@@ -74,7 +58,7 @@ open class CardCell: UICollectionViewCell {
     
     /**
      Resets the CardCell back to the center of the CollectionView.
-    */
+     */
     public func resetToCenterPosition(){
         
         UIView.animate(withDuration: 0.2, animations: { [weak self] in
@@ -90,7 +74,7 @@ open class CardCell: UICollectionViewCell {
      - parameter direction: The direction of the pan gesture.
      - parameter centerX: The center X point of the swipeAbleArea/collectionView.
      - parameter angle: The angle of the animation, depends on the direction of the swipe.
-    */
+     */
     public func endedPanAnimation(withDirection direction: PanDirection, centerX: CGFloat, angle: CGFloat){
         
         let swipePercentageMargin = self.bounds.width * 0.4
@@ -106,7 +90,7 @@ open class CardCell: UICollectionViewCell {
     /**
      Animates to card off the screen and calls the `didSwipeAway` function from the `CardDelegate`.
      - parameter angle: The angle that the card will rotate in (depends on direction). Positive means the card is swiped to the right, a negative angle means the card is swiped to the left.
-    */
+     */
     fileprivate func animateOffScreen(angle: CGFloat){
         
         var direction: CellSwipeDirection = .None
@@ -137,7 +121,7 @@ open class CardCell: UICollectionViewCell {
     /**
      Prepares for reuse by resetting the anchorPoint back to the default value.
      This is necessary because in VerticalCardSwiperController we are manipulating the anchorPoint during dragging animation.
-    */
+     */
     override open func prepareForReuse() {
         super.prepareForReuse()
         self.isHidden = false

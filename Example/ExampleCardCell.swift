@@ -21,23 +21,30 @@
 // SOFTWARE.
 
 import Foundation
+import UIKit
+import VerticalCardSwiper
 
-/// This datasource is used for providing data to the `VerticalCardSwiperController`.
-public protocol VerticalCardSwiperDatasource: class {
+class ExampleCardCell: CardCell {
     
     /**
-     Sets the number of cards for the `UICollectionView` inside the VerticalCardSwiperController.
-     - parameter verticalCardSwiper: The `VerticalCardSwiper` where we set the amount of cards.
-     - returns: an `Int` with the amount of cards we want to show.
+     We use this function to calculate and set a random backgroundcolor.
      */
-    func numberOfCards(verticalCardSwiper: UICollectionView) -> Int
+    public func setRandomBackgroundColor(){
+        
+        let randomRed:CGFloat = CGFloat(arc4random()) / CGFloat(UInt32.max)
+        let randomGreen:CGFloat = CGFloat(arc4random()) / CGFloat(UInt32.max)
+        let randomBlue:CGFloat = CGFloat(arc4random()) / CGFloat(UInt32.max)
+        
+        self.backgroundColor = UIColor(red: randomRed, green: randomGreen, blue: randomBlue, alpha: 1.0)
+    }
     
-    /**
-     Asks your data source object for the cell that corresponds to the specified item in the `VerticalCardSwiper`.
-     Your implementation of this method is responsible for creating, configuring, and returning the appropriate `CardCell` for the given item.
-     - parameter verticalCardSwiper: The `VerticalCardSwiper` that will display the `CardCell`.
-     - parameter index: The that the `CardCell` should be shown at.
-     - returns: A CardCell object. The default value is an empty CardCell object.
-    */
-    func cardForItemAt(verticalCardSwiper: UICollectionView, cardForItemAt index: Int) -> CardCell
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+    }
 }

@@ -17,7 +17,8 @@
 		6C51A121209E707900B83A82 /* VerticalCardSwiper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C51A110209E6D6900B83A82 /* VerticalCardSwiper.framework */; };
 		6C51A122209E707900B83A82 /* VerticalCardSwiper.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6C51A110209E6D6900B83A82 /* VerticalCardSwiper.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6C51A127209E710900B83A82 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 6C51A126209E710900B83A82 /* LICENSE */; };
-		6CC2B6FA209F08AB00C522C5 /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CC2B6F9209F08AB00C522C5 /* HomeVC.swift */; };
+		6CB3A32520C0A63200EE6BE3 /* ExampleCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CB3A32220C0A4A500EE6BE3 /* ExampleCardCell.swift */; };
+		6CC2B6FA209F08AB00C522C5 /* ExampleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CC2B6F9209F08AB00C522C5 /* ExampleViewController.swift */; };
 		6CE68C641F15729800CFFA14 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CE68C631F15729800CFFA14 /* AppDelegate.swift */; };
 		6CE68C691F15729800CFFA14 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6CE68C671F15729800CFFA14 /* Main.storyboard */; };
 		6CE68C6E1F15729800CFFA14 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6CE68C6D1F15729800CFFA14 /* Assets.xcassets */; };
@@ -64,7 +65,8 @@
 		6C51A11D209E6F4100B83A82 /* VerticalCardSwiper.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = VerticalCardSwiper.podspec; sourceTree = "<group>"; };
 		6C51A11E209E6F4100B83A82 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		6C51A126209E710900B83A82 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
-		6CC2B6F9209F08AB00C522C5 /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
+		6CB3A32220C0A4A500EE6BE3 /* ExampleCardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleCardCell.swift; sourceTree = "<group>"; };
+		6CC2B6F9209F08AB00C522C5 /* ExampleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleViewController.swift; sourceTree = "<group>"; };
 		6CE68C601F15729800CFFA14 /* Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6CE68C631F15729800CFFA14 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6CE68C681F15729800CFFA14 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -105,8 +107,9 @@
 				6CE68C6F1F15729800CFFA14 /* LaunchScreen.storyboard */,
 				6CE68C631F15729800CFFA14 /* AppDelegate.swift */,
 				6CE68C6D1F15729800CFFA14 /* Assets.xcassets */,
-				6CC2B6F9209F08AB00C522C5 /* HomeVC.swift */,
+				6CC2B6F9209F08AB00C522C5 /* ExampleViewController.swift */,
 				6CE68C721F15729800CFFA14 /* Info.plist */,
+				6CB3A32220C0A4A500EE6BE3 /* ExampleCardCell.swift */,
 			);
 			path = Example;
 			sourceTree = "<group>";
@@ -287,7 +290,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				6CE68C641F15729800CFFA14 /* AppDelegate.swift in Sources */,
-				6CC2B6FA209F08AB00C522C5 /* HomeVC.swift in Sources */,
+				6CC2B6FA209F08AB00C522C5 /* ExampleViewController.swift in Sources */,
+				6CB3A32520C0A63200EE6BE3 /* ExampleCardCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

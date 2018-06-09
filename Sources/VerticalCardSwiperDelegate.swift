@@ -28,7 +28,8 @@ public protocol VerticalCardSwiperDelegate: class {
     /**
      Called when a CardCell is swiped away.
      - parameter card: The CardCell that is being swiped away.
+     - parameter index: The index of the card that is being removed.
      - parameter swipeDirection: The direction the card is swiped in. This can be Left, Right or None.
      */
-    func didSwipeCardAway(card: CardCell, swipeDirection: CellSwipeDirection)
+    func didSwipeCardAway(card: CardCell, index: Int, swipeDirection: CellSwipeDirection)
 }
