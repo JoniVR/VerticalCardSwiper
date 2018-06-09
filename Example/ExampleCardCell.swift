@@ -44,7 +44,9 @@ class ExampleCardCell: CardCell {
     }
     
     override func layoutSubviews() {
-        super.layoutSubviews()
         
+        self.layer.cornerRadius = 12
+        
+        super.layoutSubviews()
     }
 }

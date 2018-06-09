@@ -34,12 +34,12 @@ open class CardCell: UICollectionViewCell {
 
     override open func layoutSubviews() {
         
-        self.layer.cornerRadius = 12
+        // make sure anchorPoint is correct when laying out subviews.
+        self.layer.anchorPoint = CGPoint(x: 0.5, y: 0.5)
+        
         self.layer.shouldRasterize = true
         self.layer.rasterizationScale = UIScreen.main.scale
         
-        // make sure anchorPoint is correct when laying out subviews.
-        self.layer.anchorPoint = CGPoint(x: 0.5, y: 0.5)
         super.layoutSubviews()
     }
     

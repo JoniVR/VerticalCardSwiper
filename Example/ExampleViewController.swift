@@ -38,16 +38,16 @@ class ExampleViewController: UIViewController, VerticalCardSwiperDelegate, Verti
         cardSwiper.register(ExampleCardCell.self, forCellWithReuseIdentifier: "ExampleCell")
     }
     
-    func cardForItemAt(verticalCardSwiper: UICollectionView, cardForItemAt index: Int) -> CardCell {
+    func cardForItemAt(cardSwiperView: CardSwiperView, cardForItemAt index: Int) -> CardCell {
         
-        let cardCell = verticalCardSwiper.dequeueReusableCell(withReuseIdentifier: "ExampleCell", for: IndexPath(row: index, section: 0)) as! ExampleCardCell
+        let cardCell = cardSwiperView.dequeueReusableCell(withReuseIdentifier: "ExampleCell", for: index) as! ExampleCardCell
         
         cardCell.setRandomBackgroundColor()
         
         return cardCell
     }
     
-    func numberOfCards(verticalCardSwiper: UICollectionView) -> Int {
+    func numberOfCards(cardSwiperView: CardSwiperView) -> Int {
         return 100
     }
     

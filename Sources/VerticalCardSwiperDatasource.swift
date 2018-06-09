@@ -30,7 +30,7 @@ public protocol VerticalCardSwiperDatasource: class {
      - parameter verticalCardSwiper: The `VerticalCardSwiper` where we set the amount of cards.
      - returns: an `Int` with the amount of cards we want to show.
      */
-    func numberOfCards(verticalCardSwiper: UICollectionView) -> Int
+    func numberOfCards(cardSwiperView: CardSwiperView) -> Int
     
     /**
      Asks your data source object for the cell that corresponds to the specified item in the `VerticalCardSwiper`.
@@ -39,5 +39,5 @@ public protocol VerticalCardSwiperDatasource: class {
      - parameter index: The that the `CardCell` should be shown at.
      - returns: A CardCell object. The default value is an empty CardCell object.
     */
-    func cardForItemAt(verticalCardSwiper: UICollectionView, cardForItemAt index: Int) -> CardCell
+    func cardForItemAt(cardSwiperView: CardSwiperView, cardForItemAt index: Int) -> CardCell
 }
