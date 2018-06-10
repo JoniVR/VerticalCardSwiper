@@ -37,7 +37,7 @@ or open the project and run the Example.
 
 ## Usage
 `VerticalCardSwiper` behaves a lot like a standard `UICollectionView`. 
-To use it inside your UIViewController:
+To use it inside your `UIViewController`:
 
 ```swift
 import VerticalCardSwiper
@@ -71,7 +71,7 @@ class ExampleViewController: UIViewController, VerticalCardSwiperDatasource {
 
 #### Properties
 ```swift
-/// Indicates if side swiping on cards is enabled. Default value is `true`.
+/// Indicates if side swiping on cards is enabled. Set to false if you don't want side swiping. Default value is `true`.
 @IBInspectable public var isSideSwipingEnabled: Bool = true
 /// The inset (spacing) at the top for the cards. Default is 40.
 @IBInspectable public var topInset: CGFloat = 40
