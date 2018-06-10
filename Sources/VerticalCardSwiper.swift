@@ -89,10 +89,7 @@ public class VerticalCardSwiper: UIView {
     fileprivate func commonInit() {
         
         setupCollectionView()
-        
-        if isSideSwipingEnabled {
-            setupGestureRecognizer()
-        }
+        setupGestureRecognizer()
     }
 }
 
@@ -140,6 +137,10 @@ extension VerticalCardSwiper: UIGestureRecognizerDelegate {
      - parameter sender: The `UIPanGestureRecognizer` that detects the pan gesture. In this case `horizontalPangestureRecognizer`.
      */
     @objc fileprivate func handlePan(sender: UIPanGestureRecognizer){
+        
+        guard isSideSwipingEnabled else {
+            return
+        }
         
         /// The taplocation relative to the superview.
         let location = sender.location(in: self)
