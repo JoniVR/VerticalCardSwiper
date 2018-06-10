@@ -149,11 +149,11 @@ extension VerticalCardSwiper: UIGestureRecognizerDelegate {
         let translation = sender.translation(in: self)
         /// The 'PanDirection' the user swipes in.
         let direction = sender.direction
-        
+                
         if swipeAbleArea.contains(location) && !cardSwiperView.isScrolling {
             if let swipedCardIndex = cardSwiperView.indexPathForItem(at: locationInCollectionView) {
                 /// The card that is swipeable inside the SwipeAbleArea.
-                swipedCard = cardSwiperView.cellForItem(at: swipedCardIndex) as! CardCell
+                swipedCard = cardSwiperView.cellForItem(at: swipedCardIndex) as? CardCell
             }
         }
         

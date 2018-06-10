@@ -25,7 +25,6 @@
 		6CE68C6E1F15729800CFFA14 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6CE68C6D1F15729800CFFA14 /* Assets.xcassets */; };
 		6CE68C711F15729800CFFA14 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6CE68C6F1F15729800CFFA14 /* LaunchScreen.storyboard */; };
 		6CF8AC63209EFFBF00A0B26E /* CellSwipeDirection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CF8AC5B209EFFBE00A0B26E /* CellSwipeDirection.swift */; };
-		6CF8AC65209EFFBF00A0B26E /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6CF8AC5D209EFFBF00A0B26E /* Info.plist */; };
 		6CF8AC66209EFFBF00A0B26E /* VerticalCardSwiper.h in Headers */ = {isa = PBXBuildFile; fileRef = 6CF8AC5E209EFFBF00A0B26E /* VerticalCardSwiper.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6CF8AC67209EFFBF00A0B26E /* VerticalCardSwiperFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CF8AC5F209EFFBF00A0B26E /* VerticalCardSwiperFlowLayout.swift */; };
 		6CF8AC68209EFFBF00A0B26E /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CF8AC60209EFFBF00A0B26E /* Extensions.swift */; };
@@ -252,7 +251,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6CF8AC65209EFFBF00A0B26E /* Info.plist in Resources */,
 				6C51A120209E6F4100B83A82 /* README.md in Resources */,
 				6C51A11F209E6F4100B83A82 /* VerticalCardSwiper.podspec in Resources */,
 				6C51A127209E710900B83A82 /* LICENSE in Resources */,
