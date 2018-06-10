@@ -8,21 +8,15 @@ _A marriage between the Shazam Discover UI and Tinder, built with UICollectionVi
 [![License](https://img.shields.io/cocoapods/l/VerticalCardSwiper.svg?style=flat)](https://cocoapods.org/pods/VerticalCardSwiper)
 [![Platform](https://img.shields.io/cocoapods/p/VerticalCardSwiper.svg?style=flat)](https://cocoapods.org/pods/VerticalCardSwiper)
 
-<hr>
-
 ## Project goal and information
 The goal of this project is to recreate the Discover UI in Shazam (which I think is a great, fun way to display content) in combination with a Tinder style of swiping cards to the left/right.
 The idea behind this is that in some cases, you don't want to swipe away cards, but keep them availible for later on. This implementation allows for that. And it's a fun way to interact with content.
 
 It's built with a `UICollectionView` and a custom flowLayout.
 
-<hr>
-
 ## Requirements
 * iOS 9.0
 * Swift 4
-
-<hr>
 
 ## Installation
 VerticalCardSwiper is available through [CocoaPods](https://cocoapods.org). To install
@@ -32,7 +26,14 @@ it, simply add the following line to your Podfile:
 pod 'VerticalCardSwiper'
 ```
 
-<hr>
+## Example
+To try out `VerticalCardSwiper`
+
+```ruby
+pod try VerticalCardSwiper
+```
+
+or open the project and run the Example.
 
 ## Usage
 `VerticalCardSwiper` behaves a lot like a standard `UICollectionView`. 
@@ -49,7 +50,6 @@ class ExampleViewController: UIViewController, VerticalCardSwiperDatasource {
         super.viewDidLoad()
         
         cardSwiper = view as? VerticalCardSwiper
-        cardSwiper.delegate = self
         cardSwiper.datasource = self
         
         // register cardcell for storyboard use
@@ -87,6 +87,12 @@ To handle swipe gestures, implement the `VerticalCardSwiperDelegate`.
 ```swift
 class ViewController: UIViewController, VerticalCardSwiperDelegate {
 
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        cardSwiper.delegate = self
+    }
+
     func didSwipeCardAway(card: CardCell, index: Int, swipeDirection: CellSwipeDirection) {
 
         // handle swipe gestures
@@ -102,8 +108,6 @@ class ExampleCardCell: CardCell {
 } 
 ```
 
-<hr>
-
 ## Features
 - [x] Shazam Discover UI with paging
 - [x] Tinder-style swiping
@@ -113,17 +117,11 @@ class ExampleCardCell: CardCell {
 - [ ] Carthage support
 - [ ] Diff support
 
-<hr>
-
 ## Author
 Joni Van Roost, joni.VR@hotmail.com
 
-<hr>
-
 ## License
 VerticalCardSwiper is available under the MIT license. See the LICENSE file for more info.
-
-<hr>
 
 ## More
 Feel free to submit a pull request, open an issue or fork this project. Any help is always appreciated.
