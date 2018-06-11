@@ -27,10 +27,11 @@ class ExampleViewController: UIViewController, VerticalCardSwiperDelegate, Verti
     
     private var cardSwiper: VerticalCardSwiper!
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func loadView() {
+        super.loadView()
         
         cardSwiper = view as? VerticalCardSwiper
+        self.view = cardSwiper
         cardSwiper.delegate = self
         cardSwiper.datasource = self
         

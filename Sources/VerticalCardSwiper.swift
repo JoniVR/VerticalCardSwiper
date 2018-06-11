@@ -34,11 +34,23 @@ public class VerticalCardSwiper: UIView {
     /// Indicates if side swiping on cards is enabled. Default value is `true`.
     @IBInspectable public var isSideSwipingEnabled: Bool = true
     /// The inset (spacing) at the top for the cards. Default is 40.
-    @IBInspectable public var topInset: CGFloat = 40
+    @IBInspectable public var topInset: CGFloat = 40 {
+        didSet {
+            setCardSwiperInsets()
+        }
+    }
     /// The inset (spacing) at each side of the cards. Default is 20.
-    @IBInspectable public var sideInset: CGFloat = 20
+    @IBInspectable public var sideInset: CGFloat = 20 {
+        didSet {
+            setCardSwiperInsets()
+        }
+    }
     /// Sets how much of the next card should be visible. Default is 50.
-    @IBInspectable public var visibleNextCardHeight: CGFloat = 50
+    @IBInspectable public var visibleNextCardHeight: CGFloat = 50 {
+        didSet {
+            setCardSwiperInsets()
+        }
+    }
     
     public weak var delegate: VerticalCardSwiperDelegate?
     public weak var datasource: VerticalCardSwiperDatasource? {
@@ -252,7 +264,7 @@ extension VerticalCardSwiper: UICollectionViewDelegate, UICollectionViewDataSour
         cardSwiperView = CardSwiperView(frame: self.frame, collectionViewLayout: flowLayout)
         cardSwiperView.decelerationRate = UIScrollViewDecelerationRateFast
         cardSwiperView.backgroundColor = UIColor.clear
-        cardSwiperView.contentInset = UIEdgeInsets(top: topInset, left: 0, bottom: topInset + flowLayout.minimumLineSpacing + visibleNextCardHeight, right: 0)
+        setCardSwiperInsets()
         cardSwiperView.showsVerticalScrollIndicator = false
         cardSwiperView.delegate = self
         cardSwiperView.dataSource = self
@@ -285,6 +297,11 @@ extension VerticalCardSwiper: UICollectionViewDelegate, UICollectionViewDataSour
         
         return (datasource?.cardForItemAt(cardSwiperView: cardSwiperView, cardForItemAt: indexPath.row))!
     }
+    
+    fileprivate func setCardSwiperInsets(){
+        
+        cardSwiperView.contentInset = UIEdgeInsets(top: topInset, left: sideInset, bottom: topInset + flowLayout.minimumLineSpacing + visibleNextCardHeight, right: sideInset)
+    }
 }
 
 extension VerticalCardSwiper: UICollectionViewDelegateFlowLayout {
@@ -306,4 +323,3 @@ extension VerticalCardSwiper: UICollectionViewDelegateFlowLayout {
         return CGSize(width: cellWidth, height: cellHeight)
     }
 }
-
