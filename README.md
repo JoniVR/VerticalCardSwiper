@@ -53,7 +53,7 @@ class ExampleViewController: UIViewController, VerticalCardSwiperDatasource {
         cardSwiper.datasource = self
         
         // register cardcell for storyboard use
-        cardSwiper.register(ExampleCardCell.self, forCellWithReuseIdentifier: "ExampleCell")
+        cardSwiper.register(nib: UINib(nibName: "ExampleCell", bundle: nil), forCellWithReuseIdentifier: "ExampleCell")
     }
     
     func cardForItemAt(cardSwiperView: CardSwiperView, cardForItemAt index: Int) -> CardCell {

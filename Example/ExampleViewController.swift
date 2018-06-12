@@ -65,13 +65,11 @@ class ExampleViewController: UIViewController, VerticalCardSwiperDelegate, Verti
     }
     
     func numberOfCards(cardSwiperView: CardSwiperView) -> Int {
-        print("COUNT: \(contactsDemoData.count)")
         return contactsDemoData.count
     }
     
     func didSwipeCardAway(card: CardCell, index: Int, swipeDirection: CellSwipeDirection) {
-
+        
         contactsDemoData.remove(at: index)
-        print("REMOVED! -> COUNT: \(contactsDemoData.count)")
     }
 }
