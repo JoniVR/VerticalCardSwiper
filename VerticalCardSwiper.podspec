@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'VerticalCardSwiper'
-  s.version          = '1.0.0'
+  s.version          = '0.1.0-alpha1'
   s.summary          = 'A marriage between the Shazam Discover UI and Tinder, built with UICollectionView in Swift.'
 
 # This description is used to generate tags and improve search results.
@@ -23,11 +23,12 @@ Pod::Spec.new do |s|
                        DESC
 
   s.homepage         = 'https://github.com/JoniVR/VerticalCardSwiper'
-  s.screenshots      = 'https://github.com/JoniVR/VerticalCardSwiper/blob/master/example.gif'
+  s.screenshots      = 'https://raw.githubusercontent.com/JoniVR/VerticalCardSwiper/master/example.gif'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'JoniVR' => 'joni.VR@hotmail.com' }
   s.source           = { :git => 'https://github.com/JoniVR/VerticalCardSwiper.git', :tag => s.version.to_s }
-
+    
+  s.swift_version = '4.0'
   s.ios.deployment_target = '9.0'
   s.source_files = 'Sources/*.swift'
   
