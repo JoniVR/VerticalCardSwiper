@@ -25,10 +25,21 @@ import VerticalCardSwiper
 
 class ExampleViewController: UIViewController, VerticalCardSwiperDelegate, VerticalCardSwiperDatasource {
     
+    private var contactsDemoData: [Contact] = [
+        Contact(name: "John Doe", age: 33),
+        Contact(name: "Chuck Norris", age: 78),
+        Contact(name: "Bill Gates", age: 62),
+        Contact(name: "Steve Jobs", age: 56),
+        Contact(name: "Barack Obama", age: 56),
+        Contact(name: "Mila Kunis", age: 34),
+        Contact(name: "Pamela Anderson", age: 50),
+        Contact(name: "Christina Anguilera", age: 37)
+    ]
+    
     private var cardSwiper: VerticalCardSwiper!
     
-    override func loadView() {
-        super.loadView()
+    override func viewDidLoad() {
+        super.viewDidLoad()
         
         cardSwiper = view as? VerticalCardSwiper
         self.view = cardSwiper
@@ -36,24 +47,31 @@ class ExampleViewController: UIViewController, VerticalCardSwiperDelegate, Verti
         cardSwiper.datasource = self
         
         // register cardcell for storyboard use
-        cardSwiper.register(ExampleCardCell.self, forCellWithReuseIdentifier: "ExampleCell")
+        cardSwiper.register(nib: UINib(nibName: "ExampleCell", bundle: nil), forCellWithReuseIdentifier: "ExampleCell")
     }
     
     func cardForItemAt(cardSwiperView: CardSwiperView, cardForItemAt index: Int) -> CardCell {
         
         let cardCell = cardSwiperView.dequeueReusableCell(withReuseIdentifier: "ExampleCell", for: index) as! ExampleCardCell
         
+        let contact = contactsDemoData[index]
+        
         cardCell.setRandomBackgroundColor()
+        
+        cardCell.nameLbl.text = "Name: " + contact.name
+        cardCell.ageLbl.text = "Age: \(contact.age ?? 0)"
         
         return cardCell
     }
     
     func numberOfCards(cardSwiperView: CardSwiperView) -> Int {
-        return 100
+        print("COUNT: \(contactsDemoData.count)")
+        return contactsDemoData.count
     }
     
     func didSwipeCardAway(card: CardCell, index: Int, swipeDirection: CellSwipeDirection) {
 
-        
+        contactsDemoData.remove(at: index)
+        print("REMOVED! -> COUNT: \(contactsDemoData.count)")
     }
 }

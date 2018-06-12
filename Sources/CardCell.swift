@@ -30,7 +30,7 @@ import UIKit
  */
 open class CardCell: UICollectionViewCell {
     
-    weak var delegate: CardDelegate?
+    internal weak var delegate: CardDelegate?
 
     override open func layoutSubviews() {
         

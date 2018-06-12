@@ -21,35 +21,14 @@
 // SOFTWARE.
 
 import Foundation
-import UIKit
-import VerticalCardSwiper
 
-class ExampleCardCell: CardCell {
+internal class Contact {
     
-    @IBOutlet weak var nameLbl: UILabel!
-    @IBOutlet weak var ageLbl: UILabel!
+    let name: String!
+    let age: Int!
     
-    /**
-     We use this function to calculate and set a random backgroundcolor.
-     */
-    public func setRandomBackgroundColor(){
-        
-        let randomRed:CGFloat = CGFloat(arc4random()) / CGFloat(UInt32.max)
-        let randomGreen:CGFloat = CGFloat(arc4random()) / CGFloat(UInt32.max)
-        let randomBlue:CGFloat = CGFloat(arc4random()) / CGFloat(UInt32.max)
-        
-        self.backgroundColor = UIColor(red: randomRed, green: randomGreen, blue: randomBlue, alpha: 1.0)
-    }
-    
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        
-    }
-    
-    override func layoutSubviews() {
-        
-        self.layer.cornerRadius = 12
-        
-        super.layoutSubviews()
+    init(name: String, age: Int) {
+        self.name = name
+        self.age = age
     }
 }

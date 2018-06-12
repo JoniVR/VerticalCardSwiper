@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14269.12" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14252.5"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ExampleCell" id="YrG-n3-lce" customClass="ExampleCardCell" customModule="Example" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="339" height="431"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                <rect key="frame" x="0.0" y="0.0" width="339" height="431"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Age" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sxb-h1-ZeR">
+                        <rect key="frame" x="30" y="71" width="279" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uvg-av-oj0">
+                        <rect key="frame" x="30" y="30" width="279" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+            </view>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="Sxb-h1-ZeR" firstAttribute="top" secondItem="Uvg-av-oj0" secondAttribute="bottom" constant="20" id="GeB-y4-yPo"/>
+                <constraint firstItem="Uvg-av-oj0" firstAttribute="top" secondItem="YrG-n3-lce" secondAttribute="top" constant="30" id="YnN-QA-IJm"/>
+                <constraint firstAttribute="trailing" secondItem="Sxb-h1-ZeR" secondAttribute="trailing" constant="30" id="ctE-mT-De4"/>
+                <constraint firstItem="Uvg-av-oj0" firstAttribute="leading" secondItem="YrG-n3-lce" secondAttribute="leading" constant="30" id="qLS-qO-m1Y"/>
+                <constraint firstItem="Sxb-h1-ZeR" firstAttribute="leading" secondItem="YrG-n3-lce" secondAttribute="leading" constant="30" id="u6G-Uv-0id"/>
+                <constraint firstAttribute="trailing" secondItem="Uvg-av-oj0" secondAttribute="trailing" constant="30" id="vQR-CJ-LM6"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="hur-jY-jUf"/>
+            <size key="customSize" width="339" height="431"/>
+            <connections>
+                <outlet property="ageLbl" destination="Sxb-h1-ZeR" id="K9n-tk-iWU"/>
+                <outlet property="nameLbl" destination="Uvg-av-oj0" id="MSc-ny-8nm"/>
+            </connections>
+        </collectionViewCell>
+    </objects>
+</document>

@@ -50,7 +50,7 @@ public class CardSwiperView: UICollectionView {
      - parameter index: The index specifying the location of the cell. The data source receives this information when it is asked for the cell and should just pass it along. This method uses the index to perform additional configuration based on the cell’s position in the CardSwiperView.
     */
     public func dequeueReusableCell(withReuseIdentifier identifier: String, for index: Int) -> UICollectionViewCell {
-        return super.dequeueReusableCell(withReuseIdentifier: identifier, for: IndexPath(row: index, section: 0))
+        return self.dequeueReusableCell(withReuseIdentifier: identifier, for: IndexPath(row: index, section: 0))
     }
     
     /**
