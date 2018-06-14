@@ -23,7 +23,7 @@ VerticalCardSwiper is available through [CocoaPods](https://cocoapods.org). To i
 it, simply add the following line to your Podfile:
 
 ```ruby
-pod 'VerticalCardSwiper'
+pod 'VerticalCardSwiper', '0.1.0-alpha1'
 ```
 
 ## Example
