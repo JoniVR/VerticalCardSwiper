@@ -113,7 +113,7 @@ class ExampleCardCell: CardCell {
 - [x] Tinder-style swiping
 - [x] Option to disable side swiping
 - [x] Code documentation in README.md file
-- [ ] Cocoapods support
+- [x] Cocoapods support
 - [ ] Carthage support
 - [ ] Diff support
 
