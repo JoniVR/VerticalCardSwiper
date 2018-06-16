@@ -3,7 +3,7 @@ _A marriage between the Shazam Discover UI and Tinder, built with UICollectionVi
 
   ![example](https://github.com/JoniVR/VerticalCardSwiper/blob/development/example.gif)
 
-[![CI Status](https://img.shields.io/travis/joni.VR@hotmail.com/VerticalCardSwiper.svg?style=flat)](https://travis-ci.org/joni.VR@hotmail.com/VerticalCardSwiper)
+[![Build Status](https://travis-ci.org/JoniVR/VerticalCardSwiper.svg?branch=master)](https://travis-ci.org/JoniVR/VerticalCardSwiper)
 [![Version](https://img.shields.io/cocoapods/v/VerticalCardSwiper.svg?style=flat)](https://cocoapods.org/pods/VerticalCardSwiper)
 [![License](https://img.shields.io/cocoapods/l/VerticalCardSwiper.svg?style=flat)](https://cocoapods.org/pods/VerticalCardSwiper)
 [![Platform](https://img.shields.io/cocoapods/p/VerticalCardSwiper.svg?style=flat)](https://cocoapods.org/pods/VerticalCardSwiper)
