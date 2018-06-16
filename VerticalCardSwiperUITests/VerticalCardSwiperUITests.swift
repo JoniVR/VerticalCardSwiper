@@ -28,39 +28,21 @@ class VerticalCardSwiperUITests: XCTestCase {
         super.setUp()
         
         // In UI tests it is usually best to stop immediately when a failure occurs.
-        continueAfterFailure = false
+        continueAfterFailure = true
         XCUIApplication().launch()
         XCUIDevice.shared.orientation = .portrait
     }
     
     override func tearDown() {
-        
         super.tearDown()
     }
     
-    func testSwipeRight() {
-        
-        let collectionView = XCUIApplication().collectionViews
-        
-        // First check if the first cell actually exists and matches what we're looking for
-        let firstCell: XCUIElement = collectionView/*@START_MENU_TOKEN@*/.staticTexts["Name: John Doe"]/*[[".cells.staticTexts[\"Name: John Doe\"]",".staticTexts[\"Name: John Doe\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/
-        XCTAssertTrue(firstCell.exists)
-        
-        // swipe cell away to right
-        let startPoint = firstCell.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.5))
-        let finishPoint = startPoint.withOffset(CGVector(dx: 200, dy: 0))
-        startPoint.press(forDuration: 0, thenDragTo: finishPoint)
-        
-        // Check if first cell with "Name: John Doe" doesn't exist anymore (after swiping away)
-        XCTAssertFalse(collectionView.staticTexts["Name: John Doe"].exists)
-    }
-    
     func testSwipeLeft() {
-
+        
         let collectionView = XCUIApplication().collectionViews
         
         // First check if the first cell actually exists and matches what we're looking for
-        let firstCell: XCUIElement = collectionView/*@START_MENU_TOKEN@*/.staticTexts["Name: John Doe"]/*[[".cells.staticTexts[\"Name: John Doe\"]",".staticTexts[\"Name: John Doe\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/
+        let firstCell: XCUIElement = collectionView/*@START_MENU_TOKEN@*/.cells.staticTexts["Name: John Doe"]/*[[".cells.staticTexts[\"Name: John Doe\"]",".staticTexts[\"Name: John Doe\"]"],[[[-1,1],[-1,0]]],[1]]@END_MENU_TOKEN@*/
         XCTAssertTrue(firstCell.exists)
         
         // swipe cell away to left
@@ -69,6 +51,23 @@ class VerticalCardSwiperUITests: XCTestCase {
         startPoint.press(forDuration: 0, thenDragTo: finishPoint)
         
         // Check if first cell with "Name: John Doe" doesn't exist anymore (after swiping away)
-        XCTAssertFalse(collectionView.staticTexts["Name: John Doe"].exists)
+        XCTAssertFalse(collectionView.cells.staticTexts["Name: John Doe"].exists)
+    }
+    
+    func testSwipeRight() {
+        
+        let collectionView = XCUIApplication().collectionViews
+        
+        // First check if the first cell actually exists and matches what we're looking for
+        let firstCell: XCUIElement = collectionView/*@START_MENU_TOKEN@*/.cells.staticTexts["Name: John Doe"]/*[[".cells.staticTexts[\"Name: John Doe\"]",".staticTexts[\"Name: John Doe\"]"],[[[-1,1],[-1,0]]],[1]]@END_MENU_TOKEN@*/
+        XCTAssertTrue(firstCell.exists)
+        
+        // swipe cell away to right
+        let startPoint = firstCell.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.5))
+        let finishPoint = startPoint.withOffset(CGVector(dx: 200, dy: 0))
+        startPoint.press(forDuration: 0, thenDragTo: finishPoint)
+        
+        // Check if first cell with "Name: John Doe" doesn't exist anymore (after swiping away)
+        XCTAssertFalse(collectionView.cells.staticTexts["Name: John Doe"].exists)
     }
 }
