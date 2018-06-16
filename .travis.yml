@@ -3,7 +3,7 @@
 # * https://github.com/supermarin/xcpretty#usage
 
 language: objective-c
-osx_image: xcode7.3
+osx_image: xcode9.4
 
 before_install:
   - gem install cocoapods
@@ -12,9 +12,9 @@ before_install:
 script:
   - set -o pipefail
   # example
-  - xcodebuild clean build -enableCodeCoverage YES -project VerticalCardSwiper.xcodeproj -scheme Example -sdk iphonesimulator9.3 ONLY_ACTIVE_ARCH=NO CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO | xcpretty
+  - xcodebuild clean build -project VerticalCardSwiper.xcodeproj -scheme Example -sdk iphonesimulator11.4 ONLY_ACTIVE_ARCH=NO CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO | xcpretty
   # library
-  - xcodebuild clean build -enableCodeCoverage YES -project VerticalCardSwiper.xcodeproj -scheme VerticalCardSwiper -sdk iphonesimulator9.3 ONLY_ACTIVE_ARCH=NO CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO | xcpretty
+  - xcodebuild clean build -project VerticalCardSwiper.xcodeproj -scheme VerticalCardSwiper -sdk iphonesimulator11.4 ONLY_ACTIVE_ARCH=NO CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO | xcpretty
   # UI Tests
-  - xcodebuild clean test -enableCodeCoverage YES -project VerticalCardSwiper.xcodeproj -scheme VerticalCardSwiperUITests -sdk iphonesimulator9.3 ONLY_ACTIVE_ARCH=NO CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO | xcpretty
+  - xcodebuild clean build test -project VerticalCardSwiper.xcodeproj -scheme VerticalCardSwiperUITests -sdk iphonesimulator11.4 -destination "platform=iOS Simulator,name=iPhone X" ONLY_ACTIVE_ARCH=NO CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO | xcpretty
   - pod lib lint
