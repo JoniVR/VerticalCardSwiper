@@ -90,10 +90,6 @@ open class CardCell: UICollectionViewCell {
         
         let swipePercentageMargin = self.bounds.width * 0.4
         let cardCenter = self.convert(CGPoint(x: self.bounds.midX, y: self.bounds.midY), to: self.superview)
-        let testView = UIView(frame: CGRect(origin: cardCenter, size: CGSize(width: 1, height: 1)))
-        testView.backgroundColor = .red
-        testView.layer.zPosition = 20
-        self.superview?.addSubview(testView)
         
         if (cardCenter.x > centerX + swipePercentageMargin || cardCenter.x < centerX - swipePercentageMargin){
             animateOffScreen(angle: angle)
