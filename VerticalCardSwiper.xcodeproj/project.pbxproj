@@ -19,6 +19,7 @@
 		6C51A122209E707900B83A82 /* VerticalCardSwiper.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6C51A110209E6D6900B83A82 /* VerticalCardSwiper.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6C51A127209E710900B83A82 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 6C51A126209E710900B83A82 /* LICENSE */; };
 		6CAB38F520CFE81300FC4C8A /* ExampleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6CAB38F420CFE81300FC4C8A /* ExampleCell.xib */; };
+		6CAB38FD20D0074000FC4C8A /* VerticalCardSwiperUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CAB38FC20D0074000FC4C8A /* VerticalCardSwiperUITests.swift */; };
 		6CB3A32520C0A63200EE6BE3 /* ExampleCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CB3A32220C0A4A500EE6BE3 /* ExampleCardCell.swift */; };
 		6CC2B6FA209F08AB00C522C5 /* ExampleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CC2B6F9209F08AB00C522C5 /* ExampleViewController.swift */; };
 		6CE5512C20CF262300C4C24C /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CE5512B20CF262300C4C24C /* Contact.swift */; };
@@ -40,6 +41,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 6C51A10F209E6D6900B83A82;
 			remoteInfo = VerticalCardSwiper;
+		};
+		6CAB38FF20D0074000FC4C8A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6CE68C581F15729800CFFA14 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6CE68C5F1F15729800CFFA14;
+			remoteInfo = Example;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -69,6 +77,9 @@
 		6C51A11E209E6F4100B83A82 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		6C51A126209E710900B83A82 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		6CAB38F420CFE81300FC4C8A /* ExampleCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ExampleCell.xib; sourceTree = "<group>"; };
+		6CAB38FA20D0074000FC4C8A /* VerticalCardSwiperUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VerticalCardSwiperUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		6CAB38FC20D0074000FC4C8A /* VerticalCardSwiperUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerticalCardSwiperUITests.swift; sourceTree = "<group>"; };
+		6CAB38FE20D0074000FC4C8A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6CB3A32220C0A4A500EE6BE3 /* ExampleCardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleCardCell.swift; sourceTree = "<group>"; };
 		6CC2B6F9209F08AB00C522C5 /* ExampleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleViewController.swift; sourceTree = "<group>"; };
 		6CE5512B20CF262300C4C24C /* Contact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contact.swift; sourceTree = "<group>"; };
@@ -88,6 +99,13 @@
 
 /* Begin PBXFrameworksBuildPhase section */
 		6C51A10C209E6D6900B83A82 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6CAB38F720D0074000FC4C8A /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -121,6 +139,15 @@
 			path = Example;
 			sourceTree = "<group>";
 		};
+		6CAB38FB20D0074000FC4C8A /* VerticalCardSwiperUITests */ = {
+			isa = PBXGroup;
+			children = (
+				6CAB38FC20D0074000FC4C8A /* VerticalCardSwiperUITests.swift */,
+				6CAB38FE20D0074000FC4C8A /* Info.plist */,
+			);
+			path = VerticalCardSwiperUITests;
+			sourceTree = "<group>";
+		};
 		6CE68C571F15729800CFFA14 = {
 			isa = PBXGroup;
 			children = (
@@ -129,6 +156,7 @@
 				6C51A126209E710900B83A82 /* LICENSE */,
 				6C51A118209E6DC700B83A82 /* Example */,
 				6CE68C621F15729800CFFA14 /* VerticalCardSwiper */,
+				6CAB38FB20D0074000FC4C8A /* VerticalCardSwiperUITests */,
 				6CE68C611F15729800CFFA14 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -138,6 +166,7 @@
 			children = (
 				6CE68C601F15729800CFFA14 /* Example.app */,
 				6C51A110209E6D6900B83A82 /* VerticalCardSwiper.framework */,
+				6CAB38FA20D0074000FC4C8A /* VerticalCardSwiperUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -194,6 +223,24 @@
 			productReference = 6C51A110209E6D6900B83A82 /* VerticalCardSwiper.framework */;
 			productType = "com.apple.product-type.framework";
 		};
+		6CAB38F920D0074000FC4C8A /* VerticalCardSwiperUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6CAB390120D0074000FC4C8A /* Build configuration list for PBXNativeTarget "VerticalCardSwiperUITests" */;
+			buildPhases = (
+				6CAB38F620D0074000FC4C8A /* Sources */,
+				6CAB38F720D0074000FC4C8A /* Frameworks */,
+				6CAB38F820D0074000FC4C8A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				6CAB390020D0074000FC4C8A /* PBXTargetDependency */,
+			);
+			name = VerticalCardSwiperUITests;
+			productName = UITests;
+			productReference = 6CAB38FA20D0074000FC4C8A /* VerticalCardSwiperUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 		6CE68C5F1F15729800CFFA14 /* Example */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6CE68C751F15729800CFFA14 /* Build configuration list for PBXNativeTarget "Example" */;
@@ -219,7 +266,7 @@
 		6CE68C581F15729800CFFA14 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0900;
+				LastSwiftUpdateCheck = 1000;
 				LastUpgradeCheck = 0900;
 				ORGANIZATIONNAME = "Joni Van Roost";
 				TargetAttributes = {
@@ -227,6 +274,11 @@
 						CreatedOnToolsVersion = 9.3;
 						LastSwiftMigration = 0930;
 						ProvisioningStyle = Automatic;
+					};
+					6CAB38F920D0074000FC4C8A = {
+						CreatedOnToolsVersion = 10.0;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 6CE68C5F1F15729800CFFA14;
 					};
 					6CE68C5F1F15729800CFFA14 = {
 						CreatedOnToolsVersion = 9.0;
@@ -248,6 +300,7 @@
 			targets = (
 				6CE68C5F1F15729800CFFA14 /* Example */,
 				6C51A10F209E6D6900B83A82 /* VerticalCardSwiper */,
+				6CAB38F920D0074000FC4C8A /* VerticalCardSwiperUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -260,6 +313,13 @@
 				6C51A120209E6F4100B83A82 /* README.md in Resources */,
 				6C51A11F209E6F4100B83A82 /* VerticalCardSwiper.podspec in Resources */,
 				6C51A127209E710900B83A82 /* LICENSE in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6CAB38F820D0074000FC4C8A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -294,6 +354,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		6CAB38F620D0074000FC4C8A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6CAB38FD20D0074000FC4C8A /* VerticalCardSwiperUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		6CE68C5C1F15729800CFFA14 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -312,6 +380,11 @@
 			isa = PBXTargetDependency;
 			target = 6C51A10F209E6D6900B83A82 /* VerticalCardSwiper */;
 			targetProxy = 6C51A123209E707900B83A82 /* PBXContainerItemProxy */;
+		};
+		6CAB390020D0074000FC4C8A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6CE68C5F1F15729800CFFA14 /* Example */;
+			targetProxy = 6CAB38FF20D0074000FC4C8A /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -391,6 +464,45 @@
 				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		6CAB390220D0074000FC4C8A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = CYC8C8R4K9;
+				INFOPLIST_FILE = VerticalCardSwiperUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jonivr.VerticalCardSwiperUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Example;
+			};
+			name = Debug;
+		};
+		6CAB390320D0074000FC4C8A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = CYC8C8R4K9;
+				INFOPLIST_FILE = VerticalCardSwiperUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.jonivr.VerticalCardSwiperUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Example;
 			};
 			name = Release;
 		};
@@ -541,6 +653,15 @@
 			buildConfigurations = (
 				6C51A116209E6D6900B83A82 /* Debug */,
 				6C51A117209E6D6900B83A82 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6CAB390120D0074000FC4C8A /* Build configuration list for PBXNativeTarget "VerticalCardSwiperUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6CAB390220D0074000FC4C8A /* Debug */,
+				6CAB390320D0074000FC4C8A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

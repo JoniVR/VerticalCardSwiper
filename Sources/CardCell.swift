@@ -44,6 +44,17 @@ open class CardCell: UICollectionViewCell {
     }
     
     /**
+     Prepares for reuse by resetting the anchorPoint back to the default value.
+     This is necessary because in VerticalCardSwiperController we are manipulating the anchorPoint during dragging animation.
+     */
+    override open func prepareForReuse() {
+        super.prepareForReuse()
+        self.isHidden = false
+        // reset to default value (https://developer.apple.com/documentation/quartzcore/calayer/1410817-anchorpoint)
+        self.layer.anchorPoint = CGPoint(x: 0.5, y: 0.5)
+    }
+    
+    /**
      This function animates the card. The animation consists of a rotation and translation.
      - parameter angle: The angle the card rotates while animating.
      - parameter horizontalTranslation: The horizontal translation the card animates in.
@@ -75,10 +86,14 @@ open class CardCell: UICollectionViewCell {
      - parameter centerX: The center X point of the swipeAbleArea/collectionView.
      - parameter angle: The angle of the animation, depends on the direction of the swipe.
      */
-    public func endedPanAnimation(withDirection direction: PanDirection, centerX: CGFloat, angle: CGFloat){
+    internal func endedPanAnimation(withDirection direction: PanDirection, centerX: CGFloat, angle: CGFloat){
         
         let swipePercentageMargin = self.bounds.width * 0.4
         let cardCenter = self.convert(CGPoint(x: self.bounds.midX, y: self.bounds.midY), to: self.superview)
+        let testView = UIView(frame: CGRect(origin: cardCenter, size: CGSize(width: 1, height: 1)))
+        testView.backgroundColor = .red
+        testView.layer.zPosition = 20
+        self.superview?.addSubview(testView)
         
         if (cardCenter.x > centerX + swipePercentageMargin || cardCenter.x < centerX - swipePercentageMargin){
             animateOffScreen(angle: angle)
@@ -116,16 +131,5 @@ open class CardCell: UICollectionViewCell {
             self.isHidden = true
             self.delegate?.didSwipeAway(cell: self, swipeDirection: direction)
         }
-    }
-    
-    /**
-     Prepares for reuse by resetting the anchorPoint back to the default value.
-     This is necessary because in VerticalCardSwiperController we are manipulating the anchorPoint during dragging animation.
-     */
-    override open func prepareForReuse() {
-        super.prepareForReuse()
-        self.isHidden = false
-        // reset to default value (https://developer.apple.com/documentation/quartzcore/calayer/1410817-anchorpoint)
-        self.layer.anchorPoint = CGPoint(x: 0.5, y: 0.5)
     }
 }

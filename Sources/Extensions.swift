@@ -39,8 +39,3 @@ internal extension UIPanGestureRecognizer {
         }
     }
 }
-
-internal extension UICollectionView {
-    
-    
-}
