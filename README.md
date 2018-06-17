@@ -16,14 +16,14 @@ It's built with a `UICollectionView` and a custom flowLayout.
 
 ## Requirements
 * iOS 9.0
-* Swift 4
+* Swift 4.1
 
 ## Installation
 VerticalCardSwiper is available through [CocoaPods](https://cocoapods.org). To install
 it, simply add the following line to your Podfile:
 
 ```ruby
-pod 'VerticalCardSwiper', '0.1.0-alpha1'
+pod 'VerticalCardSwiper', '0.1.0-alpha2'
 ```
 
 ## Example
