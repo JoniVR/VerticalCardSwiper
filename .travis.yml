@@ -15,6 +15,10 @@ script:
   - xcodebuild clean build -project VerticalCardSwiper.xcodeproj -scheme Example -sdk iphonesimulator11.4 ONLY_ACTIVE_ARCH=NO CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO | xcpretty
   # library
   - xcodebuild clean build -project VerticalCardSwiper.xcodeproj -scheme VerticalCardSwiper -sdk iphonesimulator11.4 ONLY_ACTIVE_ARCH=NO CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO | xcpretty
-  # UI Tests
+  # UI Tests iPhone X
   - xcodebuild clean build test -project VerticalCardSwiper.xcodeproj -scheme VerticalCardSwiperUITests -sdk iphonesimulator11.4 -destination "platform=iOS Simulator,name=iPhone X" ONLY_ACTIVE_ARCH=NO CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO | xcpretty
+  # UI Tests iPhone SE
+  - xcodebuild clean build test -project VerticalCardSwiper.xcodeproj -scheme VerticalCardSwiperUITests -sdk iphonesimulator11.4 -destination "platform=iOS Simulator,name=iPhone SE" ONLY_ACTIVE_ARCH=NO CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO | xcpretty
+  # UI Tests iPhone 8+
+  - xcodebuild clean build test -project VerticalCardSwiper.xcodeproj -scheme VerticalCardSwiperUITests -sdk iphonesimulator11.4 -destination "platform=iOS Simulator,name=iPhone 8 Plus" ONLY_ACTIVE_ARCH=NO CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO | xcpretty
   - pod lib lint
