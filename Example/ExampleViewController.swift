@@ -60,6 +60,9 @@ class ExampleViewController: UIViewController, VerticalCardSwiperDelegate, Verti
         
         cardCell.nameLbl.text = "Name: " + contact.name
         cardCell.ageLbl.text = "Age: \(contact.age ?? 0)"
+        
+        // used for UI Testing
+        cardCell.accessibilityIdentifier = "ExampleCell"
     
         return cardCell
     }

@@ -45,7 +45,7 @@ open class CardCell: UICollectionViewCell {
     
     /**
      Prepares for reuse by resetting the anchorPoint back to the default value.
-     This is necessary because in VerticalCardSwiperController we are manipulating the anchorPoint during dragging animation.
+     This is necessary because in VerticalCardSwiper we are manipulating the anchorPoint during dragging animation.
      */
     override open func prepareForReuse() {
         super.prepareForReuse()
@@ -64,11 +64,12 @@ open class CardCell: UICollectionViewCell {
         var transform = CATransform3DIdentity
         transform = CATransform3DRotate(transform, angle, 0, 0, 1)
         transform = CATransform3DTranslate(transform, horizontalTranslation, 0, 1)
+        
         layer.transform = transform
     }
     
     /**
-     Resets the CardCell back to the center of the CollectionView.
+     Resets the CardCell back to the center of the CardSwiperView.
      */
     public func resetToCenterPosition(){
         
@@ -83,15 +84,16 @@ open class CardCell: UICollectionViewCell {
      If a certain treshold of the screen is swiped, the `animateOffScreen` function is called,
      if the threshold is not reached, the card will be reset to the center by calling `resetToCenterPosition`.
      - parameter direction: The direction of the pan gesture.
-     - parameter centerX: The center X point of the swipeAbleArea/collectionView.
      - parameter angle: The angle of the animation, depends on the direction of the swipe.
      */
-    internal func endedPanAnimation(withDirection direction: PanDirection, centerX: CGFloat, angle: CGFloat){
+    internal func endedPanAnimation(withDirection direction: PanDirection, angle: CGFloat){
         
         let swipePercentageMargin = self.bounds.width * 0.4
-        let cardCenter = self.convert(CGPoint(x: self.bounds.midX, y: self.bounds.midY), to: self.superview)
+        let cardCenter = CGPoint(x: self.frame.midX, y: self.frame.midY)
+        let centerX = self.bounds.midX
         
-        if (cardCenter.x > centerX + swipePercentageMargin || cardCenter.x < centerX - swipePercentageMargin){
+        // check for left or right swipe
+        if (cardCenter.x < centerX - swipePercentageMargin || cardCenter.x > centerX + swipePercentageMargin){
             animateOffScreen(angle: angle)
         } else {
             self.resetToCenterPosition()

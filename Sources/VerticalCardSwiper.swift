@@ -65,8 +65,6 @@ public class VerticalCardSwiper: UIView {
     fileprivate var horizontalPangestureRecognizer: UIPanGestureRecognizer!
     /// Stores a `CGRect` with the area that is swipeable to the user.
     fileprivate var swipeAbleArea: CGRect!
-    /// Stores the center point of the swipeAbleArea/collectionView.
-    fileprivate var centerX: CGFloat!
     /// The `CardCell` that the user can (and is) moving.
     fileprivate var swipedCard: CardCell! {
         didSet {
@@ -196,7 +194,7 @@ extension VerticalCardSwiper: UIGestureRecognizerDelegate {
                 
             case .ended:
                 
-                swipedCard.endedPanAnimation(withDirection: direction!, centerX: centerX, angle: angle)
+                swipedCard.endedPanAnimation(withDirection: direction!, angle: angle)
                 swipedCard = nil
                 break
                 
@@ -318,7 +316,6 @@ extension VerticalCardSwiper: UICollectionViewDelegateFlowLayout {
             // Calculate and set the swipeAbleArea. We use this to determine wheter the cell can be swiped to the sides or not.
             let swipeAbleAreaOriginY = collectionView.frame.origin.y + collectionView.contentInset.top
             swipeAbleArea = CGRect(x: 0, y: swipeAbleAreaOriginY, width: self.frame.width, height: cellHeight)
-            centerX = swipeAbleArea.width/2
         }
         return CGSize(width: cellWidth, height: cellHeight)
     }

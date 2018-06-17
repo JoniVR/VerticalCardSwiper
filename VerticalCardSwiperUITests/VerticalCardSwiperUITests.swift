@@ -37,37 +37,75 @@ class VerticalCardSwiperUITests: XCTestCase {
         super.tearDown()
     }
     
-    func testSwipeLeft() {
+    func testSwipeLeftSuccess() {
         
         let collectionView = XCUIApplication().collectionViews
         
         // First check if the first cell actually exists and matches what we're looking for
-        let firstCell: XCUIElement = collectionView/*@START_MENU_TOKEN@*/.cells.staticTexts["Name: John Doe"]/*[[".cells.staticTexts[\"Name: John Doe\"]",".staticTexts[\"Name: John Doe\"]"],[[[-1,1],[-1,0]]],[1]]@END_MENU_TOKEN@*/
+        let firstCell: XCUIElement = collectionView.cells.containing(.staticText, identifier: "Name: John Doe").element
         XCTAssertTrue(firstCell.exists)
         
         // swipe cell away to left
+        let swipeOffset = firstCell.frame.width * 0.4 // 0.4 is the offset at which a card is swiped away
         let startPoint = firstCell.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.5))
-        let finishPoint = startPoint.withOffset(CGVector(dx: -200, dy: 0))
+        let finishPoint = startPoint.withOffset(CGVector(dx: -swipeOffset - 10, dy: 0))
         startPoint.press(forDuration: 0, thenDragTo: finishPoint)
         
-        // Check if first cell with "Name: John Doe" doesn't exist anymore (after swiping away)
-        XCTAssertFalse(collectionView.cells.staticTexts["Name: John Doe"].exists)
+        // Check if first cell doesn't exist anymore (after swiping away)
+        XCTAssertFalse(firstCell.exists)
     }
     
-    func testSwipeRight() {
+    func testSwipeRightSuccess() {
         
         let collectionView = XCUIApplication().collectionViews
         
         // First check if the first cell actually exists and matches what we're looking for
-        let firstCell: XCUIElement = collectionView/*@START_MENU_TOKEN@*/.cells.staticTexts["Name: John Doe"]/*[[".cells.staticTexts[\"Name: John Doe\"]",".staticTexts[\"Name: John Doe\"]"],[[[-1,1],[-1,0]]],[1]]@END_MENU_TOKEN@*/
+        let firstCell: XCUIElement = collectionView.cells.containing(.staticText, identifier: "Name: John Doe").element
         XCTAssertTrue(firstCell.exists)
         
         // swipe cell away to right
+        let swipeOffset = firstCell.frame.width * 0.4 // 0.4 is the offset at which a card is swiped away
         let startPoint = firstCell.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.5))
-        let finishPoint = startPoint.withOffset(CGVector(dx: 200, dy: 0))
+        let finishPoint = startPoint.withOffset(CGVector(dx: swipeOffset + 10, dy: 0))
         startPoint.press(forDuration: 0, thenDragTo: finishPoint)
         
-        // Check if first cell with "Name: John Doe" doesn't exist anymore (after swiping away)
-        XCTAssertFalse(collectionView.cells.staticTexts["Name: John Doe"].exists)
+        // Check if first cell doesn't exist anymore (after swiping away)
+        XCTAssertFalse(firstCell.exists)
+    }
+    
+    func testSwipeLeftFail() {
+        
+        let collectionView = XCUIApplication().collectionViews
+        
+        // First check if the first cell actually exists and matches what we're looking for
+        let firstCell: XCUIElement = collectionView.cells.containing(.staticText, identifier: "Name: John Doe").element
+        XCTAssertTrue(firstCell.exists)
+        
+        // swipe cell away to left
+        let swipeOffset = firstCell.frame.width * 0.4 // 0.4 is the offset at which a card is swiped away
+        let startPoint = firstCell.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.5))
+        let finishPoint = startPoint.withOffset(CGVector(dx: -swipeOffset + 10, dy: 0))
+        startPoint.press(forDuration: 0, thenDragTo: finishPoint)
+        
+        // Check if first cell doesn't exist anymore (after swiping away)
+        XCTAssertTrue(firstCell.exists)
+    }
+    
+    func testSwipeRightFail() {
+        
+        let collectionView = XCUIApplication().collectionViews
+        
+        // First check if the first cell actually exists and matches what we're looking for
+        let firstCell: XCUIElement = collectionView.cells.containing(.staticText, identifier: "Name: John Doe").element
+        XCTAssertTrue(firstCell.exists)
+        
+        // swipe cell away to right
+        let swipeOffset = firstCell.frame.width * 0.4 // 0.4 is the offset at which a card is swiped away
+        let startPoint = firstCell.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.5))
+        let finishPoint = startPoint.withOffset(CGVector(dx: swipeOffset - 10, dy: 0))
+        startPoint.press(forDuration: 0, thenDragTo: finishPoint)
+        
+        // Check if first cell doesn't exist anymore (after swiping away)
+        XCTAssertTrue(firstCell.exists)
     }
 }
