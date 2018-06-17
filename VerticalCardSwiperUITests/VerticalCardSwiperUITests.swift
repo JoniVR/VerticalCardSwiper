@@ -47,10 +47,8 @@ class VerticalCardSwiperUITests: XCTestCase {
         // swipe cell away to left
         let swipeOffset = firstCell.frame.width * 0.4 // 0.4 is the offset at which a card is swiped away
         let startPoint = firstCell.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.5))
-        let finishPoint = startPoint.withOffset(CGVector(dx: -swipeOffset - 10, dy: 0))
+        let finishPoint = startPoint.withOffset(CGVector(dx: -swipeOffset - 20, dy: 0))
         startPoint.press(forDuration: 0, thenDragTo: finishPoint)
-        
-        wait(for: 1)
         
         // Check if first cell doesn't exist anymore (after swiping away)
         XCTAssertFalse(firstCell.exists)
@@ -67,10 +65,8 @@ class VerticalCardSwiperUITests: XCTestCase {
         // swipe cell away to right
         let swipeOffset = firstCell.frame.width * 0.4 // 0.4 is the offset at which a card is swiped away
         let startPoint = firstCell.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.5))
-        let finishPoint = startPoint.withOffset(CGVector(dx: swipeOffset + 10, dy: 0))
+        let finishPoint = startPoint.withOffset(CGVector(dx: swipeOffset + 20, dy: 0))
         startPoint.press(forDuration: 0, thenDragTo: finishPoint)
-        
-        wait(for: 1)
         
         // Check if first cell doesn't exist anymore (after swiping away)
         XCTAssertFalse(firstCell.exists)
@@ -87,10 +83,8 @@ class VerticalCardSwiperUITests: XCTestCase {
         // swipe cell away to left
         let swipeOffset = firstCell.frame.width * 0.4 // 0.4 is the offset at which a card is swiped away
         let startPoint = firstCell.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.5))
-        let finishPoint = startPoint.withOffset(CGVector(dx: -swipeOffset + 10, dy: 0))
+        let finishPoint = startPoint.withOffset(CGVector(dx: -swipeOffset, dy: 0))
         startPoint.press(forDuration: 0, thenDragTo: finishPoint)
-        
-        wait(for: 1)
         
         // Check if first cell doesn't exist anymore (after swiping away)
         XCTAssertTrue(firstCell.exists)
@@ -107,27 +101,10 @@ class VerticalCardSwiperUITests: XCTestCase {
         // swipe cell away to right
         let swipeOffset = firstCell.frame.width * 0.4 // 0.4 is the offset at which a card is swiped away
         let startPoint = firstCell.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.5))
-        let finishPoint = startPoint.withOffset(CGVector(dx: swipeOffset - 10, dy: 0))
+        let finishPoint = startPoint.withOffset(CGVector(dx: swipeOffset, dy: 0))
         startPoint.press(forDuration: 0, thenDragTo: finishPoint)
-        
-        wait(for: 1)
         
         // Check if first cell doesn't exist anymore (after swiping away)
         XCTAssertTrue(firstCell.exists)
-    }
-}
-
-extension XCTestCase {
-    
-    func wait(for duration: TimeInterval) {
-        let waitExpectation = expectation(description: "Waiting")
-        
-        let when = DispatchTime.now() + duration
-        DispatchQueue.main.asyncAfter(deadline: when) {
-            waitExpectation.fulfill()
-        }
-        
-        // We use a buffer here to avoid flakiness with Timer on CI
-        waitForExpectations(timeout: duration + 0.5)
     }
 }
