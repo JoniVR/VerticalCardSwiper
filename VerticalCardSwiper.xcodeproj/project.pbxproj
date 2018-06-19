@@ -155,7 +155,7 @@
 				6C51A11D209E6F4100B83A82 /* VerticalCardSwiper.podspec */,
 				6C51A126209E710900B83A82 /* LICENSE */,
 				6C51A118209E6DC700B83A82 /* Example */,
-				6CE68C621F15729800CFFA14 /* VerticalCardSwiper */,
+				6CE68C621F15729800CFFA14 /* Sources */,
 				6CAB38FB20D0074000FC4C8A /* VerticalCardSwiperUITests */,
 				6CE68C611F15729800CFFA14 /* Products */,
 			);
@@ -171,7 +171,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		6CE68C621F15729800CFFA14 /* VerticalCardSwiper */ = {
+		6CE68C621F15729800CFFA14 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
 				6CF8AC62209EFFBF00A0B26E /* CardCell.swift */,
@@ -187,7 +187,6 @@
 				6C2FCC2520A64A1D0035AAC4 /* VerticalCardSwiper.swift */,
 				6C0A75EA20CC260300B63355 /* CardSwiperView.swift */,
 			);
-			name = VerticalCardSwiper;
 			path = Sources;
 			sourceTree = "<group>";
 		};
