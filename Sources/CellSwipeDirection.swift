@@ -23,7 +23,7 @@
 import Foundation
 
 /// Indicates the direction of a cardcell swipe.
-public enum CellSwipeDirection {
+@objc public enum CellSwipeDirection: Int {
     case Left
     case Right
     case None

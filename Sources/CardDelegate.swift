@@ -26,6 +26,13 @@ import Foundation
 internal protocol CardDelegate: class {
     
     /**
+     Called right before a CardCell is swiped away.
+     - parameter cell: The CardCell that is being swiped away.
+     - parameter swipeDirection: The direction the card is swiped in. This can be Left, Right or None.
+     */
+    func willSwipeAway(cell: CardCell, swipeDirection: CellSwipeDirection)
+    
+    /**
      Called when a CardCell is swiped away.
      - parameter cell: The CardCell that is being swiped away.
      - parameter swipeDirection: The direction the card is swiped in. This can be Left, Right or None.

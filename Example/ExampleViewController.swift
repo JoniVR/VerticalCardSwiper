@@ -68,8 +68,13 @@ class ExampleViewController: UIViewController, VerticalCardSwiperDelegate, Verti
         return contactsDemoData.count
     }
     
+    func willSwipeCardAway(card: CardCell, index: Int, swipeDirection: CellSwipeDirection) {
+
+        // called right before the card animates off the screen.
+    }
+
     func didSwipeCardAway(card: CardCell, index: Int, swipeDirection: CellSwipeDirection) {
-        
+
         contactsDemoData.remove(at: index)
     }
 }

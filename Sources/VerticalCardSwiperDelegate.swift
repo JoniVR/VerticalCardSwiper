@@ -23,13 +23,21 @@
 import Foundation
 
 /// This delegate is used for delegating `VerticalCardSwiperController` actions.
-public protocol VerticalCardSwiperDelegate: class {
+@objc public protocol VerticalCardSwiperDelegate: class {
     
     /**
-     Called when a CardCell is swiped away.
+     Called when a CardCell has animated off screen.
      - parameter card: The CardCell that is being swiped away.
      - parameter index: The index of the card that is being removed.
      - parameter swipeDirection: The direction the card is swiped in. This can be Left, Right or None.
      */
     func didSwipeCardAway(card: CardCell, index: Int, swipeDirection: CellSwipeDirection)
+    
+    /**
+     Called right before a CardCell animates off screen. At this point there's already no way back.
+     - parameter card: The CardCell that is being swiped away.
+     - parameter index: The index of the card that is being removed.
+     - parameter swipeDirection: The direction the card is swiped in. This can be Left, Right or None.
+     */
+    @objc optional func willSwipeCardAway(card: CardCell, index: Int, swipeDirection: CellSwipeDirection)
 }

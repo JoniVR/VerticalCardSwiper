@@ -105,11 +105,14 @@ public class VerticalCardSwiper: UIView {
 
 extension VerticalCardSwiper: CardDelegate {
     
-    fileprivate func setupCardSwipeDelegate() {
-        swipedCard?.delegate = self
+    internal func willSwipeAway(cell: CardCell, swipeDirection: CellSwipeDirection) {
+        
+        let index = verticalCardSwiperView.indexPath(for: cell)!.row
+        
+        self.delegate?.willSwipeCardAway?(card: cell, index: index, swipeDirection: swipeDirection)
     }
     
-    public func didSwipeAway(cell: CardCell, swipeDirection direction: CellSwipeDirection) {
+    internal func didSwipeAway(cell: CardCell, swipeDirection direction: CellSwipeDirection) {
         
         if let indexPathToRemove = verticalCardSwiperView.indexPath(for: cell){
             
@@ -125,7 +128,10 @@ extension VerticalCardSwiper: CardDelegate {
                 }
             }
         }
-        
+    }
+    
+    fileprivate func setupCardSwipeDelegate() {
+        swipedCard?.delegate = self
     }
 }
 
@@ -222,6 +228,15 @@ extension VerticalCardSwiper: UIGestureRecognizerDelegate {
 extension VerticalCardSwiper: UICollectionViewDelegate, UICollectionViewDataSource {
     
     /**
+     Reloads all of the data for the VerticalCardSwiperView.
+     
+     Call this method sparingly when you need to reload all of the items in the VerticalCardSwiper. This causes the VerticalCardSwiperView to discard any currently visible items (including placeholders) and recreate items based on the current state of the data source object. For efficiency, the VerticalCardSwiperView only displays those cells and supplementary views that are visible. If the data shrinks as a result of the reload, the VerticalCardSwiperView adjusts its scrolling offsets accordingly.
+    */
+    public func reloadData(){
+        verticalCardSwiperView.reloadData()
+    }
+    
+    /**
      Register a class for use in creating new CardCells.
      Prior to calling the dequeueReusableCell(withReuseIdentifier:for:) method of the collection view,
      you must use this method or the register(_:forCellWithReuseIdentifier:) method
@@ -257,6 +272,21 @@ extension VerticalCardSwiper: UICollectionViewDelegate, UICollectionViewDataSour
         verticalCardSwiperView.register(nib, forCellWithReuseIdentifier: identifier)
     }
     
+    public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        
+        return self.numberOfCards
+    }
+    
+    public func numberOfSections(in collectionView: UICollectionView) -> Int {
+        
+        return 1
+    }
+    
+    public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        return (datasource?.cardForItemAt(verticalCardSwiperView: verticalCardSwiperView, cardForItemAt: indexPath.row))!
+    }
+    
     fileprivate func setupCollectionView(){
         
         verticalCardSwiperView = VerticalCardSwiperView(frame: self.frame, collectionViewLayout: flowLayout)
@@ -279,21 +309,6 @@ extension VerticalCardSwiper: UICollectionViewDelegate, UICollectionViewDataSour
             verticalCardSwiperView.topAnchor.constraint(equalTo: self.topAnchor),
             verticalCardSwiperView.bottomAnchor.constraint(equalTo: self.bottomAnchor)
             ])
-    }
-    
-    public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        
-        return self.numberOfCards
-    }
-    
-    public func numberOfSections(in collectionView: UICollectionView) -> Int {
-        
-        return 1
-    }
-    
-    public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
-        return (datasource?.cardForItemAt(verticalCardSwiperView: verticalCardSwiperView, cardForItemAt: indexPath.row))!
     }
     
     fileprivate func setCardSwiperInsets(){

@@ -81,6 +81,12 @@ class ExampleViewController: UIViewController, VerticalCardSwiperDatasource {
 @IBInspectable public var visibleNextCardHeight: CGFloat = 50
 ```
 
+#### Other
+Just like with a regular `UICollectionView`, you can reload the data by calling:
+```swift
+cardSwiper.reloadData()
+```
+
 ### Delegation
 To handle swipe gestures, implement the `VerticalCardSwiperDelegate`.
 
@@ -96,6 +102,11 @@ class ViewController: UIViewController, VerticalCardSwiperDelegate {
     func didSwipeCardAway(card: CardCell, index: Int, swipeDirection: CellSwipeDirection) {
 
         // handle swipe gestures
+    }
+    
+    func willSwipeCardAway(card: CardCell, index: Int, swipeDirection: CellSwipeDirection) {
+    
+        // called right before the card animates off the screen.
     }
 }
 ```

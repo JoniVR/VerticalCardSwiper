@@ -28,7 +28,7 @@ import UIKit
  The cells will be recycled by the `VerticalCardSwiper`,
  so don't forget to override `prepareForReuse` when needed.
  */
-open class CardCell: UICollectionViewCell {
+@objc open class CardCell: UICollectionViewCell {
     
     internal weak var delegate: CardDelegate?
 
@@ -122,6 +122,8 @@ open class CardCell: UICollectionViewCell {
             transform = CATransform3DTranslate(transform, (self.frame.width * 2), 0, 1)
             direction = .Right
         }
+        
+        self.delegate?.willSwipeAway(cell: self, swipeDirection: direction)
         
         UIView.animate(withDuration: 0.2, animations: { [weak self] in
             self?.layer.transform = transform
