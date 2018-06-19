@@ -69,7 +69,7 @@ open class CardCell: UICollectionViewCell {
     }
     
     /**
-     Resets the CardCell back to the center of the CardSwiperView.
+     Resets the CardCell back to the center of the VerticalCardSwiperView.
      */
     public func resetToCenterPosition(){
         

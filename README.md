@@ -56,14 +56,14 @@ class ExampleViewController: UIViewController, VerticalCardSwiperDatasource {
         cardSwiper.register(nib: UINib(nibName: "ExampleCell", bundle: nil), forCellWithReuseIdentifier: "ExampleCell")
     }
     
-    func cardForItemAt(cardSwiperView: CardSwiperView, cardForItemAt index: Int) -> CardCell {
+    func cardForItemAt(verticalCardSwiperView: VerticalCardSwiperView, cardForItemAt index: Int) -> CardCell {
         
-        let cardCell = cardSwiperView.dequeueReusableCell(withReuseIdentifier: "ExampleCell", for: index) as! ExampleCardCell
+        let cardCell = verticalCardSwiperView.dequeueReusableCell(withReuseIdentifier: "ExampleCell", for: index) as! ExampleCardCell
                 
         return cardCell
     }
     
-    func numberOfCards(cardSwiperView: CardSwiperView) -> Int {
+    func numberOfCards(verticalCardSwiperView: VerticalCardSwiperView) -> Int {
         return 100
     }
 }

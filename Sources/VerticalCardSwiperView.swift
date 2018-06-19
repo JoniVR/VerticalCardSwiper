@@ -24,10 +24,10 @@ import Foundation
 import UIKit
 
 /**
- The CardSwiperView is a subclass of `UICollectionView` that we use internally in the `VerticalCardSwiper`.
+ The VerticalCardSwiperView is a subclass of `UICollectionView` that we use internally in the `VerticalCardSwiper`.
  This allows for custom implementations of the underlying `UICollectionView` so that we can simplify some usages.
  */
-public class CardSwiperView: UICollectionView {
+public class VerticalCardSwiperView: UICollectionView {
     
     /// A `Bool` that indicates if the `UICollectionView` is currently scrolling.
     public var isScrolling: Bool {
@@ -36,7 +36,7 @@ public class CardSwiperView: UICollectionView {
     
     /**
      Returns a reusable cell object located by its identifier.
-     Call this method from your data source object when asked to provide a new cell for the CardSwiperView.
+     Call this method from your data source object when asked to provide a new cell for the VerticalCardSwiperView.
      This method dequeues an existing cell if one is available or creates a new one based on the class or nib file you previously registered.
      
      **Important**
@@ -47,7 +47,7 @@ public class CardSwiperView: UICollectionView {
      
      - parameter identifier: The reuse identifier for the specified cell. This parameter must not be nil.
      
-     - parameter index: The index specifying the location of the cell. The data source receives this information when it is asked for the cell and should just pass it along. This method uses the index to perform additional configuration based on the cell’s position in the CardSwiperView.
+     - parameter index: The index specifying the location of the cell. The data source receives this information when it is asked for the cell and should just pass it along. This method uses the index to perform additional configuration based on the cell’s position in the VerticalCardSwiperView.
     */
     public func dequeueReusableCell(withReuseIdentifier identifier: String, for index: Int) -> UICollectionViewCell {
         return self.dequeueReusableCell(withReuseIdentifier: identifier, for: IndexPath(row: index, section: 0))

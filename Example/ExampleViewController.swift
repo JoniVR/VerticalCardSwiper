@@ -50,9 +50,9 @@ class ExampleViewController: UIViewController, VerticalCardSwiperDelegate, Verti
         cardSwiper.register(nib: UINib(nibName: "ExampleCell", bundle: nil), forCellWithReuseIdentifier: "ExampleCell")
     }
     
-    func cardForItemAt(cardSwiperView: CardSwiperView, cardForItemAt index: Int) -> CardCell {
+    func cardForItemAt(verticalCardSwiperView: VerticalCardSwiperView, cardForItemAt index: Int) -> CardCell {
         
-        let cardCell = cardSwiperView.dequeueReusableCell(withReuseIdentifier: "ExampleCell", for: index) as! ExampleCardCell
+        let cardCell = verticalCardSwiperView.dequeueReusableCell(withReuseIdentifier: "ExampleCell", for: index) as! ExampleCardCell
         
         let contact = contactsDemoData[index]
         
@@ -64,7 +64,7 @@ class ExampleViewController: UIViewController, VerticalCardSwiperDelegate, Verti
         return cardCell
     }
     
-    func numberOfCards(cardSwiperView: CardSwiperView) -> Int {
+    func numberOfCards(verticalCardSwiperView: VerticalCardSwiperView) -> Int {
         return contactsDemoData.count
     }
     

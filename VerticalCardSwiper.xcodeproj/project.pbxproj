@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		6C0A75EC20CC26D100B63355 /* CardSwiperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C0A75EA20CC260300B63355 /* CardSwiperView.swift */; };
+		6C0A75EC20CC26D100B63355 /* VerticalCardSwiperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C0A75EA20CC260300B63355 /* VerticalCardSwiperView.swift */; };
 		6C24E27920A070DE001367E7 /* CardDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C24E27720A07074001367E7 /* CardDelegate.swift */; };
 		6C24E27C20A0713B001367E7 /* PanDirection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C24E27A20A0711C001367E7 /* PanDirection.swift */; };
 		6C2FCC2020A636C20035AAC4 /* VerticalCardSwiperDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C2FCC1C20A633BC0035AAC4 /* VerticalCardSwiperDelegate.swift */; };
@@ -66,7 +66,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		6C0A75EA20CC260300B63355 /* CardSwiperView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardSwiperView.swift; sourceTree = "<group>"; };
+		6C0A75EA20CC260300B63355 /* VerticalCardSwiperView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerticalCardSwiperView.swift; sourceTree = "<group>"; };
 		6C24E27720A07074001367E7 /* CardDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDelegate.swift; sourceTree = "<group>"; };
 		6C24E27A20A0711C001367E7 /* PanDirection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PanDirection.swift; sourceTree = "<group>"; };
 		6C2FCC1C20A633BC0035AAC4 /* VerticalCardSwiperDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerticalCardSwiperDelegate.swift; sourceTree = "<group>"; };
@@ -185,7 +185,7 @@
 				6C2FCC1C20A633BC0035AAC4 /* VerticalCardSwiperDelegate.swift */,
 				6C2FCC1E20A636B90035AAC4 /* VerticalCardSwiperDatasource.swift */,
 				6C2FCC2520A64A1D0035AAC4 /* VerticalCardSwiper.swift */,
-				6C0A75EA20CC260300B63355 /* CardSwiperView.swift */,
+				6C0A75EA20CC260300B63355 /* VerticalCardSwiperView.swift */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -348,7 +348,7 @@
 				6C24E27C20A0713B001367E7 /* PanDirection.swift in Sources */,
 				6C24E27920A070DE001367E7 /* CardDelegate.swift in Sources */,
 				6C2FCC2120A636C50035AAC4 /* VerticalCardSwiperDatasource.swift in Sources */,
-				6C0A75EC20CC26D100B63355 /* CardSwiperView.swift in Sources */,
+				6C0A75EC20CC26D100B63355 /* VerticalCardSwiperView.swift in Sources */,
 				6CF8AC6A209EFFBF00A0B26E /* CardCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
