@@ -22,7 +22,7 @@
 
 import Foundation
 
-/// This delegate is used for delegating `VerticalCardSwiperController` actions.
+/// This delegate is used for delegating `VerticalCardSwiper` actions.
 @objc public protocol VerticalCardSwiperDelegate: class {
     
     /**
