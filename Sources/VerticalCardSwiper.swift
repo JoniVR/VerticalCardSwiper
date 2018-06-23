@@ -51,6 +51,19 @@ public class VerticalCardSwiper: UIView {
             setCardSwiperInsets()
         }
     }
+    /// Vertical spacing between CardCells. Default is 40.
+    @IBInspectable public var cardSpacing: CGFloat = 40 {
+        willSet {
+            flowLayout.minimumLineSpacing = newValue
+        }
+    }
+    
+    /// The transform animation that is shown on the top card when scrolling through the cards. Default is 0.05.
+    @IBInspectable public var firstItemTransform: CGFloat = 0.05 {
+        willSet {
+            flowLayout.firstItemTransform = newValue
+        }
+    }
     
     public weak var delegate: VerticalCardSwiperDelegate?
     public weak var datasource: VerticalCardSwiperDatasource? {
@@ -75,8 +88,8 @@ public class VerticalCardSwiper: UIView {
     /// The flowlayout used in the collectionView.
     fileprivate lazy var flowLayout: VerticalCardSwiperFlowLayout = {
         let flowLayout = VerticalCardSwiperFlowLayout()
-        flowLayout.firstItemTransform = 0.05
-        flowLayout.minimumLineSpacing = 40
+        flowLayout.firstItemTransform = firstItemTransform
+        flowLayout.minimumLineSpacing = cardSpacing
         flowLayout.isPagingEnabled = true
         return flowLayout
     }()

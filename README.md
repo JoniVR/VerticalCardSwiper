@@ -79,6 +79,10 @@ class ExampleViewController: UIViewController, VerticalCardSwiperDatasource {
 @IBInspectable public var sideInset: CGFloat = 20
 /// Sets how much of the next card should be visible. Default is 50.
 @IBInspectable public var visibleNextCardHeight: CGFloat = 50
+/// Vertical spacing between CardCells. Default is 40.
+@IBInspectable public var cardSpacing: CGFloat = 40
+/// The transform animation that is shown on the top card when scrolling through the cards. Default is 0.05.
+@IBInspectable public var firstItemTransform: CGFloat = 0.05
 ```
 
 #### Other
