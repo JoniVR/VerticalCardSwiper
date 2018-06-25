@@ -110,7 +110,13 @@ class ViewController: UIViewController, VerticalCardSwiperDelegate {
     
     func willSwipeCardAway(card: CardCell, index: Int, swipeDirection: CellSwipeDirection) {
     
-        // called right before the card animates off the screen.
+        // called right before the card animates off the screen (optional).
+    }
+    
+    func sizeForItem(verticalCardSwiperView: VerticalCardSwiperView, index: Int) -> CGSize {
+    
+        // Allows you to return custom card sizes (optional).
+        return CGSize(width: verticalCardSwiperView.frame.width * 0.75, height: verticalCardSwiperView.frame.height * 0.75)
     }
 }
 ```

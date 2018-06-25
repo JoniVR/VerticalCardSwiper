@@ -334,8 +334,20 @@ extension VerticalCardSwiper: UICollectionViewDelegateFlowLayout {
     
     public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        let cellWidth = collectionView.frame.size.width - (sideInset * 2)
-        let cellHeight = collectionView.frame.size.height - flowLayout.minimumLineSpacing - visibleNextCardHeight - topInset
+        var cellWidth: CGFloat!
+        var cellHeight: CGFloat!
+        let xInsets = sideInset * 2
+        let yInsets = cardSpacing + visibleNextCardHeight + topInset
+        
+        // get size from delegate if the sizeForItem function is called.
+        if let customSize = delegate?.sizeForItem?(verticalCardSwiperView: verticalCardSwiperView, index: indexPath.row) {
+            // set custom sizes and make sure sizes are not negative, if they are, don't subtract the insets.
+            cellWidth = customSize.width - (customSize.width - xInsets > 0 ? xInsets : 0)
+            cellHeight = customSize.height - (customSize.height - yInsets > 0 ? yInsets : 0)
+        } else {
+            cellWidth = collectionView.frame.size.width - xInsets
+            cellHeight = collectionView.frame.size.height - yInsets
+        }
         
         // set cellHeight in the custom flowlayout, we use this for paging calculations.
         flowLayout.cellHeight = cellHeight

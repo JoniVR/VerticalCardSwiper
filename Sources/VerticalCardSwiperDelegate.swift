@@ -40,4 +40,20 @@ import Foundation
      - parameter swipeDirection: The direction the card is swiped in. This can be Left, Right or None.
      */
     @objc optional func willSwipeCardAway(card: CardCell, index: Int, swipeDirection: CellSwipeDirection)
+    
+    /**
+     Allows you to return the size as a CGSize for each card at their specified index.
+     This function will be called for every card. You can customize each card to have a different size.
+     
+     Because this function uses the standard `sizeForItem` function of a `UICollectionView` internally,
+     you should keep in mind that returning a very small cell size results in multiple columns (like a standard collectionview),
+     which is not supported at the moment and very buggy.
+     
+     This function will also take the custom insets into account, in case (itemSize - insets) is negative,
+     it will not take the insets into account.
+     - parameter verticalCardSwiperView: The `VerticalCardSwiperView` that will display the `CardCell`.
+     - parameter index: The index for which we return the specific CGSize.
+     - returns: The size of each card for its respective index as a CGSize.
+    */
+    @objc optional func sizeForItem(verticalCardSwiperView: VerticalCardSwiperView, index: Int) -> CGSize
 }
