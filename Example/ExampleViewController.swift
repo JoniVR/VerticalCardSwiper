@@ -25,6 +25,8 @@ import VerticalCardSwiper
 
 class ExampleViewController: UIViewController, VerticalCardSwiperDelegate, VerticalCardSwiperDatasource {
     
+    @IBOutlet weak var cardSwiper: VerticalCardSwiper!
+    
     private var contactsDemoData: [Contact] = [
         Contact(name: "John Doe", age: 33),
         Contact(name: "Chuck Norris", age: 78),
@@ -33,16 +35,17 @@ class ExampleViewController: UIViewController, VerticalCardSwiperDelegate, Verti
         Contact(name: "Barack Obama", age: 56),
         Contact(name: "Mila Kunis", age: 34),
         Contact(name: "Pamela Anderson", age: 50),
-        Contact(name: "Christina Anguilera", age: 37)
+        Contact(name: "Christina Anguilera", age: 37),
+        Contact(name: "Ed Sheeran", age: 23),
+        Contact(name: "Jennifer Lopez", age: 45),
+        Contact(name: "Nicki Minaj", age: 31),
+        Contact(name: "Tim Cook", age: 57),
+        Contact(name: "Satya Nadella", age: 50)
     ]
-    
-    private var cardSwiper: VerticalCardSwiper!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        cardSwiper = view as? VerticalCardSwiper
-        self.view = cardSwiper
         cardSwiper.delegate = self
         cardSwiper.datasource = self
         
