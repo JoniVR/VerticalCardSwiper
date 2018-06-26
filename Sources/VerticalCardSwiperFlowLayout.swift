@@ -32,14 +32,14 @@ internal class VerticalCardSwiperFlowLayout: UICollectionViewFlowLayout {
     /// Stores the height of a CardCell.
     internal var cellHeight: CGFloat!
     
-    override func prepare() {
+    override internal func prepare() {
         super.prepare()
         
         assert(collectionView!.numberOfSections == 1, "Number of sections should always be 1.")
         assert(collectionView!.isPagingEnabled == false, "Paging on the collectionview itself should never be enabled. To enable cell paging, use the isPagingEnabled property of the VerticalCardSwiperFlowLayout instead.")
     }
     
-    override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
+    override internal func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
         let items = NSArray (array: super.layoutAttributesForElements(in: rect)!, copyItems: true)
         
         items.enumerateObjects(using: { (object, index, stop) -> Void in
@@ -50,36 +50,13 @@ internal class VerticalCardSwiperFlowLayout: UICollectionViewFlowLayout {
         return items as? [UICollectionViewLayoutAttributes]
     }
     
-    /**
-     Updates the attributes.
-     Here manipulate the zIndex of the cards here, calculate the positions and do the animations.
-     - parameter attributes: The attributes we're updating.
-    */
-    func updateCellAttributes(_ attributes: UICollectionViewLayoutAttributes) {
-        let minY = collectionView!.bounds.minY + collectionView!.contentInset.top
-        let maxY = attributes.frame.origin.y
-        
-        let finalY = max(minY, maxY)
-        var origin = attributes.frame.origin
-        let deltaY = (finalY - origin.y) / attributes.frame.height
-        
-        if let itemTransform = firstItemTransform {
-            let scale = 1 - deltaY * itemTransform
-            attributes.transform = CGAffineTransform(scaleX: scale, y: scale)
-            // TODO: add card stack effect (like Shazam)
-        }
-        origin.y = finalY
-        attributes.frame = CGRect(origin: origin, size: attributes.frame.size)
-        attributes.zIndex = attributes.indexPath.row
-    }
-    
     // We invalidate the layout when a "bounds change" happens, for example when we scale the top cell. This forces a layout update on the flowlayout.
-    override func shouldInvalidateLayout(forBoundsChange newBounds: CGRect) -> Bool {
+    override internal func shouldInvalidateLayout(forBoundsChange newBounds: CGRect) -> Bool {
         return true
     }
     
     // Cell paging
-    override func targetContentOffset(forProposedContentOffset proposedContentOffset: CGPoint, withScrollingVelocity velocity: CGPoint) -> CGPoint {
+    override internal func targetContentOffset(forProposedContentOffset proposedContentOffset: CGPoint, withScrollingVelocity velocity: CGPoint) -> CGPoint {
         
         // If the property `isPagingEnabled` is set to false, we don't enable paging and thus return the current contentoffset.
         guard isPagingEnabled else {
@@ -108,7 +85,7 @@ internal class VerticalCardSwiperFlowLayout: UICollectionViewFlowLayout {
         return CGPoint(x: proposedContentOffset.x, y: newVerticalOffset)
     }
     
-    override func finalLayoutAttributesForDisappearingItem(at itemIndexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
+    override internal func finalLayoutAttributesForDisappearingItem(at itemIndexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
 
         // make sure the zIndex of the next card is higher than the one we're swiping away.
         let nextIndexPath = IndexPath(row: itemIndexPath.row + 1, section: itemIndexPath.section)
@@ -119,5 +96,28 @@ internal class VerticalCardSwiperFlowLayout: UICollectionViewFlowLayout {
         let attr = self.layoutAttributesForItem(at: itemIndexPath)
         
         return attr
+    }
+    
+    /**
+     Updates the attributes.
+     Here manipulate the zIndex of the cards here, calculate the positions and do the animations.
+     - parameter attributes: The attributes we're updating.
+     */
+    fileprivate func updateCellAttributes(_ attributes: UICollectionViewLayoutAttributes) {
+        let minY = collectionView!.bounds.minY + collectionView!.contentInset.top
+        let maxY = attributes.frame.origin.y
+        
+        let finalY = max(minY, maxY)
+        var origin = attributes.frame.origin
+        let deltaY = (finalY - origin.y) / attributes.frame.height
+        
+        if let itemTransform = firstItemTransform {
+            let scale = 1 - deltaY * itemTransform
+            attributes.transform = CGAffineTransform(scaleX: scale, y: scale)
+            // TODO: add card stack effect (like Shazam)
+        }
+        origin.y = finalY
+        attributes.frame = CGRect(origin: origin, size: attributes.frame.size)
+        attributes.zIndex = attributes.indexPath.row
     }
 }
