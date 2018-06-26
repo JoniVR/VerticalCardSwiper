@@ -21,6 +21,7 @@
 		6CAB38F520CFE81300FC4C8A /* ExampleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6CAB38F420CFE81300FC4C8A /* ExampleCell.xib */; };
 		6CAB38FD20D0074000FC4C8A /* VerticalCardSwiperUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CAB38FC20D0074000FC4C8A /* VerticalCardSwiperUITests.swift */; };
 		6CB3A32520C0A63200EE6BE3 /* ExampleCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CB3A32220C0A4A500EE6BE3 /* ExampleCardCell.swift */; };
+		6CBBF36920E27016000120DA /* CHANGELOG.md in Resources */ = {isa = PBXBuildFile; fileRef = 6CBBF36820E2700D000120DA /* CHANGELOG.md */; };
 		6CC2B6FA209F08AB00C522C5 /* ExampleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CC2B6F9209F08AB00C522C5 /* ExampleViewController.swift */; };
 		6CE5512C20CF262300C4C24C /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CE5512B20CF262300C4C24C /* Contact.swift */; };
 		6CE68C641F15729800CFFA14 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CE68C631F15729800CFFA14 /* AppDelegate.swift */; };
@@ -81,6 +82,7 @@
 		6CAB38FC20D0074000FC4C8A /* VerticalCardSwiperUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerticalCardSwiperUITests.swift; sourceTree = "<group>"; };
 		6CAB38FE20D0074000FC4C8A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6CB3A32220C0A4A500EE6BE3 /* ExampleCardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleCardCell.swift; sourceTree = "<group>"; };
+		6CBBF36820E2700D000120DA /* CHANGELOG.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = CHANGELOG.md; sourceTree = "<group>"; };
 		6CC2B6F9209F08AB00C522C5 /* ExampleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleViewController.swift; sourceTree = "<group>"; };
 		6CE5512B20CF262300C4C24C /* Contact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contact.swift; sourceTree = "<group>"; };
 		6CE68C601F15729800CFFA14 /* Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -152,6 +154,7 @@
 			isa = PBXGroup;
 			children = (
 				6C51A11E209E6F4100B83A82 /* README.md */,
+				6CBBF36820E2700D000120DA /* CHANGELOG.md */,
 				6C51A11D209E6F4100B83A82 /* VerticalCardSwiper.podspec */,
 				6C51A126209E710900B83A82 /* LICENSE */,
 				6C51A118209E6DC700B83A82 /* Example */,
@@ -312,6 +315,7 @@
 				6C51A120209E6F4100B83A82 /* README.md in Resources */,
 				6C51A11F209E6F4100B83A82 /* VerticalCardSwiper.podspec in Resources */,
 				6C51A127209E710900B83A82 /* LICENSE in Resources */,
+				6CBBF36920E27016000120DA /* CHANGELOG.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

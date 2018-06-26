@@ -1,5 +1,16 @@
 # Change Log
 
+## [0.1.0-beta2](https://github.com/JoniVR/VerticalCardSwiper/releases/tag/0.1.0-beta2) (Jun 26, 2018)
+
+#### API breaking changes
+
+#### Enhancements
+
+- Added `sizeForItem` function to `VerticalCardSwiperDelegate`
+- Added `cardSpacing` property to `VerticalCardSwiper`
+- Added `firstItemTransform` property to `VerticalCardSwiper`
+- Updated example
+
 ## [0.1.0-beta1](https://github.com/JoniVR/VerticalCardSwiper/releases/tag/0.1.0-beta1) (Jun 21, 2018)
 
 #### API breaking changes
@@ -8,8 +19,8 @@
 
 #### Enhancements
 
-- Added `willSwipeCardAway(cell: CardCell, swipeDirection: CellSwipeDirection)` to `VerticalCardSwiperDelegate`
-- Added `reloadData()` to `VerticalCardSwiper`
+- Added `willSwipeCardAway` function to `VerticalCardSwiperDelegate`
+- Added `reloadData()` function to `VerticalCardSwiper`
 - Added iPad support
 - Added changelog
 - Updated documentation
@@ -19,7 +30,7 @@
 
 #### API breaking changes
 
-- Simplified `endedPanAnimation` and made it internal instead of public. 
+- Simplified `endedPanAnimation` function and made it internal instead of public. 
 
 #### Enhancements
 
