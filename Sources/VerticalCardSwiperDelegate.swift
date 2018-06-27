@@ -42,6 +42,12 @@ import Foundation
     @objc optional func willSwipeCardAway(card: CardCell, index: Int, swipeDirection: CellSwipeDirection)
     
     /**
+     Tells the delegate when the user scrolls through the cards.
+     - parameter verticalCardSwiperView: The `VerticalCardSwiperView` that displays the cardcells.
+    */
+    @objc optional func didScroll(verticalCardSwiperView: VerticalCardSwiperView)
+    
+    /**
      Allows you to return the size as a CGSize for each card at their specified index.
      This function will be called for every card. You can customize each card to have a different size.
      

@@ -118,6 +118,11 @@ class ViewController: UIViewController, VerticalCardSwiperDelegate {
         // Allows you to return custom card sizes (optional).
         return CGSize(width: verticalCardSwiperView.frame.width * 0.75, height: verticalCardSwiperView.frame.height * 0.75)
     }
+    
+    func didScroll(verticalCardSwiperView: VerticalCardSwiperView) {
+    
+        // Tells the delegate when the user scrolls through the cards.
+    }
 }
 ```
 

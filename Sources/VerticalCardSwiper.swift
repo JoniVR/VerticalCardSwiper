@@ -300,6 +300,10 @@ extension VerticalCardSwiper: UICollectionViewDelegate, UICollectionViewDataSour
         return (datasource?.cardForItemAt(verticalCardSwiperView: verticalCardSwiperView, cardForItemAt: indexPath.row))!
     }
     
+    public func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        delegate?.didScroll?(verticalCardSwiperView: verticalCardSwiperView)
+    }
+    
     fileprivate func setupCollectionView(){
         
         verticalCardSwiperView = VerticalCardSwiperView(frame: self.frame, collectionViewLayout: flowLayout)
