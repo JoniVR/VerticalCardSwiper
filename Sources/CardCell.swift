@@ -73,8 +73,17 @@ import UIKit
      */
     public func resetToCenterPosition(){
         
-        UIView.animate(withDuration: 0.2, animations: { [weak self] in
-            self?.layer.transform = CATransform3DIdentity
+        let cardCenterX = self.frame.midX
+        let centerX = self.bounds.midX
+        let initialSpringVelocity = fabs(cardCenterX - centerX)/100
+        
+        UIView.animate(withDuration: 0.5,
+                       delay: 0,
+                       usingSpringWithDamping: 0.6,
+                       initialSpringVelocity: initialSpringVelocity,
+                       options: .allowUserInteraction,
+                       animations: { [weak self] in
+                        self?.layer.transform = CATransform3DIdentity
         })
     }
     
