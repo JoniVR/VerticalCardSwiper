@@ -120,6 +120,8 @@ extension VerticalCardSwiper: CardDelegate {
     
     internal func willSwipeAway(cell: CardCell, swipeDirection: CellSwipeDirection) {
         
+        verticalCardSwiperView.isUserInteractionEnabled = false
+        
         if let index = verticalCardSwiperView.indexPath(for: cell)?.row {
             self.delegate?.willSwipeCardAway?(card: cell, index: index, swipeDirection: swipeDirection)
         }
@@ -137,6 +139,7 @@ extension VerticalCardSwiper: CardDelegate {
             }) { [weak self] (finished) in
                 if finished {
                     self?.verticalCardSwiperView.collectionViewLayout.invalidateLayout()
+                    self?.verticalCardSwiperView.isUserInteractionEnabled = true
                     self?.delegate?.didSwipeCardAway(card: cell, index: indexPathToRemove.row ,swipeDirection: direction)
                 }
             }
