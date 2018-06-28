@@ -121,7 +121,7 @@ class ViewController: UIViewController, VerticalCardSwiperDelegate {
     
     func didScroll(verticalCardSwiperView: VerticalCardSwiperView) {
     
-        // Tells the delegate when the user scrolls through the cards.
+        // Tells the delegate when the user scrolls through the cards (optional).
     }
 }
 ```

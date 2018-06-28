@@ -120,9 +120,9 @@ extension VerticalCardSwiper: CardDelegate {
     
     internal func willSwipeAway(cell: CardCell, swipeDirection: CellSwipeDirection) {
         
-        let index = verticalCardSwiperView.indexPath(for: cell)!.row
-        
-        self.delegate?.willSwipeCardAway?(card: cell, index: index, swipeDirection: swipeDirection)
+        if let index = verticalCardSwiperView.indexPath(for: cell)?.row {
+            self.delegate?.willSwipeCardAway?(card: cell, index: index, swipeDirection: swipeDirection)
+        }
     }
     
     internal func didSwipeAway(cell: CardCell, swipeDirection direction: CellSwipeDirection) {
