@@ -97,7 +97,7 @@ public class VerticalCardSwiper: UIView {
     /// The collectionView where all the magic happens.
     public var verticalCardSwiperView: VerticalCardSwiperView!
     
-    override init(frame: CGRect) {
+    override public init(frame: CGRect) {
         super.init(frame: frame)
         
         commonInit()

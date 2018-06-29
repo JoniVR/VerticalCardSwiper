@@ -49,7 +49,9 @@ class ExampleViewController: UIViewController, VerticalCardSwiperDatasource {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        cardSwiper = view as? VerticalCardSwiper
+        cardSwiper = VerticalCardSwiper(frame: self.view.bounds)
+        view.addSubview(cardSwiper)
+        
         cardSwiper.datasource = self
         
         // register cardcell for storyboard use
