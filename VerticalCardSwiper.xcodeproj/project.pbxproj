@@ -28,7 +28,7 @@
 		6CE68C691F15729800CFFA14 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6CE68C671F15729800CFFA14 /* Main.storyboard */; };
 		6CE68C6E1F15729800CFFA14 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6CE68C6D1F15729800CFFA14 /* Assets.xcassets */; };
 		6CE68C711F15729800CFFA14 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6CE68C6F1F15729800CFFA14 /* LaunchScreen.storyboard */; };
-		6CF8AC63209EFFBF00A0B26E /* CellSwipeDirection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CF8AC5B209EFFBE00A0B26E /* CellSwipeDirection.swift */; };
+		6CF8AC63209EFFBF00A0B26E /* SwipeDirection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CF8AC5B209EFFBE00A0B26E /* SwipeDirection.swift */; };
 		6CF8AC66209EFFBF00A0B26E /* VerticalCardSwiper.h in Headers */ = {isa = PBXBuildFile; fileRef = 6CF8AC5E209EFFBF00A0B26E /* VerticalCardSwiper.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6CF8AC67209EFFBF00A0B26E /* VerticalCardSwiperFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CF8AC5F209EFFBF00A0B26E /* VerticalCardSwiperFlowLayout.swift */; };
 		6CF8AC68209EFFBF00A0B26E /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CF8AC60209EFFBF00A0B26E /* Extensions.swift */; };
@@ -91,7 +91,7 @@
 		6CE68C6D1F15729800CFFA14 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6CE68C701F15729800CFFA14 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6CE68C721F15729800CFFA14 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		6CF8AC5B209EFFBE00A0B26E /* CellSwipeDirection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CellSwipeDirection.swift; path = Sources/CellSwipeDirection.swift; sourceTree = SOURCE_ROOT; };
+		6CF8AC5B209EFFBE00A0B26E /* SwipeDirection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SwipeDirection.swift; path = Sources/SwipeDirection.swift; sourceTree = SOURCE_ROOT; };
 		6CF8AC5D209EFFBF00A0B26E /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = Sources/Info.plist; sourceTree = SOURCE_ROOT; };
 		6CF8AC5E209EFFBF00A0B26E /* VerticalCardSwiper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VerticalCardSwiper.h; path = Sources/VerticalCardSwiper.h; sourceTree = SOURCE_ROOT; };
 		6CF8AC5F209EFFBF00A0B26E /* VerticalCardSwiperFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VerticalCardSwiperFlowLayout.swift; path = Sources/VerticalCardSwiperFlowLayout.swift; sourceTree = SOURCE_ROOT; };
@@ -178,7 +178,7 @@
 			isa = PBXGroup;
 			children = (
 				6CF8AC62209EFFBF00A0B26E /* CardCell.swift */,
-				6CF8AC5B209EFFBE00A0B26E /* CellSwipeDirection.swift */,
+				6CF8AC5B209EFFBE00A0B26E /* SwipeDirection.swift */,
 				6CF8AC60209EFFBF00A0B26E /* Extensions.swift */,
 				6CF8AC5D209EFFBF00A0B26E /* Info.plist */,
 				6CF8AC5E209EFFBF00A0B26E /* VerticalCardSwiper.h */,
@@ -347,7 +347,7 @@
 				6C2FCC2020A636C20035AAC4 /* VerticalCardSwiperDelegate.swift in Sources */,
 				6CF8AC68209EFFBF00A0B26E /* Extensions.swift in Sources */,
 				6CF8AC67209EFFBF00A0B26E /* VerticalCardSwiperFlowLayout.swift in Sources */,
-				6CF8AC63209EFFBF00A0B26E /* CellSwipeDirection.swift in Sources */,
+				6CF8AC63209EFFBF00A0B26E /* SwipeDirection.swift in Sources */,
 				6C2FCC2620A64A1D0035AAC4 /* VerticalCardSwiper.swift in Sources */,
 				6C24E27C20A0713B001367E7 /* PanDirection.swift in Sources */,
 				6C24E27920A070DE001367E7 /* CardDelegate.swift in Sources */,

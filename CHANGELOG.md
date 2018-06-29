@@ -11,9 +11,9 @@
 
 #### Bug fixes
 
-- fixed possible nil crash in rare occasions when swiping.
-- fixed animation glitch when scrolling cards while card was animating off screen.
-- fixed cards zPosition bug which caused bottom card to overlap top card in some occasions.
+- Fixed possible nil crash in rare occasions when swiping.
+- Fixed animation glitch when scrolling cards while card was animating off screen.
+- Fixed cards zPosition bug which caused bottom card to overlap top card in some occasions.
 
 ## [0.1.0-beta2](https://github.com/JoniVR/VerticalCardSwiper/releases/tag/0.1.0-beta2) (Jun 26, 2018)
 

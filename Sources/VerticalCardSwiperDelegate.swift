@@ -26,20 +26,30 @@ import Foundation
 @objc public protocol VerticalCardSwiperDelegate: class {
     
     /**
-     Called when a CardCell has animated off screen.
-     - parameter card: The CardCell that is being swiped away.
-     - parameter index: The index of the card that is being removed.
-     - parameter swipeDirection: The direction the card is swiped in. This can be Left, Right or None.
-     */
-    func didSwipeCardAway(card: CardCell, index: Int, swipeDirection: CellSwipeDirection)
-    
-    /**
      Called right before a CardCell animates off screen. At this point there's already no way back.
      - parameter card: The CardCell that is being swiped away.
      - parameter index: The index of the card that is being removed.
      - parameter swipeDirection: The direction the card is swiped in. This can be Left, Right or None.
      */
-    @objc optional func willSwipeCardAway(card: CardCell, index: Int, swipeDirection: CellSwipeDirection)
+    @objc optional func willSwipeCardAway(card: CardCell, index: Int, swipeDirection: SwipeDirection)
+    
+    /**
+     Called when a CardCell has animated off screen.
+     - parameter card: The CardCell that is being swiped away.
+     - parameter index: The index of the card that is being removed.
+     - parameter swipeDirection: The direction the card is swiped in. This can be Left, Right or None.
+     */
+    @objc optional func didSwipeCardAway(card: CardCell, index: Int, swipeDirection: SwipeDirection)
+    
+    /**
+     Called while the user is dragging a card to a side.
+     
+     You can use this to add some custom features to a card when it enters a certain `swipeDirection` (like overlays).
+     - parameter card: The CardCell that the user is currently dragging.
+     - parameter index: The index of the CardCell that is currently being dragged.
+     - parameter swipeDirection: The direction in which the card is being dragged.
+    */
+    @objc optional func didDragCard(card: CardCell, index: Int, swipeDirection: SwipeDirection)
     
     /**
      Tells the delegate when the user scrolls through the cards.

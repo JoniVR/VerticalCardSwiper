@@ -118,7 +118,7 @@ public class VerticalCardSwiper: UIView {
 
 extension VerticalCardSwiper: CardDelegate {
     
-    internal func willSwipeAway(cell: CardCell, swipeDirection: CellSwipeDirection) {
+    internal func willSwipeAway(cell: CardCell, swipeDirection: SwipeDirection) {
         
         verticalCardSwiperView.isUserInteractionEnabled = false
         
@@ -127,7 +127,7 @@ extension VerticalCardSwiper: CardDelegate {
         }
     }
     
-    internal func didSwipeAway(cell: CardCell, swipeDirection direction: CellSwipeDirection) {
+    internal func didSwipeAway(cell: CardCell, swipeDirection direction: SwipeDirection) {
         
         if let indexPathToRemove = verticalCardSwiperView.indexPath(for: cell){
             
@@ -140,9 +140,16 @@ extension VerticalCardSwiper: CardDelegate {
                 if finished {
                     self?.verticalCardSwiperView.collectionViewLayout.invalidateLayout()
                     self?.verticalCardSwiperView.isUserInteractionEnabled = true
-                    self?.delegate?.didSwipeCardAway(card: cell, index: indexPathToRemove.row ,swipeDirection: direction)
+                    self?.delegate?.didSwipeCardAway?(card: cell, index: indexPathToRemove.row ,swipeDirection: direction)
                 }
             }
+        }
+    }
+    
+    internal func didDragCard(cell: CardCell, swipeDirection: SwipeDirection) {
+        
+        if let index = verticalCardSwiperView.indexPath(for: cell)?.row {
+            self.delegate?.didDragCard?(card: cell, index: index, swipeDirection: swipeDirection)
         }
     }
     

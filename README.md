@@ -73,7 +73,7 @@ class ExampleViewController: UIViewController, VerticalCardSwiperDatasource {
 
 #### Properties
 ```swift
-/// Indicates if side swiping on cards is enabled. Set to false if you don't want side swiping. Default value is `true`.
+/// Indicates if side swiping on cards is enabled. Set to false if you don't want side swiping. Default is `true`.
 @IBInspectable public var isSideSwipingEnabled: Bool = true
 /// The inset (spacing) at the top for the cards. Default is 40.
 @IBInspectable public var topInset: CGFloat = 40
@@ -104,15 +104,15 @@ class ViewController: UIViewController, VerticalCardSwiperDelegate {
 
         cardSwiper.delegate = self
     }
-
-    func didSwipeCardAway(card: CardCell, index: Int, swipeDirection: CellSwipeDirection) {
-
-        // handle swipe gestures
-    }
     
     func willSwipeCardAway(card: CardCell, index: Int, swipeDirection: CellSwipeDirection) {
     
         // called right before the card animates off the screen (optional).
+    }
+
+    func didSwipeCardAway(card: CardCell, index: Int, swipeDirection: CellSwipeDirection) {
+
+        // handle swipe gestures (optional).
     }
     
     func sizeForItem(verticalCardSwiperView: VerticalCardSwiperView, index: Int) -> CGSize {
@@ -124,6 +124,11 @@ class ViewController: UIViewController, VerticalCardSwiperDelegate {
     func didScroll(verticalCardSwiperView: VerticalCardSwiperView) {
     
         // Tells the delegate when the user scrolls through the cards (optional).
+    }
+    
+    func didDragCard(card: CardCell, index: Int, swipeDirection: SwipeDirection) {
+    
+        // Called when the user starts dragging a card to the side (optional).
     }
 }
 ```

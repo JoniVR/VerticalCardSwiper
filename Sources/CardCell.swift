@@ -67,6 +67,21 @@ import UIKit
      */
     public func animateCard(angle: CGFloat, horizontalTranslation: CGFloat){
         
+        let cardCenterX = self.frame.midX
+        let centerX = self.bounds.midX
+        
+        var direction: SwipeDirection!
+        
+        if cardCenterX < centerX {
+            direction = .Left
+        } else if cardCenterX > centerX {
+            direction = .Right
+        } else {
+            direction = .None
+        }
+        
+        delegate?.didDragCard(cell: self, swipeDirection: direction)
+        
         var transform = CATransform3DIdentity
         transform = CATransform3DRotate(transform, angle, 0, 0, 1)
         transform = CATransform3DTranslate(transform, horizontalTranslation, 0, 1)
@@ -121,7 +136,7 @@ import UIKit
      */
     fileprivate func animateOffScreen(angle: CGFloat){
         
-        var direction: CellSwipeDirection = .None
+        var direction: SwipeDirection = .None
         
         var transform = CATransform3DIdentity
         transform = CATransform3DRotate(transform, angle, 0, 0, 1)
