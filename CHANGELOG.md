@@ -1,14 +1,27 @@
 # Change Log
 
-## [0.1.0-beta2](https://github.com/JoniVR/VerticalCardSwiper/releases/tag/0.1.0-beta2) (Jun 26, 2018)
-
-#### API breaking changes
+## [0.1.0-beta3](https://github.com/JoniVR/VerticalCardSwiper/releases/tag/0.1.0-beta3) (Jun 29, 2018)
 
 #### Enhancements
 
-- Added `sizeForItem` function to `VerticalCardSwiperDelegate`
-- Added `cardSpacing` property to `VerticalCardSwiper`
-- Added `firstItemTransform` property to `VerticalCardSwiper`
+- Added `didScroll` function to `VerticalCardSwiperDelegate`.
+- Changed `init(frame: CGRect)` function to be `public` (instead of internal) inside `VerticalCardSwiper`.
+- Added small spring animation to `resetToCenter` which results in a small bouncy effect depending on how far you drag.
+- Changed some example code to use `init(frame: CGRect)`.
+
+#### Bug fixes
+
+- fixed possible nil crash in rare occasions when swiping.
+- fixed animation glitch when scrolling cards while card was animating off screen.
+- fixed cards zPosition bug which caused bottom card to overlap top card in some occasions.
+
+## [0.1.0-beta2](https://github.com/JoniVR/VerticalCardSwiper/releases/tag/0.1.0-beta2) (Jun 26, 2018)
+
+#### Enhancements
+
+- Added `sizeForItem` function to `VerticalCardSwiperDelegate`.
+- Added `cardSpacing` property to `VerticalCardSwiper`.
+- Added `firstItemTransform` property to `VerticalCardSwiper`.
 - Updated example
 
 ## [0.1.0-beta1](https://github.com/JoniVR/VerticalCardSwiper/releases/tag/0.1.0-beta1) (Jun 21, 2018)
@@ -19,12 +32,12 @@
 
 #### Enhancements
 
-- Added `willSwipeCardAway` function to `VerticalCardSwiperDelegate`
-- Added `reloadData()` function to `VerticalCardSwiper`
-- Added iPad support
-- Added changelog
-- Updated documentation
-- Cleaned up project
+- Added `willSwipeCardAway` function to `VerticalCardSwiperDelegate`.
+- Added `reloadData()` function to `VerticalCardSwiper`.
+- Added iPad support.
+- Added changelog.
+- Updated documentation.
+- Cleaned up project.
 
 ## [0.1.0-alpha2](https://github.com/JoniVR/VerticalCardSwiper/releases/tag/0.1.0-alpha2) (Jun 17, 2018)
 
@@ -34,8 +47,8 @@
 
 #### Enhancements
 
-- Added UITests
-- Updated some documentation
+- Added UITests.
+- Updated some documentation.
 
 #### Bug fixes
 
@@ -43,5 +56,5 @@
 
 ## [0.1.0-alpha1](https://github.com/JoniVR/VerticalCardSwiper/releases/tag/0.1.0-alpha1) (Jun 12, 2018)
 
-- Initial release
-- Cocoapods release
+- Initial release.
+- Cocoapods release.
