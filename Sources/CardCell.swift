@@ -32,7 +32,7 @@ import UIKit
     
     internal weak var delegate: CardDelegate?
 
-    override open func layoutSubviews() {
+    open override func layoutSubviews() {
         
         // make sure anchorPoint is correct when laying out subviews.
         self.layer.anchorPoint = CGPoint(x: 0.5, y: 0.5)
@@ -43,11 +43,17 @@ import UIKit
         super.layoutSubviews()
     }
     
+    open override func apply(_ layoutAttributes: UICollectionViewLayoutAttributes) {
+        super.apply(layoutAttributes)
+        
+        self.layer.zPosition = CGFloat(layoutAttributes.zIndex)
+    }
+    
     /**
      Prepares for reuse by resetting the anchorPoint back to the default value.
      This is necessary because in VerticalCardSwiper we are manipulating the anchorPoint during dragging animation.
      */
-    override open func prepareForReuse() {
+    open override func prepareForReuse() {
         super.prepareForReuse()
         self.isHidden = false
         // reset to default value (https://developer.apple.com/documentation/quartzcore/calayer/1410817-anchorpoint)

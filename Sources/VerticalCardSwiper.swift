@@ -97,13 +97,13 @@ public class VerticalCardSwiper: UIView {
     /// The collectionView where all the magic happens.
     public var verticalCardSwiperView: VerticalCardSwiperView!
     
-    override public init(frame: CGRect) {
+    public override init(frame: CGRect) {
         super.init(frame: frame)
         
         commonInit()
     }
     
-    required public init?(coder aDecoder: NSCoder) {
+    public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         
         commonInit()
@@ -152,6 +152,18 @@ extension VerticalCardSwiper: CardDelegate {
 }
 
 extension VerticalCardSwiper: UIGestureRecognizerDelegate {
+    
+    public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        
+        if let panGestureRec = gestureRecognizer as? UIPanGestureRecognizer {
+            
+            // When a horizontal pan is detected, we make sure to disable the collectionView.panGestureRecognizer so that it doesn't interfere with the sideswipe.
+            if panGestureRec == horizontalPangestureRecognizer, panGestureRec.direction!.isX {
+                return false
+            }
+        }
+        return true
+    }
     
     /// We set up the `horizontalPangestureRecognizer` and attach it to the `collectionView`.
     fileprivate func setupGestureRecognizer(){
@@ -226,18 +238,6 @@ extension VerticalCardSwiper: UIGestureRecognizerDelegate {
                 swipedCard = nil
             }
         }
-    }
-    
-    public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-        
-        if let panGestureRec = gestureRecognizer as? UIPanGestureRecognizer {
-            
-            // When a horizontal pan is detected, we make sure to disable the collectionView.panGestureRecognizer so that it doesn't interfere with the sideswipe.
-            if panGestureRec == horizontalPangestureRecognizer, panGestureRec.direction!.isX {
-                return false
-            }
-        }
-        return true
     }
 }
 

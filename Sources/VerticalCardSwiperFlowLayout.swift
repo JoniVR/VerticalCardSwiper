@@ -32,14 +32,14 @@ internal class VerticalCardSwiperFlowLayout: UICollectionViewFlowLayout {
     /// Stores the height of a CardCell.
     internal var cellHeight: CGFloat!
     
-    override internal func prepare() {
+    internal override func prepare() {
         super.prepare()
         
         assert(collectionView!.numberOfSections == 1, "Number of sections should always be 1.")
         assert(collectionView!.isPagingEnabled == false, "Paging on the collectionview itself should never be enabled. To enable cell paging, use the isPagingEnabled property of the VerticalCardSwiperFlowLayout instead.")
     }
     
-    override internal func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
+    internal override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
         let items = NSArray (array: super.layoutAttributesForElements(in: rect)!, copyItems: true)
         
         items.enumerateObjects(using: { (object, index, stop) -> Void in
@@ -51,12 +51,12 @@ internal class VerticalCardSwiperFlowLayout: UICollectionViewFlowLayout {
     }
     
     // We invalidate the layout when a "bounds change" happens, for example when we scale the top cell. This forces a layout update on the flowlayout.
-    override internal func shouldInvalidateLayout(forBoundsChange newBounds: CGRect) -> Bool {
+    internal override func shouldInvalidateLayout(forBoundsChange newBounds: CGRect) -> Bool {
         return true
     }
     
     // Cell paging
-    override internal func targetContentOffset(forProposedContentOffset proposedContentOffset: CGPoint, withScrollingVelocity velocity: CGPoint) -> CGPoint {
+    internal override func targetContentOffset(forProposedContentOffset proposedContentOffset: CGPoint, withScrollingVelocity velocity: CGPoint) -> CGPoint {
         
         // If the property `isPagingEnabled` is set to false, we don't enable paging and thus return the current contentoffset.
         guard isPagingEnabled else {
@@ -85,7 +85,7 @@ internal class VerticalCardSwiperFlowLayout: UICollectionViewFlowLayout {
         return CGPoint(x: proposedContentOffset.x, y: newVerticalOffset)
     }
     
-    override internal func finalLayoutAttributesForDisappearingItem(at itemIndexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
+    internal override func finalLayoutAttributesForDisappearingItem(at itemIndexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
 
         // make sure the zIndex of the next card is higher than the one we're swiping away.
         let nextIndexPath = IndexPath(row: itemIndexPath.row + 1, section: itemIndexPath.section)
