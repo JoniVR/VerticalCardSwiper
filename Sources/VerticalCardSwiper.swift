@@ -31,6 +31,9 @@ import Foundation
  */
 public class VerticalCardSwiper: UIView {
     
+    /// The collectionView where all the magic happens.
+    public var verticalCardSwiperView: VerticalCardSwiperView!
+    
     /// Indicates if side swiping on cards is enabled. Default value is `true`.
     @IBInspectable public var isSideSwipingEnabled: Bool = true
     /// The inset (spacing) at the top for the cards. Default is 40.
@@ -93,9 +96,6 @@ public class VerticalCardSwiper: UIView {
         flowLayout.isPagingEnabled = true
         return flowLayout
     }()
-    
-    /// The collectionView where all the magic happens.
-    public var verticalCardSwiperView: VerticalCardSwiperView!
     
     public override init(frame: CGRect) {
         super.init(frame: frame)
@@ -199,8 +199,6 @@ extension VerticalCardSwiper: UIGestureRecognizerDelegate {
         let locationInCollectionView = sender.location(in: verticalCardSwiperView)
         /// The translation of the finger performing the PanGesture.
         let translation = sender.translation(in: self)
-        /// The 'PanDirection' the user swipes in.
-        let direction = sender.direction
                 
         if swipeAbleArea.contains(location) && !verticalCardSwiperView.isScrolling {
             if let swipedCardIndex = verticalCardSwiperView.indexPathForItem(at: locationInCollectionView) {
@@ -235,7 +233,7 @@ extension VerticalCardSwiper: UIGestureRecognizerDelegate {
                 
             case .ended:
                 
-                swipedCard.endedPanAnimation(withDirection: direction!, angle: angle)
+                swipedCard.endedPanAnimation(angle: angle)
                 swipedCard = nil
                 break
                 

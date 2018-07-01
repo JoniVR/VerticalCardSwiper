@@ -31,7 +31,7 @@ import UIKit
 @objc open class CardCell: UICollectionViewCell {
     
     internal weak var delegate: CardDelegate?
-
+    
     open override func layoutSubviews() {
         
         // make sure anchorPoint is correct when laying out subviews.
@@ -67,26 +67,13 @@ import UIKit
      */
     public func animateCard(angle: CGFloat, horizontalTranslation: CGFloat){
         
-        let cardCenterX = self.frame.midX
-        let centerX = self.bounds.midX
-        
-        var direction: SwipeDirection!
-        
-        if cardCenterX < centerX {
-            direction = .Left
-        } else if cardCenterX > centerX {
-            direction = .Right
-        } else {
-            direction = .None
-        }
-        
-        delegate?.didDragCard(cell: self, swipeDirection: direction)
+        delegate?.didDragCard(cell: self, swipeDirection: determineCardSwipeDirection())
         
         var transform = CATransform3DIdentity
         transform = CATransform3DRotate(transform, angle, 0, 0, 1)
         transform = CATransform3DTranslate(transform, horizontalTranslation, 0, 1)
         
-        layer.transform = transform
+        self.layer.transform = transform
     }
     
     /**
@@ -113,17 +100,16 @@ import UIKit
      Handles what happens when the user stops swiping a card.
      If a certain treshold of the screen is swiped, the `animateOffScreen` function is called,
      if the threshold is not reached, the card will be reset to the center by calling `resetToCenterPosition`.
-     - parameter direction: The direction of the pan gesture.
      - parameter angle: The angle of the animation, depends on the direction of the swipe.
      */
-    internal func endedPanAnimation(withDirection direction: PanDirection, angle: CGFloat){
+    internal func endedPanAnimation(angle: CGFloat){
         
         let swipePercentageMargin = self.bounds.width * 0.4
-        let cardCenter = CGPoint(x: self.frame.midX, y: self.frame.midY)
+        let cardCenterX = self.frame.midX
         let centerX = self.bounds.midX
         
-        // check for left or right swipe
-        if (cardCenter.x < centerX - swipePercentageMargin || cardCenter.x > centerX + swipePercentageMargin){
+        // check for left or right swipe and if swipePercentageMargin is reached or not
+        if (cardCenterX < centerX - swipePercentageMargin || cardCenterX > centerX + swipePercentageMargin){
             animateOffScreen(angle: angle)
         } else {
             self.resetToCenterPosition()
@@ -131,26 +117,30 @@ import UIKit
     }
     
     /**
-     Animates to card off the screen and calls the `didSwipeAway` function from the `CardDelegate`.
+     Animates to card off the screen and calls the `willSwipeAway` and `didSwipeAway` functions from the `CardDelegate`.
      - parameter angle: The angle that the card will rotate in (depends on direction). Positive means the card is swiped to the right, a negative angle means the card is swiped to the left.
      */
     fileprivate func animateOffScreen(angle: CGFloat){
         
-        var direction: SwipeDirection = .None
-        
         var transform = CATransform3DIdentity
+        let direction = determineCardSwipeDirection()
+        
         transform = CATransform3DRotate(transform, angle, 0, 0, 1)
         
-        // swipe left
-        if angle < 0 {
+        switch direction {
+            
+        case .Left:
+            
             transform = CATransform3DTranslate(transform, -(self.frame.width * 2), 0, 1)
-            direction = .Left
-        }
-        
-        // swipe right
-        if angle > 0 {
+            break
+            
+        case .Right:
+            
             transform = CATransform3DTranslate(transform, (self.frame.width * 2), 0, 1)
-            direction = .Right
+            break
+            
+        default: break
+            
         }
         
         self.delegate?.willSwipeAway(cell: self, swipeDirection: direction)
@@ -160,6 +150,20 @@ import UIKit
         }){ (completed) in
             self.isHidden = true
             self.delegate?.didSwipeAway(cell: self, swipeDirection: direction)
+        }
+    }
+    
+    fileprivate func determineCardSwipeDirection() -> SwipeDirection {
+        
+        let cardCenterX = self.frame.midX
+        let centerX = self.bounds.midX
+        
+        if cardCenterX < centerX {
+            return .Left
+        } else if cardCenterX > centerX {
+            return .Right
+        } else {
+            return .None
         }
     }
 }
