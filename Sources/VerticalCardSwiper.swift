@@ -111,7 +111,9 @@ public class VerticalCardSwiper: UIView {
     
     fileprivate func commonInit() {
         
-        setupCollectionView()
+        setupVerticalCardSwiperView()
+        setupConstraints()
+        setCardSwiperInsets()
         setupGestureRecognizer()
     }
 }
@@ -312,12 +314,11 @@ extension VerticalCardSwiper: UICollectionViewDelegate, UICollectionViewDataSour
         delegate?.didScroll?(verticalCardSwiperView: verticalCardSwiperView)
     }
     
-    fileprivate func setupCollectionView(){
+    fileprivate func setupVerticalCardSwiperView(){
         
         verticalCardSwiperView = VerticalCardSwiperView(frame: self.frame, collectionViewLayout: flowLayout)
         verticalCardSwiperView.decelerationRate = UIScrollViewDecelerationRateFast
         verticalCardSwiperView.backgroundColor = UIColor.clear
-        setCardSwiperInsets()
         verticalCardSwiperView.showsVerticalScrollIndicator = false
         verticalCardSwiperView.delegate = self
         verticalCardSwiperView.dataSource = self
@@ -325,6 +326,9 @@ extension VerticalCardSwiper: UICollectionViewDelegate, UICollectionViewDataSour
         self.numberOfCards = datasource?.numberOfCards(verticalCardSwiperView: verticalCardSwiperView) ?? 0
         
         self.addSubview(verticalCardSwiperView)
+    }
+    
+    fileprivate func setupConstraints(){
         
         verticalCardSwiperView.translatesAutoresizingMaskIntoConstraints = false
         
@@ -346,28 +350,34 @@ extension VerticalCardSwiper: UICollectionViewDelegateFlowLayout {
     
     public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        var cellWidth: CGFloat!
-        var cellHeight: CGFloat!
-        let xInsets = sideInset * 2
-        let yInsets = cardSpacing + visibleNextCardHeight + topInset
-        
-        // get size from delegate if the sizeForItem function is called.
-        if let customSize = delegate?.sizeForItem?(verticalCardSwiperView: verticalCardSwiperView, index: indexPath.row) {
-            // set custom sizes and make sure sizes are not negative, if they are, don't subtract the insets.
-            cellWidth = customSize.width - (customSize.width - xInsets > 0 ? xInsets : 0)
-            cellHeight = customSize.height - (customSize.height - yInsets > 0 ? yInsets : 0)
-        } else {
-            cellWidth = collectionView.frame.size.width - xInsets
-            cellHeight = collectionView.frame.size.height - yInsets
-        }
+        let itemSize = calculateItemSize(for: indexPath.row)
         
         // set cellHeight in the custom flowlayout, we use this for paging calculations.
-        flowLayout.cellHeight = cellHeight
+        flowLayout.cellHeight = itemSize.height
         
         if swipeAbleArea == nil {
             // Calculate and set the swipeAbleArea. We use this to determine wheter the cell can be swiped to the sides or not.
             let swipeAbleAreaOriginY = collectionView.frame.origin.y + collectionView.contentInset.top
-            swipeAbleArea = CGRect(x: 0, y: swipeAbleAreaOriginY, width: self.frame.width, height: cellHeight)
+            swipeAbleArea = CGRect(x: 0, y: swipeAbleAreaOriginY, width: self.frame.width, height: itemSize.height)
+        }
+        return itemSize
+    }
+    
+    fileprivate func calculateItemSize(for index: Int) -> CGSize {
+        
+        let cellWidth: CGFloat!
+        let cellHeight: CGFloat!
+        let xInsets = sideInset * 2
+        let yInsets = cardSpacing + visibleNextCardHeight + topInset
+        
+        // get size from delegate if the sizeForItem function is called.
+        if let customSize = delegate?.sizeForItem?(verticalCardSwiperView: verticalCardSwiperView, index: index) {
+            // set custom sizes and make sure sizes are not negative, if they are, don't subtract the insets.
+            cellWidth = customSize.width - (customSize.width - xInsets > 0 ? xInsets : 0)
+            cellHeight = customSize.height - (customSize.height - yInsets > 0 ? yInsets : 0)
+        } else {
+            cellWidth = verticalCardSwiperView.frame.size.width - xInsets
+            cellHeight = verticalCardSwiperView.frame.size.height - yInsets
         }
         return CGSize(width: cellWidth, height: cellHeight)
     }
