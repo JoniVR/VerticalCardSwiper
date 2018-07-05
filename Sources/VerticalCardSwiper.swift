@@ -219,28 +219,18 @@ extension VerticalCardSwiper: UIGestureRecognizerDelegate {
             switch (sender.state) {
                 
             case .began:
-                
-                let initialTouchPoint = location
-                let newAnchorPoint = CGPoint(x: initialTouchPoint.x / swipedCard.bounds.width, y: initialTouchPoint.y / swipedCard.bounds.height)
-                let oldPosition = CGPoint(x: swipedCard.bounds.size.width * swipedCard.layer.anchorPoint.x, y: swipedCard.bounds.size.height * swipedCard.layer.anchorPoint.y)
-                let newPosition = CGPoint(x: swipedCard.bounds.size.width * newAnchorPoint.x, y: swipedCard.bounds.size.height * newAnchorPoint.y)
-                swipedCard.layer.anchorPoint = newAnchorPoint
-                swipedCard.layer.position = CGPoint(x: swipedCard.layer.position.x - oldPosition.x + newPosition.x, y: swipedCard.layer.position.y - oldPosition.y + newPosition.y)
                 break
                 
             case .changed:
-                
                 swipedCard.animateCard(angle: angle, horizontalTranslation: translation.x)
                 break
                 
             case .ended:
-                
                 swipedCard.endedPanAnimation(angle: angle)
                 swipedCard = nil
                 break
                 
             default:
-                
                 swipedCard.resetToCenterPosition()
                 swipedCard = nil
             }
