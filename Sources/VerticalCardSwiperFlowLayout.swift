@@ -86,6 +86,8 @@ internal class VerticalCardSwiperFlowLayout: UICollectionViewFlowLayout {
     }
     
     internal override func finalLayoutAttributesForDisappearingItem(at itemIndexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
+        
+        if self.collectionView?.numberOfItems(inSection: 0) == 0 { return nil }
 
         // make sure the zIndex of the next card is higher than the one we're swiping away.
         let nextIndexPath = IndexPath(row: itemIndexPath.row + 1, section: itemIndexPath.section)
