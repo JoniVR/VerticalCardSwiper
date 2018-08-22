@@ -50,6 +50,17 @@ internal class VerticalCardSwiperFlowLayout: UICollectionViewFlowLayout {
         return items as? [UICollectionViewLayoutAttributes]
     }
     
+    internal override func layoutAttributesForItem(at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
+        
+        if self.collectionView?.numberOfItems(inSection: 0) == 0 { return nil }
+        
+        if let attr = super.layoutAttributesForItem(at: indexPath)?.copy() as? UICollectionViewLayoutAttributes {
+            self.updateCellAttributes(attr)
+            return attr
+        }
+        return nil
+    }
+    
     // We invalidate the layout when a "bounds change" happens, for example when we scale the top cell. This forces a layout update on the flowlayout.
     internal override func shouldInvalidateLayout(forBoundsChange newBounds: CGRect) -> Bool {
         return true
@@ -87,17 +98,8 @@ internal class VerticalCardSwiperFlowLayout: UICollectionViewFlowLayout {
     
     internal override func finalLayoutAttributesForDisappearingItem(at itemIndexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
         
-        if self.collectionView?.numberOfItems(inSection: 0) == 0 { return nil }
-
-        // make sure the zIndex of the next card is higher than the one we're swiping away.
-        let nextIndexPath = IndexPath(row: itemIndexPath.row + 1, section: itemIndexPath.section)
-        let nextAttr = self.layoutAttributesForItem(at: nextIndexPath)
-        nextAttr?.zIndex = nextIndexPath.row
-
         // attributes for swiping card away
-        let attr = self.layoutAttributesForItem(at: itemIndexPath)
-        
-        return attr
+        return self.layoutAttributesForItem(at: itemIndexPath)
     }
     
     /**
