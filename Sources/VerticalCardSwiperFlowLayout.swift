@@ -102,6 +102,12 @@ internal class VerticalCardSwiperFlowLayout: UICollectionViewFlowLayout {
         return self.layoutAttributesForItem(at: itemIndexPath)
     }
     
+    override func initialLayoutAttributesForAppearingItem(at itemIndexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
+        
+        // attributes for adding card
+        return self.layoutAttributesForItem(at: itemIndexPath)
+    }
+    
     /**
      Updates the attributes.
      Here manipulate the zIndex of the cards here, calculate the positions and do the animations.
