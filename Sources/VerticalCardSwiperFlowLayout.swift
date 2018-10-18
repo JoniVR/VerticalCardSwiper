@@ -105,14 +105,19 @@ internal class VerticalCardSwiperFlowLayout: UICollectionViewFlowLayout {
      - parameter attributes: The attributes we're updating.
      */
     fileprivate func updateCellAttributes(_ attributes: UICollectionViewLayoutAttributes) {
-        let minY = collectionView!.bounds.minY + collectionView!.contentInset.top
+        var minY = collectionView!.bounds.minY + collectionView!.contentInset.top
         let maxY = attributes.frame.origin.y
+        
+        if minY > attributes.frame.origin.y + attributes.bounds.height + minimumLineSpacing + collectionView!.contentInset.top {
+            minY = 0
+        }
         
         let finalY = max(minY, maxY)
         var origin = attributes.frame.origin
         let deltaY = (finalY - origin.y) / attributes.frame.height
         let translationScale = CGFloat((attributes.zIndex + 1) * 10)
         
+        // Card stack effect
         if let itemTransform = firstItemTransform {
             let scale = 1 - deltaY * itemTransform
             var t = CGAffineTransform.identity
