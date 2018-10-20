@@ -49,8 +49,6 @@ class ExampleViewController: UIViewController, VerticalCardSwiperDelegate, Verti
         cardSwiper.delegate = self
         cardSwiper.datasource = self
         
-        cardSwiper.isPreviousCardVisible = false
-        
         // register cardcell for storyboard use
         cardSwiper.register(nib: UINib(nibName: "ExampleCell", bundle: nil), forCellWithReuseIdentifier: "ExampleCell")
     }
