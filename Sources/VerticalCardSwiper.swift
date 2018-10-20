@@ -34,7 +34,7 @@ public class VerticalCardSwiper: UIView {
     /// The collectionView where all the magic happens.
     public var verticalCardSwiperView: VerticalCardSwiperView!
     
-    /// Indicates if side swiping on cards is enabled. Default value is `true`.
+    /// Indicates if side swiping on cards is enabled. Default is `true`.
     @IBInspectable public var isSideSwipingEnabled: Bool = true
     /// The inset (spacing) at the top for the cards. Default is 40.
     @IBInspectable public var topInset: CGFloat = 40 {
@@ -60,11 +60,16 @@ public class VerticalCardSwiper: UIView {
             flowLayout.minimumLineSpacing = newValue
         }
     }
-    
     /// The transform animation that is shown on the top card when scrolling through the cards. Default is 0.05.
     @IBInspectable public var firstItemTransform: CGFloat = 0.05 {
         willSet {
             flowLayout.firstItemTransform = newValue
+        }
+    }
+    /// Allows you to make the previous card visible or not visible (stack effect). Default is `true`.
+    @IBInspectable public var isPreviousCardVisible: Bool = true {
+        willSet {
+            flowLayout.isPreviousCardVisible = newValue
         }
     }
     

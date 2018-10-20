@@ -27,10 +27,12 @@ internal class VerticalCardSwiperFlowLayout: UICollectionViewFlowLayout {
     
     /// This property sets the amount of scaling for the first item.
     internal var firstItemTransform: CGFloat?
-    /// This property enables paging per card. The default value is true.
+    /// This property enables paging per card. Default is true.
     internal var isPagingEnabled: Bool = true
     /// Stores the height of a CardCell.
     internal var cellHeight: CGFloat!
+    /// Allows you to make the previous card visible or not visible (stack effect). Default is `true`.
+    internal var isPreviousCardVisible: Bool = true
     
     internal override func prepare() {
         super.prepare()
@@ -131,10 +133,14 @@ internal class VerticalCardSwiperFlowLayout: UICollectionViewFlowLayout {
         // Card stack effect
         if let itemTransform = firstItemTransform {
             let scale = 1 - deltaY * itemTransform
-            var t = CGAffineTransform.identity
-            t = t.scaledBy(x: scale, y: 1)
-            t = t.translatedBy(x: 0, y: (deltaY * translationScale))
             
+            var t = CGAffineTransform.identity
+            
+            t = t.scaledBy(x: scale, y: 1)
+            if isPreviousCardVisible {
+                t = t.translatedBy(x: 0, y: (deltaY * translationScale))
+            }
+
             attributes.transform = t
         }
         
