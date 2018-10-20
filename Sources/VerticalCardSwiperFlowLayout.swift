@@ -47,6 +47,7 @@ internal class VerticalCardSwiperFlowLayout: UICollectionViewFlowLayout {
             
             self.updateCellAttributes(attributes)
         })
+        
         return items as? [UICollectionViewLayoutAttributes]
     }
     
@@ -85,7 +86,7 @@ internal class VerticalCardSwiperFlowLayout: UICollectionViewFlowLayout {
         let currentPage = (velocity.y < 0.0) ? floor(approximatePage) : ceil(approximatePage)
         
         // Create custom flickVelocity.
-        let flickVelocity = velocity.y * 0.3
+        let flickVelocity = velocity.y * 0.4
         
         // Check how many pages the user flicked, if <= 1 then flickedPages should return 0.
         let flickedPages = (abs(round(flickVelocity)) <= 1) ? 0 : round(flickVelocity)
@@ -114,18 +115,30 @@ internal class VerticalCardSwiperFlowLayout: UICollectionViewFlowLayout {
      - parameter attributes: The attributes we're updating.
      */
     fileprivate func updateCellAttributes(_ attributes: UICollectionViewLayoutAttributes) {
-        let minY = collectionView!.bounds.minY + collectionView!.contentInset.top
+        
+        var minY = collectionView!.bounds.minY + collectionView!.contentInset.top
         let maxY = attributes.frame.origin.y
+        
+        if minY > attributes.frame.origin.y + attributes.bounds.height + minimumLineSpacing + collectionView!.contentInset.top {
+            minY = 0
+        }
         
         let finalY = max(minY, maxY)
         var origin = attributes.frame.origin
         let deltaY = (finalY - origin.y) / attributes.frame.height
+        let translationScale = CGFloat((attributes.zIndex + 1) * 10)
         
+        // Card stack effect
         if let itemTransform = firstItemTransform {
             let scale = 1 - deltaY * itemTransform
-            attributes.transform = CGAffineTransform(scaleX: scale, y: scale)
-            // TODO: add card stack effect (like Shazam)
+            var t = CGAffineTransform.identity
+            t = t.scaledBy(x: scale, y: 1)
+            t = t.translatedBy(x: 0, y: (deltaY * translationScale))
+            
+            attributes.transform = t
         }
+        
+        origin.x = (self.collectionView?.frame.width)! / 2 - attributes.frame.width / 2 - (self.collectionView?.contentInset.left)!
         origin.y = finalY
         attributes.frame = CGRect(origin: origin, size: attributes.frame.size)
         attributes.zIndex = attributes.indexPath.row
