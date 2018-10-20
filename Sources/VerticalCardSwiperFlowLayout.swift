@@ -105,6 +105,7 @@ internal class VerticalCardSwiperFlowLayout: UICollectionViewFlowLayout {
      - parameter attributes: The attributes we're updating.
      */
     fileprivate func updateCellAttributes(_ attributes: UICollectionViewLayoutAttributes) {
+        
         var minY = collectionView!.bounds.minY + collectionView!.contentInset.top
         let maxY = attributes.frame.origin.y
         
@@ -122,7 +123,7 @@ internal class VerticalCardSwiperFlowLayout: UICollectionViewFlowLayout {
             let scale = 1 - deltaY * itemTransform
             var t = CGAffineTransform.identity
             t = t.scaledBy(x: scale, y: 1)
-            t = t.translatedBy(x: 0, y: (translationScale + deltaY * translationScale))
+            t = t.translatedBy(x: 0, y: (deltaY * translationScale))
             
             attributes.transform = t
         }
