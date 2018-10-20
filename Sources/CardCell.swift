@@ -75,7 +75,7 @@ import UIKit
         
         let cardCenterX = self.frame.midX
         let centerX = self.bounds.midX
-        let initialSpringVelocity = fabs(cardCenterX - centerX)/100
+        let initialSpringVelocity = abs(cardCenterX - centerX)/100
         
         UIView.animate(withDuration: 0.5,
                        delay: 0,
