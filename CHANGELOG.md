@@ -1,5 +1,25 @@
 # Change Log
 
+## [0.1.0-beta4](https://github.com/JoniVR/VerticalCardSwiper/releases/tag/0.1.0-beta4) (Oct 20, 2018)
+
+#### API breaking changes
+
+- Migrated from Swift 4.1 to Swift 4.2.
+- Renamed `CellSwipeDirection` to `SwipeDirection`.
+- Removed unused `direction` parameter from `internal func endedPanAnimation(withDirection direction: PanDirection, angle: CGFloat)`.
+- Removed `animateIn()` function from `VerticalCardSwiperView`.
+
+#### Enhancements
+
+- Added Shazam card stack effect (thanks @VladIacobIonut).
+- Added  function `didDragCard(cell: CardCell, swipeDirection: SwipeDirection)` to `VerticalCardSwiperDelegate`.
+- General stability and code improvements.
+
+#### Bug fixes
+
+- Fixed crash when swiping away all cards (reaching end).
+- Fixed visual glitch that would sometimes occur when adding cards (preparation for future support).
+
 ## [0.1.0-beta3](https://github.com/JoniVR/VerticalCardSwiper/releases/tag/0.1.0-beta3) (Jun 29, 2018)
 
 #### Enhancements
@@ -22,7 +42,7 @@
 - Added `sizeForItem` function to `VerticalCardSwiperDelegate`.
 - Added `cardSpacing` property to `VerticalCardSwiper`.
 - Added `firstItemTransform` property to `VerticalCardSwiper`.
-- Updated example
+- Updated example.
 
 ## [0.1.0-beta1](https://github.com/JoniVR/VerticalCardSwiper/releases/tag/0.1.0-beta1) (Jun 21, 2018)
 
