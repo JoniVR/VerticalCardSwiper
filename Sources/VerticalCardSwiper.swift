@@ -213,18 +213,12 @@ extension VerticalCardSwiper: UIGestureRecognizerDelegate {
     
     @objc fileprivate func handleTap(sender: UITapGestureRecognizer) {
         if let delegate = delegate {
-            if let wasTapped = delegate.didTapCard {
-                /// The taplocation relative to the superview.
-                let location = sender.location(in: self)
+            if let wasTapped = delegate.wasTapped {
                 /// The taplocation relative to the collectionView.
                 let locationInCollectionView = sender.location(in: verticalCardSwiperView)
                 
-                if swipeAbleArea != nil {
-                    if swipeAbleArea.contains(location) && !verticalCardSwiperView.isScrolling {
-                        if let tappedCardIndex = verticalCardSwiperView.indexPathForItem(at: locationInCollectionView) {
-                            wasTapped(verticalCardSwiperView, tappedCardIndex.row)
-                        }
-                    }
+                if let tappedCardIndex = verticalCardSwiperView.indexPathForItem(at: locationInCollectionView) {
+                    wasTapped(verticalCardSwiperView, tappedCardIndex.row)
                 }
             }
         }
@@ -232,16 +226,12 @@ extension VerticalCardSwiper: UIGestureRecognizerDelegate {
     
     @objc fileprivate func handleHold(sender: UILongPressGestureRecognizer) {
         if let delegate = delegate {
-            if let wasHeld = delegate.didHoldCard {
-                /// The taplocation relative to the superview.
-                let location = sender.location(in: self)
+            if let wasHeld = delegate.wasHeld {
                 /// The taplocation relative to the collectionView.
                 let locationInCollectionView = sender.location(in: verticalCardSwiperView)
                 
-                if swipeAbleArea.contains(location) && !verticalCardSwiperView.isScrolling {
-                    if let swipedCardIndex = verticalCardSwiperView.indexPathForItem(at: locationInCollectionView) {
-                        wasHeld(verticalCardSwiperView, swipedCardIndex.row, sender.state)
-                    }
+                if let swipedCardIndex = verticalCardSwiperView.indexPathForItem(at: locationInCollectionView) {
+                    wasHeld(verticalCardSwiperView, swipedCardIndex.row, sender.state)
                 }
             }
         }
