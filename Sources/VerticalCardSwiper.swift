@@ -219,9 +219,11 @@ extension VerticalCardSwiper: UIGestureRecognizerDelegate {
                 /// The taplocation relative to the collectionView.
                 let locationInCollectionView = sender.location(in: verticalCardSwiperView)
                 
-                if swipeAbleArea.contains(location) && !verticalCardSwiperView.isScrolling {
-                    if let tappedCardIndex = verticalCardSwiperView.indexPathForItem(at: locationInCollectionView) {
-                        wasTapped(verticalCardSwiperView, tappedCardIndex.row)
+                if swipeAbleArea != nil {
+                    if swipeAbleArea.contains(location) && !verticalCardSwiperView.isScrolling {
+                        if let tappedCardIndex = verticalCardSwiperView.indexPathForItem(at: locationInCollectionView) {
+                            wasTapped(verticalCardSwiperView, tappedCardIndex.row)
+                        }
                     }
                 }
             }
