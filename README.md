@@ -1,12 +1,35 @@
-# VerticalCardSwiper
-_A marriage between the Shazam Discover UI and Tinder, built with UICollectionView in Swift._
+<h1 align="center"> VerticalCardSwiper </h1>
 
-  ![example](https://github.com/JoniVR/VerticalCardSwiper/blob/development/example.gif)
+<div align="center">
+    A marriage between the Shazam Discover UI and Tinder, built with UICollectionView in Swift.
+</div>
 
-[![Build Status](https://travis-ci.org/JoniVR/VerticalCardSwiper.svg?branch=master)](https://travis-ci.org/JoniVR/VerticalCardSwiper)
-[![Version](https://img.shields.io/cocoapods/v/VerticalCardSwiper.svg?style=flat)](https://cocoapods.org/pods/VerticalCardSwiper)
-[![License](https://img.shields.io/cocoapods/l/VerticalCardSwiper.svg?style=flat)](https://cocoapods.org/pods/VerticalCardSwiper)
-[![Platform](https://img.shields.io/cocoapods/p/VerticalCardSwiper.svg?style=flat)](https://cocoapods.org/pods/VerticalCardSwiper)
+<br />
+
+<div align="center">
+    <!-- build status -->
+    <a href="https://travis-ci.org/JoniVR/VerticalCardSwiper">
+        <img src="https://travis-ci.org/JoniVR/VerticalCardSwiper.svg?branch=master"  alt="build status"/>
+    </a>
+    <!-- version -->
+    <a href="https://cocoapods.org/pods/VerticalCardSwiper">
+        <img src="https://img.shields.io/cocoapods/v/VerticalCardSwiper.svg?style=flat"  alt="cocoapods version"/>
+    </a>
+    <!-- license -->
+    <a href="https://cocoapods.org/pods/VerticalCardSwiper">
+        <img src="https://img.shields.io/cocoapods/l/VerticalCardSwiper.svg?style=flat"  alt="license"/>
+    </a>
+    <!-- platform -->
+    <a href="https://cocoapods.org/pods/VerticalCardSwiper">
+        <img src="https://img.shields.io/cocoapods/p/VerticalCardSwiper.svg?style=flat?"  alt="platform"/>
+    </a>
+</div>
+
+<br />
+  
+<div align="center">
+  <img src="https://github.com/JoniVR/VerticalCardSwiper/blob/development/example.gif" alt="example"/>
+</div>
 
 ## Project goal and information
 The goal of this project is to recreate the Discover UI in Shazam (which I think is a great, fun way to display content) in combination with a Tinder style of swiping cards to the left/right.
