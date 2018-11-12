@@ -1,5 +1,11 @@
 # Change Log
 
+## [0.1.0-beta5](https://github.com/JoniVR/VerticalCardSwiper/releases/tag/0.1.0-beta5) (Nov 12, 2018)
+
+#### Enhancements
+
+- Added `didTapCard` and `didHoldCard` to `VerticalCardSwiperDelegate`. (thanks @williamsthing)
+
 ## [0.1.0-beta4](https://github.com/JoniVR/VerticalCardSwiper/releases/tag/0.1.0-beta4) (Oct 20, 2018)
 
 #### API breaking changes
