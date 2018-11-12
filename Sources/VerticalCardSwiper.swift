@@ -35,7 +35,16 @@ public class VerticalCardSwiper: UIView {
     public var verticalCardSwiperView: VerticalCardSwiperView!
     
     /// Indicates if side swiping on cards is enabled. Default is `true`.
-    @IBInspectable public var isSideSwipingEnabled: Bool = true
+    @IBInspectable public var isSideSwipingEnabled: Bool = true {
+        willSet {
+            if(newValue) {
+                horizontalPangestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(handlePan))
+            } else {
+                verticalCardSwiperView.removeGestureRecognizer(horizontalPangestureRecognizer)
+            }
+        }
+    }
+    
     /// The inset (spacing) at the top for the cards. Default is 40.
     @IBInspectable public var topInset: CGFloat = 40 {
         didSet {
@@ -82,6 +91,10 @@ public class VerticalCardSwiper: UIView {
     
     /// The amount of cards in the collectionView.
     fileprivate var numberOfCards: Int = 0
+    /// We use this tapGestureRecognizer for the tap recognizer.
+    fileprivate var tapGestureRecognizer: UITapGestureRecognizer!
+    /// We use this tapGestureRecognizer for the tap recognizer.
+    fileprivate var longPressGestureRecognizer: UILongPressGestureRecognizer!
     /// We use this horizontalPangestureRecognizer for the vertical panning.
     fileprivate var horizontalPangestureRecognizer: UIPanGestureRecognizer!
     /// Stores a `CGRect` with the area that is swipeable to the user.
@@ -181,12 +194,55 @@ extension VerticalCardSwiper: UIGestureRecognizerDelegate {
     
     /// We set up the `horizontalPangestureRecognizer` and attach it to the `collectionView`.
     fileprivate func setupGestureRecognizer(){
+        tapGestureRecognizer = UITapGestureRecognizer.init(target: self, action: #selector(handleTap))
+        tapGestureRecognizer.delegate = self
+        verticalCardSwiperView.addGestureRecognizer(tapGestureRecognizer)
+        
+        longPressGestureRecognizer = UILongPressGestureRecognizer.init(target: self, action: #selector(handleHold))
+        longPressGestureRecognizer.delegate = self
+        longPressGestureRecognizer.minimumPressDuration = 0.125
+        longPressGestureRecognizer.cancelsTouchesInView = false
+        verticalCardSwiperView.addGestureRecognizer(longPressGestureRecognizer)
         
         horizontalPangestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(handlePan))
         horizontalPangestureRecognizer.maximumNumberOfTouches = 1
         horizontalPangestureRecognizer.delegate = self
         verticalCardSwiperView.addGestureRecognizer(horizontalPangestureRecognizer)
         verticalCardSwiperView.panGestureRecognizer.maximumNumberOfTouches = 1
+    }
+    
+    @objc fileprivate func handleTap(sender: UITapGestureRecognizer) {
+        if let delegate = delegate {
+            if let wasTapped = delegate.wasTapped {
+                /// The taplocation relative to the superview.
+                let location = sender.location(in: self)
+                /// The taplocation relative to the collectionView.
+                let locationInCollectionView = sender.location(in: verticalCardSwiperView)
+                
+                if swipeAbleArea.contains(location) && !verticalCardSwiperView.isScrolling {
+                    if let tappedCardIndex = verticalCardSwiperView.indexPathForItem(at: locationInCollectionView) {
+                        wasTapped(verticalCardSwiperView, tappedCardIndex.row)
+                    }
+                }
+            }
+        }
+    }
+    
+    @objc fileprivate func handleHold(sender: UILongPressGestureRecognizer) {
+        if let delegate = delegate {
+            if let wasHeld = delegate.wasHeld {
+                /// The taplocation relative to the superview.
+                let location = sender.location(in: self)
+                /// The taplocation relative to the collectionView.
+                let locationInCollectionView = sender.location(in: verticalCardSwiperView)
+                
+                if swipeAbleArea.contains(location) && !verticalCardSwiperView.isScrolling {
+                    if let swipedCardIndex = verticalCardSwiperView.indexPathForItem(at: locationInCollectionView) {
+                        wasHeld(verticalCardSwiperView, swipedCardIndex.row, sender.state)
+                    }
+                }
+            }
+        }
     }
     
     /**
@@ -206,7 +262,7 @@ extension VerticalCardSwiper: UIGestureRecognizerDelegate {
         let locationInCollectionView = sender.location(in: verticalCardSwiperView)
         /// The translation of the finger performing the PanGesture.
         let translation = sender.translation(in: self)
-                
+        
         if swipeAbleArea.contains(location) && !verticalCardSwiperView.isScrolling {
             if let swipedCardIndex = verticalCardSwiperView.indexPathForItem(at: locationInCollectionView) {
                 /// The card that is swipeable inside the SwipeAbleArea.
@@ -249,7 +305,7 @@ extension VerticalCardSwiper: UICollectionViewDelegate, UICollectionViewDataSour
      Reloads all of the data for the VerticalCardSwiperView.
      
      Call this method sparingly when you need to reload all of the items in the VerticalCardSwiper. This causes the VerticalCardSwiperView to discard any currently visible items (including placeholders) and recreate items based on the current state of the data source object. For efficiency, the VerticalCardSwiperView only displays those cells and supplementary views that are visible. If the data shrinks as a result of the reload, the VerticalCardSwiperView adjusts its scrolling offsets accordingly.
-    */
+     */
     public func reloadData(){
         verticalCardSwiperView.reloadData()
     }
@@ -285,7 +341,7 @@ extension VerticalCardSwiper: UICollectionViewDelegate, UICollectionViewDataSour
      - parameter nib: The nib object containing the cell object. The nib file must contain only one top-level object and that object must be of the type UICollectionViewCell.
      identifier
      - parameter identifier: The reuse identifier to associate with the specified nib file. This parameter must not be nil and must not be an empty string.
-    */
+     */
     public func register(nib: UINib?, forCellWithReuseIdentifier identifier: String) {
         verticalCardSwiperView.register(nib, forCellWithReuseIdentifier: identifier)
     }

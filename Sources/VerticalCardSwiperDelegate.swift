@@ -48,14 +48,29 @@ import Foundation
      - parameter card: The CardCell that the user is currently dragging.
      - parameter index: The index of the CardCell that is currently being dragged.
      - parameter swipeDirection: The direction in which the card is being dragged.
-    */
+     */
     @objc optional func didDragCard(card: CardCell, index: Int, swipeDirection: SwipeDirection)
     
     /**
      Tells the delegate when the user scrolls through the cards.
      - parameter verticalCardSwiperView: The `VerticalCardSwiperView` that displays the cardcells.
-    */
+     */
     @objc optional func didScroll(verticalCardSwiperView: VerticalCardSwiperView)
+    
+    /**
+     Tells the delegate when the user taps a card.
+     - parameter verticalCardSwiperView: The `VerticalCardSwiperView` that displays the cardcells.
+     - parameter index: The index of the CardCell that was tapped.
+     */
+    @objc optional func wasTapped(verticalCardSwiperView: VerticalCardSwiperView, index: Int)
+    
+    /**
+     Tells the delegate when the user holds a card.
+     - parameter verticalCardSwiperView: The `VerticalCardSwiperView` that displays the cardcells.
+     - parameter index: The index of the CardCell that was tapped.
+     - parameter state: The state of the long press gesture.
+     */
+    @objc optional func wasHeld(verticalCardSwiperView: VerticalCardSwiperView, index: Int, state: UITapGestureRecognizer.State)
     
     /**
      Allows you to return the size as a CGSize for each card at their specified index.
@@ -70,6 +85,6 @@ import Foundation
      - parameter verticalCardSwiperView: The `VerticalCardSwiperView` that will display the `CardCell`.
      - parameter index: The index for which we return the specific CGSize.
      - returns: The size of each card for its respective index as a CGSize.
-    */
+     */
     @objc optional func sizeForItem(verticalCardSwiperView: VerticalCardSwiperView, index: Int) -> CGSize
 }
