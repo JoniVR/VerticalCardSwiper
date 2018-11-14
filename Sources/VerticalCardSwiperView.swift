@@ -34,30 +34,29 @@ public class VerticalCardSwiperView: UICollectionView {
         return (self.isDragging || self.isTracking || self.isDecelerating)
     }
     
-    public var indexesForVisibleCards: [IndexPath] {
-        var paths: [IndexPath] = []
+    /**
+     Returns an array of indexes (as Int) that are currently visible in the `VerticalCardSwiperView`.
+     This does not include cards that are behind the card that is in focus.
+     - returns: An array of indexes (as Int) that are currently visible.
+     */
+    public var indexesForVisibleCards: [Int] {
         
+        let lowestIndex = self.indexPathsForVisibleItems.min()?.row ?? 0
+        
+        // when first card is focussed, return as usual.
+        if (visibleCells.count == 2 && lowestIndex == 0) {
+            return self.indexPathsForVisibleItems.map({$0.row}).sorted()
+        }
+        
+        var indexes: [Int] = []
+        // Add each visible cell except the lowest one and return
         for cell in self.visibleCells {
-            if let cell = cell as? CardCell {
-                if let indexPath = self.indexPath(for: cell) {
-                    if(paths.count > indexPath.row) {
-                        paths.insert(indexPath, at: indexPath.row)
-                    } else {
-                        paths.append(indexPath)
-                    }
-                }
+            
+            if let index = self.indexPath(for: cell)?.row, index != lowestIndex {
+                indexes.append(index)
             }
         }
-        
-        if(paths.count == 3) {
-            paths.remove(at: 0)
-        } else if(paths.count == 2) {
-            if(paths[0].row > 0) {
-                paths.remove(at: 0)
-            }
-        }
-        
-        return paths
+        return indexes.sorted()
     }
     
     /**
