@@ -34,6 +34,22 @@ public class VerticalCardSwiperView: UICollectionView {
         return (self.isDragging || self.isTracking || self.isDecelerating)
     }
     
+    public override var indexPathsForVisibleItems: [IndexPath] {
+        var paths: [IndexPath] = []
+        
+        for cell in self.visibleCells {
+            if let cell = cell as? CardCell {
+                if(!cell.isReceeded) {
+                    if let indexPath = self.indexPath(for: cell) {
+                        paths.append(indexPath)
+                    }
+                }
+            }
+        }
+        
+        return paths.reversed()
+    }
+    
     /**
      Returns a reusable cell object located by its identifier.
      Call this method from your data source object when asked to provide a new cell for the VerticalCardSwiperView.
@@ -48,7 +64,7 @@ public class VerticalCardSwiperView: UICollectionView {
      - parameter identifier: The reuse identifier for the specified cell. This parameter must not be nil.
      
      - parameter index: The index specifying the location of the cell. The data source receives this information when it is asked for the cell and should just pass it along. This method uses the index to perform additional configuration based on the cell’s position in the VerticalCardSwiperView.
-    */
+     */
     public func dequeueReusableCell(withReuseIdentifier identifier: String, for index: Int) -> UICollectionViewCell {
         return self.dequeueReusableCell(withReuseIdentifier: identifier, for: IndexPath(row: index, section: 0))
     }
