@@ -34,20 +34,30 @@ public class VerticalCardSwiperView: UICollectionView {
         return (self.isDragging || self.isTracking || self.isDecelerating)
     }
     
-    public override var indexPathsForVisibleItems: [IndexPath] {
+    public var indexesForVisibleCards: [IndexPath] {
         var paths: [IndexPath] = []
         
         for cell in self.visibleCells {
             if let cell = cell as? CardCell {
-                if(!cell.isReceeded) {
-                    if let indexPath = self.indexPath(for: cell) {
+                if let indexPath = self.indexPath(for: cell) {
+                    if(paths.count > indexPath.row) {
+                        paths.insert(indexPath, at: indexPath.row)
+                    } else {
                         paths.append(indexPath)
                     }
                 }
             }
         }
         
-        return paths.reversed()
+        if(paths.count == 3) {
+            paths.remove(at: 0)
+        } else if(paths.count == 2) {
+            if(paths[0].row > 0) {
+                paths.remove(at: 0)
+            }
+        }
+        
+        return paths
     }
     
     /**

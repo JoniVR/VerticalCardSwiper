@@ -32,8 +32,6 @@ import UIKit
     
     internal weak var delegate: CardDelegate?
     
-    public var isReceeded: Bool = false
-    
     open override func layoutSubviews() {
         
         self.layer.shouldRasterize = true
@@ -44,8 +42,6 @@ import UIKit
     
     open override func apply(_ layoutAttributes: UICollectionViewLayoutAttributes) {
         super.apply(layoutAttributes)
-        
-        isReceeded = (layoutAttributes.zIndex == 0)
         
         self.layer.zPosition = CGFloat(layoutAttributes.zIndex)
     }
