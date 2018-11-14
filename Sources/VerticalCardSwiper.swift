@@ -213,7 +213,7 @@ extension VerticalCardSwiper: UIGestureRecognizerDelegate {
     
     @objc fileprivate func handleTap(sender: UITapGestureRecognizer) {
         if let delegate = delegate {
-            if let wasTapped = delegate.wasTapped {
+            if let wasTapped = delegate.didTapCard {
                 /// The taplocation relative to the collectionView.
                 let locationInCollectionView = sender.location(in: verticalCardSwiperView)
                 
@@ -226,7 +226,7 @@ extension VerticalCardSwiper: UIGestureRecognizerDelegate {
     
     @objc fileprivate func handleHold(sender: UILongPressGestureRecognizer) {
         if let delegate = delegate {
-            if let wasHeld = delegate.wasHeld {
+            if let wasHeld = delegate.didHoldCard {
                 /// The taplocation relative to the collectionView.
                 let locationInCollectionView = sender.location(in: verticalCardSwiperView)
                 

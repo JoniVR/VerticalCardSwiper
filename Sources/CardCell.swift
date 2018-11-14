@@ -32,7 +32,7 @@ import UIKit
     
     internal weak var delegate: CardDelegate?
     
-    var isReceeded: Bool = false
+    public var isReceeded: Bool = false
     
     open override func layoutSubviews() {
         
@@ -65,8 +65,6 @@ import UIKit
         
         delegate?.didDragCard(cell: self, swipeDirection: determineCardSwipeDirection())
         
-        print("animateCard")
-        
         var transform = CATransform3DIdentity
         transform = CATransform3DRotate(transform, angle, 0, 0, 1)
         transform = CATransform3DTranslate(transform, horizontalTranslation, 0, 1)
@@ -78,8 +76,6 @@ import UIKit
      Resets the CardCell back to the center of the VerticalCardSwiperView.
      */
     public func resetToCenterPosition(){
-        
-        print("resetToCenterPosition")
         
         let cardCenterX = self.frame.midX
         let centerX = self.bounds.midX
@@ -104,8 +100,6 @@ import UIKit
      */
     internal func endedPanAnimation(angle: CGFloat){
         
-        print("endedpanAnimation")
-        
         let swipePercentageMargin = self.bounds.width * 0.4
         let cardCenterX = self.frame.midX
         let centerX = self.bounds.midX
@@ -123,8 +117,6 @@ import UIKit
      - parameter angle: The angle that the card will rotate in (depends on direction). Positive means the card is swiped to the right, a negative angle means the card is swiped to the left.
      */
     fileprivate func animateOffScreen(angle: CGFloat){
-        
-        print("animateOffScreen")
         
         var transform = CATransform3DIdentity
         let direction = determineCardSwipeDirection()
@@ -158,8 +150,6 @@ import UIKit
     }
     
     fileprivate func determineCardSwipeDirection() -> SwipeDirection {
-        
-        print("determineCardsWIPEdiRECTION")
         
         let cardCenterX = self.frame.midX
         let centerX = self.bounds.midX
