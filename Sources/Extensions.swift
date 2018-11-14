@@ -20,6 +20,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+import Foundation
 import UIKit
 
 internal extension UIPanGestureRecognizer {
@@ -37,5 +38,13 @@ internal extension UIPanGestureRecognizer {
         case (false, let x, _) where x < 0: return .Left
         default: return PanDirection.None
         }
+    }
+}
+
+extension VerticalCardSwiper {
+    
+    /// Takes an index as Int and converts it to an IndexPath with row: index and section: 0.
+    internal func convertIndexToIndexPath(for index: Int) -> IndexPath {
+        return IndexPath(row: index, section: 0)
     }
 }
