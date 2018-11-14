@@ -27,6 +27,7 @@ import Foundation
     
     /**
      Called right before a CardCell animates off screen. At this point there's already no way back.
+     You'll want to delete your item from the datasource here.
      - parameter card: The CardCell that is being swiped away.
      - parameter index: The index of the card that is being removed.
      - parameter swipeDirection: The direction the card is swiped in. This can be Left, Right or None.
