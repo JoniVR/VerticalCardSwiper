@@ -50,10 +50,10 @@ public class VerticalCardSwiperView: UICollectionView {
         
         var indexes: [Int] = []
         // Add each visible cell except the lowest one and return
-        for cell in self.visibleCells {
-            
-            if let index = self.indexPath(for: cell)?.row, index != lowestIndex {
-                indexes.append(index)
+        
+        for cellIndexPath in self.indexPathsForVisibleItems {
+            if (cellIndexPath.row != lowestIndex) {
+                indexes.append(cellIndexPath.row)
             }
         }
         return indexes.sorted()
