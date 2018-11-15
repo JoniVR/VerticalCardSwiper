@@ -35,6 +35,31 @@ public class VerticalCardSwiperView: UICollectionView {
     }
     
     /**
+     Returns an array of indexes (as Int) that are currently visible in the `VerticalCardSwiperView`.
+     This does not include cards that are behind the card that is in focus.
+     - returns: An array of indexes (as Int) that are currently visible.
+     */
+    public var indexesForVisibleCards: [Int] {
+        
+        let lowestIndex = self.indexPathsForVisibleItems.min()?.row ?? 0
+        
+        // when first card is focussed, return as usual.
+        if (visibleCells.count == 2 && lowestIndex == 0) {
+            return self.indexPathsForVisibleItems.map({$0.row}).sorted()
+        }
+        
+        var indexes: [Int] = []
+        // Add each visible cell except the lowest one and return
+        
+        for cellIndexPath in self.indexPathsForVisibleItems {
+            if (cellIndexPath.row != lowestIndex) {
+                indexes.append(cellIndexPath.row)
+            }
+        }
+        return indexes.sorted()
+    }
+    
+    /**
      Returns a reusable cell object located by its identifier.
      Call this method from your data source object when asked to provide a new cell for the VerticalCardSwiperView.
      This method dequeues an existing cell if one is available or creates a new one based on the class or nib file you previously registered.
@@ -48,7 +73,7 @@ public class VerticalCardSwiperView: UICollectionView {
      - parameter identifier: The reuse identifier for the specified cell. This parameter must not be nil.
      
      - parameter index: The index specifying the location of the cell. The data source receives this information when it is asked for the cell and should just pass it along. This method uses the index to perform additional configuration based on the cell’s position in the VerticalCardSwiperView.
-    */
+     */
     public func dequeueReusableCell(withReuseIdentifier identifier: String, for index: Int) -> UICollectionViewCell {
         return self.dequeueReusableCell(withReuseIdentifier: identifier, for: IndexPath(row: index, section: 0))
     }

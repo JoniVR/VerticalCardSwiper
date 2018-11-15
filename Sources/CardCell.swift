@@ -45,7 +45,7 @@ import UIKit
         
         self.layer.zPosition = CGFloat(layoutAttributes.zIndex)
     }
-
+    
     open override func prepareForReuse() {
         super.prepareForReuse()
         
