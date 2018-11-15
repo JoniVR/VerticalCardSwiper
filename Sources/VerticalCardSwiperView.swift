@@ -44,7 +44,7 @@ public class VerticalCardSwiperView: UICollectionView {
         let lowestIndex = self.indexPathsForVisibleItems.min()?.row ?? 0
         
         // when first card is focussed, return as usual.
-        if (self.visibleCells.count == 2 && lowestIndex == 0) {
+        if (self.visibleCells.count <= 2 && lowestIndex == 0) {
             return self.indexPathsForVisibleItems.map({$0.row}).sorted()
         }
         

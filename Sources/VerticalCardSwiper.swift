@@ -98,7 +98,7 @@ public class VerticalCardSwiper: UIView {
     /// We use this horizontalPangestureRecognizer for the vertical panning.
     fileprivate var horizontalPangestureRecognizer: UIPanGestureRecognizer!
     /// Stores a `CGRect` with the area that is swipeable to the user.
-    fileprivate var swipeAbleArea: CGRect!
+    fileprivate var swipeAbleArea: CGRect?
     /// The `CardCell` that the user can (and is) moving.
     fileprivate var swipedCard: CardCell! {
         didSet {
@@ -255,7 +255,7 @@ extension VerticalCardSwiper: UIGestureRecognizerDelegate {
         /// The translation of the finger performing the PanGesture.
         let translation = sender.translation(in: self)
         
-        if swipeAbleArea.contains(location) && !verticalCardSwiperView.isScrolling {
+        if let swipeArea = swipeAbleArea, swipeArea.contains(location) && !verticalCardSwiperView.isScrolling {
             if let swipedCardIndex = verticalCardSwiperView.indexPathForItem(at: locationInCollectionView) {
                 /// The card that is swipeable inside the SwipeAbleArea.
                 swipedCard = verticalCardSwiperView.cellForItem(at: swipedCardIndex) as? CardCell
