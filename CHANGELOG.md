@@ -1,5 +1,16 @@
 # Change Log
 
+## [0.1.0-beta6](https://github.com/JoniVR/VerticalCardSwiper/releases/tag/0.1.0-beta6) (Nov 15, 2018)
+
+#### Enhancements
+
+- Added `indexesForVisibleCards` to `VerticalCardSwiperView`. (thanks @williamsthing)
+- Changed `didTapCard` to support unfocused cards. (thanks @williamsthing)
+
+#### Bug fixes
+
+ - Fixed `didTapCard` crash. (thanks @williamsthing)
+
 ## [0.1.0-beta5](https://github.com/JoniVR/VerticalCardSwiper/releases/tag/0.1.0-beta5) (Nov 12, 2018)
 
 #### Enhancements
