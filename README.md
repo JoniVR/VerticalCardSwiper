@@ -28,7 +28,7 @@
 <br />
   
 <div align="center">
-  <img src="https://github.com/JoniVR/VerticalCardSwiper/blob/development/example.gif" alt="example"/>
+  <img src="https://github.com/JoniVR/VerticalCardSwiper/blob/master/example.gif" alt="example"/>
 </div>
 
 ## Project goal and information

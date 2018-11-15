@@ -44,17 +44,14 @@ public class VerticalCardSwiperView: UICollectionView {
         let lowestIndex = self.indexPathsForVisibleItems.min()?.row ?? 0
         
         // when first card is focussed, return as usual.
-        if (visibleCells.count == 2 && lowestIndex == 0) {
+        if (self.visibleCells.count == 2 && lowestIndex == 0) {
             return self.indexPathsForVisibleItems.map({$0.row}).sorted()
         }
         
         var indexes: [Int] = []
         // Add each visible cell except the lowest one and return
-        
-        for cellIndexPath in self.indexPathsForVisibleItems {
-            if (cellIndexPath.row != lowestIndex) {
-                indexes.append(cellIndexPath.row)
-            }
+        for cellIndexPath in self.indexPathsForVisibleItems where cellIndexPath.row != lowestIndex {
+            indexes.append(cellIndexPath.row)
         }
         return indexes.sorted()
     }

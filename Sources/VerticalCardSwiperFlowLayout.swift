@@ -42,14 +42,14 @@ internal class VerticalCardSwiperFlowLayout: UICollectionViewFlowLayout {
     }
     
     internal override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
+        
         let items = NSArray (array: super.layoutAttributesForElements(in: rect)!, copyItems: true)
         
-        items.enumerateObjects(using: { (object, index, stop) -> Void in
-            let attributes = object as! UICollectionViewLayoutAttributes
-            
-            self.updateCellAttributes(attributes)
-        })
-        
+        for object in items {
+            if let attributes = object as? UICollectionViewLayoutAttributes {
+                self.updateCellAttributes(attributes)
+            }
+        }
         return items as? [UICollectionViewLayoutAttributes]
     }
     
@@ -80,7 +80,7 @@ internal class VerticalCardSwiperFlowLayout: UICollectionViewFlowLayout {
         
         // Page height used for estimating and calculating paging.
         let pageHeight = cellHeight + self.minimumLineSpacing
-
+        
         // Make an estimation of the current page position.
         let approximatePage = self.collectionView!.contentOffset.y/pageHeight
         
@@ -95,7 +95,7 @@ internal class VerticalCardSwiperFlowLayout: UICollectionViewFlowLayout {
         
         // Calculate newVerticalOffset.
         let newVerticalOffset = ((currentPage + flickedPages) * pageHeight) - self.collectionView!.contentInset.top
-
+        
         return CGPoint(x: proposedContentOffset.x, y: newVerticalOffset)
     }
     
@@ -140,7 +140,6 @@ internal class VerticalCardSwiperFlowLayout: UICollectionViewFlowLayout {
             if isPreviousCardVisible {
                 t = t.translatedBy(x: 0, y: (deltaY * translationScale))
             }
-
             attributes.transform = t
         }
         
