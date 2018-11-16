@@ -82,6 +82,28 @@ public class VerticalCardSwiper: UIView {
         }
     }
     
+    /**
+     Returns an array of indexes (as Int) that are currently visible in the `VerticalCardSwiperView`.
+     This does not include cards that are behind the card that is in focus.
+     - returns: An array of indexes (as Int) that are currently visible.
+     */
+    public var indexesForVisibleCards: [Int] {
+        
+        let lowestIndex = self.verticalCardSwiperView.indexPathsForVisibleItems.min()?.row ?? 0
+        
+        // when first card is focussed, return as usual.
+        if (self.verticalCardSwiperView.visibleCells.count <= 2 && lowestIndex == 0) {
+            return self.verticalCardSwiperView.indexPathsForVisibleItems.map({$0.row}).sorted()
+        }
+        
+        var indexes: [Int] = []
+        // Add each visible cell except the lowest one and return
+        for cellIndexPath in self.verticalCardSwiperView.indexPathsForVisibleItems where cellIndexPath.row != lowestIndex {
+            indexes.append(cellIndexPath.row)
+        }
+        return indexes.sorted()
+    }
+    
     public weak var delegate: VerticalCardSwiperDelegate?
     public weak var datasource: VerticalCardSwiperDatasource? {
         didSet{
@@ -300,6 +322,15 @@ extension VerticalCardSwiper: UICollectionViewDelegate, UICollectionViewDataSour
      */
     public func reloadData(){
         verticalCardSwiperView.reloadData()
+    }
+    
+    /**
+     Scrolls the collection view contents until the specified item is visible.
+     - parameter index: The index of the item to scroll into view.
+     - parameter animated: Specify true to animate the scrolling behavior or false to adjust the scroll view’s visible content immediately.
+     */
+    public func scrollToCard(at index: Int, animated: Bool){
+        verticalCardSwiperView.scrollToItem(at: convertIndexToIndexPath(for: index), at: .top, animated: animated)
     }
     
     /**

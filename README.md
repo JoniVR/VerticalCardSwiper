@@ -110,12 +110,22 @@ class ExampleViewController: UIViewController, VerticalCardSwiperDatasource {
 @IBInspectable public var visibleNextCardHeight: CGFloat = 50
 /// Vertical spacing between CardCells. Default is 40.
 @IBInspectable public var cardSpacing: CGFloat = 40
+/** 
+ Returns an array of indexes (as Int) that are currently visible in the `VerticalCardSwiperView`.
+ This does not include cards that are behind the card that is in focus.
+*/
+public var indexesForVisibleCards: [Int]
 ```
 
 #### Other
 Just like with a regular `UICollectionView`, you can reload the data by calling:
 ```swift
 cardSwiper.reloadData()
+```
+
+Scroll to a specifc card by calling:
+```swift
+cardSwiper.scrollToCard(at: Int, animated: Bool)
 ```
 
 ### Delegation
