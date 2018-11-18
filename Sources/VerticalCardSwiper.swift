@@ -326,6 +326,8 @@ extension VerticalCardSwiper: UICollectionViewDelegate, UICollectionViewDataSour
     
     /**
      Scrolls the collection view contents until the specified item is visible.
+     If you want to scroll to a specific card from the start, make sure to call this function in `viewDidLayoutSubviews`
+     instead of functions like `viewDidLoad` as the underlying collectionView needs to be loaded first for this to work.
      - parameter index: The index of the item to scroll into view.
      - parameter animated: Specify true to animate the scrolling behavior or false to adjust the scroll view’s visible content immediately.
      */
