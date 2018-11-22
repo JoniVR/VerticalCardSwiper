@@ -118,19 +118,34 @@ internal class VerticalCardSwiperFlowLayout: UICollectionViewFlowLayout {
      */
     fileprivate func updateCellAttributes(_ attributes: UICollectionViewLayoutAttributes) {
         
-        var minY = collectionView!.bounds.minY + collectionView!.contentInset.top
-        let maxY = attributes.frame.origin.y
+        guard let collectionView = collectionView else { return }
         
-        if minY > attributes.frame.origin.y + attributes.bounds.height + minimumLineSpacing + collectionView!.contentInset.top {
-            minY = 0
+        var cvMinY = collectionView.bounds.minY + collectionView.contentInset.top
+        var origin = attributes.frame.origin
+        let cardMinY = attributes.frame.minY
+        let cardHeight = attributes.frame.height
+        
+        if cvMinY > cardMinY + cardHeight + minimumLineSpacing + collectionView.contentInset.top {
+            cvMinY = 0
         }
         
-        let finalY = max(minY, maxY)
-        var origin = attributes.frame.origin
-        let deltaY = (finalY - origin.y) / attributes.frame.height
+        let finalY = max(cvMinY, cardMinY)
+        
+        let deltaY = (finalY - cardMinY) / cardHeight
+        transformAttributes(attributes: attributes, deltaY: deltaY)
+        
+        // Set the attributes frame position to the values we calculated
+        origin.x = collectionView.frame.width/2 - attributes.frame.width/2 - collectionView.contentInset.left
+        origin.y = finalY
+        attributes.frame = CGRect(origin: origin, size: attributes.frame.size)
+        attributes.zIndex = attributes.indexPath.row
+    }
+    
+    // Creates and applies a CGAffineTransform to the attributes to recreate the effect of the card going to the background.
+    fileprivate func transformAttributes(attributes: UICollectionViewLayoutAttributes, deltaY: CGFloat) {
+        
         let translationScale = CGFloat((attributes.zIndex + 1) * 10)
         
-        // Card stack effect
         if let itemTransform = firstItemTransform {
             let scale = 1 - deltaY * itemTransform
             
@@ -142,10 +157,5 @@ internal class VerticalCardSwiperFlowLayout: UICollectionViewFlowLayout {
             }
             attributes.transform = t
         }
-        
-        origin.x = (self.collectionView?.frame.width)! / 2 - attributes.frame.width / 2 - (self.collectionView?.contentInset.left)!
-        origin.y = finalY
-        attributes.frame = CGRect(origin: origin, size: attributes.frame.size)
-        attributes.zIndex = attributes.indexPath.row
     }
 }
