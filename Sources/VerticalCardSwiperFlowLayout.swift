@@ -114,6 +114,36 @@ internal class VerticalCardSwiperFlowLayout: UICollectionViewFlowLayout {
     /**
      Updates the attributes.
      Here manipulate the zIndex of the cards here, calculate the positions and do the animations.
+     
+     Below we'll briefly explain how the effect of scrolling a card to the background instead of the top is achieved.
+     Keep in mind that (x,y) coords in views start from the top left (x: 0,y: 0) and increase as you go down/to the right,
+     so as you go down, the y-value increases, and as you go right, the x value increases.
+     
+     The two most important variables we use to achieve this effect are cvMinY and cardMinY.
+     * cvMinY: The top position of the collectionView + inset. On the drawings below it's marked as "A".
+     This position never changes (the value of the variable does, but the position is always at the top where "A" is marked).
+     * cardMinY: The top position of each card. On the drawings below it's marked as "B". As the user scrolls a card,
+     this position changes with the card position (as it's the top of the card).
+     When the card is moving down, this will go up, when the card is moving up, this will go down.
+     
+     We then take the max(cvMinY, cardMinY) to get the highest value of those two and set that as the origin.y of the card.
+     By doing this, we ensure that the origin.y of a card never goes below cvMinY, thus preventing cards from scrolling upwards.
+     
+     ```
+     +---------+   +---------+
+     |         |   |         |
+     | +-A=B-+ |   |  +-A-+  | ---> The top line here is the previous card
+     | |     | |   | +--B--+ |      that's visible when the user starts scrolling.
+     | |     | |   | |     | |
+     | |     | |   | |     | |  |  As the card moves down,
+     | |     | |   | |     | |  v  cardMinY ("B") goes up.
+     | +-----+ |   | |     | |
+     |         |   | +-----+ |
+     | +--B--+ |   | +--B--+ |
+     | |     | |   | |     | |
+     +-+-----+-+   +-+-----+-+
+     ```
+     
      - parameter attributes: The attributes we're updating.
      */
     fileprivate func updateCellAttributes(_ attributes: UICollectionViewLayoutAttributes) {
