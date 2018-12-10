@@ -72,10 +72,10 @@ import Foundation
      */
     @objc optional func didScroll(verticalCardSwiperView: VerticalCardSwiperView)
     /**
-     Tells the delegate when user scroll through the cards end.
+     Tells the delegate when scrolling through the cards came to an end.
       - parameter verticalCardSwiperView: The `VerticalCardSwiperView` that displays the cardcells.
      */
-    @objc optional func scrollDidEnded(verticalCardSwiperView: VerticalCardSwiperView)
+    @objc optional func didEndScroll(verticalCardSwiperView: VerticalCardSwiperView)
     
     /**
      Allows you to return the size as a CGSize for each card at their specified index.

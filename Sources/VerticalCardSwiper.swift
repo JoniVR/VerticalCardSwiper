@@ -356,14 +356,21 @@ extension VerticalCardSwiper: UICollectionViewDelegate, UICollectionViewDataSour
     public func scrollViewDidScroll(_ scrollView: UIScrollView) {
         delegate?.didScroll?(verticalCardSwiperView: verticalCardSwiperView)
     }
+    
     public func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        if !decelerate{
-            delegate?.scrollDidEnded?(verticalCardSwiperView: verticalCardSwiperView)
+        if !decelerate {
+            delegate?.didEndScroll?(verticalCardSwiperView: verticalCardSwiperView)
         }
     }
+    
     public func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-         delegate?.scrollDidEnded?(verticalCardSwiperView: verticalCardSwiperView)
+        delegate?.didEndScroll?(verticalCardSwiperView: verticalCardSwiperView)
     }
+    
+    public func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
+        delegate?.didEndScroll?(verticalCardSwiperView: verticalCardSwiperView)
+    }
+    
     fileprivate func setupVerticalCardSwiperView(){
         
         verticalCardSwiperView = VerticalCardSwiperView(frame: self.frame, collectionViewLayout: flowLayout)
