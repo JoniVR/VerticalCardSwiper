@@ -161,6 +161,11 @@ class ViewController: UIViewController, VerticalCardSwiperDelegate {
         // Tells the delegate when the user scrolls through the cards (optional).
     }
     
+    func didEndScroll(verticalCardSwiperView: VerticalCardSwiperView) {
+    
+        // Tells the delegate when scrolling through the cards came to an end.
+    }
+    
     func didDragCard(card: CardCell, index: Int, swipeDirection: SwipeDirection) {
     
         // Called when the user starts dragging a card to the side (optional).
