@@ -68,6 +68,9 @@ public class VerticalCardSwiper: UIView {
         willSet {
             flowLayout.minimumLineSpacing = newValue
         }
+        didSet {
+            setCardSwiperInsets()
+        }
     }
     /// The transform animation that is shown on the top card when scrolling through the cards. Default is 0.05.
     @IBInspectable public var firstItemTransform: CGFloat = 0.05 {
@@ -204,10 +207,10 @@ extension VerticalCardSwiper: UIGestureRecognizerDelegate {
     
     public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         
-        if let panGestureRec = gestureRecognizer as? UIPanGestureRecognizer {
+        if let panGestureRec = horizontalPangestureRecognizer {
             
             // When a horizontal pan is detected, we make sure to disable the collectionView.panGestureRecognizer so that it doesn't interfere with the sideswipe.
-            if panGestureRec == horizontalPangestureRecognizer, panGestureRec.direction!.isX {
+            if let direction = panGestureRec.direction, direction.isX {
                 return false
             }
         }
@@ -432,7 +435,8 @@ extension VerticalCardSwiper: UICollectionViewDelegate, UICollectionViewDataSour
     
     fileprivate func setCardSwiperInsets(){
         
-        verticalCardSwiperView.contentInset = UIEdgeInsets(top: topInset, left: sideInset, bottom: topInset + flowLayout.minimumLineSpacing + visibleNextCardHeight, right: sideInset)
+        let bottomInset = visibleNextCardHeight + flowLayout.minimumLineSpacing + 20
+        verticalCardSwiperView.contentInset = UIEdgeInsets(top: topInset, left: sideInset, bottom: bottomInset, right: sideInset)
     }
 }
 

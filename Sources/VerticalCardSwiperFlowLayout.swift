@@ -37,14 +37,14 @@ internal class VerticalCardSwiperFlowLayout: UICollectionViewFlowLayout {
     internal override func prepare() {
         super.prepare()
         
-        assert(collectionView!.numberOfSections == 1, "Number of sections should always be 1.")
-        assert(collectionView!.isPagingEnabled == false, "Paging on the collectionview itself should never be enabled. To enable cell paging, use the isPagingEnabled property of the VerticalCardSwiperFlowLayout instead.")
+        assert(collectionView?.numberOfSections == 1, "Number of sections should always be 1.")
+        assert(collectionView?.isPagingEnabled == false, "Paging on the collectionview itself should never be enabled. To enable cell paging, use the isPagingEnabled property of the VerticalCardSwiperFlowLayout instead.")
+        
     }
     
     internal override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
         
-        let items = NSArray (array: super.layoutAttributesForElements(in: rect)!, copyItems: true)
-        
+        let items = NSArray(array: super.layoutAttributesForElements(in: rect)!, copyItems: true)
         for object in items {
             if let attributes = object as? UICollectionViewLayoutAttributes {
                 self.updateCellAttributes(attributes)
@@ -73,7 +73,7 @@ internal class VerticalCardSwiperFlowLayout: UICollectionViewFlowLayout {
     internal override func targetContentOffset(forProposedContentOffset proposedContentOffset: CGPoint, withScrollingVelocity velocity: CGPoint) -> CGPoint {
         
         // If the property `isPagingEnabled` is set to false, we don't enable paging and thus return the current contentoffset.
-        guard isPagingEnabled else {
+        guard let collectionView = self.collectionView, isPagingEnabled else {
             let latestOffset = super.targetContentOffset(forProposedContentOffset: proposedContentOffset, withScrollingVelocity: velocity)
             return latestOffset
         }
@@ -82,7 +82,7 @@ internal class VerticalCardSwiperFlowLayout: UICollectionViewFlowLayout {
         let pageHeight = cellHeight + self.minimumLineSpacing
         
         // Make an estimation of the current page position.
-        let approximatePage = self.collectionView!.contentOffset.y/pageHeight
+        let approximatePage = collectionView.contentOffset.y/pageHeight
         
         // Determine the current page based on velocity.
         let currentPage = (velocity.y < 0.0) ? floor(approximatePage) : ceil(approximatePage)
@@ -94,9 +94,9 @@ internal class VerticalCardSwiperFlowLayout: UICollectionViewFlowLayout {
         let flickedPages = (abs(round(flickVelocity)) <= 1) ? 0 : round(flickVelocity)
         
         // Calculate newVerticalOffset.
-        let newVerticalOffset = ((currentPage + flickedPages) * pageHeight) - self.collectionView!.contentInset.top
+        let newVerticalOffset = ((currentPage + flickedPages) * pageHeight) - collectionView.contentInset.top
         
-        return CGPoint(x: proposedContentOffset.x, y: newVerticalOffset)
+        return CGPoint(x: round(proposedContentOffset.x), y: round(newVerticalOffset))
     }
     
     internal override func finalLayoutAttributesForDisappearingItem(at itemIndexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
@@ -120,9 +120,9 @@ internal class VerticalCardSwiperFlowLayout: UICollectionViewFlowLayout {
      so as you go down, the y-value increases, and as you go right, the x value increases.
      
      The two most important variables we use to achieve this effect are cvMinY and cardMinY.
-     * cvMinY: The top position of the collectionView + inset. On the drawings below it's marked as "A".
+     * cvMinY (A): The top position of the collectionView + inset. On the drawings below it's marked as "A".
      This position never changes (the value of the variable does, but the position is always at the top where "A" is marked).
-     * cardMinY: The top position of each card. On the drawings below it's marked as "B". As the user scrolls a card,
+     * cardMinY (B): The top position of each card. On the drawings below it's marked as "B". As the user scrolls a card,
      this position changes with the card position (as it's the top of the card).
      When the card is moving down, this will go up, when the card is moving up, this will go down.
      
@@ -151,8 +151,8 @@ internal class VerticalCardSwiperFlowLayout: UICollectionViewFlowLayout {
         guard let collectionView = collectionView else { return }
         
         var cvMinY = collectionView.bounds.minY + collectionView.contentInset.top
-        var origin = attributes.frame.origin
         let cardMinY = attributes.frame.minY
+        var origin = attributes.frame.origin
         let cardHeight = attributes.frame.height
         
         if cvMinY > cardMinY + cardHeight + minimumLineSpacing + collectionView.contentInset.top {
@@ -174,11 +174,10 @@ internal class VerticalCardSwiperFlowLayout: UICollectionViewFlowLayout {
     // Creates and applies a CGAffineTransform to the attributes to recreate the effect of the card going to the background.
     fileprivate func transformAttributes(attributes: UICollectionViewLayoutAttributes, deltaY: CGFloat) {
         
-        let translationScale = CGFloat((attributes.zIndex + 1) * 10)
-        
         if let itemTransform = firstItemTransform {
-            let scale = 1 - deltaY * itemTransform
             
+            let scale = 1 - deltaY * itemTransform
+            let translationScale = CGFloat((attributes.zIndex + 1) * 10)
             var t = CGAffineTransform.identity
             
             t = t.scaledBy(x: scale, y: 1)
