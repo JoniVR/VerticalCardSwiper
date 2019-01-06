@@ -435,7 +435,7 @@ extension VerticalCardSwiper: UICollectionViewDelegate, UICollectionViewDataSour
     
     fileprivate func setCardSwiperInsets(){
         
-        let bottomInset = visibleNextCardHeight + flowLayout.minimumLineSpacing + 20
+        let bottomInset = visibleNextCardHeight + flowLayout.minimumLineSpacing
         verticalCardSwiperView.contentInset = UIEdgeInsets(top: topInset, left: sideInset, bottom: bottomInset, right: sideInset)
     }
 }

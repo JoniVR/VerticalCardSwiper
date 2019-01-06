@@ -96,7 +96,7 @@ internal class VerticalCardSwiperFlowLayout: UICollectionViewFlowLayout {
         // Calculate newVerticalOffset.
         let newVerticalOffset = ((currentPage + flickedPages) * pageHeight) - collectionView.contentInset.top
         
-        return CGPoint(x: round(proposedContentOffset.x), y: round(newVerticalOffset))
+        return CGPoint(x: proposedContentOffset.x, y: newVerticalOffset)
     }
     
     internal override func finalLayoutAttributesForDisappearingItem(at itemIndexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
