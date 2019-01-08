@@ -39,7 +39,6 @@ internal class VerticalCardSwiperFlowLayout: UICollectionViewFlowLayout {
         
         assert(collectionView?.numberOfSections == 1, "Number of sections should always be 1.")
         assert(collectionView?.isPagingEnabled == false, "Paging on the collectionview itself should never be enabled. To enable cell paging, use the isPagingEnabled property of the VerticalCardSwiperFlowLayout instead.")
-        
     }
     
     internal override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {

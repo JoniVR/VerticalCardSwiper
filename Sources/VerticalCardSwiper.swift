@@ -335,7 +335,17 @@ extension VerticalCardSwiper: UICollectionViewDelegate, UICollectionViewDataSour
      - parameter animated: Specify true to animate the scrolling behavior or false to adjust the scroll view’s visible content immediately.
      */
     public func scrollToCard(at index: Int, animated: Bool){
-        verticalCardSwiperView.scrollToItem(at: convertIndexToIndexPath(for: index), at: .top, animated: animated)
+        
+        /**
+         scrollToItem & scrollRectToVisible were giving issues with reliable scrolling,
+         so we're using setContentOffset for the time being.
+         See: https://github.com/JoniVR/VerticalCardSwiper/issues/23
+        */
+        guard index >= 0 && index < verticalCardSwiperView.numberOfItems(inSection: 0) else { return }
+        
+        let y = CGFloat(index) * (flowLayout.cellHeight + flowLayout.minimumLineSpacing) - topInset
+        let point = CGPoint(x: verticalCardSwiperView.contentOffset.x, y: y)
+        verticalCardSwiperView.setContentOffset(point, animated: true)
     }
     
     /**
