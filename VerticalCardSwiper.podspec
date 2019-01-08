@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'VerticalCardSwiper'
-  s.version          = '0.1.0-beta6'
+  s.version          = '0.1.0-beta7'
   s.summary          = 'A marriage between the Shazam Discover UI and Tinder, built with UICollectionView in Swift.'
 
 # This description is used to generate tags and improve search results.
