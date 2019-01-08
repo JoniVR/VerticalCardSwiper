@@ -345,7 +345,7 @@ extension VerticalCardSwiper: UICollectionViewDelegate, UICollectionViewDataSour
         
         let y = CGFloat(index) * (flowLayout.cellHeight + flowLayout.minimumLineSpacing) - topInset
         let point = CGPoint(x: verticalCardSwiperView.contentOffset.x, y: y)
-        verticalCardSwiperView.setContentOffset(point, animated: true)
+        verticalCardSwiperView.setContentOffset(point, animated: animated)
     }
     
     /**
