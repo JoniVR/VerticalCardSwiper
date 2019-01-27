@@ -24,9 +24,9 @@ import UIKit
 import VerticalCardSwiper
 
 class ExampleViewController: UIViewController, VerticalCardSwiperDelegate, VerticalCardSwiperDatasource {
-    
-    @IBOutlet weak var cardSwiper: VerticalCardSwiper!
-    
+
+    @IBOutlet private var cardSwiper: VerticalCardSwiper!
+
     private var contactsDemoData: [Contact] = [
         Contact(name: "John Doe", age: 33),
         Contact(name: "Chuck Norris", age: 78),
@@ -42,35 +42,43 @@ class ExampleViewController: UIViewController, VerticalCardSwiperDelegate, Verti
         Contact(name: "Tim Cook", age: 57),
         Contact(name: "Satya Nadella", age: 50)
     ]
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         cardSwiper.delegate = self
         cardSwiper.datasource = self
-        
+
         // register cardcell for storyboard use
         cardSwiper.register(nib: UINib(nibName: "ExampleCell", bundle: nil), forCellWithReuseIdentifier: "ExampleCell")
     }
-    
+
     func cardForItemAt(verticalCardSwiperView: VerticalCardSwiperView, cardForItemAt index: Int) -> CardCell {
-        
-        let cardCell = verticalCardSwiperView.dequeueReusableCell(withReuseIdentifier: "ExampleCell", for: index) as! ExampleCardCell
-        
-        let contact = contactsDemoData[index]
-        
-        cardCell.setRandomBackgroundColor()
-        
-        cardCell.nameLbl.text = "Name: " + contact.name
-        cardCell.ageLbl.text = "Age: \(contact.age ?? 0)"
-    
-        return cardCell
+
+        if let cardCell = verticalCardSwiperView.dequeueReusableCell(withReuseIdentifier: "ExampleCell", for: index) as? ExampleCardCell {
+
+            let contact = contactsDemoData[index]
+
+            cardCell.setRandomBackgroundColor()
+
+            cardCell.nameLbl.text = "Name: " + contact.name
+            cardCell.ageLbl.text = "Age: \(contact.age ?? 0)"
+
+            return cardCell
+        }
+        return CardCell()
     }
-    
+
     func numberOfCards(verticalCardSwiperView: VerticalCardSwiperView) -> Int {
         return contactsDemoData.count
     }
-    
+
+    func didTapCard(verticalCardSwiperView: VerticalCardSwiperView, index: Int) {
+        //        cardSwiper.scrollToCard(at: contactsDemoData.count - 1, animated: true)
+        print(verticalCardSwiperView.indexPathsForVisibleItems.count)
+
+    }
+
     func willSwipeCardAway(card: CardCell, index: Int, swipeDirection: SwipeDirection) {
 
         // called right before the card animates off the screen.

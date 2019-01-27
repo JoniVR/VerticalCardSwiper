@@ -30,21 +30,21 @@ import Foundation
  If you want to handle actions like cards being swiped away, implement the `VerticalCardSwiperDelegate`.
  */
 public class VerticalCardSwiper: UIView {
-    
+
     /// The collectionView where all the magic happens.
     public var verticalCardSwiperView: VerticalCardSwiperView!
-    
+
     /// Indicates if side swiping on cards is enabled. Default is `true`.
     @IBInspectable public var isSideSwipingEnabled: Bool = true {
         willSet {
-            if(newValue) {
+            if newValue {
                 horizontalPangestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(handlePan))
             } else {
                 verticalCardSwiperView.removeGestureRecognizer(horizontalPangestureRecognizer)
             }
         }
     }
-    
+
     /// The inset (spacing) at the top for the cards. Default is 40.
     @IBInspectable public var topInset: CGFloat = 40 {
         didSet {
@@ -84,21 +84,21 @@ public class VerticalCardSwiper: UIView {
             flowLayout.isPreviousCardVisible = newValue
         }
     }
-    
+
     /**
      Returns an array of indexes (as Int) that are currently visible in the `VerticalCardSwiperView`.
      This does not include cards that are behind the card that is in focus.
      - returns: An array of indexes (as Int) that are currently visible.
      */
     public var indexesForVisibleCards: [Int] {
-        
+
         let lowestIndex = self.verticalCardSwiperView.indexPathsForVisibleItems.min()?.row ?? 0
-        
+
         // when first card is focussed, return as usual.
-        if (self.verticalCardSwiperView.visibleCells.count <= 2 && lowestIndex == 0) {
+        if self.verticalCardSwiperView.visibleCells.count <= 2 && lowestIndex == 0 {
             return self.verticalCardSwiperView.indexPathsForVisibleItems.map({$0.row}).sorted()
         }
-        
+
         var indexes: [Int] = []
         // Add each visible cell except the lowest one and return
         for cellIndexPath in self.verticalCardSwiperView.indexPathsForVisibleItems where cellIndexPath.row != lowestIndex {
@@ -106,14 +106,14 @@ public class VerticalCardSwiper: UIView {
         }
         return indexes.sorted()
     }
-    
+
     public weak var delegate: VerticalCardSwiperDelegate?
     public weak var datasource: VerticalCardSwiperDatasource? {
-        didSet{
+        didSet {
             numberOfCards = datasource?.numberOfCards(verticalCardSwiperView: self.verticalCardSwiperView) ?? 0
         }
     }
-    
+
     /// The amount of cards in the collectionView.
     fileprivate var numberOfCards: Int = 0
     /// We use this tapGestureRecognizer for the tap recognizer.
@@ -130,7 +130,7 @@ public class VerticalCardSwiper: UIView {
             setupCardSwipeDelegate()
         }
     }
-    
+
     /// The flowlayout used in the collectionView.
     fileprivate lazy var flowLayout: VerticalCardSwiperFlowLayout = {
         let flowLayout = VerticalCardSwiperFlowLayout()
@@ -139,21 +139,21 @@ public class VerticalCardSwiper: UIView {
         flowLayout.isPagingEnabled = true
         return flowLayout
     }()
-    
+
     public override init(frame: CGRect) {
         super.init(frame: frame)
-        
+
         commonInit()
     }
-    
+
     public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        
+
         commonInit()
     }
-    
+
     fileprivate func commonInit() {
-        
+
         setupVerticalCardSwiperView()
         setupConstraints()
         setCardSwiperInsets()
@@ -162,53 +162,51 @@ public class VerticalCardSwiper: UIView {
 }
 
 extension VerticalCardSwiper: CardDelegate {
-    
+
     internal func willSwipeAway(cell: CardCell, swipeDirection: SwipeDirection) {
-        
+
         verticalCardSwiperView.isUserInteractionEnabled = false
-        
+
         if let index = verticalCardSwiperView.indexPath(for: cell)?.row {
             self.delegate?.willSwipeCardAway?(card: cell, index: index, swipeDirection: swipeDirection)
         }
     }
-    
+
     internal func didSwipeAway(cell: CardCell, swipeDirection direction: SwipeDirection) {
-        
-        if let indexPathToRemove = verticalCardSwiperView.indexPath(for: cell){
-            
+
+        if let indexPathToRemove = verticalCardSwiperView.indexPath(for: cell) {
+
             self.numberOfCards -= 1
             swipedCard = nil
-            
+
             self.verticalCardSwiperView.performBatchUpdates({
                 self.verticalCardSwiperView.deleteItems(at: [indexPathToRemove])
-            }) { [weak self] (finished) in
-                if finished {
-                    self?.verticalCardSwiperView.collectionViewLayout.invalidateLayout()
-                    self?.verticalCardSwiperView.isUserInteractionEnabled = true
-                    self?.delegate?.didSwipeCardAway?(card: cell, index: indexPathToRemove.row ,swipeDirection: direction)
-                }
-            }
+            }, completion: { [weak self] _ in
+                self?.verticalCardSwiperView.collectionViewLayout.invalidateLayout()
+                self?.verticalCardSwiperView.isUserInteractionEnabled = true
+                self?.delegate?.didSwipeCardAway?(card: cell, index: indexPathToRemove.row, swipeDirection: direction)
+            })
         }
     }
-    
+
     internal func didDragCard(cell: CardCell, swipeDirection: SwipeDirection) {
-        
+
         if let index = verticalCardSwiperView.indexPath(for: cell)?.row {
             self.delegate?.didDragCard?(card: cell, index: index, swipeDirection: swipeDirection)
         }
     }
-    
+
     fileprivate func setupCardSwipeDelegate() {
         swipedCard?.delegate = self
     }
 }
 
 extension VerticalCardSwiper: UIGestureRecognizerDelegate {
-    
+
     public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-        
+
         if let panGestureRec = horizontalPangestureRecognizer {
-            
+
             // When a horizontal pan is detected, we make sure to disable the collectionView.panGestureRecognizer so that it doesn't interfere with the sideswipe.
             if let direction = panGestureRec.direction, direction.isX {
                 return false
@@ -216,98 +214,96 @@ extension VerticalCardSwiper: UIGestureRecognizerDelegate {
         }
         return true
     }
-    
+
     /// We set up the `horizontalPangestureRecognizer` and attach it to the `collectionView`.
-    fileprivate func setupGestureRecognizer(){
+    fileprivate func setupGestureRecognizer() {
         tapGestureRecognizer = UITapGestureRecognizer.init(target: self, action: #selector(handleTap))
         tapGestureRecognizer.delegate = self
         verticalCardSwiperView.addGestureRecognizer(tapGestureRecognizer)
-        
+
         longPressGestureRecognizer = UILongPressGestureRecognizer.init(target: self, action: #selector(handleHold))
         longPressGestureRecognizer.delegate = self
         longPressGestureRecognizer.minimumPressDuration = 0.125
         longPressGestureRecognizer.cancelsTouchesInView = false
         verticalCardSwiperView.addGestureRecognizer(longPressGestureRecognizer)
-        
+
         horizontalPangestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(handlePan))
         horizontalPangestureRecognizer.maximumNumberOfTouches = 1
         horizontalPangestureRecognizer.delegate = self
         verticalCardSwiperView.addGestureRecognizer(horizontalPangestureRecognizer)
         verticalCardSwiperView.panGestureRecognizer.maximumNumberOfTouches = 1
     }
-    
+
     @objc fileprivate func handleTap(sender: UITapGestureRecognizer) {
         if let delegate = delegate {
             if let wasTapped = delegate.didTapCard {
                 /// The taplocation relative to the collectionView.
                 let locationInCollectionView = sender.location(in: verticalCardSwiperView)
-                
+
                 if let tappedCardIndex = verticalCardSwiperView.indexPathForItem(at: locationInCollectionView) {
                     wasTapped(verticalCardSwiperView, tappedCardIndex.row)
                 }
             }
         }
     }
-    
+
     @objc fileprivate func handleHold(sender: UILongPressGestureRecognizer) {
         if let delegate = delegate {
             if let wasHeld = delegate.didHoldCard {
                 /// The taplocation relative to the collectionView.
                 let locationInCollectionView = sender.location(in: verticalCardSwiperView)
-                
+
                 if let swipedCardIndex = verticalCardSwiperView.indexPathForItem(at: locationInCollectionView) {
                     wasHeld(verticalCardSwiperView, swipedCardIndex.row, sender.state)
                 }
             }
         }
     }
-    
+
     /**
      This function is called when a pan is detected inside the `collectionView`.
      We also take care of detecting if the pan gesture is inside the `swipeAbleArea` and we animate the cell if necessary.
      - parameter sender: The `UIPanGestureRecognizer` that detects the pan gesture. In this case `horizontalPangestureRecognizer`.
      */
-    @objc fileprivate func handlePan(sender: UIPanGestureRecognizer){
-        
+    @objc fileprivate func handlePan(sender: UIPanGestureRecognizer) {
+
         guard isSideSwipingEnabled else {
             return
         }
-        
+
         /// The taplocation relative to the superview.
         let location = sender.location(in: self)
         /// The taplocation relative to the collectionView.
         let locationInCollectionView = sender.location(in: verticalCardSwiperView)
         /// The translation of the finger performing the PanGesture.
         let translation = sender.translation(in: self)
-        
+
         if let swipeArea = swipeAbleArea, swipeArea.contains(location) && !verticalCardSwiperView.isScrolling {
             if let swipedCardIndex = verticalCardSwiperView.indexPathForItem(at: locationInCollectionView) {
                 /// The card that is swipeable inside the SwipeAbleArea.
                 swipedCard = verticalCardSwiperView.cellForItem(at: swipedCardIndex) as? CardCell
             }
         }
-        
+
         if swipedCard != nil && !verticalCardSwiperView.isScrolling {
-            
+
             /// The angle we pass for the swipe animation.
             let maximumRotation: CGFloat = 1.0
             let rotationStrength = min(translation.x / swipedCard.frame.width, maximumRotation)
             let angle = (CGFloat(Double.pi) / 10.0) * rotationStrength
-            
-            switch (sender.state) {
-                
+
+            switch sender.state {
+
             case .began:
                 break
-                
+
             case .changed:
                 swipedCard.animateCard(angle: angle, horizontalTranslation: translation.x)
-                break
-                
+
             case .ended:
                 swipedCard.endedPanAnimation(angle: angle)
                 swipedCard = nil
-                break
-                
+
             default:
                 swipedCard.resetToCenterPosition()
                 swipedCard = nil
@@ -317,16 +313,16 @@ extension VerticalCardSwiper: UIGestureRecognizerDelegate {
 }
 
 extension VerticalCardSwiper: UICollectionViewDelegate, UICollectionViewDataSource {
-    
+
     /**
      Reloads all of the data for the VerticalCardSwiperView.
      
      Call this method sparingly when you need to reload all of the items in the VerticalCardSwiper. This causes the VerticalCardSwiperView to discard any currently visible items (including placeholders) and recreate items based on the current state of the data source object. For efficiency, the VerticalCardSwiperView only displays those cells and supplementary views that are visible. If the data shrinks as a result of the reload, the VerticalCardSwiperView adjusts its scrolling offsets accordingly.
      */
-    public func reloadData(){
+    public func reloadData() {
         verticalCardSwiperView.reloadData()
     }
-    
+
     /**
      Scrolls the collection view contents until the specified item is visible.
      If you want to scroll to a specific card from the start, make sure to call this function in `viewDidLayoutSubviews`
@@ -334,20 +330,20 @@ extension VerticalCardSwiper: UICollectionViewDelegate, UICollectionViewDataSour
      - parameter index: The index of the item to scroll into view.
      - parameter animated: Specify true to animate the scrolling behavior or false to adjust the scroll view’s visible content immediately.
      */
-    public func scrollToCard(at index: Int, animated: Bool){
-        
+    public func scrollToCard(at index: Int, animated: Bool) {
+
         /**
          scrollToItem & scrollRectToVisible were giving issues with reliable scrolling,
          so we're using setContentOffset for the time being.
          See: https://github.com/JoniVR/VerticalCardSwiper/issues/23
         */
         guard index >= 0 && index < verticalCardSwiperView.numberOfItems(inSection: 0) else { return }
-        
+
         let y = CGFloat(index) * (flowLayout.cellHeight + flowLayout.minimumLineSpacing) - topInset
         let point = CGPoint(x: verticalCardSwiperView.contentOffset.x, y: y)
         verticalCardSwiperView.setContentOffset(point, animated: animated)
     }
-    
+
     /**
      Register a class for use in creating new CardCells.
      Prior to calling the dequeueReusableCell(withReuseIdentifier:for:) method of the collection view,
@@ -365,7 +361,7 @@ extension VerticalCardSwiper: UICollectionViewDelegate, UICollectionViewDataSour
     public func register(_ cellClass: AnyClass?, forCellWithReuseIdentifier identifier: String) {
         verticalCardSwiperView.register(cellClass, forCellWithReuseIdentifier: identifier)
     }
-    
+
     /**
      Register a nib file for use in creating new collection view cells.
      Prior to calling the dequeueReusableCell(withReuseIdentifier:for:) method of the collection view,
@@ -383,58 +379,57 @@ extension VerticalCardSwiper: UICollectionViewDelegate, UICollectionViewDataSour
     public func register(nib: UINib?, forCellWithReuseIdentifier identifier: String) {
         verticalCardSwiperView.register(nib, forCellWithReuseIdentifier: identifier)
     }
-    
+
     public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        
+
         return self.numberOfCards
     }
-    
+
     public func numberOfSections(in collectionView: UICollectionView) -> Int {
-        
+
         return 1
     }
-    
+
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
-        return (datasource?.cardForItemAt(verticalCardSwiperView: verticalCardSwiperView, cardForItemAt: indexPath.row))!
+        return datasource?.cardForItemAt(verticalCardSwiperView: verticalCardSwiperView, cardForItemAt: indexPath.row) ?? CardCell()
     }
-    
+
     public func scrollViewDidScroll(_ scrollView: UIScrollView) {
         delegate?.didScroll?(verticalCardSwiperView: verticalCardSwiperView)
     }
-    
+
     public func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         if !decelerate {
             delegate?.didEndScroll?(verticalCardSwiperView: verticalCardSwiperView)
         }
     }
-    
+
     public func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         delegate?.didEndScroll?(verticalCardSwiperView: verticalCardSwiperView)
     }
-    
+
     public func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
         delegate?.didEndScroll?(verticalCardSwiperView: verticalCardSwiperView)
     }
-    
-    fileprivate func setupVerticalCardSwiperView(){
-        
+
+    fileprivate func setupVerticalCardSwiperView() {
+
         verticalCardSwiperView = VerticalCardSwiperView(frame: self.frame, collectionViewLayout: flowLayout)
         verticalCardSwiperView.decelerationRate = UIScrollView.DecelerationRate.fast
         verticalCardSwiperView.backgroundColor = UIColor.clear
         verticalCardSwiperView.showsVerticalScrollIndicator = false
         verticalCardSwiperView.delegate = self
         verticalCardSwiperView.dataSource = self
-        
+
         self.numberOfCards = datasource?.numberOfCards(verticalCardSwiperView: verticalCardSwiperView) ?? 0
-        
+
         self.addSubview(verticalCardSwiperView)
     }
-    
-    fileprivate func setupConstraints(){
-        
+
+    fileprivate func setupConstraints() {
+
         verticalCardSwiperView.translatesAutoresizingMaskIntoConstraints = false
-        
+
         NSLayoutConstraint.activate([
             verticalCardSwiperView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
             verticalCardSwiperView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
@@ -442,23 +437,23 @@ extension VerticalCardSwiper: UICollectionViewDelegate, UICollectionViewDataSour
             verticalCardSwiperView.bottomAnchor.constraint(equalTo: self.bottomAnchor)
             ])
     }
-    
-    fileprivate func setCardSwiperInsets(){
-        
+
+    fileprivate func setCardSwiperInsets() {
+
         let bottomInset = visibleNextCardHeight + flowLayout.minimumLineSpacing
         verticalCardSwiperView.contentInset = UIEdgeInsets(top: topInset, left: sideInset, bottom: bottomInset, right: sideInset)
     }
 }
 
 extension VerticalCardSwiper: UICollectionViewDelegateFlowLayout {
-    
+
     public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        
+
         let itemSize = calculateItemSize(for: indexPath.row)
-        
+
         // set cellHeight in the custom flowlayout, we use this for paging calculations.
         flowLayout.cellHeight = itemSize.height
-        
+
         if swipeAbleArea == nil {
             // Calculate and set the swipeAbleArea. We use this to determine wheter the cell can be swiped to the sides or not.
             let swipeAbleAreaOriginY = collectionView.frame.origin.y + collectionView.contentInset.top
@@ -466,14 +461,14 @@ extension VerticalCardSwiper: UICollectionViewDelegateFlowLayout {
         }
         return itemSize
     }
-    
+
     fileprivate func calculateItemSize(for index: Int) -> CGSize {
-        
+
         let cellWidth: CGFloat!
         let cellHeight: CGFloat!
         let xInsets = sideInset * 2
         let yInsets = cardSpacing + visibleNextCardHeight + topInset
-        
+
         // get size from delegate if the sizeForItem function is called.
         if let customSize = delegate?.sizeForItem?(verticalCardSwiperView: verticalCardSwiperView, index: index) {
             // set custom sizes and make sure sizes are not negative, if they are, don't subtract the insets.

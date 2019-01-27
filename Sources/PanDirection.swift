@@ -29,7 +29,7 @@ public enum PanDirection: Int {
     case Left
     case Right
     case None
-    
+
     /// Returns true is the PanDirection is horizontal.
     public var isX: Bool { return self == .Left || self == .Right }
     /// Returns true if the PanDirection is vertical.

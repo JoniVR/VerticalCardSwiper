@@ -28,12 +28,12 @@ import UIKit
  This allows for custom implementations of the underlying `UICollectionView` so that we can simplify some usages.
  */
 public class VerticalCardSwiperView: UICollectionView {
-    
+
     /// A `Bool` that indicates if the `UICollectionView` is currently scrolling.
     public var isScrolling: Bool {
         return (self.isDragging || self.isTracking || self.isDecelerating)
     }
-    
+
     /**
      Returns a reusable cell object located by its identifier.
      Call this method from your data source object when asked to provide a new cell for the VerticalCardSwiperView.
