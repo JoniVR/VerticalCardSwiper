@@ -151,33 +151,33 @@ public class VerticalCardSwiper: UIView {
 
         commonInit()
     }
-    
-    public func insertCards(at indexes: [Int]){
-        
+
+    public func insertCards(at indexes: [Int]) {
+
         UIView.performWithoutAnimation {
             self.verticalCardSwiperView.performBatchUpdates({
-                self.verticalCardSwiperView.insertItems(at: indexes.map { (index) -> IndexPath in return convertIndexToIndexPath(for: index) } )
-            }) { [weak self] (finished) in
+                self.verticalCardSwiperView.insertItems(at: indexes.map { (index) -> IndexPath in return convertIndexToIndexPath(for: index) })
+            }, completion: { [weak self] _ in
                 self?.verticalCardSwiperView.collectionViewLayout.invalidateLayout()
-            }
+            })
         }
     }
-    
-    public func deleteCards(at indexes: [Int]){
-        
+
+    public func deleteCards(at indexes: [Int]) {
+
         UIView.performWithoutAnimation {
             self.verticalCardSwiperView.performBatchUpdates({
-                self.verticalCardSwiperView.deleteItems(at: indexes.map { (index) -> IndexPath in return self.convertIndexToIndexPath(for: index) } )
-            }) { [weak self] (finished) in
+                self.verticalCardSwiperView.deleteItems(at: indexes.map { (index) -> IndexPath in return self.convertIndexToIndexPath(for: index) })
+            }, completion: { [weak self] _ in
                 self?.verticalCardSwiperView.collectionViewLayout.invalidateLayout()
-            }
+            })
         }
     }
-    
-    public func moveCard(at atIndex: Int, to toIndex: Int){
+
+    public func moveCard(at atIndex: Int, to toIndex: Int) {
         self.verticalCardSwiperView.moveItem(at: convertIndexToIndexPath(for: atIndex), to: convertIndexToIndexPath(for: toIndex))
     }
-  
+
     fileprivate func commonInit() {
 
         setupVerticalCardSwiperView()
@@ -190,9 +190,9 @@ public class VerticalCardSwiper: UIView {
 extension VerticalCardSwiper: CardDelegate {
 
     internal func willSwipeAway(cell: CardCell, swipeDirection: SwipeDirection) {
-        
+
         self.verticalCardSwiperView.isUserInteractionEnabled = false
-        
+
         if let index = self.verticalCardSwiperView.indexPath(for: cell)?.row {
             self.delegate?.willSwipeCardAway?(card: cell, index: index, swipeDirection: swipeDirection)
         }
@@ -212,7 +212,7 @@ extension VerticalCardSwiper: CardDelegate {
         }
     }
 
-    internal func didDragCard(cell: CardCell, swipeDirection: SwipeDirection) {        
+    internal func didDragCard(cell: CardCell, swipeDirection: SwipeDirection) {
         if let index = self.verticalCardSwiperView.indexPath(for: cell)?.row {
             self.delegate?.didDragCard?(card: cell, index: index, swipeDirection: swipeDirection)
         }
@@ -248,7 +248,7 @@ extension VerticalCardSwiper: UIGestureRecognizerDelegate {
         longPressGestureRecognizer.minimumPressDuration = 0.125
         longPressGestureRecognizer.cancelsTouchesInView = false
         verticalCardSwiperView.addGestureRecognizer(longPressGestureRecognizer)
-        
+
         horizontalPangestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(handlePan))
         horizontalPangestureRecognizer.maximumNumberOfTouches = 1
         horizontalPangestureRecognizer.delegate = self
@@ -357,7 +357,7 @@ extension VerticalCardSwiper: UICollectionViewDelegate, UICollectionViewDataSour
          scrollToItem & scrollRectToVisible were giving issues with reliable scrolling,
          so we're using setContentOffset for the time being.
          See: https://github.com/JoniVR/VerticalCardSwiper/issues/23
-        */
+         */
         guard index >= 0 && index < verticalCardSwiperView.numberOfItems(inSection: 0) else { return }
 
         let y = CGFloat(index) * (flowLayout.cellHeight + flowLayout.minimumLineSpacing) - topInset
