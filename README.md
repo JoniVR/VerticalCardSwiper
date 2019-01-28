@@ -46,7 +46,7 @@ VerticalCardSwiper is available through [CocoaPods](https://cocoapods.org). To i
 it, simply add the following line to your Podfile:
 
 ```ruby
-pod 'VerticalCardSwiper', '0.1.0-beta5'
+pod 'VerticalCardSwiper', '0.1.0-beta7'
 ```
 
 ## Example
@@ -110,12 +110,22 @@ class ExampleViewController: UIViewController, VerticalCardSwiperDatasource {
 @IBInspectable public var visibleNextCardHeight: CGFloat = 50
 /// Vertical spacing between CardCells. Default is 40.
 @IBInspectable public var cardSpacing: CGFloat = 40
+/** 
+ Returns an array of indexes (as Int) that are currently visible in the `VerticalCardSwiperView`.
+ This does not include cards that are behind the card that is in focus.
+*/
+public var indexesForVisibleCards: [Int]
 ```
 
 #### Other
 Just like with a regular `UICollectionView`, you can reload the data by calling:
 ```swift
 cardSwiper.reloadData()
+```
+
+Scroll to a specifc card by calling:
+```swift
+cardSwiper.scrollToCard(at: Int, animated: Bool)
 ```
 
 ### Delegation
@@ -149,6 +159,11 @@ class ViewController: UIViewController, VerticalCardSwiperDelegate {
     func didScroll(verticalCardSwiperView: VerticalCardSwiperView) {
     
         // Tells the delegate when the user scrolls through the cards (optional).
+    }
+    
+    func didEndScroll(verticalCardSwiperView: VerticalCardSwiperView) {
+    
+        // Tells the delegate when scrolling through the cards came to an end.
     }
     
     func didDragCard(card: CardCell, index: Int, swipeDirection: SwipeDirection) {

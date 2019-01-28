@@ -1,5 +1,34 @@
 # Change Log
 
+## [0.1.0-beta7](https://github.com/JoniVR/VerticalCardSwiper/releases/tag/0.1.0-beta7) (Jan 8, 2019)
+
+#### API breaking changes
+
+- Moved `indexesForVisibleCards` to `VerticalCardSwiper`.
+
+#### Enhancements
+
+- Added `didEndScroll`  function to `VerticalCardSwiperDelegate`. (thanks @mkhakpaki)
+- Added `scrollToCard` function to `VerticalCardSwiper`. [(#23)](https://github.com/JoniVR/VerticalCardSwiper/issues/23)
+- Removed some force unwrapping in the code.
+
+#### Bug fixes
+
+- Fixed nil crash when doing a swipe gesture on an empty `VerticalCardSwiper`.
+- Fixed wrong `indexesForVisibleCards` when only one card was present.
+- Fixed wrong bottom contentInset calculation.
+
+## [0.1.0-beta6](https://github.com/JoniVR/VerticalCardSwiper/releases/tag/0.1.0-beta6) (Nov 15, 2018)
+
+#### Enhancements
+
+- Added `indexesForVisibleCards` to `VerticalCardSwiperView`. (thanks @williamsthing)
+- Changed `didTapCard` to support unfocused cards. (thanks @williamsthing)
+
+#### Bug fixes
+
+ - Fixed `didTapCard` crash. (thanks @williamsthing)
+
 ## [0.1.0-beta5](https://github.com/JoniVR/VerticalCardSwiper/releases/tag/0.1.0-beta5) (Nov 12, 2018)
 
 #### Enhancements
