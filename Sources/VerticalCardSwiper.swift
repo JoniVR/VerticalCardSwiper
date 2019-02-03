@@ -108,14 +108,8 @@ public class VerticalCardSwiper: UIView {
     }
 
     public weak var delegate: VerticalCardSwiperDelegate?
-    public weak var datasource: VerticalCardSwiperDatasource? {
-        didSet {
-            numberOfCards = datasource?.numberOfCards(verticalCardSwiperView: self.verticalCardSwiperView) ?? 0
-        }
-    }
+    public weak var datasource: VerticalCardSwiperDatasource?
 
-    /// The amount of cards in the collectionView.
-    fileprivate var numberOfCards: Int = 0
     /// We use this tapGestureRecognizer for the tap recognizer.
     fileprivate var tapGestureRecognizer: UITapGestureRecognizer!
     /// We use this tapGestureRecognizer for the tap recognizer.
@@ -153,10 +147,10 @@ public class VerticalCardSwiper: UIView {
     }
 
     public func insertCards(at indexes: [Int]) {
-
         UIView.performWithoutAnimation {
             self.verticalCardSwiperView.performBatchUpdates({
-                self.verticalCardSwiperView.insertItems(at: indexes.map { (index) -> IndexPath in return convertIndexToIndexPath(for: index) })
+                self.verticalCardSwiperView.insertItems(at: indexes.map { (index) -> IndexPath in
+                    return convertIndexToIndexPath(for: index) })
             }, completion: { [weak self] _ in
                 self?.verticalCardSwiperView.collectionViewLayout.invalidateLayout()
             })
@@ -164,10 +158,10 @@ public class VerticalCardSwiper: UIView {
     }
 
     public func deleteCards(at indexes: [Int]) {
-
         UIView.performWithoutAnimation {
             self.verticalCardSwiperView.performBatchUpdates({
-                self.verticalCardSwiperView.deleteItems(at: indexes.map { (index) -> IndexPath in return self.convertIndexToIndexPath(for: index) })
+                self.verticalCardSwiperView.deleteItems(at: indexes.map { (index) -> IndexPath in
+                    return self.convertIndexToIndexPath(for: index) })
             }, completion: { [weak self] _ in
                 self?.verticalCardSwiperView.collectionViewLayout.invalidateLayout()
             })
@@ -200,7 +194,6 @@ extension VerticalCardSwiper: CardDelegate {
 
     internal func didSwipeAway(cell: CardCell, swipeDirection direction: SwipeDirection) {
         if let indexPathToRemove = self.verticalCardSwiperView.indexPath(for: cell) {
-            self.numberOfCards -= 1
             swipedCard = nil
             self.verticalCardSwiperView.performBatchUpdates({
                 self.verticalCardSwiperView.deleteItems(at: [indexPathToRemove])
@@ -402,7 +395,7 @@ extension VerticalCardSwiper: UICollectionViewDelegate, UICollectionViewDataSour
     }
 
     public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.numberOfCards
+        return datasource?.numberOfCards(verticalCardSwiperView: verticalCardSwiperView) ?? 0
     }
 
     public func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -438,7 +431,6 @@ extension VerticalCardSwiper: UICollectionViewDelegate, UICollectionViewDataSour
         verticalCardSwiperView.showsVerticalScrollIndicator = false
         verticalCardSwiperView.delegate = self
         verticalCardSwiperView.dataSource = self
-        self.numberOfCards = datasource?.numberOfCards(verticalCardSwiperView: verticalCardSwiperView) ?? 0
         self.addSubview(verticalCardSwiperView)
     }
 
