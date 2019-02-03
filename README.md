@@ -28,7 +28,7 @@
 <br />
   
 <div align="center">
-  <img src="https://github.com/JoniVR/VerticalCardSwiper/blob/master/example.gif" alt="example"/>
+  <img src="./example.gif" alt="example"/>
 </div>
 
 ## Project goal and information
@@ -118,14 +118,22 @@ public var indexesForVisibleCards: [Int]
 ```
 
 #### Other
-Just like with a regular `UICollectionView`, you can reload the data by calling:
+##### Just like with a regular `UICollectionView`, you can reload the data by calling:
 ```swift
 cardSwiper.reloadData()
 ```
 
-Scroll to a specifc card by calling:
+##### Scroll to a specifc card by calling
 ```swift
 cardSwiper.scrollToCard(at: Int, animated: Bool)
+```
+
+##### Moving/Deleting/Inserting cards at runtime
+Make sure to update your datasource first, otherwise an error will occur.
+```swift
+cardSwiper.moveCard(at: Int, to: Int)
+cardSwiper.deleteCards(at: [Int])
+cardSwiper.insertCards(at: [Int])
 ```
 
 ### Delegation

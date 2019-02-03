@@ -146,6 +146,13 @@ public class VerticalCardSwiper: UIView {
         commonInit()
     }
 
+    /**
+     Inserts new cards at the specified indexes.
+
+     Call this method to insert one or more new cards into the cardSwiper.
+     You might do this when your data source object receives data for new items or in response to user interactions with the cardSwiper.
+     - parameter indexes: An array of integers at which to insert the new card. This parameter must not be nil.
+    */
     public func insertCards(at indexes: [Int]) {
         UIView.performWithoutAnimation {
             self.verticalCardSwiperView.performBatchUpdates({
@@ -157,6 +164,13 @@ public class VerticalCardSwiper: UIView {
         }
     }
 
+    /**
+     Deletes cards at the specified indexes.
+
+     Call this method to delete one or more new cards from the cardSwiper.
+     You might do this when you remove the items from your data source object or in response to user interactions with the cardSwiper.
+     - parameter indexes: An array of integers at which to delete the card. This parameter must not be nil.
+     */
     public func deleteCards(at indexes: [Int]) {
         UIView.performWithoutAnimation {
             self.verticalCardSwiperView.performBatchUpdates({
@@ -168,12 +182,19 @@ public class VerticalCardSwiper: UIView {
         }
     }
 
+    /**
+     Moves an item from one location to another in the collection view.
+
+     Use this method to reorganize existing cards. You might do this when you rearrange the items within your data source object or in response to user interactions with the cardSwiper. The cardSwiper updates the layout as needed to account for the move, animating cards into position as needed.
+
+     - parameter atIndex: The index of the card you want to move. This parameter must not be nil.
+     - parameter toIndex: The index of the card’s new location. This parameter must not be nil.
+    */
     public func moveCard(at atIndex: Int, to toIndex: Int) {
         self.verticalCardSwiperView.moveItem(at: convertIndexToIndexPath(for: atIndex), to: convertIndexToIndexPath(for: toIndex))
     }
 
     fileprivate func commonInit() {
-
         setupVerticalCardSwiperView()
         setupConstraints()
         setCardSwiperInsets()
