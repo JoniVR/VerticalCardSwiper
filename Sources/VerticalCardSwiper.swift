@@ -154,13 +154,9 @@ public class VerticalCardSwiper: UIView {
      - parameter indexes: An array of integers at which to insert the new card. This parameter must not be nil.
     */
     public func insertCards(at indexes: [Int]) {
-        UIView.performWithoutAnimation {
-            self.verticalCardSwiperView.performBatchUpdates({
-                self.verticalCardSwiperView.insertItems(at: indexes.map { (index) -> IndexPath in
-                    return convertIndexToIndexPath(for: index) })
-            }, completion: { [weak self] _ in
-                self?.verticalCardSwiperView.collectionViewLayout.invalidateLayout()
-            })
+        performUpdates {
+            self.verticalCardSwiperView.insertItems(at: indexes.map { (index) -> IndexPath in
+                return convertIndexToIndexPath(for: index) })
         }
     }
 
@@ -172,13 +168,9 @@ public class VerticalCardSwiper: UIView {
      - parameter indexes: An array of integers at which to delete the card. This parameter must not be nil.
      */
     public func deleteCards(at indexes: [Int]) {
-        UIView.performWithoutAnimation {
-            self.verticalCardSwiperView.performBatchUpdates({
-                self.verticalCardSwiperView.deleteItems(at: indexes.map { (index) -> IndexPath in
-                    return self.convertIndexToIndexPath(for: index) })
-            }, completion: { [weak self] _ in
-                self?.verticalCardSwiperView.collectionViewLayout.invalidateLayout()
-            })
+        performUpdates {
+            self.verticalCardSwiperView.deleteItems(at: indexes.map { (index) -> IndexPath in
+                return self.convertIndexToIndexPath(for: index) })
         }
     }
 
@@ -194,11 +186,21 @@ public class VerticalCardSwiper: UIView {
         self.verticalCardSwiperView.moveItem(at: convertIndexToIndexPath(for: atIndex), to: convertIndexToIndexPath(for: toIndex))
     }
 
-    fileprivate func commonInit() {
+    private func commonInit() {
         setupVerticalCardSwiperView()
         setupConstraints()
         setCardSwiperInsets()
         setupGestureRecognizer()
+    }
+
+    private func performUpdates(updateClosure: () -> Void) {
+        UIView.performWithoutAnimation {
+            self.verticalCardSwiperView.performBatchUpdates({
+                updateClosure()
+            }, completion: { [weak self] _ in
+                self?.verticalCardSwiperView.collectionViewLayout.invalidateLayout()
+            })
+        }
     }
 }
 
@@ -417,10 +419,6 @@ extension VerticalCardSwiper: UICollectionViewDelegate, UICollectionViewDataSour
 
     public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return datasource?.numberOfCards(verticalCardSwiperView: verticalCardSwiperView) ?? 0
-    }
-
-    public func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
     }
 
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
