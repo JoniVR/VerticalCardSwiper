@@ -107,6 +107,14 @@ public class VerticalCardSwiper: UIView {
         return indexes.sorted()
     }
 
+    public var focussedCardIndex: Int? {
+        let center = self.convert(self.verticalCardSwiperView.center, to: self.verticalCardSwiperView)
+        if let index = self.verticalCardSwiperView.indexPathForItem(at: center) {
+            return index.row
+        }
+        return nil
+    }
+
     public weak var delegate: VerticalCardSwiperDelegate?
     public weak var datasource: VerticalCardSwiperDatasource?
 
@@ -136,13 +144,11 @@ public class VerticalCardSwiper: UIView {
 
     public override init(frame: CGRect) {
         super.init(frame: frame)
-
         commonInit()
     }
 
     public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-
         commonInit()
     }
 
@@ -242,7 +248,6 @@ extension VerticalCardSwiper: UIGestureRecognizerDelegate {
     public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
 
         if let panGestureRec = horizontalPangestureRecognizer {
-
             // When a horizontal pan is detected, we make sure to disable the collectionView.panGestureRecognizer so that it doesn't interfere with the sideswipe.
             if let direction = panGestureRec.direction, direction.isX {
                 return false

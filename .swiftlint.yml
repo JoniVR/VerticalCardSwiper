@@ -5,4 +5,4 @@ disabled_rules:
 excluded:
   - Pods
 type_body_length: 500
-file_length: 500
+file_length: 600
