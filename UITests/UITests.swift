@@ -110,9 +110,9 @@ class UITests: XCTestCase {
 
         app.navigationBars["Example.ExampleView"].buttons["+5"].tap()
 
-        let firstCell: XCUIElement = cv.cells.otherElements.containing(.staticText, identifier: "Name: testUser1").element
+        let firstCell: XCUIElement = cv.cells.containing(.staticText, identifier: "Name: testUser1").element
 
-        let secondCell: XCUIElement = cv.cells.otherElements.containing(.staticText, identifier: "Name: testUser2").element
+        let secondCell: XCUIElement = cv.cells.containing(.staticText, identifier: "Name: testUser2").element
 
         XCTAssertTrue(firstCell.exists)
         XCTAssertTrue(secondCell.exists)
@@ -122,7 +122,7 @@ class UITests: XCTestCase {
 
         app.navigationBars["Example.ExampleView"].buttons["-5"].tap()
 
-        let firstCell: XCUIElement = cv.cells.otherElements.containing(.staticText, identifier: "Name: John Doe").element
+        let firstCell: XCUIElement = cv.cells.containing(.staticText, identifier: "Name: John Doe").element
 
         XCTAssertFalse(firstCell.exists)
     }
