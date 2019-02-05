@@ -19,7 +19,7 @@
 		6C51A122209E707900B83A82 /* VerticalCardSwiper.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6C51A110209E6D6900B83A82 /* VerticalCardSwiper.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6C51A127209E710900B83A82 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 6C51A126209E710900B83A82 /* LICENSE */; };
 		6CAB38F520CFE81300FC4C8A /* ExampleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6CAB38F420CFE81300FC4C8A /* ExampleCell.xib */; };
-		6CAB38FD20D0074000FC4C8A /* VerticalCardSwiperUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CAB38FC20D0074000FC4C8A /* VerticalCardSwiperUITests.swift */; };
+		6CAB38FD20D0074000FC4C8A /* UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CAB38FC20D0074000FC4C8A /* UITests.swift */; };
 		6CB3A32520C0A63200EE6BE3 /* ExampleCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CB3A32220C0A4A500EE6BE3 /* ExampleCardCell.swift */; };
 		6CBBF36920E27016000120DA /* CHANGELOG.md in Resources */ = {isa = PBXBuildFile; fileRef = 6CBBF36820E2700D000120DA /* CHANGELOG.md */; };
 		6CC2B6FA209F08AB00C522C5 /* ExampleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CC2B6F9209F08AB00C522C5 /* ExampleViewController.swift */; };
@@ -78,8 +78,8 @@
 		6C51A11E209E6F4100B83A82 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		6C51A126209E710900B83A82 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		6CAB38F420CFE81300FC4C8A /* ExampleCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ExampleCell.xib; sourceTree = "<group>"; };
-		6CAB38FA20D0074000FC4C8A /* VerticalCardSwiperUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VerticalCardSwiperUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		6CAB38FC20D0074000FC4C8A /* VerticalCardSwiperUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerticalCardSwiperUITests.swift; sourceTree = "<group>"; };
+		6CAB38FA20D0074000FC4C8A /* UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		6CAB38FC20D0074000FC4C8A /* UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITests.swift; sourceTree = "<group>"; };
 		6CAB38FE20D0074000FC4C8A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6CB3A32220C0A4A500EE6BE3 /* ExampleCardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleCardCell.swift; sourceTree = "<group>"; };
 		6CBBF36820E2700D000120DA /* CHANGELOG.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = CHANGELOG.md; sourceTree = "<group>"; };
@@ -141,13 +141,13 @@
 			path = Example;
 			sourceTree = "<group>";
 		};
-		6CAB38FB20D0074000FC4C8A /* VerticalCardSwiperUITests */ = {
+		6CAB38FB20D0074000FC4C8A /* UITests */ = {
 			isa = PBXGroup;
 			children = (
-				6CAB38FC20D0074000FC4C8A /* VerticalCardSwiperUITests.swift */,
+				6CAB38FC20D0074000FC4C8A /* UITests.swift */,
 				6CAB38FE20D0074000FC4C8A /* Info.plist */,
 			);
-			path = VerticalCardSwiperUITests;
+			path = UITests;
 			sourceTree = "<group>";
 		};
 		6CE68C571F15729800CFFA14 = {
@@ -159,7 +159,7 @@
 				6C51A126209E710900B83A82 /* LICENSE */,
 				6C51A118209E6DC700B83A82 /* Example */,
 				6CE68C621F15729800CFFA14 /* Sources */,
-				6CAB38FB20D0074000FC4C8A /* VerticalCardSwiperUITests */,
+				6CAB38FB20D0074000FC4C8A /* UITests */,
 				6CE68C611F15729800CFFA14 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -169,7 +169,7 @@
 			children = (
 				6CE68C601F15729800CFFA14 /* Example.app */,
 				6C51A110209E6D6900B83A82 /* VerticalCardSwiper.framework */,
-				6CAB38FA20D0074000FC4C8A /* VerticalCardSwiperUITests.xctest */,
+				6CAB38FA20D0074000FC4C8A /* UITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -226,9 +226,9 @@
 			productReference = 6C51A110209E6D6900B83A82 /* VerticalCardSwiper.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		6CAB38F920D0074000FC4C8A /* VerticalCardSwiperUITests */ = {
+		6CAB38F920D0074000FC4C8A /* UITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 6CAB390120D0074000FC4C8A /* Build configuration list for PBXNativeTarget "VerticalCardSwiperUITests" */;
+			buildConfigurationList = 6CAB390120D0074000FC4C8A /* Build configuration list for PBXNativeTarget "UITests" */;
 			buildPhases = (
 				6CAB38F620D0074000FC4C8A /* Sources */,
 				6CAB38F720D0074000FC4C8A /* Frameworks */,
@@ -239,9 +239,9 @@
 			dependencies = (
 				6CAB390020D0074000FC4C8A /* PBXTargetDependency */,
 			);
-			name = VerticalCardSwiperUITests;
+			name = UITests;
 			productName = UITests;
-			productReference = 6CAB38FA20D0074000FC4C8A /* VerticalCardSwiperUITests.xctest */;
+			productReference = 6CAB38FA20D0074000FC4C8A /* UITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 		6CE68C5F1F15729800CFFA14 /* Example */ = {
@@ -304,7 +304,7 @@
 			targets = (
 				6CE68C5F1F15729800CFFA14 /* Example */,
 				6C51A10F209E6D6900B83A82 /* VerticalCardSwiper */,
-				6CAB38F920D0074000FC4C8A /* VerticalCardSwiperUITests */,
+				6CAB38F920D0074000FC4C8A /* UITests */,
 			);
 		};
 /* End PBXProject section */
@@ -383,7 +383,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6CAB38FD20D0074000FC4C8A /* VerticalCardSwiperUITests.swift in Sources */,
+				6CAB38FD20D0074000FC4C8A /* UITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -500,11 +500,11 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = CYC8C8R4K9;
-				INFOPLIST_FILE = VerticalCardSwiperUITests/Info.plist;
+				INFOPLIST_FILE = UITests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
-				PRODUCT_BUNDLE_IDENTIFIER = com.jonivr.VerticalCardSwiperUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jonivr.UITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -520,10 +520,10 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = CYC8C8R4K9;
-				INFOPLIST_FILE = VerticalCardSwiperUITests/Info.plist;
+				INFOPLIST_FILE = UITests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.jonivr.VerticalCardSwiperUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jonivr.UITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -684,7 +684,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		6CAB390120D0074000FC4C8A /* Build configuration list for PBXNativeTarget "VerticalCardSwiperUITests" */ = {
+		6CAB390120D0074000FC4C8A /* Build configuration list for PBXNativeTarget "UITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				6CAB390220D0074000FC4C8A /* Debug */,

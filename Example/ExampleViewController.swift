@@ -79,6 +79,18 @@ class ExampleViewController: UIViewController, VerticalCardSwiperDelegate, Verti
         cardSwiper.insertCards(at: [0, 1, 2, 3, 4])
     }
 
+    @IBAction func pressScrollUp(_ sender: UIBarButtonItem) {
+        if let currentIndex = cardSwiper.focussedCardIndex {
+            cardSwiper.scrollToCard(at: currentIndex - 1, animated: true)
+        }
+    }
+
+    @IBAction func pressScrollDown(_ sender: UIBarButtonItem) {
+        if let currentIndex = cardSwiper.focussedCardIndex {
+            cardSwiper.scrollToCard(at: currentIndex + 1, animated: true)
+        }
+    }
+
     func cardForItemAt(verticalCardSwiperView: VerticalCardSwiperView, cardForItemAt index: Int) -> CardCell {
 
         if let cardCell = verticalCardSwiperView.dequeueReusableCell(withReuseIdentifier: "ExampleCell", for: index) as? ExampleCardCell {

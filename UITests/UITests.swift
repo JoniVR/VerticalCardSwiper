@@ -22,26 +22,30 @@
 
 import XCTest
 
-class VerticalCardSwiperUITests: XCTestCase {
+class UITests: XCTestCase {
+
+    var cv: XCUIElementQuery!
+    var app: XCUIApplication!
 
     override func setUp() {
         super.setUp()
-
         continueAfterFailure = true
         XCUIApplication().launch()
         XCUIDevice.shared.orientation = .portrait
+        app = XCUIApplication()
+        cv = app.collectionViews
     }
 
     override func tearDown() {
         super.tearDown()
+        cv = nil
+        app = nil
     }
 
     func testSwipeLeftSuccess() {
 
-        let collectionView = XCUIApplication().collectionViews
-
         // First check if the first cell actually exists and matches what we're looking for
-        let firstCell: XCUIElement = collectionView.cells.containing(.staticText, identifier: "Name: John Doe").element
+        let firstCell: XCUIElement = cv.cells.containing(.staticText, identifier: "Name: John Doe").element
         XCTAssertTrue(firstCell.exists)
 
         // swipe cell away to left
@@ -56,10 +60,8 @@ class VerticalCardSwiperUITests: XCTestCase {
 
     func testSwipeRightSuccess() {
 
-        let collectionView = XCUIApplication().collectionViews
-
         // First check if the first cell actually exists and matches what we're looking for
-        let firstCell: XCUIElement = collectionView.cells.containing(.staticText, identifier: "Name: John Doe").element
+        let firstCell: XCUIElement = cv.cells.containing(.staticText, identifier: "Name: John Doe").element
         XCTAssertTrue(firstCell.exists)
 
         // swipe cell away to right
@@ -74,10 +76,8 @@ class VerticalCardSwiperUITests: XCTestCase {
 
     func testSwipeLeftFail() {
 
-        let collectionView = XCUIApplication().collectionViews
-
         // First check if the first cell actually exists and matches what we're looking for
-        let firstCell: XCUIElement = collectionView.cells.containing(.staticText, identifier: "Name: John Doe").element
+        let firstCell: XCUIElement = cv.cells.containing(.staticText, identifier: "Name: John Doe").element
         XCTAssertTrue(firstCell.exists)
 
         // swipe cell away to left
@@ -92,10 +92,8 @@ class VerticalCardSwiperUITests: XCTestCase {
 
     func testSwipeRightFail() {
 
-        let collectionView = XCUIApplication().collectionViews
-
         // First check if the first cell actually exists and matches what we're looking for
-        let firstCell: XCUIElement = collectionView.cells.containing(.staticText, identifier: "Name: John Doe").element
+        let firstCell: XCUIElement = cv.cells.containing(.staticText, identifier: "Name: John Doe").element
         XCTAssertTrue(firstCell.exists)
 
         // swipe cell away to right
@@ -106,5 +104,42 @@ class VerticalCardSwiperUITests: XCTestCase {
 
         // Check if first cell doesn't exist anymore (after swiping away)
         XCTAssertTrue(firstCell.exists)
+    }
+
+    func testAddCards() {
+
+        app.navigationBars["Example.ExampleView"].buttons["+5"].tap()
+
+        let firstCell: XCUIElement = cv.cells.containing(.staticText, identifier: "Name: testUser1").element
+
+        let secondCell: XCUIElement = cv.cells.containing(.staticText, identifier: "Name: testUser2").element
+
+        XCTAssertTrue(firstCell.exists)
+        XCTAssertTrue(secondCell.exists)
+    }
+
+    func testRemoveCards() {
+
+        app.navigationBars["Example.ExampleView"].buttons["-5"].tap()
+
+        let firstCell: XCUIElement = cv.cells.containing(.staticText, identifier: "Name: John Doe").element
+
+        XCTAssertFalse(firstCell.exists)
+    }
+
+    func testEmptyCards() {
+
+        let button = app.navigationBars["Example.ExampleView"].buttons["-5"]
+
+        // tap "-5" multiple times to remove all cards
+        for _ in 0...5 {
+            button.tap()
+        }
+
+        XCTAssertEqual(cv.cells.count, 0)
+
+        // try swiping on empty VerticalCardSwiper to cause crash
+        cv.element.swipeRight()
+        cv.element.swipeLeft()
     }
 }
