@@ -176,7 +176,7 @@ class ViewController: UIViewController, VerticalCardSwiperDelegate {
     
     func didEndScroll(verticalCardSwiperView: VerticalCardSwiperView) {
     
-        // Tells the delegate when scrolling through the cards came to an end.
+        // Tells the delegate when scrolling through the cards came to an end (optional).
     }
     
     func didDragCard(card: CardCell, index: Int, swipeDirection: SwipeDirection) {
@@ -186,12 +186,12 @@ class ViewController: UIViewController, VerticalCardSwiperDelegate {
     
     func didTapCard(verticalCardSwiperView: VerticalCardSwiperView, index: Int) {
     
-        // Tells the delegate when the user taps a card.
+        // Tells the delegate when the user taps a card (optional).
     }
     
     func didHoldCard(verticalCardSwiperView: VerticalCardSwiperView, index: Int, state: UIGestureRecognizer.State) {
     
-        // Tells the delegate when the user holds a card.
+        // Tells the delegate when the user holds a card (optional).
     }
 }
 ```
