@@ -107,10 +107,11 @@ public class VerticalCardSwiper: UIView {
         return indexes.sorted()
     }
 
-    public var focussedCardIndex: Int? {
+    /// The currently focussed card index.
+    public var focussedIndex: Int? {
         let center = self.convert(self.verticalCardSwiperView.center, to: self.verticalCardSwiperView)
-        if let index = self.verticalCardSwiperView.indexPathForItem(at: center) {
-            return index.row
+        if let indexPath = self.verticalCardSwiperView.indexPathForItem(at: center) {
+            return indexPath.row
         }
         return nil
     }
@@ -158,14 +159,11 @@ public class VerticalCardSwiper: UIView {
      Call this method to insert one or more new cards into the cardSwiper.
      You might do this when your data source object receives data for new items or in response to user interactions with the cardSwiper.
      - parameter indexes: An array of integers at which to insert the new card. This parameter must not be nil.
-    */
+     */
     public func insertCards(at indexes: [Int]) {
-        UIView.performWithoutAnimation {
-            self.verticalCardSwiperView.performBatchUpdates({
-                self.verticalCardSwiperView.insertItems(at: indexes.map { (index) -> IndexPath in
-                    return convertIndexToIndexPath(for: index) })
-            }, completion: { [weak self] _ in
-                self?.verticalCardSwiperView.collectionViewLayout.invalidateLayout()
+        performUpdates {
+            self.verticalCardSwiperView.insertItems(at: indexes.map { (index) -> IndexPath in
+                return convertIndexToIndexPath(for: index)
             })
         }
     }
@@ -178,12 +176,9 @@ public class VerticalCardSwiper: UIView {
      - parameter indexes: An array of integers at which to delete the card. This parameter must not be nil.
      */
     public func deleteCards(at indexes: [Int]) {
-        UIView.performWithoutAnimation {
-            self.verticalCardSwiperView.performBatchUpdates({
-                self.verticalCardSwiperView.deleteItems(at: indexes.map { (index) -> IndexPath in
-                    return self.convertIndexToIndexPath(for: index) })
-            }, completion: { [weak self] _ in
-                self?.verticalCardSwiperView.collectionViewLayout.invalidateLayout()
+        performUpdates {
+            self.verticalCardSwiperView.deleteItems(at: indexes.map { (index) -> IndexPath in
+                return self.convertIndexToIndexPath(for: index)
             })
         }
     }
@@ -195,23 +190,32 @@ public class VerticalCardSwiper: UIView {
 
      - parameter atIndex: The index of the card you want to move. This parameter must not be nil.
      - parameter toIndex: The index of the card’s new location. This parameter must not be nil.
-    */
+     */
     public func moveCard(at atIndex: Int, to toIndex: Int) {
         self.verticalCardSwiperView.moveItem(at: convertIndexToIndexPath(for: atIndex), to: convertIndexToIndexPath(for: toIndex))
     }
 
-    fileprivate func commonInit() {
+    private func commonInit() {
         setupVerticalCardSwiperView()
         setupConstraints()
         setCardSwiperInsets()
         setupGestureRecognizer()
+    }
+
+    private func performUpdates(updateClosure: () -> Void) {
+        UIView.performWithoutAnimation {
+            self.verticalCardSwiperView.performBatchUpdates({
+                updateClosure()
+            }, completion: { [weak self] _ in
+                self?.verticalCardSwiperView.collectionViewLayout.invalidateLayout()
+            })
+        }
     }
 }
 
 extension VerticalCardSwiper: CardDelegate {
 
     internal func willSwipeAway(cell: CardCell, swipeDirection: SwipeDirection) {
-
         self.verticalCardSwiperView.isUserInteractionEnabled = false
 
         if let index = self.verticalCardSwiperView.indexPath(for: cell)?.row {
@@ -308,9 +312,7 @@ extension VerticalCardSwiper: UIGestureRecognizerDelegate {
      */
     @objc fileprivate func handlePan(sender: UIPanGestureRecognizer) {
 
-        guard isSideSwipingEnabled else {
-            return
-        }
+        guard isSideSwipingEnabled else { return }
 
         /// The taplocation relative to the superview.
         let location = sender.location(in: self)
@@ -333,17 +335,11 @@ extension VerticalCardSwiper: UIGestureRecognizerDelegate {
             let angle = (CGFloat(Double.pi) / 10.0) * rotationStrength
 
             switch sender.state {
-
-            case .began:
-                break
-
-            case .changed:
+            case .began, .changed:
                 swipedCard.animateCard(angle: angle, horizontalTranslation: translation.x)
-
             case .ended:
                 swipedCard.endedPanAnimation(angle: angle)
                 swipedCard = nil
-
             default:
                 self.swipedCard.resetToCenterPosition()
                 self.swipedCard = nil
@@ -424,10 +420,6 @@ extension VerticalCardSwiper: UICollectionViewDelegate, UICollectionViewDataSour
         return datasource?.numberOfCards(verticalCardSwiperView: verticalCardSwiperView) ?? 0
     }
 
-    public func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
-    }
-
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         return datasource?.cardForItemAt(verticalCardSwiperView: verticalCardSwiperView, cardForItemAt: indexPath.row) ?? CardCell()
     }
@@ -471,7 +463,6 @@ extension VerticalCardSwiper: UICollectionViewDelegate, UICollectionViewDataSour
     }
 
     fileprivate func setCardSwiperInsets() {
-
         let bottomInset = visibleNextCardHeight + flowLayout.minimumLineSpacing
         verticalCardSwiperView.contentInset = UIEdgeInsets(top: topInset, left: sideInset, bottom: bottomInset, right: sideInset)
     }
