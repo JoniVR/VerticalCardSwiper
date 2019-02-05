@@ -126,4 +126,20 @@ class UITests: XCTestCase {
 
         XCTAssertFalse(firstCell.exists)
     }
+
+    func testEmptyCards() {
+
+        let button = app.navigationBars["Example.ExampleView"].buttons["-5"]
+
+        // tap "-5" multiple times to remove all cards
+        for _ in 0...5 {
+            button.tap()
+        }
+
+        XCTAssertEqual(cv.cells.count, 0)
+
+        // try swiping on empty VerticalCardSwiper to cause crash
+        cv.element.swipeRight()
+        cv.element.swipeLeft()
+    }
 }
