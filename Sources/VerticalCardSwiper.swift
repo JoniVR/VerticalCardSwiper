@@ -107,10 +107,10 @@ public class VerticalCardSwiper: UIView {
         return indexes.sorted()
     }
 
-    public var focussedCardIndex: Int? {
+    public var focussedIndex: Int? {
         let center = self.convert(self.verticalCardSwiperView.center, to: self.verticalCardSwiperView)
-        if let index = self.verticalCardSwiperView.indexPathForItem(at: center) {
-            return index.row
+        if let indexPath = self.verticalCardSwiperView.indexPathForItem(at: center) {
+            return indexPath.row
         }
         return nil
     }

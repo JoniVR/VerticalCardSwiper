@@ -118,9 +118,14 @@ public var indexesForVisibleCards: [Int]
 ```
 
 #### Other
-##### Just like with a regular `UICollectionView`, you can reload the data by calling:
+##### Just like with a regular `UICollectionView`, you can reload the data by calling
 ```swift
 cardSwiper.reloadData()
+```
+
+##### Get the current focussed card index
+```swift
+cardSwiper.focussedIndex
 ```
 
 ##### Scroll to a specifc card by calling
