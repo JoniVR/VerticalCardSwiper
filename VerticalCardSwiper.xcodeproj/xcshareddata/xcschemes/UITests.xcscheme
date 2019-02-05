@@ -13,12 +13,14 @@
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
          <TestableReference
-            skipped = "NO">
+            skipped = "NO"
+            parallelizable = "YES"
+            testExecutionOrdering = "random">
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "6CAB38F920D0074000FC4C8A"
-               BuildableName = "VerticalCardSwiperUITests.xctest"
-               BlueprintName = "VerticalCardSwiperUITests"
+               BuildableName = "UITests.xctest"
+               BlueprintName = "UITests"
                ReferencedContainer = "container:VerticalCardSwiper.xcodeproj">
             </BuildableReference>
          </TestableReference>

@@ -45,6 +45,20 @@
                                 </connections>
                             </barButtonItem>
                         </leftBarButtonItems>
+                        <rightBarButtonItems>
+                            <barButtonItem image="up-arrow" id="Ek1-Zq-X5B">
+                                <inset key="imageInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="50"/>
+                                <connections>
+                                    <action selector="pressScrollUp:" destination="BYZ-38-t0r" id="pEo-Ui-emm"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem image="down-arrow" id="4IW-cO-hqd">
+                                <inset key="imageInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="5"/>
+                                <connections>
+                                    <action selector="pressScrollDown:" destination="BYZ-38-t0r" id="FWF-p5-G2u"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <connections>
                         <outlet property="cardSwiper" destination="IHn-f3-EKg" id="qo4-k3-AZN"/>
@@ -73,4 +87,8 @@
             <point key="canvasLocation" x="-340" y="139"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="down-arrow" width="22" height="22"/>
+        <image name="up-arrow" width="22" height="22"/>
+    </resources>
 </document>
