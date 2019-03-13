@@ -9,26 +9,26 @@
 <div align="center">
     <!-- build status -->
     <a href="https://travis-ci.org/JoniVR/VerticalCardSwiper">
-        <img src="https://travis-ci.org/JoniVR/VerticalCardSwiper.svg?branch=master"  alt="build status"/>
+        <img src="https://travis-ci.org/JoniVR/VerticalCardSwiper.svg?branch=master"  alt="build status">
     </a>
     <!-- version -->
     <a href="https://cocoapods.org/pods/VerticalCardSwiper">
-        <img src="https://img.shields.io/cocoapods/v/VerticalCardSwiper.svg?style=flat"  alt="cocoapods version"/>
+        <img src="https://img.shields.io/cocoapods/v/VerticalCardSwiper.svg?style=flat"  alt="cocoapods version">
     </a>
     <!-- license -->
     <a href="https://cocoapods.org/pods/VerticalCardSwiper">
-        <img src="https://img.shields.io/cocoapods/l/VerticalCardSwiper.svg?style=flat"  alt="license"/>
+        <img alt="GitHub" src="https://img.shields.io/github/license/JoniVR/VerticalCardSwiper.svg">   
     </a>
     <!-- platform -->
     <a href="https://cocoapods.org/pods/VerticalCardSwiper">
-        <img src="https://img.shields.io/cocoapods/p/VerticalCardSwiper.svg?style=flat?"  alt="platform"/>
+        <img src="https://img.shields.io/cocoapods/p/VerticalCardSwiper.svg?style=flat?"  alt="platform">
     </a>
 </div>
 
 <br />
   
 <div align="center">
-  <img src="./example.gif" alt="example"/>
+  <img src="./example.gif" alt="example">
 </div>
 
 ## Project goal and information
@@ -46,7 +46,7 @@ VerticalCardSwiper is available through [CocoaPods](https://cocoapods.org). To i
 it, simply add the following line to your Podfile:
 
 ```ruby
-pod 'VerticalCardSwiper', '0.1.0-beta7'
+pod 'VerticalCardSwiper'
 ```
 
 ## Example

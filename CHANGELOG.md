@@ -1,5 +1,18 @@
 # Change Log
 
+## [0.1.0](https://github.com/JoniVR/VerticalCardSwiper/releases/tag/0.1.0) (Mar 13, 2019)
+
+#### Enhancements
+
+- Added `insertCards` function to `VerticalCardSwiper`.
+- Added `deleteCards` function to `VerticalCardSwiper`.
+- Added `moveCard` function to `VerticalCardSwiper`.
+- Added `focussedIndex` variable to `VerticalCardSwiper`.
+- Improved UITests.
+- Improved example.
+- Cleaned up code and removed some force-unwrapping.
+- Added [Swiftlint](https://github.com/realm/SwiftLint).
+
 ## [0.1.0-beta7](https://github.com/JoniVR/VerticalCardSwiper/releases/tag/0.1.0-beta7) (Jan 8, 2019)
 
 #### API breaking changes

@@ -28,7 +28,7 @@ internal extension UIPanGestureRecognizer {
     /**
      This calculated var stores the direction of the gesture received by the `UIPanGestureRecognizer`.
      */
-    internal var direction: PanDirection? {
+    var direction: PanDirection? {
         let velocity = self.velocity(in: view)
         let vertical = abs(velocity.y) > abs(velocity.x)
         switch (vertical, velocity.x, velocity.y) {
