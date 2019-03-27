@@ -4,28 +4,31 @@
     A marriage between the Shazam Discover UI and Tinder, built with UICollectionView in Swift.
 </div>
 
-<br />
+<br/>
 
 <div align="center">
     <!-- build status -->
     <a href="https://travis-ci.org/JoniVR/VerticalCardSwiper">
         <img src="https://travis-ci.org/JoniVR/VerticalCardSwiper.svg?branch=master"  alt="build status">
     </a>
-    <!-- version -->
+    <!-- pod version -->
     <a href="https://cocoapods.org/pods/VerticalCardSwiper">
         <img src="https://img.shields.io/cocoapods/v/VerticalCardSwiper.svg?style=flat"  alt="cocoapods version">
     </a>
     <!-- license -->
-    <a href="https://cocoapods.org/pods/VerticalCardSwiper">
-        <img alt="GitHub" src="https://img.shields.io/github/license/JoniVR/VerticalCardSwiper.svg">   
+    <a href="https://github.com/JoniVR/VerticalCardSwiper/blob/master/LICENSE">
+        <img alt="GitHub" src="https://img.shields.io/github/license/JoniVR/VerticalCardSwiper.svg">
     </a>
     <!-- platform -->
     <a href="https://cocoapods.org/pods/VerticalCardSwiper">
-        <img src="https://img.shields.io/cocoapods/p/VerticalCardSwiper.svg?style=flat?"  alt="platform">
+        <img src="https://img.shields.io/cocoapods/p/VerticalCardSwiper.svg?style=flat?" alt="platform">
+    </a>
+    <a href="https://swift.org/blog/swift-5-released/">
+        <img src="https://img.shields.io/badge/swift-5.0-brightgreen.svg" alt="swift5.0">
     </a>
 </div>
 
-<br />
+<br/>
   
 <div align="center">
   <img src="./example.gif" alt="example">
@@ -39,7 +42,7 @@ It's built with a `UICollectionView` and a custom flowLayout.
 
 ## Requirements
 * iOS 9.0
-* Swift 4.2
+* Swift 5.0
 
 ## Installation
 VerticalCardSwiper is available through [CocoaPods](https://cocoapods.org). To install
@@ -201,7 +204,7 @@ Subclass the `CardCell` to customize the cards.
 ```swift
 class ExampleCardCell: CardCell {
 
-} 
+}
 ```
 
 ## Features
