@@ -18,7 +18,7 @@ Pod::Spec.new do |s|
 #   * Finally, don't worry about the indent, CocoaPods strips it!
 
   s.description      = <<-DESC
-  The goal of this project is to recreate the Discover UI in Shazam (which I think is a great, fun way to display content) in combination with a Tinder style of swiping cards to the left/right. The idea behind this is that in some cases, you don't want to swipe away cards, but keep them availible for later on. This implementation allows for that. And it's a fun way to interact with content.
+  The goal of this project is to recreate the Discover UI in Shazam (which I think is a great, fun way to display content) in combination with a Tinder style of swiping cards to the left/right. The idea behind this is that in some cases, you don't want to swipe away cards, but keep them available for later on. This implementation allows for that. And it's a fun way to interact with content.
   It's built with a UICollectionView and a custom flowLayout.
                        DESC
 
@@ -28,7 +28,7 @@ Pod::Spec.new do |s|
   s.author           = { 'JoniVR' => 'joni.VR@hotmail.com' }
   s.source           = { :git => 'https://github.com/JoniVR/VerticalCardSwiper.git', :tag => s.version.to_s }
     
-  s.swift_version = '4.2'
+  s.swift_version = '5.0'
   s.ios.deployment_target = '9.0'
   s.source_files = 'Sources/*.swift'
   
