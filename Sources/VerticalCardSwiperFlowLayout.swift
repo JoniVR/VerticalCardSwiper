@@ -30,7 +30,7 @@ internal class VerticalCardSwiperFlowLayout: UICollectionViewFlowLayout {
     /// This property enables paging per card. Default is true.
     internal var isPagingEnabled: Bool = true
     /// Stores the height of a CardCell.
-    internal var cellHeight: CGFloat!
+    internal var cellHeight: CGFloat?
     /// Allows you to make the previous card visible or not visible (stack effect). Default is `true`.
     internal var isPreviousCardVisible: Bool = true
 
@@ -82,8 +82,11 @@ internal class VerticalCardSwiperFlowLayout: UICollectionViewFlowLayout {
     // Cell paging
     internal override func targetContentOffset(forProposedContentOffset proposedContentOffset: CGPoint, withScrollingVelocity velocity: CGPoint) -> CGPoint {
 
-        // If the property `isPagingEnabled` is set to false, we don't enable paging and thus return the current contentoffset.
-        guard let collectionView = self.collectionView, isPagingEnabled else {
+        guard
+            let collectionView = self.collectionView,
+            let cellHeight = cellHeight,
+            isPagingEnabled
+        else {
             let latestOffset = super.targetContentOffset(forProposedContentOffset: proposedContentOffset, withScrollingVelocity: velocity)
             return latestOffset
         }
