@@ -60,7 +60,6 @@ class ExampleViewController: UIViewController, VerticalCardSwiperDelegate, Verti
             contactsDemoData.remove(at: i)
             indexesToRemove.append(i)
         }
-
         cardSwiper.deleteCards(at: indexesToRemove)
     }
 
@@ -81,13 +80,13 @@ class ExampleViewController: UIViewController, VerticalCardSwiperDelegate, Verti
 
     @IBAction func pressScrollUp(_ sender: UIBarButtonItem) {
         if let currentIndex = cardSwiper.focussedIndex {
-            cardSwiper.scrollToCard(at: currentIndex - 1, animated: true)
+            _ = cardSwiper.scrollToCard(at: currentIndex - 1, animated: true)
         }
     }
 
     @IBAction func pressScrollDown(_ sender: UIBarButtonItem) {
         if let currentIndex = cardSwiper.focussedIndex {
-            cardSwiper.scrollToCard(at: currentIndex + 1, animated: true)
+            _ = cardSwiper.scrollToCard(at: currentIndex + 1, animated: true)
         }
     }
 
@@ -96,12 +95,9 @@ class ExampleViewController: UIViewController, VerticalCardSwiperDelegate, Verti
         if let cardCell = verticalCardSwiperView.dequeueReusableCell(withReuseIdentifier: "ExampleCell", for: index) as? ExampleCardCell {
 
             let contact = contactsDemoData[index]
-
             cardCell.setRandomBackgroundColor()
-
             cardCell.nameLbl.text = "Name: " + contact.name
             cardCell.ageLbl.text = "Age: \(contact.age ?? 0)"
-
             return cardCell
         }
         return CardCell()
@@ -117,7 +113,6 @@ class ExampleViewController: UIViewController, VerticalCardSwiperDelegate, Verti
     }
 
     func didSwipeCardAway(card: CardCell, index: Int, swipeDirection: SwipeDirection) {
-
         // called when a card has animated off screen entirely.
     }
 }

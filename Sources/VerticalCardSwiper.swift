@@ -365,7 +365,8 @@ extension VerticalCardSwiper: UICollectionViewDelegate, UICollectionViewDataSour
      instead of functions like `viewDidLoad` as the underlying collectionView needs to be loaded first for this to work.
      - parameter index: The index of the item to scroll into view.
      - parameter animated: Specify true to animate the scrolling behavior or false to adjust the scroll view’s visible content immediately.
-     - Returns: True if scrolling succeeds. False if scrolling failed because the view layout has not been established yet.
+     - Returns: True if scrolling succeeds. False if scrolling failed.
+     Scrolling could fail due to the flowlayout not being set up yet or an incorrect index.
      */
     public func scrollToCard(at index: Int, animated: Bool) -> Bool {
 
@@ -374,12 +375,15 @@ extension VerticalCardSwiper: UICollectionViewDelegate, UICollectionViewDataSour
          so we're using setContentOffset for the time being.
          See: https://github.com/JoniVR/VerticalCardSwiper/issues/23
          */
-        guard index >= 0, index < verticalCardSwiperView.numberOfItems(inSection: 0), let cellHeight = flowLayout.cellHeight else { return false }
+        guard
+            let cellHeight = flowLayout.cellHeight,
+            index >= 0,
+            index < verticalCardSwiperView.numberOfItems(inSection: 0)
+        else { return false }
 
         let y = CGFloat(index) * (cellHeight + flowLayout.minimumLineSpacing) - topInset
         let point = CGPoint(x: verticalCardSwiperView.contentOffset.x, y: y)
         verticalCardSwiperView.setContentOffset(point, animated: animated)
-        
         return true
     }
 
