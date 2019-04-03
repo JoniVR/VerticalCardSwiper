@@ -86,9 +86,10 @@ class ExampleViewController: UIViewController, VerticalCardSwiperDatasource {
     
     func cardForItemAt(verticalCardSwiperView: VerticalCardSwiperView, cardForItemAt index: Int) -> CardCell {
         
-        let cardCell = verticalCardSwiperView.dequeueReusableCell(withReuseIdentifier: "ExampleCell", for: index) as! ExampleCardCell
-                
-        return cardCell
+        if let cardCell = verticalCardSwiperView.dequeueReusableCell(withReuseIdentifier: "ExampleCell", for: index) as? ExampleCardCell {
+            return cardCell
+        }
+        return CardCell()
     }
     
     func numberOfCards(verticalCardSwiperView: VerticalCardSwiperView) -> Int {
@@ -133,7 +134,7 @@ cardSwiper.focussedIndex
 
 ##### Scroll to a specifc card by calling
 ```swift
-cardSwiper.scrollToCard(at: Int, animated: Bool)
+cardSwiper.scrollToCard(at: Int, animated: Bool) -> Bool
 ```
 
 ##### Moving/Deleting/Inserting cards at runtime
