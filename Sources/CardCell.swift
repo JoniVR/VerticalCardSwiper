@@ -32,14 +32,6 @@ import UIKit
 
     internal weak var delegate: CardDelegate?
 
-    open override func layoutSubviews() {
-
-        self.layer.shouldRasterize = true
-        self.layer.rasterizationScale = UIScreen.main.scale
-
-        super.layoutSubviews()
-    }
-
     open override func apply(_ layoutAttributes: UICollectionViewLayoutAttributes) {
         super.apply(layoutAttributes)
 
