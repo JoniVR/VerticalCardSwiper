@@ -1,5 +1,17 @@
 # Change Log
 
+## [1.0.0](https://github.com/JoniVR/VerticalCardSwiper/releases/tag/1.0.0) (Apr 9, 2019)
+
+#### API breaking changes
+
+- Migrated from `Swift 4.2` -> `Swift 5.0`.
+- `scrollToCard(at: Int, animated: Bool) -> Bool` now returns a Boolean indicating if scrolling has failed or succeeded.
+
+#### Bug fixes
+
+- Fixed crash in `scrollToCard` when it was called before the view layout was properly set up. ([#37](https://github.com/JoniVR/VerticalCardSwiper/issues/37)) - thanks [@geniegeist](https://github.com/geniegeist)
+- Fixed `CardCell` animation glitch when changing alpha. ([#43](https://github.com/JoniVR/VerticalCardSwiper/issues/43))
+
 ## [0.1.0](https://github.com/JoniVR/VerticalCardSwiper/releases/tag/0.1.0) (Mar 13, 2019)
 
 #### Enhancements
@@ -21,8 +33,8 @@
 
 #### Enhancements
 
-- Added `didEndScroll`  function to `VerticalCardSwiperDelegate`. (thanks @mkhakpaki)
-- Added `scrollToCard` function to `VerticalCardSwiper`. [(#23)](https://github.com/JoniVR/VerticalCardSwiper/issues/23)
+- Added `didEndScroll`  function to `VerticalCardSwiperDelegate`. - thanks [@mkhakpaki](https://github.com/mkhakpaki)
+- Added `scrollToCard` function to `VerticalCardSwiper`. ([#23](https://github.com/JoniVR/VerticalCardSwiper/issues/23))
 - Removed some force unwrapping in the code.
 
 #### Bug fixes
@@ -35,8 +47,8 @@
 
 #### Enhancements
 
-- Added `indexesForVisibleCards` to `VerticalCardSwiperView`. (thanks @williamsthing)
-- Changed `didTapCard` to support unfocused cards. (thanks @williamsthing)
+- Added `indexesForVisibleCards` to `VerticalCardSwiperView`. - thanks [@williamsthing](https://github.com/williamsthing)
+- Changed `didTapCard` to support unfocused cards. - thanks [@williamsthing](https://github.com/williamsthing)
 
 #### Bug fixes
 
@@ -46,7 +58,7 @@
 
 #### Enhancements
 
-- Added `didTapCard` and `didHoldCard` to `VerticalCardSwiperDelegate`. (thanks @williamsthing)
+- Added `didTapCard` and `didHoldCard` to `VerticalCardSwiperDelegate`. - thanks [@williamsthing](https://github.com/williamsthing)
 
 ## [0.1.0-beta4](https://github.com/JoniVR/VerticalCardSwiper/releases/tag/0.1.0-beta4) (Oct 20, 2018)
 
