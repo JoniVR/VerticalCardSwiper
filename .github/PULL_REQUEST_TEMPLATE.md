@@ -4,6 +4,7 @@
 - [ ] I've tested my changes.
 - [ ] I've read the [Contribution Guidelines](CONTRIBUTING.md).
 - [ ] I've updated the documentation if necessary.
+- [ ] I've added additional Tests where/if it makes sense.
 
 ### Motivation and Context
 <!--- Why is this change required? What problem does it solve? -->
