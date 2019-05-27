@@ -114,6 +114,10 @@ class ExampleViewController: UIViewController, VerticalCardSwiperDatasource {
 @IBInspectable public var visibleNextCardHeight: CGFloat = 50
 /// Vertical spacing between CardCells. Default is 40.
 @IBInspectable public var cardSpacing: CGFloat = 40
+/// Allows you to set the view to Stack at the Top or at the Bottom
+@IBInspectable public var stackOnBottom: Bool = true
+/// Sets how many cards of the stack are visible in the background
+@IBInspectable public var topStackCount: Int = 1
 /** 
  Returns an array of indexes (as Int) that are currently visible in the `VerticalCardSwiperView`.
  This does not include cards that are behind the card that is in focus.
