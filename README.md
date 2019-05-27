@@ -102,8 +102,8 @@ class ExampleViewController: UIViewController, VerticalCardSwiperDatasource {
 ```swift
 /// Indicates if side swiping on cards is enabled. Set to false if you don't want side swiping. Default is `true`.
 @IBInspectable public var isSideSwipingEnabled: Bool = true
-/// Allows you to make the previous card visible or not visible (stack effect). Default is `true`.
-@IBInspectable public var isPreviousCardVisible: Bool = true
+/// Allows you to enable/disable the stacking effect. Default is `true` (enabled).
+@IBInspectable public var isStackingEnabled: Bool = true
 /// The transform animation that is shown on the top card when scrolling through the cards. Default is 0.05.
 @IBInspectable public var firstItemTransform: CGFloat = 0.05
 /// The inset (spacing) at the top for the cards. Default is 40.

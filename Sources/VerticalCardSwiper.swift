@@ -77,10 +77,10 @@ public class VerticalCardSwiper: UIView {
             flowLayout.firstItemTransform = newValue
         }
     }
-    /// Allows you to make the previous card visible or not visible (stack effect). Default is `true`.
-    @IBInspectable public var isPreviousCardVisible: Bool = true {
+    /// Allows you to enable/disable the stacking effect. Default is `true` (enabled).
+    @IBInspectable public var isStackingEnabled: Bool = true {
         willSet {
-            flowLayout.isPreviousCardVisible = newValue
+            flowLayout.isStackingEnabled = newValue
         }
     }
     /// Allows you to set the view to Stack at the Top or at the Bottom.

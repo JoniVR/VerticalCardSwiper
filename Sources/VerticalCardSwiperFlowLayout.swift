@@ -31,8 +31,8 @@ internal class VerticalCardSwiperFlowLayout: UICollectionViewFlowLayout {
     internal var isPagingEnabled: Bool = true
     /// Stores the height of a CardCell.
     internal var cellHeight: CGFloat?
-    /// Allows you to make the previous card visible or not visible (stack effect). Default is `true`.
-    internal var isPreviousCardVisible: Bool = true
+    /// Allows you to enable/disable the stacking effect. Default is `true` (enabled).
+    internal var isStackingEnabled: Bool = true
     /// Allows you to set the view to Stack at the Top or at the Bottom
     internal var stackOnBottom: Bool = true
     /// Sets how many cards of the stack are visible in the background
@@ -185,7 +185,7 @@ internal class VerticalCardSwiperFlowLayout: UICollectionViewFlowLayout {
             var t = CGAffineTransform.identity
 
             t = t.scaledBy(x: scale, y: 1)
-            if isPreviousCardVisible {
+            if isStackingEnabled {
                 t = t.translatedBy(x: 0, y: top * translationScale)
             }
             attributes.transform = t
