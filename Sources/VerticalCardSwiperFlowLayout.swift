@@ -47,7 +47,7 @@ internal class VerticalCardSwiperFlowLayout: UICollectionViewFlowLayout {
 
     internal override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
         guard let collectionView = collectionView, let cellHeight = cellHeight else { return nil }
-        
+
         let y = collectionView.bounds.minY - cellHeight * CGFloat(topStackCount)
         let newRect = CGRect(x: 0, y: y < 0 ? 0 : y, width: collectionView.bounds.maxX, height: collectionView.bounds.maxY)
         let items = NSArray(array: super.layoutAttributesForElements(in: newRect)!, copyItems: true)
@@ -177,13 +177,13 @@ internal class VerticalCardSwiperFlowLayout: UICollectionViewFlowLayout {
 
     // Creates and applies a CGAffineTransform to the attributes to recreate the effect of the card going to the background.
     fileprivate func transformAttributes(attributes: UICollectionViewLayoutAttributes, deltaY: CGFloat) {
-        
+
         if let itemTransform = firstItemTransform {
             let top = stackOnBottom ? deltaY : deltaY * -1
             let scale = 1 - deltaY * itemTransform
             let translationScale = CGFloat((attributes.zIndex + 1) * 10)
             var t = CGAffineTransform.identity
-            
+
             t = t.scaledBy(x: scale, y: 1)
             if isPreviousCardVisible {
                 t = t.translatedBy(x: 0, y: top * translationScale)
