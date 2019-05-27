@@ -84,6 +84,20 @@ public class VerticalCardSwiper: UIView {
             flowLayout.isPreviousCardVisible = newValue
         }
     }
+    
+    /// Allows you to set the view to Stack at the Top or at the Bottom
+    @IBInspectable public var stackOnBottom: Bool = true {
+        willSet {
+            flowLayout.stackOnBottom = newValue
+        }
+    }
+    
+    /// Sets how many cards of the stack are visible in the background
+    @IBInspectable public var topStackCount: Int = 1 {
+        willSet {
+            flowLayout.topStackCount = newValue
+        }
+    }
 
     /**
      Returns an array of indexes (as Int) that are currently visible in the `VerticalCardSwiperView`.
