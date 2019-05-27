@@ -44,7 +44,6 @@ public class VerticalCardSwiper: UIView {
             }
         }
     }
-
     /// The inset (spacing) at the top for the cards. Default is 40.
     @IBInspectable public var topInset: CGFloat = 40 {
         didSet {
@@ -84,43 +83,31 @@ public class VerticalCardSwiper: UIView {
             flowLayout.isPreviousCardVisible = newValue
         }
     }
-
-    /// Allows you to set the view to Stack at the Top or at the Bottom
+    /// Allows you to set the view to Stack at the Top or at the Bottom.
     @IBInspectable public var stackOnBottom: Bool = true {
         willSet {
             flowLayout.stackOnBottom = newValue
         }
     }
-
-    /// Sets how many cards of the stack are visible in the background
+    /// Sets how many cards of the stack are visible in the background.
     @IBInspectable public var topStackCount: Int = 1 {
         willSet {
             flowLayout.topStackCount = newValue
         }
     }
-
     /**
      Returns an array of indexes (as Int) that are currently visible in the `VerticalCardSwiperView`.
-     This does not include cards that are behind the card that is in focus.
+     This includes cards that are stacked (behind the focussed card).
      - returns: An array of indexes (as Int) that are currently visible.
      */
     public var indexesForVisibleCards: [Int] {
-
-        let lowestIndex = self.verticalCardSwiperView.indexPathsForVisibleItems.min()?.row ?? 0
-
-        // when first card is focussed, return as usual.
-        if self.verticalCardSwiperView.visibleCells.count <= 2 && lowestIndex == 0 {
-            return self.verticalCardSwiperView.indexPathsForVisibleItems.map({$0.row}).sorted()
-        }
-
         var indexes: [Int] = []
         // Add each visible cell except the lowest one and return
-        for cellIndexPath in self.verticalCardSwiperView.indexPathsForVisibleItems where cellIndexPath.row != lowestIndex {
+        for cellIndexPath in self.verticalCardSwiperView.indexPathsForVisibleItems {
             indexes.append(cellIndexPath.row)
         }
         return indexes.sorted()
     }
-
     /// The currently focussed card index.
     public var focussedIndex: Int? {
         let center = self.convert(self.verticalCardSwiperView.center, to: self.verticalCardSwiperView)

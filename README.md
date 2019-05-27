@@ -120,7 +120,7 @@ class ExampleViewController: UIViewController, VerticalCardSwiperDatasource {
 @IBInspectable public var topStackCount: Int = 1
 /** 
  Returns an array of indexes (as Int) that are currently visible in the `VerticalCardSwiperView`.
- This does not include cards that are behind the card that is in focus.
+ This includes cards that are stacked (behind the focussed card).
 */
 public var indexesForVisibleCards: [Int]
 ```
