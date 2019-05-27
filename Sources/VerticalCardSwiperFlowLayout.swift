@@ -168,6 +168,8 @@ internal class VerticalCardSwiperFlowLayout: UICollectionViewFlowLayout {
         let deltaY = (finalY - cardMinY) / cardHeight
         transformAttributes(attributes: attributes, deltaY: deltaY)
 
+        attributes.alpha = 1 - (deltaY / CGFloat(topStackCount+1))
+
         // Set the attributes frame position to the values we calculated
         origin.x = collectionView.frame.width/2 - attributes.frame.width/2 - collectionView.contentInset.left
         origin.y = finalY
@@ -184,7 +186,7 @@ internal class VerticalCardSwiperFlowLayout: UICollectionViewFlowLayout {
             let translationScale = CGFloat((attributes.zIndex + 1) * 10)
             var t = CGAffineTransform.identity
 
-            t = t.scaledBy(x: scale, y: 1)
+            t = t.scaledBy(x: scale > 0 ? scale : 0, y: 1)
             if isStackingEnabled {
                 t = t.translatedBy(x: 0, y: top * translationScale)
             }
