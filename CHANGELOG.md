@@ -1,5 +1,18 @@
 # Change Log
 
+## [2.0.0](https://github.com/JoniVR/VerticalCardSwiper/releases/tag/2.0.0) (Jun 21, 2019)
+
+#### API breaking changes
+
+- Renamed `VerticalCardSwiper` property `focussedIndex` to `focussedCardIndex`.
+- Renamed `VerticalCardSwiper` property `isPreviousCardVisible` to `isStackingEnabled`.
+- Refactored `VerticalCardSwiper` property `indexesForVisibleCards` to **include stacked cards**. ‼️
+
+#### Enhancements
+
+- Added `isStackOnBottom` property to `VerticalCardSwiper`. ([#48](https://github.com/JoniVR/VerticalCardSwiper/pull/48)) - thanks [@stfnhdr](https://github.com/stfnhdr)
+- Added `stackedCardsCount` property to `VerticalCardSwiper`. ([#48](https://github.com/JoniVR/VerticalCardSwiper/pull/48)) - thanks [@stfnhdr](https://github.com/stfnhdr)
+
 ## [1.0.0](https://github.com/JoniVR/VerticalCardSwiper/releases/tag/1.0.0) (Apr 9, 2019)
 
 #### API breaking changes

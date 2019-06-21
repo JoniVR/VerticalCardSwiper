@@ -212,13 +212,15 @@ class ExampleCardCell: CardCell {
 }
 ```
 
-## Features
+## Key Features
 - [x] Shazam Discover UI with paging
 - [x] Tinder-style swiping
 - [x] Option to disable side swiping
+- [x] Set custom number of stacked cards
 - [x] Code documentation in README.md file
 - [x] Cocoapods support
 - [ ] Carthage support
+- [ ] SPM support
 - [ ] Diff support
 
 ## Author
@@ -229,3 +231,4 @@ VerticalCardSwiper is available under the MIT license. See the LICENSE file for 
 
 ## More
 Feel free to submit a pull request, open an issue or fork this project. Any help is always appreciated.
+A big thank you to all the [contributors](https://github.com/JoniVR/VerticalCardSwiper/graphs/contributors)! 
