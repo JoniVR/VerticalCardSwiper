@@ -79,13 +79,13 @@ class ExampleViewController: UIViewController, VerticalCardSwiperDelegate, Verti
     }
 
     @IBAction func pressScrollUp(_ sender: UIBarButtonItem) {
-        if let currentIndex = cardSwiper.focussedIndex {
+        if let currentIndex = cardSwiper.focussedCardIndex {
             _ = cardSwiper.scrollToCard(at: currentIndex - 1, animated: true)
         }
     }
 
     @IBAction func pressScrollDown(_ sender: UIBarButtonItem) {
-        if let currentIndex = cardSwiper.focussedIndex {
+        if let currentIndex = cardSwiper.focussedCardIndex {
             _ = cardSwiper.scrollToCard(at: currentIndex + 1, animated: true)
         }
     }

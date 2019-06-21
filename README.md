@@ -102,8 +102,8 @@ class ExampleViewController: UIViewController, VerticalCardSwiperDatasource {
 ```swift
 /// Indicates if side swiping on cards is enabled. Set to false if you don't want side swiping. Default is `true`.
 @IBInspectable public var isSideSwipingEnabled: Bool = true
-/// Allows you to make the previous card visible or not visible (stack effect). Default is `true`.
-@IBInspectable public var isPreviousCardVisible: Bool = true
+/// Allows you to enable/disable the stacking effect. Default is `true` (enabled).
+@IBInspectable public var isStackingEnabled: Bool = true
 /// The transform animation that is shown on the top card when scrolling through the cards. Default is 0.05.
 @IBInspectable public var firstItemTransform: CGFloat = 0.05
 /// The inset (spacing) at the top for the cards. Default is 40.
@@ -112,11 +112,15 @@ class ExampleViewController: UIViewController, VerticalCardSwiperDatasource {
 @IBInspectable public var sideInset: CGFloat = 20
 /// Sets how much of the next card should be visible. Default is 50.
 @IBInspectable public var visibleNextCardHeight: CGFloat = 50
-/// Vertical spacing between CardCells. Default is 40.
+/// Vertical spacing between the focussed card and the bottom (next) card. Default is 40.
 @IBInspectable public var cardSpacing: CGFloat = 40
+/// Allows you to set the view to Stack at the Top or at the Bottom. Default is true.
+@IBInspectable public var isStackOnBottom: Bool = true
+/// Sets how many cards of the stack are visible in the background
+@IBInspectable public var stackedCardsCount: Int = 1
 /** 
  Returns an array of indexes (as Int) that are currently visible in the `VerticalCardSwiperView`.
- This does not include cards that are behind the card that is in focus.
+ This includes cards that are stacked (behind the focussed card).
 */
 public var indexesForVisibleCards: [Int]
 ```
@@ -129,7 +133,7 @@ cardSwiper.reloadData()
 
 ##### Get the current focussed card index
 ```swift
-cardSwiper.focussedIndex
+cardSwiper.focussedCardIndex
 ```
 
 ##### Scroll to a specifc card by calling

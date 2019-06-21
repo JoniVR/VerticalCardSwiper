@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0930"
+   LastUpgradeVersion = "1020"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "6CE68C5F1F15729800CFFA14"
-               BuildableName = "Example.app"
-               BlueprintName = "Example"
+               BlueprintIdentifier = "6C51A10F209E6D6900B83A82"
+               BuildableName = "VerticalCardSwiper.framework"
+               BlueprintName = "VerticalCardSwiper"
                ReferencedContainer = "container:VerticalCardSwiper.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -28,31 +28,12 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "6CAB38F920D0074000FC4C8A"
-               BuildableName = "UITests.xctest"
-               BlueprintName = "UITests"
-               ReferencedContainer = "container:VerticalCardSwiper.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "6CE68C5F1F15729800CFFA14"
-            BuildableName = "Example.app"
-            BlueprintName = "Example"
-            ReferencedContainer = "container:VerticalCardSwiper.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>
    <LaunchAction
-      buildConfiguration = "Release"
+      buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       launchStyle = "0"
@@ -64,9 +45,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "6CE68C5F1F15729800CFFA14"
-            BuildableName = "Example.app"
-            BlueprintName = "Example"
+            BlueprintIdentifier = "6C51A10F209E6D6900B83A82"
+            BuildableName = "VerticalCardSwiper.framework"
+            BlueprintName = "VerticalCardSwiper"
             ReferencedContainer = "container:VerticalCardSwiper.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -74,7 +55,7 @@
       </AdditionalOptions>
    </LaunchAction>
    <ProfileAction
-      buildConfiguration = "Debug"
+      buildConfiguration = "Release"
       shouldUseLaunchSchemeArgsEnv = "YES"
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
@@ -82,9 +63,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "6CE68C5F1F15729800CFFA14"
-            BuildableName = "Example.app"
-            BlueprintName = "Example"
+            BlueprintIdentifier = "6C51A10F209E6D6900B83A82"
+            BuildableName = "VerticalCardSwiper.framework"
+            BlueprintName = "VerticalCardSwiper"
             ReferencedContainer = "container:VerticalCardSwiper.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
