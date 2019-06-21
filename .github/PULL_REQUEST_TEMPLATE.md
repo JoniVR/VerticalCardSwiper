@@ -8,7 +8,7 @@
 
 ### Motivation and Context
 <!--- Why is this change required? What problem does it solve? -->
-<!--- If it fixes an open issue, please link to the issue here. -->
+<!--- If it fixes an open issue, please link to the issue here. Use "fixes #2" or "closes #2" -->
 <!--- Please describe how you tested your changes. --->
 
 ### Description
