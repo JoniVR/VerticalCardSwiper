@@ -112,12 +112,12 @@ class ExampleViewController: UIViewController, VerticalCardSwiperDatasource {
 @IBInspectable public var sideInset: CGFloat = 20
 /// Sets how much of the next card should be visible. Default is 50.
 @IBInspectable public var visibleNextCardHeight: CGFloat = 50
-/// Vertical spacing between CardCells. Default is 40.
+/// Vertical spacing between the focussed card and the bottom (next) card. Default is 40.
 @IBInspectable public var cardSpacing: CGFloat = 40
-/// Allows you to set the view to Stack at the Top or at the Bottom
-@IBInspectable public var stackOnBottom: Bool = true
+/// Allows you to set the view to Stack at the Top or at the Bottom. Default is true.
+@IBInspectable public var isStackOnBottom: Bool = true
 /// Sets how many cards of the stack are visible in the background
-@IBInspectable public var topStackCount: Int = 1
+@IBInspectable public var stackedCardsCount: Int = 1
 /** 
  Returns an array of indexes (as Int) that are currently visible in the `VerticalCardSwiperView`.
  This includes cards that are stacked (behind the focussed card).
@@ -133,7 +133,7 @@ cardSwiper.reloadData()
 
 ##### Get the current focussed card index
 ```swift
-cardSwiper.focussedIndex
+cardSwiper.focussedCardIndex
 ```
 
 ##### Scroll to a specifc card by calling

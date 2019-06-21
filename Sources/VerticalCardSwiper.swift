@@ -62,7 +62,7 @@ public class VerticalCardSwiper: UIView {
             setCardSwiperInsets()
         }
     }
-    /// Vertical spacing between CardCells. Default is 40.
+    /// Vertical spacing between the focussed card and the bottom (next) card. Default is 40.
     @IBInspectable public var cardSpacing: CGFloat = 40 {
         willSet {
             flowLayout.minimumLineSpacing = newValue
@@ -77,28 +77,27 @@ public class VerticalCardSwiper: UIView {
             flowLayout.firstItemTransform = newValue
         }
     }
-    /// Allows you to enable/disable the stacking effect. Default is `true` (enabled).
+    /// Allows you to enable/disable the stacking effect. Default is `true`.
     @IBInspectable public var isStackingEnabled: Bool = true {
         willSet {
             flowLayout.isStackingEnabled = newValue
         }
     }
-    /// Allows you to set the view to Stack at the Top or at the Bottom.
-    @IBInspectable public var stackOnBottom: Bool = true {
+    /// Allows you to set the view to Stack at the Top or at the Bottom. Default is `true`.
+    @IBInspectable public var isStackOnBottom: Bool = true {
         willSet {
-            flowLayout.stackOnBottom = newValue
+            flowLayout.isStackOnBottom = newValue
         }
     }
-    /// Sets how many cards of the stack are visible in the background.
-    @IBInspectable public var topStackCount: Int = 1 {
+    /// Sets how many cards of the stack are visible in the background. Default is 1.
+    @IBInspectable public var stackedCardsCount: Int = 1 {
         willSet {
-            flowLayout.topStackCount = newValue
+            flowLayout.stackedCardsCount = newValue
         }
     }
     /**
      Returns an array of indexes (as Int) that are currently visible in the `VerticalCardSwiperView`.
      This includes cards that are stacked (behind the focussed card).
-     - returns: An array of indexes (as Int) that are currently visible.
      */
     public var indexesForVisibleCards: [Int] {
         var indexes: [Int] = []
@@ -109,7 +108,7 @@ public class VerticalCardSwiper: UIView {
         return indexes.sorted()
     }
     /// The currently focussed card index.
-    public var focussedIndex: Int? {
+    public var focussedCardIndex: Int? {
         let center = self.convert(self.verticalCardSwiperView.center, to: self.verticalCardSwiperView)
         if let indexPath = self.verticalCardSwiperView.indexPathForItem(at: center) {
             return indexPath.row

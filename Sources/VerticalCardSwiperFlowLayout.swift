@@ -31,12 +31,12 @@ internal class VerticalCardSwiperFlowLayout: UICollectionViewFlowLayout {
     internal var isPagingEnabled: Bool = true
     /// Stores the height of a CardCell.
     internal var cellHeight: CGFloat?
-    /// Allows you to enable/disable the stacking effect. Default is `true` (enabled).
+    /// Allows you to enable/disable the stacking effect. Default is `true`.
     internal var isStackingEnabled: Bool = true
-    /// Allows you to set the view to Stack at the Top or at the Bottom
-    internal var stackOnBottom: Bool = true
-    /// Sets how many cards of the stack are visible in the background
-    internal var topStackCount: Int = 1
+    /// Allows you to set the view to Stack at the Top or at the Bottom. Default is `true`.
+    internal var isStackOnBottom: Bool = true
+    /// Sets how many cards of the stack are visible in the background. Default is 1.
+    internal var stackedCardsCount: Int = 1
 
     internal override func prepare() {
         super.prepare()
@@ -48,7 +48,7 @@ internal class VerticalCardSwiperFlowLayout: UICollectionViewFlowLayout {
     internal override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
         guard let collectionView = collectionView, let cellHeight = cellHeight else { return nil }
 
-        let y = collectionView.bounds.minY - cellHeight * CGFloat(topStackCount)
+        let y = collectionView.bounds.minY - cellHeight * CGFloat(stackedCardsCount)
         let newRect = CGRect(x: 0, y: y < 0 ? 0 : y, width: collectionView.bounds.maxX, height: collectionView.bounds.maxY)
         let items = NSArray(array: super.layoutAttributesForElements(in: newRect)!, copyItems: true)
 
@@ -108,7 +108,7 @@ internal class VerticalCardSwiperFlowLayout: UICollectionViewFlowLayout {
         let currentPage = (velocity.y < 0.0) ? floor(approximatePage) : ceil(approximatePage)
 
         // Create custom flickVelocity.
-        let flickVelocity = velocity.y * 0.4
+        let flickVelocity = velocity.y * 0.3
 
         // Check how many pages the user flicked, if <= 1 then flickedPages should return 0.
         let flickedPages = (abs(round(flickVelocity)) <= 1) ? 0 : round(flickVelocity)
@@ -168,7 +168,7 @@ internal class VerticalCardSwiperFlowLayout: UICollectionViewFlowLayout {
         let deltaY = (finalY - cardMinY) / cardHeight
         transformAttributes(attributes: attributes, deltaY: deltaY)
 
-        attributes.alpha = 1 - (deltaY - CGFloat(topStackCount))
+        attributes.alpha = 1 - (deltaY - CGFloat(stackedCardsCount))
 
         // Set the attributes frame position to the values we calculated
         origin.x = collectionView.frame.width/2 - attributes.frame.width/2 - collectionView.contentInset.left
@@ -181,7 +181,7 @@ internal class VerticalCardSwiperFlowLayout: UICollectionViewFlowLayout {
     fileprivate func transformAttributes(attributes: UICollectionViewLayoutAttributes, deltaY: CGFloat) {
 
         if let itemTransform = firstItemTransform {
-            let top = stackOnBottom ? deltaY : deltaY * -1
+            let top = isStackOnBottom ? deltaY : deltaY * -1
             let scale = 1 - deltaY * itemTransform
             let translationScale = CGFloat((attributes.zIndex + 1) * 10)
             var t = CGAffineTransform.identity
