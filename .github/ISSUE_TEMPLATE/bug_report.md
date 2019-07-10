@@ -7,7 +7,7 @@ assignees: ''
 
 ---
 
-<!--- Provide a short summary in the Title above after the [Bug] tag. -->
+<!--- Provide a short summary in the Title after the [Bug] tag. -->
 
 ### New Issue Checklist
 <!-- Before you submit your issue, please make sure to check the following boxes by putting an x in the [ ] (don't: [x ], [ x], do: [x]) -->

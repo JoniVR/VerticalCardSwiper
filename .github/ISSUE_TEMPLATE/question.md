@@ -9,7 +9,7 @@ assignees: ''
 
 <!-- 
 !! READ THIS BEFORE SUBMITTING YOUR QUESTION !!
-Provide a short summary in the Title above after the [Question] tag.
+Provide a short summary in the Title after the [Question] tag.
 Please only ask Questions related to the library and search for solutions on Google first. I'm not your personal programmer! -->
 
 ### New Issue Checklist
