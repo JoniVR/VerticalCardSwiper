@@ -105,7 +105,7 @@ internal class VerticalCardSwiperFlowLayout: UICollectionViewFlowLayout {
         let approximatePage = collectionView.contentOffset.y/pageHeight
 
         // Determine the current page based on velocity.
-        let currentPage = (velocity.y < 0.0) ? floor(approximatePage) : ceil(approximatePage)
+        let currentPage = velocity.y == 0.0 ? round(approximatePage) : (velocity.y < 0.0 ? floor(approximatePage) : ceil(approximatePage))
 
         // Create custom flickVelocity.
         let flickVelocity = velocity.y * 0.3
