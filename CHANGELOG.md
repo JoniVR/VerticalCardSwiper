@@ -1,5 +1,11 @@
 # Change Log
 
+## [2.0.1](https://github.com/JoniVR/VerticalCardSwiper/releases/tag/2.0.1) (Aug 19, 2019)
+
+#### Bug fixes
+
+- Fixed paging algorithm not accounting for zero velocity.
+
 ## [2.0.0](https://github.com/JoniVR/VerticalCardSwiper/releases/tag/2.0.0) (Jun 21, 2019)
 
 #### API breaking changes
