@@ -15,6 +15,10 @@
     <a href="https://cocoapods.org/pods/VerticalCardSwiper">
         <img src="https://img.shields.io/cocoapods/v/VerticalCardSwiper.svg?style=flat"  alt="cocoapods version">
     </a>
+    <!-- carthage compatible -->
+    <a href="https://github.com/Carthage/Carthage">
+        <img src="https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat"  alt="Carthage compatible">
+    </a>
     <!-- license -->
     <a href="https://github.com/JoniVR/VerticalCardSwiper/blob/master/LICENSE">
         <img alt="GitHub" src="https://img.shields.io/github/license/JoniVR/VerticalCardSwiper.svg">
@@ -41,15 +45,21 @@ The idea behind this is that in some cases, you don't want to swipe away cards, 
 It's built with a `UICollectionView` and a custom flowLayout.
 
 ## Requirements
-* iOS 9.0
-* Swift 5.0
+* iOS 9.0+
+* Swift 5
 
 ## Installation
-VerticalCardSwiper is available through [CocoaPods](https://cocoapods.org). To install
-it, simply add the following line to your Podfile:
 
+### CocoaPods
+To install with [CocoaPods](https://cocoapods.org), simply add the following line to your Podfile:
 ```ruby
 pod 'VerticalCardSwiper'
+```
+
+### Carthage
+To install with [Carthage](https://github.com/Carthage/Carthage), simply add the following line to your Podfile:
+```ruby
+github "JoniVR/VerticalCardSwiper"
 ```
 
 ## Example
@@ -224,7 +234,7 @@ class ExampleCardCell: CardCell {
 - [x] Set custom number of stacked cards
 - [x] Code documentation in README.md file
 - [x] Cocoapods support
-- [ ] Carthage support
+- [x] Carthage support
 - [ ] SPM support
 - [ ] Diff support
 
