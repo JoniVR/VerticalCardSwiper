@@ -141,6 +141,11 @@ cardSwiper.focussedCardIndex
 cardSwiper.scrollToCard(at: Int, animated: Bool) -> Bool
 ```
 
+##### Swipe a card away programatically
+```swift
+cardSwiper.swipeCardAwayProgrammatically(at: Int, to: SwipeDirection, withDuration: TimeInterval = 0.3) -> Bool
+```
+
 ##### Moving/Deleting/Inserting cards at runtime
 Make sure to update your datasource first, otherwise an error will occur.
 ```swift

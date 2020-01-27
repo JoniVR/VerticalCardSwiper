@@ -94,20 +94,32 @@ import UIKit
 
         // check for left or right swipe and if swipePercentageMargin is reached or not
         if cardCenterX < centerX - swipePercentageMargin || cardCenterX > centerX + swipePercentageMargin {
-            animateOffScreen(angle: angle)
+            animateOffScreen(angle: angle, direction: determineCardSwipeDirection())
         } else {
             self.resetToCenterPosition()
         }
     }
 
+    internal func animateOffScreenProgramatically(to direction: SwipeDirection, withDuration duration: TimeInterval) {
+
+        var angle: CGFloat = 0.15
+
+        if direction == .Left {
+            angle = -angle
+        }
+        self.animateOffScreen(angle: angle, duration: duration, direction: direction)
+    }
+
     /**
      Animates to card off the screen and calls the `willSwipeAway` and `didSwipeAway` functions from the `CardDelegate`.
-     - parameter angle: The angle that the card will rotate in (depends on direction). Positive means the card is swiped to the right, a negative angle means the card is swiped to the left.
+     - parameter angle: The angle that the card will rotate in (depends on direction). Positive means the card is swiped to the right, a negative angle means the card is
+     swiped to the left.
+     - parameter duration: The duration of the card animation. Default is 0.2 seconds.
+     - parameter direction: The `SwipeDirection` in which a card will be animated.
      */
-    fileprivate func animateOffScreen(angle: CGFloat) {
+    fileprivate func animateOffScreen(angle: CGFloat, duration: TimeInterval = 0.2, direction: SwipeDirection) {
 
         var transform = CATransform3DIdentity
-        let direction = determineCardSwipeDirection()
 
         transform = CATransform3DRotate(transform, angle, 0, 0, 1)
 
@@ -121,7 +133,7 @@ import UIKit
         }
         self.delegate?.willSwipeAway(cell: self, swipeDirection: direction)
 
-        UIView.animate(withDuration: 0.2, animations: { [weak self] in
+        UIView.animate(withDuration: duration, animations: { [weak self] in
             self?.layer.transform = transform
         }, completion: { _ in
             self.isHidden = true
