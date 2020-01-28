@@ -21,6 +21,7 @@
 // SOFTWARE.
 
 import Foundation
+import UIKit
 
 /// This delegate is used for delegating `VerticalCardSwiper` actions.
 @objc public protocol VerticalCardSwiperDelegate: class {

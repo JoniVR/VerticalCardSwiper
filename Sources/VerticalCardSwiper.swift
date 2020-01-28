@@ -21,6 +21,7 @@
 // SOFTWARE.
 
 import Foundation
+import UIKit
 
 /**
  The VerticalCardSwiper is a subclass of `UIView` that has a `VerticalCardSwiperView` embedded.
