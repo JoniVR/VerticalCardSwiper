@@ -16,16 +16,6 @@ let package = Package(
             name: "VerticalCardSwiper",
             dependencies: [],
             path: "Sources"
-        ),
-        .target(
-            name: "Example",
-            dependencies: ["VerticalCardSwiper"],
-            path: "Example"
-        ),
-        .testTarget(
-            name: "VerticalCardSwiperUITests",
-            dependencies: ["Example"],
-            path: "UITests"
         )
     ]
 )
