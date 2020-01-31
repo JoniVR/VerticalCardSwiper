@@ -1,5 +1,13 @@
 # Change Log
 
+## [2.1.0](https://github.com/JoniVR/VerticalCardSwiper/releases/tag/2.1.0) (Jan 31, 2020)
+
+#### Enhancements
+
+- Add `swipeCardAwayProgrammatically` function to `VerticalCardSwiper`.
+- Add official Carthage support.
+- Update SPM support to 5.1.
+
 ## [2.0.1](https://github.com/JoniVR/VerticalCardSwiper/releases/tag/2.0.1) (Aug 19, 2019)
 
 #### Bug fixes

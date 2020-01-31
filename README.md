@@ -235,7 +235,7 @@ class ExampleCardCell: CardCell {
 - [x] Code documentation in README.md file
 - [x] Cocoapods support
 - [x] Carthage support
-- [ ] SPM support
+- [x] SPM support
 - [ ] Diff support
 
 ## Author
