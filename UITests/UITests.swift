@@ -30,9 +30,9 @@ class UITests: XCTestCase {
     override func setUp() {
         super.setUp()
         continueAfterFailure = true
-        XCUIApplication().launch()
-        XCUIDevice.shared.orientation = .portrait
         app = XCUIApplication()
+        app.launch()
+        XCUIDevice.shared.orientation = .portrait
         cv = app.collectionViews
     }
 
