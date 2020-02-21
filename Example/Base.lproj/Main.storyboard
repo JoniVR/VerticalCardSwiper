@@ -42,16 +42,26 @@
                             </barButtonItem>
                         </leftBarButtonItems>
                         <rightBarButtonItems>
-                            <barButtonItem image="up-arrow" id="Ek1-Zq-X5B">
+                            <barButtonItem title="up" image="up-arrow" id="Ek1-Zq-X5B">
                                 <inset key="imageInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="50"/>
                                 <connections>
                                     <action selector="pressScrollUp:" destination="BYZ-38-t0r" id="pEo-Ui-emm"/>
                                 </connections>
                             </barButtonItem>
-                            <barButtonItem image="down-arrow" id="4IW-cO-hqd">
+                            <barButtonItem title="down" image="down-arrow" id="4IW-cO-hqd">
                                 <inset key="imageInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="5"/>
                                 <connections>
                                     <action selector="pressScrollDown:" destination="BYZ-38-t0r" id="FWF-p5-G2u"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="right" image="right-arrow" id="skb-VA-Mjo">
+                                <connections>
+                                    <action selector="pressRightButton:" destination="BYZ-38-t0r" id="62p-fN-rf1"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="left" image="left-arrow" id="A8v-Zm-lWX">
+                                <connections>
+                                    <action selector="pressLeftButton:" destination="BYZ-38-t0r" id="2hU-Bv-uS8"/>
                                 </connections>
                             </barButtonItem>
                         </rightBarButtonItems>
@@ -85,6 +95,8 @@
     </scenes>
     <resources>
         <image name="down-arrow" width="22" height="22"/>
+        <image name="left-arrow" width="22" height="22"/>
+        <image name="right-arrow" width="22" height="22"/>
         <image name="up-arrow" width="22" height="22"/>
     </resources>
 </document>

@@ -130,8 +130,8 @@ public class VerticalCardSwiper: UIView {
     fileprivate var swipeAbleArea: CGRect?
     /// The `CardCell` that the user can (and is) moving.
     fileprivate var swipedCard: CardCell!
-    /// Indicates if programmatic removal of a card is allowed. This is used to prevent rapid removal causing the datasource to get out of sync.
-    fileprivate var isProgrammaticRemovalAllowed = true
+    /// Indicates if removal of a card is allowed. This is used to prevent rapid removal causing the datasource to get out of sync.
+    fileprivate var isCardRemovalAllowed = true
 
     /// The flowlayout used in the collectionView.
     fileprivate lazy var flowLayout: VerticalCardSwiperFlowLayout = {
@@ -150,6 +150,11 @@ public class VerticalCardSwiper: UIView {
     public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         commonInit()
+    }
+
+    public override func layoutSubviews() {
+        super.layoutSubviews()
+        self.verticalCardSwiperView.delegate = self
     }
 
     /**
@@ -199,7 +204,7 @@ public class VerticalCardSwiper: UIView {
         setupConstraints()
         setCardSwiperInsets()
         setupGestureRecognizer()
-    }
+   }
 
     private func performUpdates(updateClosure: () -> Void) {
         UIView.performWithoutAnimation {
@@ -231,7 +236,7 @@ extension VerticalCardSwiper: CardDelegate {
                 self?.verticalCardSwiperView.collectionViewLayout.invalidateLayout()
                 self?.verticalCardSwiperView.isUserInteractionEnabled = true
                 self?.delegate?.didSwipeCardAway?(card: cell, index: indexPathToRemove.row, swipeDirection: direction)
-                self?.isProgrammaticRemovalAllowed = true
+                self?.isCardRemovalAllowed = true
             })
         }
     }
@@ -310,22 +315,13 @@ extension VerticalCardSwiper: UIGestureRecognizerDelegate {
 
         guard isSideSwipingEnabled else { return }
 
-        /// The taplocation relative to the superview.
-        let location = sender.location(in: self)
-        /// The taplocation relative to the collectionView.
-        let locationInCollectionView = sender.location(in: verticalCardSwiperView)
         /// The translation of the finger performing the PanGesture.
         let translation = sender.translation(in: self)
 
-        if let swipeArea = swipeAbleArea, swipeArea.contains(location) && !verticalCardSwiperView.isScrolling {
-            if let swipedCardIndex = verticalCardSwiperView.indexPathForItem(at: locationInCollectionView) {
-                /// The card that is swipeable inside the SwipeAbleArea.
-                self.swipedCard = self.verticalCardSwiperView.cellForItem(at: swipedCardIndex) as? CardCell
-            }
-        }
+        setSwipedCardIfDragging(pangestureRecognizer: sender)
 
-        if swipedCard != nil && !verticalCardSwiperView.isScrolling {
-            isProgrammaticRemovalAllowed = false
+        if swipedCard != nil {
+            isCardRemovalAllowed = false
             /// The angle we pass for the swipe animation.
             let maximumRotation: CGFloat = 1.0
             let rotationStrength = min(translation.x / self.swipedCard.frame.width, maximumRotation)
@@ -340,6 +336,20 @@ extension VerticalCardSwiper: UIGestureRecognizerDelegate {
             default:
                 self.swipedCard.resetToCenterPosition()
                 self.swipedCard = nil
+            }
+        }
+    }
+
+    fileprivate func setSwipedCardIfDragging(pangestureRecognizer gestureRec: UIPanGestureRecognizer) {
+        /// The taplocation relative to the superview.
+        let location = gestureRec.location(in: self)
+        /// The taplocation relative to the collectionView.
+        let locationInCollectionView = gestureRec.location(in: verticalCardSwiperView)
+
+        if let swipeArea = swipeAbleArea, swipeArea.contains(location), !verticalCardSwiperView.isScrolling {
+            if let swipedCardIndex = verticalCardSwiperView.indexPathForItem(at: locationInCollectionView) {
+                /// The card that is swipeable inside the SwipeAbleArea.
+                self.swipedCard = self.verticalCardSwiperView.cellForItem(at: swipedCardIndex) as? CardCell
             }
         }
     }
@@ -366,8 +376,10 @@ extension VerticalCardSwiper: UICollectionViewDelegate, UICollectionViewDataSour
     - Returns: True if swiping away succeeds. False if swiping away failed.
     */
     public func swipeCardAwayProgrammatically(at index: Int, to direction: SwipeDirection, withDuration duration: TimeInterval = 0.3) -> Bool {
-        if let card = self.verticalCardSwiperView.cellForItem(at: self.convertIndexToIndexPath(for: index)) as? CardCell, isProgrammaticRemovalAllowed {
-            isProgrammaticRemovalAllowed = false
+        guard swipedCard == nil, isCardRemovalAllowed else { return false }
+
+        if let card = self.verticalCardSwiperView.cellForItem(at: self.convertIndexToIndexPath(for: index)) as? CardCell {
+            isCardRemovalAllowed = false
             card.animateOffScreenProgramatically(to: direction, withDuration: duration)
             return true
         }
@@ -393,9 +405,10 @@ extension VerticalCardSwiper: UICollectionViewDelegate, UICollectionViewDataSour
         guard
             let cellHeight = flowLayout.cellHeight,
             index >= 0,
+            swipedCard == nil,
             index < verticalCardSwiperView.numberOfItems(inSection: 0)
         else { return false }
-        self.isProgrammaticRemovalAllowed = false
+        self.isCardRemovalAllowed = false
         let y = CGFloat(index) * (cellHeight + flowLayout.minimumLineSpacing) - topInset
         let point = CGPoint(x: verticalCardSwiperView.contentOffset.x, y: y)
         verticalCardSwiperView.setContentOffset(point, animated: animated)
@@ -452,46 +465,28 @@ extension VerticalCardSwiper: UICollectionViewDelegate, UICollectionViewDataSour
 
     public func scrollViewDidScroll(_ scrollView: UIScrollView) {
         self.delegate?.didScroll?(verticalCardSwiperView: self.verticalCardSwiperView)
+        isCardRemovalAllowed = false
+    }
+
+    public func scrollViewDidScrollToTop(_ scrollView: UIScrollView) {
+        isCardRemovalAllowed = true
     }
 
     public func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         if !decelerate {
             delegate?.didEndScroll?(verticalCardSwiperView: verticalCardSwiperView)
+            isCardRemovalAllowed = true
         }
     }
 
     public func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         delegate?.didEndScroll?(verticalCardSwiperView: verticalCardSwiperView)
+        isCardRemovalAllowed = true
     }
 
     public func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
         delegate?.didEndScroll?(verticalCardSwiperView: verticalCardSwiperView)
-        isProgrammaticRemovalAllowed = true
-    }
-
-    fileprivate func setupVerticalCardSwiperView() {
-        verticalCardSwiperView = VerticalCardSwiperView(frame: self.frame, collectionViewLayout: flowLayout)
-        verticalCardSwiperView.decelerationRate = UIScrollView.DecelerationRate.fast
-        verticalCardSwiperView.backgroundColor = UIColor.clear
-        verticalCardSwiperView.showsVerticalScrollIndicator = false
-        verticalCardSwiperView.delegate = self
-        verticalCardSwiperView.dataSource = self
-        self.addSubview(verticalCardSwiperView)
-    }
-
-    fileprivate func setupConstraints() {
-        verticalCardSwiperView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            self.verticalCardSwiperView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
-            self.verticalCardSwiperView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
-            self.verticalCardSwiperView.topAnchor.constraint(equalTo: self.topAnchor),
-            self.verticalCardSwiperView.bottomAnchor.constraint(equalTo: self.bottomAnchor)
-            ])
-    }
-
-    fileprivate func setCardSwiperInsets() {
-        let bottomInset = visibleNextCardHeight + flowLayout.minimumLineSpacing
-        verticalCardSwiperView.contentInset = UIEdgeInsets(top: topInset, left: sideInset, bottom: bottomInset, right: sideInset)
+        isCardRemovalAllowed = true
     }
 }
 
@@ -529,5 +524,29 @@ extension VerticalCardSwiper: UICollectionViewDelegateFlowLayout {
             cellHeight = verticalCardSwiperView.frame.size.height - yInsets
         }
         return CGSize(width: cellWidth, height: cellHeight)
+    }
+
+    fileprivate func setupVerticalCardSwiperView() {
+        verticalCardSwiperView = VerticalCardSwiperView(frame: self.frame, collectionViewLayout: flowLayout)
+        verticalCardSwiperView.decelerationRate = UIScrollView.DecelerationRate.fast
+        verticalCardSwiperView.backgroundColor = UIColor.clear
+        verticalCardSwiperView.showsVerticalScrollIndicator = false
+        verticalCardSwiperView.dataSource = self
+        self.addSubview(verticalCardSwiperView)
+    }
+
+    fileprivate func setupConstraints() {
+        verticalCardSwiperView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            self.verticalCardSwiperView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+            self.verticalCardSwiperView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
+            self.verticalCardSwiperView.topAnchor.constraint(equalTo: self.topAnchor),
+            self.verticalCardSwiperView.bottomAnchor.constraint(equalTo: self.bottomAnchor)
+            ])
+    }
+
+    fileprivate func setCardSwiperInsets() {
+        let bottomInset = visibleNextCardHeight + flowLayout.minimumLineSpacing
+        verticalCardSwiperView.contentInset = UIEdgeInsets(top: topInset, left: sideInset, bottom: bottomInset, right: sideInset)
     }
 }

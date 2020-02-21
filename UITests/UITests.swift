@@ -132,7 +132,7 @@ class UITests: XCTestCase {
         let button = app.navigationBars["Example.ExampleView"].buttons["-5"]
 
         // tap "-5" multiple times to remove all cards
-        for _ in 0...5 {
+        repeatTimes(times: 5) {
             button.tap()
         }
 
@@ -141,5 +141,41 @@ class UITests: XCTestCase {
         // try swiping on empty VerticalCardSwiper to cause crash
         cv.element.swipeRight()
         cv.element.swipeLeft()
+    }
+
+    func testScrollProgramaticallySuccess() {
+        let downButton = app.navigationBars["Example.ExampleView"].buttons["down"]
+        let upButton = app.navigationBars["Example.ExampleView"].buttons["up"]
+        let firstCell = cv.cells.containing(.staticText, identifier: "Name: John Doe").element
+        XCTAssertTrue(firstCell.isHittable)
+        repeatTimes(times: 3) {
+            downButton.tap()
+        }
+        XCTAssertFalse(firstCell.exists)
+        repeatTimes(times: 3) {
+            upButton.tap()
+        }
+        XCTAssertTrue(firstCell.isHittable)
+    }
+
+    func testSwipeCardProgramaticallySuccess() {
+        let firstCell = cv.cells.containing(.staticText, identifier: "Name: John Doe").element
+        XCTAssertTrue(firstCell.exists)
+        let rightButton = app.navigationBars["Example.ExampleView"].buttons["right"]
+        rightButton.tap()
+        XCTAssertFalse(firstCell.exists)
+        let secondCell = cv.cells.containing(.staticText, identifier: "Name: Chuck Norris").element
+        XCTAssertTrue(secondCell.exists)
+        let leftButton = app.navigationBars["Example.ExampleView"].buttons["left"]
+        leftButton.tap()
+        XCTAssertFalse(secondCell.exists)
+    }
+}
+
+extension XCTestCase {
+    fileprivate func repeatTimes(times: Int, action: () -> Void) {
+        for _ in 0..<times {
+            action()
+        }
     }
 }
