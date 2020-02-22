@@ -22,7 +22,7 @@ jobs:
         uses: actions/checkout@v2
       - name: GitHub Action for SwiftLint
         uses: norio-nomura/action-swiftlint@3.1.0
-  Pod lint:
+  PodLint:
     runs-on: macos-latest
     steps: 
       - name: Checkout
