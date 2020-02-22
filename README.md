@@ -8,8 +8,8 @@
 
 <div align="center">
     <!-- build status -->
-    <a href="https://travis-ci.org/JoniVR/VerticalCardSwiper">
-        <img src="https://travis-ci.org/JoniVR/VerticalCardSwiper.svg?branch=master"  alt="build status">
+    <a href="https://github.com/JoniVR/VerticalCardSwiper/actions">
+        <img src="https://github.com/JoniVR/VerticalCardSwiper/workflows/build/badge.svg" alt="build status">
     </a>
     <!-- pod version -->
     <a href="https://cocoapods.org/pods/VerticalCardSwiper">
