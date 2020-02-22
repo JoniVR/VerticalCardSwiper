@@ -21,11 +21,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Build Example
-        run: xcodebuild clean build -project VerticalCardSwiper.xcodeproj -scheme Example -destination "${destination}" ONLY_ACTIVE_ARCH=NO CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO | xcpretty
+        run: set -o pipefail && xcodebuild clean build -project VerticalCardSwiper.xcodeproj -scheme Example -destination "${destination}" ONLY_ACTIVE_ARCH=NO CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO | xcpretty
         env:
          destination: ${{ matrix.destination }}
       - name: Build Framework
-        run: xcodebuild clean build -project VerticalCardSwiper.xcodeproj -scheme VerticalCardSwiper -destination "${destination}" ONLY_ACTIVE_ARCH=NO CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO | xcpretty
+        run: set -o pipefail && xcodebuild clean build -project VerticalCardSwiper.xcodeproj -scheme VerticalCardSwiper -destination "${destination}" ONLY_ACTIVE_ARCH=NO CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO | xcpretty
         env: 
          destination: ${{ matrix.destination }}
   SwiftLint:
@@ -46,11 +46,11 @@ jobs:
     runs-on: macos-latest
     strategy:
       matrix:
-        destination: ['platform=iOS Simulator,OS=13.3,name=iPhone 11', 'platform=iOS Simulator,OS=13.3,name=iPhone 8 Plus', 'platform=iOS Simulator,OS=13.3,name=iPad Pro (9.7-inch)']
+        destination: ['platform=iOS Simulator,OS=13.3,name=iPhone 11', 'platform=iOS Simulator,OS=13.3,name=iPhone 8 Plus', 'platform=iOS Simulator,OS=13.3,name=iPad Pro (12.9-inch) (3rd generation)']
     steps:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Test
-        run: xcodebuild clean test -project VerticalCardSwiper.xcodeproj -scheme UITests -destination "${destination}" ONLY_ACTIVE_ARCH=NO CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO | xcpretty
+        run: set -o pipefail && xcodebuild clean test -project VerticalCardSwiper.xcodeproj -scheme UITests -destination "${destination}" ONLY_ACTIVE_ARCH=NO CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO | xcpretty
         env: 
          destination: ${{ matrix.destination }}
