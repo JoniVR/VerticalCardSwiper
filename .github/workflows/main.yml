@@ -11,7 +11,7 @@ jobs:
         destination: ['platform=iOS Simulator,OS=13.4,name=iPhone 11']
     steps:
       - name: Checkout
-      - uses: actions/checkout@v2
+        uses: actions/checkout@v2
       - name: Build Example
         run: xcodebuild clean build -project VerticalCardSwiper.xcodeproj -scheme Example -destination "${matrix.destination}" ONLY_ACTIVE_ARCH=NO CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO | xcpretty
       - name: Build Framework
@@ -21,7 +21,7 @@ jobs:
     runs-on: macos-latest
     steps: 
       - name: Checkout
-      - uses: actions/checkout@v2
+        uses: actions/checkout@v2
       - name: GitHub Action for SwiftLint
         uses: norio-nomura/action-swiftlint@3.1.0
       - name: Pod lint
@@ -34,6 +34,6 @@ jobs:
         destination: ['platform=iOS Simulator,OS=13.4,name=iPhone 11', 'platform=iOS Simulator,OS=13.4,name=iPhone 8 Plus', 'platform=iOS Simulator,OS=13.4,name=iPad Pro (9.7 inch)']
     steps:
       - name: Checkout
-      - uses: actions/checkout@v2
+        uses: actions/checkout@v2
       - name: Test
         run: xcodebuild clean test -project VerticalCardSwiper.xcodeproj -scheme UITests -destination "${matrix.destination}" ONLY_ACTIVE_ARCH=NO CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO | xcpretty
