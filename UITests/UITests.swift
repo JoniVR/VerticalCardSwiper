@@ -51,7 +51,7 @@ class UITests: XCTestCase {
         // swipe cell away to left
         let swipeOffset = firstCell.frame.width * 0.4 // 0.4 is the offset at which a card is swiped away
         let startPoint = firstCell.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.5))
-        let finishPoint = startPoint.withOffset(CGVector(dx: -swipeOffset - 20, dy: 0))
+        let finishPoint = startPoint.withOffset(CGVector(dx: -swipeOffset - 30, dy: 0))
         startPoint.press(forDuration: 0, thenDragTo: finishPoint)
 
         // Check if first cell doesn't exist anymore (after swiping away)
@@ -67,7 +67,7 @@ class UITests: XCTestCase {
         // swipe cell away to right
         let swipeOffset = firstCell.frame.width * 0.4 // 0.4 is the offset at which a card is swiped away
         let startPoint = firstCell.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.5))
-        let finishPoint = startPoint.withOffset(CGVector(dx: swipeOffset + 20, dy: 0))
+        let finishPoint = startPoint.withOffset(CGVector(dx: swipeOffset + 30, dy: 0))
         startPoint.press(forDuration: 0, thenDragTo: finishPoint)
 
         // Check if first cell doesn't exist anymore (after swiping away)
