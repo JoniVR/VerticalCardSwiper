@@ -241,6 +241,14 @@ extension VerticalCardSwiper: CardDelegate {
         }
     }
 
+    func didCancelSwipe(cell: CardCell) {
+        if let index = self.verticalCardSwiperView.indexPath(for: cell)?.row {
+            delegate?.didCancelSwipe?(card: cell, index: index)
+            self.isCardRemovalAllowed = true
+            swipedCard = nil
+        }
+    }
+
     internal func didDragCard(cell: CardCell, swipeDirection: SwipeDirection) {
         if let index = self.verticalCardSwiperView.indexPath(for: cell)?.row {
             self.delegate?.didDragCard?(card: cell, index: index, swipeDirection: swipeDirection)
@@ -332,10 +340,8 @@ extension VerticalCardSwiper: UIGestureRecognizerDelegate {
                 swipedCard.animateCard(angle: angle, horizontalTranslation: translation.x)
             case .ended:
                 swipedCard.endedPanAnimation(angle: angle)
-                swipedCard = nil
             default:
                 self.swipedCard.resetToCenterPosition()
-                self.swipedCard = nil
             }
         }
     }

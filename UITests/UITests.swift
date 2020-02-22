@@ -169,6 +169,14 @@ class UITests: XCTestCase {
         let leftButton = app.navigationBars["Example.ExampleView"].buttons["left"]
         leftButton.tap()
         XCTAssertFalse(secondCell.exists)
+        // test if it works after cancelling a manual swipe
+        let thirdCell = cv.cells.containing(.staticText, identifier: "Name: Bill Gates").element
+        let swipeOffset = thirdCell.frame.width * 0.4 // 0.4 is the offset at which a card is swiped away
+        let startPoint = thirdCell.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.5))
+        let finishPoint = startPoint.withOffset(CGVector(dx: swipeOffset, dy: 0))
+        startPoint.press(forDuration: 0, thenDragTo: finishPoint)
+        rightButton.tap()
+        XCTAssertFalse(thirdCell.exists)
     }
 }
 

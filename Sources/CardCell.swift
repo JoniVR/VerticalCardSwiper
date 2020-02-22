@@ -77,6 +77,7 @@ import UIKit
                        animations: { [weak self] in
                         self?.layer.transform = CATransform3DIdentity
         })
+        delegate?.didCancelSwipe(cell: self)
     }
 
     /**

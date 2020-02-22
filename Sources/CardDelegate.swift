@@ -40,6 +40,12 @@ internal protocol CardDelegate: class {
     func didSwipeAway(cell: CardCell, swipeDirection: SwipeDirection)
 
     /**
+     Called when a swipe is aborted because the minimum threshold wasn't reached.
+     - parameter cell: The CardCell that was swiped.
+    */
+    func didCancelSwipe(cell: CardCell)
+
+    /**
      Called while the user is dragging a card to a side.
      
      You can use this to add some custom features to a card when it enters a certain `swipeDirection` (like overlays).

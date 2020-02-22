@@ -186,6 +186,11 @@ class ViewController: UIViewController, VerticalCardSwiperDelegate {
         // handle swipe gestures (optional).
     }
     
+    func didCancelSwipe(card: CardCell, index: Int) {
+        
+        // Called when a card swipe is cancelled (when the threshold wasn't reached)
+    }
+    
     func sizeForItem(verticalCardSwiperView: VerticalCardSwiperView, index: Int) -> CGSize {
     
         // Allows you to return custom card sizes (optional).

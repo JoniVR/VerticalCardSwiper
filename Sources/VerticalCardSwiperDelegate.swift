@@ -44,6 +44,13 @@ import UIKit
     @objc optional func didSwipeCardAway(card: CardCell, index: Int, swipeDirection: SwipeDirection)
 
     /**
+     Called when a swipe is aborted because the minimum threshold wasn't reached.
+     - parameter card: The CardCell that was swiped.
+     - parameter index: The index of the was swiped.
+    */
+    @objc optional func didCancelSwipe(card: CardCell, index: Int)
+
+    /**
      Called while the user is dragging a card to a side.
      
      You can use this to add some custom features to a card when it enters a certain `swipeDirection` (like overlays).
