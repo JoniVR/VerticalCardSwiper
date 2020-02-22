@@ -3,8 +3,7 @@ name: CI
 on: [push, pull_request]
 
 jobs:
-  build:
-    name: Build
+  Build:
     runs-on: macos-latest
     strategy:
       matrix:
@@ -16,18 +15,21 @@ jobs:
         run: xcodebuild clean build -project VerticalCardSwiper.xcodeproj -scheme Example -destination "${matrix.destination}" ONLY_ACTIVE_ARCH=NO CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO | xcpretty
       - name: Build Framework
         run: xcodebuild clean build -project VerticalCardSwiper.xcodeproj -scheme VerticalCardSwiper -destination "${matrix.destination}" ONLY_ACTIVE_ARCH=NO CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO | xcpretty
-  lint:
-    name: "Lint"
-    runs-on: macos-latest
+  SwiftLint:
+    runs-on: ubuntu-latest
     steps: 
       - name: Checkout
         uses: actions/checkout@v2
       - name: GitHub Action for SwiftLint
         uses: norio-nomura/action-swiftlint@3.1.0
+  Pod lint:
+    runs-on: macos-latest
+    steps: 
+      - name: Checkout
+        uses: actions/checkout@v2
       - name: Pod lint
         run: pod lib lint
-  test:
-    name: Test
+  Test:
     runs-on: macos-latest
     strategy:
       matrix:
