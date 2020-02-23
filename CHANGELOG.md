@@ -1,5 +1,15 @@
 # Change Log
 
+## [2.2.0](https://github.com/JoniVR/VerticalCardSwiper/releases/tag/2.2.0) (Feb 23, 2020)
+
+#### Enhancements
+
+- Added `didCancelSwipe` function to `VerticalCardSwiperDelegate`.
+
+#### Bug fixes
+
+- Fixed `swipeCardAwayProgrammatically` not working correctly in some cases.
+
 ## [2.1.0](https://github.com/JoniVR/VerticalCardSwiper/releases/tag/2.1.0) (Jan 31, 2020)
 
 #### Enhancements
