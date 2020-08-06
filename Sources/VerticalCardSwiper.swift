@@ -199,12 +199,21 @@ public class VerticalCardSwiper: UIView {
         self.verticalCardSwiperView.moveItem(at: convertIndexToIndexPath(for: atIndex), to: convertIndexToIndexPath(for: toIndex))
     }
 
+    /**
+     Returns the visible card object at the specified index.
+     - parameter index: The index that specifies the item number of the cell.
+     - returns: The card object at the corresponding index or nil if the cell is not visible or index is out of range.
+     */
+    public func cardForItem(at index: Int) -> CardCell? {
+        return self.verticalCardSwiperView.cellForItem(at: convertIndexToIndexPath(for: index)) as? CardCell
+    }
+
     private func commonInit() {
         setupVerticalCardSwiperView()
         setupConstraints()
         setCardSwiperInsets()
         setupGestureRecognizer()
-   }
+    }
 
     private func performUpdates(updateClosure: () -> Void) {
         UIView.performWithoutAnimation {
@@ -373,14 +382,14 @@ extension VerticalCardSwiper: UICollectionViewDelegate, UICollectionViewDataSour
     }
 
     /**
-    Allows you to swipe a card away from code.
-    The  `willSwipeCardAway` and `didSwipeCardAway` delegate functions will also be called when you use this function.
-    You can use `willSwipeCardAway` to modify your DataSource.
-    - parameter index: The index of the card you want to swipe away.
-    - parameter direction: The `SwipeDirection` you want to swipe to.
-    - parameter duration: The duration of the animation in seconds. Default is 0.3 seconds.
-    - Returns: True if swiping away succeeds. False if swiping away failed.
-    */
+     Allows you to swipe a card away from code.
+     The  `willSwipeCardAway` and `didSwipeCardAway` delegate functions will also be called when you use this function.
+     You can use `willSwipeCardAway` to modify your DataSource.
+     - parameter index: The index of the card you want to swipe away.
+     - parameter direction: The `SwipeDirection` you want to swipe to.
+     - parameter duration: The duration of the animation in seconds. Default is 0.3 seconds.
+     - Returns: True if swiping away succeeds. False if swiping away failed.
+     */
     public func swipeCardAwayProgrammatically(at index: Int, to direction: SwipeDirection, withDuration duration: TimeInterval = 0.3) -> Bool {
         guard swipedCard == nil, isCardRemovalAllowed else { return false }
 
@@ -413,7 +422,7 @@ extension VerticalCardSwiper: UICollectionViewDelegate, UICollectionViewDataSour
             index >= 0,
             swipedCard == nil,
             index < verticalCardSwiperView.numberOfItems(inSection: 0)
-        else { return false }
+            else { return false }
         self.isCardRemovalAllowed = false
         let y = CGFloat(index) * (cellHeight + flowLayout.minimumLineSpacing) - topInset
         let point = CGPoint(x: verticalCardSwiperView.contentOffset.x, y: y)
@@ -548,7 +557,7 @@ extension VerticalCardSwiper: UICollectionViewDelegateFlowLayout {
             self.verticalCardSwiperView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
             self.verticalCardSwiperView.topAnchor.constraint(equalTo: self.topAnchor),
             self.verticalCardSwiperView.bottomAnchor.constraint(equalTo: self.bottomAnchor)
-            ])
+        ])
     }
 
     fileprivate func setCardSwiperInsets() {
