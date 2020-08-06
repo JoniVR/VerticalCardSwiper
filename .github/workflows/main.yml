@@ -5,8 +5,8 @@ on:
     branches:
       - master
   pull_request:
-    branches: 
-      - "*"
+    branches:
+      - '*'
   release:
     types:
       - created
@@ -16,28 +16,28 @@ jobs:
     runs-on: macos-latest
     strategy:
       matrix:
-        destination: ['platform=iOS Simulator,OS=13.3,name=iPhone 11']
+        destination: ['platform=iOS Simulator,OS=13.6,name=iPhone 11']
     steps:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Build Example
         run: set -o pipefail && xcodebuild clean build -project VerticalCardSwiper.xcodeproj -scheme Example -destination "${destination}" ONLY_ACTIVE_ARCH=NO CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO | xcpretty
         env:
-         destination: ${{ matrix.destination }}
+          destination: ${{ matrix.destination }}
       - name: Build Framework
         run: set -o pipefail && xcodebuild clean build -project VerticalCardSwiper.xcodeproj -scheme VerticalCardSwiper -destination "${destination}" ONLY_ACTIVE_ARCH=NO CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO | xcpretty
-        env: 
-         destination: ${{ matrix.destination }}
+        env:
+          destination: ${{ matrix.destination }}
   SwiftLint:
     runs-on: ubuntu-latest
-    steps: 
+    steps:
       - name: Checkout
         uses: actions/checkout@v2
       - name: GitHub Action for SwiftLint
         uses: norio-nomura/action-swiftlint@3.1.0
   PodLint:
     runs-on: macos-latest
-    steps: 
+    steps:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Pod lint
@@ -46,11 +46,16 @@ jobs:
     runs-on: macos-latest
     strategy:
       matrix:
-        destination: ['platform=iOS Simulator,OS=13.3,name=iPhone 11', 'platform=iOS Simulator,OS=13.3,name=iPhone 8 Plus', 'platform=iOS Simulator,OS=13.3,name=iPad Pro (12.9-inch) (3rd generation)']
+        destination:
+          [
+            'platform=iOS Simulator,OS=13.6,name=iPhone 11',
+            'platform=iOS Simulator,OS=13.6,name=iPhone 8 Plus',
+            'platform=iOS Simulator,OS=13.6,name=iPad Pro (12.9-inch) (4th generation)',
+          ]
     steps:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Test
         run: set -o pipefail && xcodebuild clean test -project VerticalCardSwiper.xcodeproj -scheme UITests -destination "${destination}" ONLY_ACTIVE_ARCH=NO CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO | xcpretty
-        env: 
-         destination: ${{ matrix.destination }}
+        env:
+          destination: ${{ matrix.destination }}
