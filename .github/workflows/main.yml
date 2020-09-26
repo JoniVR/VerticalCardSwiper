@@ -16,10 +16,12 @@ jobs:
     runs-on: macos-latest
     strategy:
       matrix:
-        destination: ['platform=iOS Simulator,OS=13.6,name=iPhone 11']
+        destination: ['platform=iOS Simulator,OS=14.0,name=iPhone 11']
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+      - name: Set Xcode version
+        run: sudo xcode-select --switch /Applications/Xcode_12.app
       - name: Build Example
         run: set -o pipefail && xcodebuild clean build -project VerticalCardSwiper.xcodeproj -scheme Example -destination "${destination}" ONLY_ACTIVE_ARCH=NO CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO | xcpretty
         env:
@@ -48,13 +50,15 @@ jobs:
       matrix:
         destination:
           [
-            'platform=iOS Simulator,OS=13.6,name=iPhone 11',
-            'platform=iOS Simulator,OS=13.6,name=iPhone 8 Plus',
-            'platform=iOS Simulator,OS=13.6,name=iPad Pro (12.9-inch) (4th generation)',
+            'platform=iOS Simulator,OS=14.0,name=iPhone 11',
+            'platform=iOS Simulator,OS=14.0,name=iPhone 8 Plus',
+            'platform=iOS Simulator,OS=14.0,name=iPad Pro (12.9-inch) (4th generation)',
           ]
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+      - name: Set Xcode version
+        run: sudo xcode-select --switch /Applications/Xcode_12.app
       - name: Test
         run: set -o pipefail && xcodebuild clean test -project VerticalCardSwiper.xcodeproj -scheme UITests -destination "${destination}" ONLY_ACTIVE_ARCH=NO CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO | xcpretty
         env:
