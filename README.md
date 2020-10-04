@@ -151,6 +151,11 @@ cardSwiper.focussedCardIndex
 cardSwiper.scrollToCard(at: Int, animated: Bool) -> Bool
 ```
 
+##### Get a card at a specified index
+```swift
+cardSwiper.cardForItem(at: Int) -> CardCell?
+```
+
 ##### Swipe a card away programatically
 ```swift
 cardSwiper.swipeCardAwayProgrammatically(at: Int, to: SwipeDirection, withDuration: TimeInterval = 0.3) -> Bool

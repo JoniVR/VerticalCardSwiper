@@ -1,5 +1,15 @@
 # Change Log
 
+## [2.3.0](https://github.com/JoniVR/VerticalCardSwiper/releases/tag/2.3.0) (Oct 4, 2020)
+
+#### Enhancements
+
+- Added `cardForItem` function to `VerticalCardSwiper`.
+
+#### Bug fixes
+
+- Fixed scale animation to transform both x and y values ([#76](https://github.com/JoniVR/VerticalCardSwiper/pull/76)) - thanks [@elfanek](https://github.com/elfanek).
+
 ## [2.2.0](https://github.com/JoniVR/VerticalCardSwiper/releases/tag/2.2.0) (Feb 23, 2020)
 
 #### Enhancements
