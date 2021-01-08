@@ -1,5 +1,11 @@
 # Change Log
 
+## [2.3.1](https://github.com/JoniVR/VerticalCardSwiper/releases/tag/2.3.1) (Jan 8, 2021)
+
+#### Bug fixes
+
+- Fixed `isStackOnBottom` and `stackedCardsCount` not working - thanks [@stfnhdr](https://github.com/stfnhdr).
+
 ## [2.3.0](https://github.com/JoniVR/VerticalCardSwiper/releases/tag/2.3.0) (Oct 4, 2020)
 
 #### Enhancements
