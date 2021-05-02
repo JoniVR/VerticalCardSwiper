@@ -23,7 +23,7 @@
 import Foundation
 
 /// This delegate is used for delegating `CardCell` actions.
-internal protocol CardDelegate: class {
+internal protocol CardDelegate: AnyObject {
 
     /**
      Called right before a CardCell is swiped away.

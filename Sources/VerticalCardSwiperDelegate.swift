@@ -24,7 +24,7 @@ import Foundation
 import UIKit
 
 /// This delegate is used for delegating `VerticalCardSwiper` actions.
-@objc public protocol VerticalCardSwiperDelegate: class {
+@objc public protocol VerticalCardSwiperDelegate: AnyObject {
 
     /**
      Called right before a CardCell animates off screen. At this point there's already no way back.

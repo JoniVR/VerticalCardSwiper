@@ -23,7 +23,7 @@
 import Foundation
 
 /// This datasource is used for providing data to the `VerticalCardSwiper`.
-public protocol VerticalCardSwiperDatasource: class {
+public protocol VerticalCardSwiperDatasource: AnyObject {
 
     /**
      Sets the number of cards for the `UICollectionView` inside the VerticalCardSwiperController.
