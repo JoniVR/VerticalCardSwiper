@@ -17,7 +17,7 @@ jobs:
     runs-on: macos-latest
     strategy:
       matrix:
-        destination: ['platform=iOS Simulator,OS=15.0,name=iPhone 13 Pro']
+        destination: ['platform=iOS Simulator,OS=15.2,name=iPhone 13 Pro']
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -51,9 +51,9 @@ jobs:
       matrix:
         destination:
           [
-            'platform=iOS Simulator,OS=15.0,name=iPhone 13 Pro',
-            'platform=iOS Simulator,OS=15.0,name=iPhone 8 Plus',
-            'platform=iOS Simulator,OS=15.0,name=iPad Pro (12.9-inch) (5th generation)',
+            'platform=iOS Simulator,OS=15.2,name=iPhone 13 Pro',
+            'platform=iOS Simulator,OS=15.2,name=iPhone 8 Plus',
+            'platform=iOS Simulator,OS=15.2,name=iPad Pro (12.9-inch) (5th generation)',
           ]
     steps:
       - name: Checkout
