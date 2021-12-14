@@ -16,12 +16,12 @@ jobs:
     runs-on: macos-latest
     strategy:
       matrix:
-        destination: ['platform=iOS Simulator,OS=14.0,name=iPhone 11']
+        destination: ['platform=iOS Simulator,OS=15.2,name=iPhone 13 Pro']
     steps:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Set Xcode version
-        run: sudo xcode-select --switch /Applications/Xcode_12.app
+        run: sudo xcode-select --switch /Applications/Xcode_13.2.app
       - name: Build Example
         run: set -o pipefail && xcodebuild clean build -project VerticalCardSwiper.xcodeproj -scheme Example -destination "${destination}" ONLY_ACTIVE_ARCH=NO CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO | xcpretty
         env:
@@ -38,27 +38,27 @@ jobs:
       - name: GitHub Action for SwiftLint
         uses: norio-nomura/action-swiftlint@3.1.0
   PodLint:
-    runs-on: macos-latest
+    runs-on: macos-11
     steps:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Pod lint
         run: pod lib lint
   Test:
-    runs-on: macos-latest
+    runs-on: macos-11
     strategy:
       matrix:
         destination:
           [
-            'platform=iOS Simulator,OS=14.0,name=iPhone 11',
-            'platform=iOS Simulator,OS=14.0,name=iPhone 8 Plus',
-            'platform=iOS Simulator,OS=14.0,name=iPad Pro (12.9-inch) (4th generation)',
+            'platform=iOS Simulator,OS=15.2,name=iPhone 13 Pro',
+            'platform=iOS Simulator,OS=15.2,name=iPhone 8 Plus',
+            'platform=iOS Simulator,OS=15.2,name=iPad Pro (12.9-inch) (5th generation)',
           ]
     steps:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Set Xcode version
-        run: sudo xcode-select --switch /Applications/Xcode_12.app
+        run: sudo xcode-select --switch /Applications/Xcode_13.2.app
       - name: Test
         run: set -o pipefail && xcodebuild clean test -project VerticalCardSwiper.xcodeproj -scheme UITests -destination "${destination}" ONLY_ACTIVE_ARCH=NO CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO | xcpretty
         env:

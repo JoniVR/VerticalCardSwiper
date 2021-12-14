@@ -1,0 +1,15 @@
+name: Discussion
+description: Start a discussion about this project
+labels: ["discussion"]
+assignees: []
+body:
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Before opening the issue, have you...?
+      description: This is to help us minimize the amount of duplicate issues, which allows us more time for actual development.
+      options:
+        - label: Read the [Contribution Guidelines](CONTRIBUTING.md).
+          required: true
+        - label: Searched for [existing GitHub issues](https://github.com/JoniVR/VerticalCardSwiper/issues).
+          required: true
