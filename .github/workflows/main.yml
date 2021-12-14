@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - main
-      - docs/templates
   pull_request:
     branches:
       - '*'
