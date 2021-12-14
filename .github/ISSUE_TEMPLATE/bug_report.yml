@@ -66,8 +66,8 @@ body:
             - **VerticalCardSwiper Version**: v2.3.1
             - **Xcode Version**: 13.0
       value: |
-          - **iOS version**: 
-          - **Device(s)**: 
-          - **VerticalCardSwiper Version**: 
-          - **Xcode Version**: 
+          - iOS version: 
+          - Device(s): 
+          - VerticalCardSwiper Version: 
+          - Xcode Version: 
       render: markdown
