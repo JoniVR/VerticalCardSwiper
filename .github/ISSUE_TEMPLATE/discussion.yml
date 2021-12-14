@@ -11,5 +11,5 @@ body:
       options:
         - label: Read the [Contribution Guidelines](CONTRIBUTING.md).
           required: true
-        - label: searched for [existing GitHub issues](https://github.com/JoniVR/VerticalCardSwiper/issues).
+        - label: Searched for [existing GitHub issues](https://github.com/JoniVR/VerticalCardSwiper/issues).
           required: true
