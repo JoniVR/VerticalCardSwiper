@@ -1,0 +1,24 @@
+name: Question
+description: I have a question related to this project
+labels: ["question"]
+assignees: []
+body:
+  - type: checkboxes
+    attributes:
+      label: Before opening the issue, have you...?
+      description: This is to help us minimize the amount of duplicate issues, which allows us more time for actual development.
+      options:
+        - label: Read the [documentation](https://github.com/JoniVR/VerticalCardSwiper).
+          required: true
+      options:
+        - label: Searched for [existing GitHub issues](https://github.com/JoniVR/VerticalCardSwiper/issues).
+          required: true
+      options:
+        - label: Searched Google for a solution to my issue if applicable.
+          required: true
+  - type: textarea
+    validations:
+      required: true
+    attributes:
+      label: Question
+      description: Ask your question, be specific. The more info you provide, the easier it will be for someone to answer!
