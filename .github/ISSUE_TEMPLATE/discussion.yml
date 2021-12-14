@@ -1,6 +1,6 @@
 name: Discussion
 description: Start a discussion about this project
-labels: ["Discussion"]
+labels: ["discussion"]
 assignees: []
 body:
   - type: checkboxes
