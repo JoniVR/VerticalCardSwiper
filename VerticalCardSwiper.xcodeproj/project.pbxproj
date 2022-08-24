@@ -211,9 +211,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6C51A115209E6D6900B83A82 /* Build configuration list for PBXNativeTarget "VerticalCardSwiper" */;
 			buildPhases = (
+				6C51A10D209E6D6900B83A82 /* Headers */,
 				6C51A10B209E6D6900B83A82 /* Sources */,
 				6C51A10C209E6D6900B83A82 /* Frameworks */,
-				6C51A10D209E6D6900B83A82 /* Headers */,
 				6C51A10E209E6D6900B83A82 /* Resources */,
 				6C4B9FC921FDF39400C07547 /* ShellScript */,
 			);
