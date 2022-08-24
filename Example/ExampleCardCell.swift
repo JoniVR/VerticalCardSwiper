@@ -34,9 +34,9 @@ class ExampleCardCell: CardCell {
      */
     public func setRandomBackgroundColor() {
 
-        let randomRed: CGFloat = CGFloat(arc4random()) / CGFloat(UInt32.max)
-        let randomGreen: CGFloat = CGFloat(arc4random()) / CGFloat(UInt32.max)
-        let randomBlue: CGFloat = CGFloat(arc4random()) / CGFloat(UInt32.max)
+        let randomRed: CGFloat = .random(in: 0...1)
+        let randomGreen: CGFloat = .random(in: 0...1)
+        let randomBlue: CGFloat = .random(in: 0...1)
         self.backgroundColor = UIColor(red: randomRed, green: randomGreen, blue: randomBlue, alpha: 1.0)
     }
 
