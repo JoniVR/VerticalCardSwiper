@@ -38,40 +38,80 @@
   <img src="./example.gif" alt="example">
 </div>
 
-## Project goal and information
-The goal of this project is to recreate the Discover UI in Shazam (which I think is a great, fun way to display content) in combination with a Tinder style of swiping cards to the left/right.
-The idea behind this is that in some cases, you don't want to swipe away cards, but keep them available for later on. This implementation allows for that. And it's a fun way to interact with content.
+## Table of Contents
+* Project goal
+* Key Features
+* System Requirements
+* Installation
+* Example
+* Code Documentation / Usage
+    * Code Explanation
+    * Delegation
+    * Customization
+* Contribution Guidelines
+* Credits
+* Contact Info
+* License
+* Contributers
+
+
+## Project goal
+The goal of this project is to recreate the Discover UI in Shazam incorporating the swipe action on the Tinder application. This project allows a deck of cards to not only be swiped left and right but also up and down to save them for later use.
 
 It's built with a `UICollectionView` and a custom flowLayout.
 
-## Requirements
+
+## Key Features
+- [x] Shazam Discover UI with paging
+- [x] Tinder-style swiping
+- [x] Option to disable side swiping
+- [x] Set custom number of stacked cards
+- [x] Code documentation in README.md file
+- [x] Cocoapods support
+- [x] Carthage support
+- [x] SPM support
+- [ ] Diff support
+
+
+## System Requirements
 * iOS 9.0+
 * Swift 5
 
 ## Installation
+This project needs to be installed with both CocoaPods and Carthage.
+
+CocoaPods is a dependency manager for Swift and Objective-C Cocoa projects.
+
+Carthage allows frameworks to be added to the Cocoa application.
 
 ### CocoaPods
-To install with [CocoaPods](https://cocoapods.org), simply add the following line to your Podfile:
+Install [CocoaPods](https://cocoapods.org) if it's not already installed.
+
+Then, add the following line to your Podfile:
 ```ruby
 pod 'VerticalCardSwiper'
 ```
 
 ### Carthage
-To install with [Carthage](https://github.com/Carthage/Carthage), simply add the following line to your Podfile:
+Install [Carthage](https://github.com/Carthage/Carthage) if it's not already installed.
+
+Then, add the following line to your Podfile:
 ```ruby
 github "JoniVR/VerticalCardSwiper"
 ```
 
 ## Example
-To try out `VerticalCardSwiper`
+To run the project `VericalCardSwiper` enter the following into Ruby
 
 ```ruby
 pod try VerticalCardSwiper
 ```
 
-or open the project and run the Example.
+or open the project folder, go to Example folder and double click on `ExampleCardCell.swift`, or `ExampleViewController.swift`.
 
-## Usage
+## Code Documentation / Usage
+This section explains the different functions and classes present in the code and their use cases.
+
 `VerticalCardSwiper` behaves a lot like a standard `UICollectionView`. 
 To use it inside your `UIViewController`:
 
@@ -108,7 +148,7 @@ class ExampleViewController: UIViewController, VerticalCardSwiperDatasource {
 }
 ```
 
-#### Properties
+#### Code Explanation
 ```swift
 /// Indicates if side swiping on cards is enabled. Set to false if you don't want side swiping. Default is `true`.
 @IBInspectable public var isSideSwipingEnabled: Bool = true
@@ -135,7 +175,6 @@ class ExampleViewController: UIViewController, VerticalCardSwiperDatasource {
 public var indexesForVisibleCards: [Int]
 ```
 
-#### Other
 ##### Just like with a regular `UICollectionView`, you can reload the data by calling
 ```swift
 cardSwiper.reloadData()
@@ -237,23 +276,40 @@ class ExampleCardCell: CardCell {
 }
 ```
 
-## Key Features
-- [x] Shazam Discover UI with paging
-- [x] Tinder-style swiping
-- [x] Option to disable side swiping
-- [x] Set custom number of stacked cards
-- [x] Code documentation in README.md file
-- [x] Cocoapods support
-- [x] Carthage support
-- [x] SPM support
-- [ ] Diff support
+## Contribution Guidelines
+Maintaining this repo is a collaborative effort. One can support the project by writing documentation, helping to fix bugs and submitting code.
 
-## Author
-Joni Van Roost, joni.VR@hotmail.com
+Forking the repository
+* On GitHub.com, navigate to the respository
+* In the top-right corner of the page, click Fork
+* Select "Copy the DEFAULT branch only"
+* Click Create Fork
+
+Cloning the repository
+* Navigate to the forked repository on your github account
+* Above the list of files, click <> Code
+* Copy the URL of the repository
+* Open Git Bash
+* In Git Bash, navigate to a folder to save the file.
+* Enter git clone enterURL
+* Press Enter. The local clone will be created in the folder.
+
+Modify the necessary files and create a Pull Request.
+
+The pull request will be reviewed and approved if acceptable. Otherwise, an explanation will be left in the comments.
+
+## Credits
+The UI features in the following two apps inspired the creation of this project.
+
+Shazam: https://www.shazam.com/apps
+
+Tinder: https://tinder.com/
+
+## Contact Info
+Author: Joni Van Roost, joni.VR@hotmail.com
 
 ## License
 VerticalCardSwiper is available under the MIT license. See the LICENSE file for more info.
 
-## More
-Feel free to submit a pull request, open an issue or fork this project. Any help is always appreciated.
+## Contributers
 A big thank you to all the [contributors](https://github.com/JoniVR/VerticalCardSwiper/graphs/contributors)! 
