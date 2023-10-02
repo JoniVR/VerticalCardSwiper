@@ -292,7 +292,7 @@ Cloning the repository
 * Open Git Bash
 * In Git Bash, navigate to a folder to save the file.
 * Enter git clone enterURL
-* Press Enter. The local clone will be created.
+* Press Enter. The local clone will be created in the folder.
 
 Modify the necessary files and create a Pull Request.
 
